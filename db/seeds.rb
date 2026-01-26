@@ -3,6 +3,7 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
 puts "Cleaning database..."
+QuizRoom.destroy_all
 Answer.destroy_all
 Attempt.destroy_all
 Option.destroy_all
