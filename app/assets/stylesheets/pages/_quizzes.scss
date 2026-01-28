@@ -2,11 +2,11 @@
 
 // Container card blanc pour chaque section
 .quizzes-section-container {
-  background: white;
+  background: $card-bg;
   border-radius: 25px;
   padding: 30px;
   margin-top: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .quizzes-section-public {
@@ -296,7 +296,7 @@
   border: 2px solid rgba(255, 255, 255, 0.3);
 
   .quiz-card:hover & {
-    background: white;
+    background: $card-bg;
     color: #1351AA;
   }
 
@@ -312,9 +312,9 @@
 .quizzes-empty {
   text-align: center;
   padding: 80px 20px;
-  background: white;
+  background: $card-bg;
   border-radius: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   margin-top: 40px;
 }
 

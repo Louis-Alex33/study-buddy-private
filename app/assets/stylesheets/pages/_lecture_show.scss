@@ -167,10 +167,10 @@
 }
 
 .assistant-ia-card {
-  background: white;
+  background: $card-bg;
   padding: 30px;
   border-radius: 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -212,12 +212,12 @@
 
   .chat-messages-container {
     flex: 1;
-    background: #fafafa;
+    background: $card-bg-accent;
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
     overflow-y: auto;
-    border: 2px solid #E3E2DE;
+    border: 2px solid darken($card-bg-accent, 5%);
     min-height: 0;
 
     .chat-message {
@@ -328,10 +328,10 @@
 
 .flashcards-card {
   height: 100vh;
-  background: white;
+  background: $card-bg;
   padding: 30px;
   border-radius: 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 
   .flashcards-header {
     display: flex;
@@ -396,7 +396,7 @@
   }
 
   .flashcard-item {
-    background: linear-gradient(to right, #fafafa 0%, #ffffff 100%);
+    background: linear-gradient(to right, $card-bg-accent 0%, $card-bg 100%);
     padding: 25px;
     border-radius: 20px;
     border: 2px solid #E3E2DE;
@@ -618,7 +618,7 @@
   .modal-footer {
     border: none;
     padding: 20px 30px;
-    background: #fafafa;
+    background: $card-bg-accent;
     display: flex;
     justify-content: center;
     gap: 12px;

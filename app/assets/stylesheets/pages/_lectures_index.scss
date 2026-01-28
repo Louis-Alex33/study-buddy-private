@@ -193,10 +193,10 @@
 }
 
 .lecture-card {
-  background: white;
+  background: $card-bg;
   border-radius: 25px;
   padding: 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   transition: all 0.3s;
   position: relative;
   overflow: hidden;
@@ -249,7 +249,7 @@
   gap: 20px;
   margin-bottom: 25px;
   padding: 15px;
-  background: #fafafa;
+  background: $card-bg-accent;
   border-radius: 15px;
 
   .stat-item {
@@ -330,9 +330,9 @@
 .empty-lectures {
   text-align: center;
   padding: 100px 20px;
-  background: white;
+  background: $card-bg;
   border-radius: 30px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 
   .empty-icon {
     font-size: 80px;
@@ -433,7 +433,7 @@
     font-size: 16px;
     color: #1351AA;
     font-weight: 600;
-    background: white;
+    background: $card-bg;
     padding: 5px 12px;
     border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -458,10 +458,10 @@
 }
 
 .quizz-card {
-  background: white;
+  background: $card-bg;
   border-radius: 25px;
   padding: 25px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   transition: all 0.3s;
   border: 2px solid transparent;
 

@@ -10,13 +10,14 @@
 .pricing-main-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #1351AA;
   margin-bottom: 0.5rem;
 }
 
 .pricing-subtitle {
   font-size: 1.2rem;
-  color: #666;
+  color: #555;
+  font-weight: 500;
 }
 
 .pricing-grid {
@@ -28,11 +29,11 @@
 }
 
 .pricing-card {
-  background: white;
+  background: $card-bg;
   border-radius: 20px;
   padding: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 2px solid #f0f0f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid darken($card-bg, 5%);
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
@@ -69,7 +70,7 @@
 .pricing-plan-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #333;
   margin-bottom: 1rem;
 }
 

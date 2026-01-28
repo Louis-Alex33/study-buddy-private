@@ -228,7 +228,7 @@
 
 // Quiz Arena
 .quiz-arena {
-  background: linear-gradient(135deg, #e8eaed 0%, #d4d7db 100%);
+  background: linear-gradient(135deg, darken($light-gray, 2%) 0%, darken($light-gray, 5%) 100%);
   min-height: 100vh;
   padding: 1.5rem;
   display: grid;
@@ -238,10 +238,10 @@
 }
 
 .quiz-header {
-  background: white;
+  background: $card-bg;
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   margin-bottom: 1.25rem;
 
   h2 {
@@ -275,7 +275,7 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: #1351AA;
-  background: #f5f7f9;
+  background: $card-bg-accent;
   padding: 0.75rem 1.25rem;
   border-radius: 10px;
 }
@@ -297,10 +297,10 @@
 }
 
 .quiz-question-container {
-  background: white;
+  background: $card-bg;
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .question-number {
@@ -341,8 +341,8 @@
 }
 
 .answer-option {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border: 2px solid #dee2e6;
+  background: linear-gradient(135deg, $card-bg 0%, $card-bg-accent 100%);
+  border: 2px solid darken($card-bg, 8%);
   border-radius: 10px;
   padding: 1.125rem;
   cursor: pointer;
@@ -423,10 +423,10 @@
 
 // Live Leaderboard
 .live-leaderboard {
-  background: white;
+  background: $card-bg;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   position: sticky;
   top: 1.5rem;
 
@@ -443,14 +443,14 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem;
-  background: #f8f9fa;
+  background: $card-bg-accent;
   border-radius: 8px;
   margin-bottom: 0.625rem;
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateX(3px);
-    background: #e9ecef;
+    background: darken($card-bg-accent, 3%);
   }
 
   &.rank-1 {
@@ -515,7 +515,7 @@
 }
 
 .podium-item {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, $card-bg 0%, $card-bg-accent 100%);
   border-radius: 16px;
   padding: 2rem;
   text-align: center;

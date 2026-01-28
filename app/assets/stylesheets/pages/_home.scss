@@ -359,9 +359,9 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.5rem;
-  background: #ffffff;
+  background: $card-bg;
   backdrop-filter: blur(12px);
-  border: 2px solid #e9ecef;
+  border: 2px solid darken($card-bg, 5%);
   border-radius: 20px;
   color: #2c3e50;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -398,7 +398,7 @@
 
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    background: #ffffff;
+    background: $card-bg;
     box-shadow:
       0 20px 40px rgba(0, 0, 0, 0.12),
       0 0 0 2px rgba(19, 81, 170, 0.3),
