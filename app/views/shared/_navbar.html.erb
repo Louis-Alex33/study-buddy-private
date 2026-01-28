@@ -1,14 +1,19 @@
-<nav class="navbar-studybuddy">
+<nav class="navbar-studigo">
   <div class="navbar-container">
     <%= link_to root_path, class: "navbar-brand" do %>
-      <div class="navbar-logo">SB</div>
-      <h1 class="navbar-title">Study Buddy</h1>
+      <div class="navbar-logo">S</div>
+      <h1 class="navbar-title">Studigo</h1>
     <% end %>
     <div class="navbar-links">
       <% if user_signed_in? %>
         <%= link_to "Mes cours", lectures_path, class: "navbar-link #{'active' if current_page?(lectures_path)}" %>
         <%= link_to "Mes Quiz", quizzes_path, class: "navbar-link #{'active' if current_page?(quizzes_path)}" %>
-        <%= link_to "Multijoueur", multiplayer_path, class: "navbar-link #{'active' if current_page?(multiplayer_path)}" %>
+        <%= link_to multiplayer_path, class: "navbar-link #{'active' if current_page?(multiplayer_path)}" do %>
+          Multijoueur
+          <% unless current_user.pro? %>
+            <span class="navbar-pro-badge">PRO</span>
+          <% end %>
+        <% end %>
         <button type="button" class="dark-mode-toggle" data-action="click->dark-mode#toggle" data-dark-mode-target="button">
           <i class="fas fa-sun"></i>
         </button>
@@ -24,6 +29,11 @@
             </span>
           <% end %>
           <span class="navbar-user-email"><%= current_user.display_name %></span>
+          <% if current_user.pro? %>
+            <span class="navbar-pro-badge">PRO</span>
+          <% else %>
+            <%= link_to "Passer a Pro", pricing_path, class: "navbar-upgrade-link" %>
+          <% end %>
         </div>
         <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-btn" %>
       <% else %>

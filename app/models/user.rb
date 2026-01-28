@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  include Subscribable
+
+  pay_customer stripe_attributes: :stripe_attributes
+
   has_many :lectures
   has_many :categories, through: :lectures
   has_many :flashcard_completions
@@ -66,5 +68,14 @@ class User < ApplicationRecord
   # Créer la ligue si elle n'existe pas
   def ensure_league!
     create_user_league! unless user_league
+  end
+
+  def stripe_attributes(pay_customer)
+    {
+      metadata: {
+        pay_customer_id: pay_customer.id,
+        user_id: id
+      }
+    }
   end
 end

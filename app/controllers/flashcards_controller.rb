@@ -1,5 +1,6 @@
 class FlashcardsController < ApplicationController
   before_action :set_lecture, only: [:new, :create]
+  before_action :check_flashcard_limit, only: [:create]
 
   def new
   end
@@ -8,6 +9,7 @@ class FlashcardsController < ApplicationController
     generated_flashcards = generate_flashcards_with_ai
 
     if generated_flashcards.present?
+      current_user.increment!(:flashcard_generations_count)
       redirect_to lecture_path(@lecture), notice: "#{generated_flashcards.count} flashcards generees avec succes"
     else
       redirect_to lecture_path(@lecture), alert: "Erreur lors de la generation des flashcards"
@@ -36,6 +38,10 @@ class FlashcardsController < ApplicationController
   end
 
   private
+
+  def check_flashcard_limit
+    enforce_flashcard_generation_limit!
+  end
 
   def set_lecture
     @lecture = Lecture.find(params[:lecture_id])

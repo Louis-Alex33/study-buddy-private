@@ -6,6 +6,12 @@ Rails.application.routes.draw do
   # Cheat code for points
   post 'cheat_points', to: 'pages#cheat_points'
 
+  # Subscription / Pricing
+  get "tarifs", to: "subscriptions#pricing", as: :pricing
+  post "checkout", to: "subscriptions#checkout", as: :subscription_checkout
+  get "checkout/succes", to: "subscriptions#success", as: :subscription_success
+  get "portail", to: "subscriptions#portal", as: :subscription_portal
+
   # Multiplayer section
   get 'multiplayer', to: 'multiplayer#index', as: :multiplayer
   get 'league', to: 'multiplayer#league', as: :league

@@ -1,5 +1,6 @@
 class RealTimeQuizzesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_multiplayer_access
   before_action :set_quiz_room, only: [:show, :join, :leave, :start, :destroy]
 
   def index
@@ -208,6 +209,10 @@ class RealTimeQuizzesController < ApplicationController
 
   def set_quiz_room
     @quiz_room = QuizRoom.find(params[:id])
+  end
+
+  def check_multiplayer_access
+    enforce_multiplayer_access!
   end
 
   def quiz_room_params

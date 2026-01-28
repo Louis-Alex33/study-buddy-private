@@ -1,4 +1,5 @@
 class LecturesController < ApplicationController
+  before_action :check_lecture_limit, only: [:create]
 
   def index
     @lectures = current_user.lectures
@@ -53,6 +54,10 @@ class LecturesController < ApplicationController
   end
 
   private
+
+  def check_lecture_limit
+    enforce_lecture_limit!
+  end
 
   def lecture_params
     params.require(:lecture).permit(:title, :resume, :category_id, :document)

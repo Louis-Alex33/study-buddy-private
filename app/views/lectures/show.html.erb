@@ -113,6 +113,15 @@
           <% end %>
         </div>
 
+        <% unless current_user.pro? %>
+          <div class="message-limit-info">
+            <%= current_user.messages_remaining(@lecture) %> messages restants
+            <% unless current_user.can_send_message?(@lecture) %>
+              &mdash; <%= link_to "Passer a Pro", pricing_path %>
+            <% end %>
+          </div>
+        <% end %>
+
         <%= form_with model: [:lecture, Message.new], url: lecture_messages_path(@lecture), class: "chat-input-form", data: { turbo_stream: true, chat_target: "form", action: "turbo:submit-end->chat#resetForm" } do |f| %>
           <%= f.text_area :content, placeholder: "Tape ta question ici...", rows: 2, required: true, data: { chat_target: "input" } %>
           <%= f.submit "Envoyer", class: "submit-button" %>

@@ -1,0 +1,58 @@
+<div class="pricing-page">
+  <div class="container my-5">
+    <div class="pricing-header">
+      <h1 class="pricing-main-title">Choisissez votre plan</h1>
+      <p class="pricing-subtitle">Debloquez tout le potentiel de Studigo</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Plan Gratuit -->
+      <div class="pricing-card">
+        <h3 class="pricing-plan-name">Gratuit</h3>
+        <div class="pricing-price">0&euro;<span>/mois</span></div>
+        <p class="pricing-plan-desc">Pour decouvrir Studigo</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> 3 cours maximum</li>
+          <li><i class="fas fa-check"></i> 5 Mo par document</li>
+          <li><i class="fas fa-check"></i> 5 messages IA par cours</li>
+          <li><i class="fas fa-check"></i> 2 generations de flashcards</li>
+          <li><i class="fas fa-check"></i> 2 creations de quiz</li>
+          <li class="disabled"><i class="fas fa-times"></i> Mode multijoueur</li>
+        </ul>
+        <% if user_signed_in? && current_user.free? %>
+          <span class="btn-plan-current">Plan actuel</span>
+        <% end %>
+      </div>
+
+      <!-- Plan Pro -->
+      <div class="pricing-card pricing-card-pro">
+        <span class="pricing-badge">Populaire</span>
+        <h3 class="pricing-plan-name">Studigo Pro</h3>
+        <div class="pricing-price">9,99&euro;<span>/mois</span></div>
+        <p class="pricing-plan-desc">Pour les etudiants serieux</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Cours illimites</li>
+          <li><i class="fas fa-check"></i> 10 Mo par document</li>
+          <li><i class="fas fa-check"></i> Messages IA illimites</li>
+          <li><i class="fas fa-check"></i> Flashcards illimitees</li>
+          <li><i class="fas fa-check"></i> Quiz illimites</li>
+          <li><i class="fas fa-check"></i> Mode multijoueur complet</li>
+        </ul>
+        <% if user_signed_in? && current_user.pro? %>
+          <%= link_to "Gerer mon abonnement", subscription_portal_path, class: "btn-plan-action" %>
+        <% elsif user_signed_in? %>
+          <%= button_to "Passer a Pro", subscription_checkout_path, method: :post, class: "btn-plan-action" %>
+        <% else %>
+          <%= link_to "Commencer", new_user_registration_path, class: "btn-plan-action" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="pricing-back">
+      <%= link_to root_path, class: "btn-back-home" do %>
+        <span>&larr;</span>
+        <span>Retour a l'accueil</span>
+      <% end %>
+    </div>
+  </div>
+</div>

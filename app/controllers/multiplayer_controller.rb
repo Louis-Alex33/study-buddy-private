@@ -1,4 +1,6 @@
 class MultiplayerController < ApplicationController
+  before_action :check_multiplayer_access
+
   def index
   end
 
@@ -11,5 +13,11 @@ class MultiplayerController < ApplicationController
       losses: 0
     )
     @leaderboard = UserLeague.joins(:user).order(rank: :desc, division: :asc, points: :desc).limit(10)
+  end
+
+  private
+
+  def check_multiplayer_access
+    enforce_multiplayer_access!
   end
 end

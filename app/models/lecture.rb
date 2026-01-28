@@ -1,6 +1,4 @@
 class Lecture < ApplicationRecord
-  MAX_FILE_SIZE_MB  = 10
-
   has_one_attached :document
 
   belongs_to :user
@@ -17,14 +15,17 @@ class Lecture < ApplicationRecord
 
   after_commit :analyze_document, on: :create
 
+  def max_file_size_mb
+    user&.max_file_size_mb || 5
+  end
 
   def document_presence
     errors.add(:document, "must be attached") unless document.attached?
   end
 
   def file_size_limit
-    if document.attached? && document.byte_size > MAX_FILE_SIZE_MB.megabytes
-      errors.add(:document, "size must be less than #{MAX_FILE_SIZE_MB}MB")
+    if document.attached? && document.byte_size > max_file_size_mb.megabytes
+      errors.add(:document, "La taille du fichier doit etre inferieure a #{max_file_size_mb}Mo")
     end
   end
 

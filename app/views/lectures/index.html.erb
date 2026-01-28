@@ -7,6 +7,16 @@
     </div>
   </div>
 
+  <% unless current_user.pro? %>
+    <div class="plan-limit-banner">
+      <i class="fas fa-info-circle"></i>
+      <%= current_user.lectures.count %>/<%= current_user.plan_limit(:max_lectures) %> cours utilises
+      <% unless current_user.can_create_lecture? %>
+        &mdash; <%= link_to "Passer a Studigo Pro", pricing_path %> pour un acces illimite
+      <% end %>
+    </div>
+  <% end %>
+
   <!-- Search Bar -->
   <div class="lectures-search-container">
     <%= form_with url: lectures_path, method: :get, local: true, class: "lectures-search-form" do %>

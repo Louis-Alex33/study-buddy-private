@@ -1,5 +1,6 @@
 class QuizzesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_quiz_limit, only: [:create]
 
   def index
     @categories = Category.includes(:quizzes).where.not(quizzes: { id: nil })
@@ -24,6 +25,7 @@ class QuizzesController < ApplicationController
     if @quiz.save
       # Générer les questions avec l'IA
       QuizGeneratorService.new(@quiz).call
+      current_user.increment!(:quiz_generations_count)
 
       # Créer le challenge avec l'utilisateur courant comme propriétaire
       challenge = current_user.challenges.create!(quiz: @quiz)
@@ -42,6 +44,10 @@ class QuizzesController < ApplicationController
   end
 
   private
+
+  def check_quiz_limit
+    enforce_quiz_generation_limit!
+  end
 
   def quiz_params
     params.require(:quiz).permit(:title, :category_id, :level, :status)

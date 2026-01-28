@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Study Buddy is a Rails 7.1 application for managing study materials. Users can organize lectures into categories, create flashcards for studying, take notes, and interact with an AI assistant (via ruby_llm gem) for each lecture.
+Studigo is a Rails 7.1 application for managing study materials. Users can organize lectures into categories, create flashcards for studying, take notes, and interact with an AI assistant (via ruby_llm gem) for each lecture.
 
 ## Development Commands
 

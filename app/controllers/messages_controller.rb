@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_lecture
+  before_action :check_message_limit, only: [:create]
 
   def create
     @message = @lecture.messages.new(message_params)
@@ -47,6 +48,10 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def check_message_limit
+    enforce_message_limit!(@lecture)
+  end
 
   def set_lecture
     @lecture = Lecture.find(params[:lecture_id])

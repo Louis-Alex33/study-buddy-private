@@ -1,0 +1,309 @@
+.pricing-page {
+  min-height: 80vh;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.pricing-main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0f0f0;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.pricing-card-pro {
+  border-color: #1351AA;
+  box-shadow: 0 8px 24px rgba(19, 81, 170, 0.2);
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(19, 81, 170, 0.25);
+  }
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pricing-plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.pricing-price {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1351AA;
+  margin-bottom: 0.5rem;
+
+  span {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+  }
+}
+
+.pricing-plan-desc {
+  color: #888;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-bottom: 2rem;
+
+  li {
+    padding: 0.6rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    i {
+      width: 18px;
+      text-align: center;
+    }
+
+    .fa-check {
+      color: #28a745;
+    }
+
+    .fa-times {
+      color: #dc3545;
+    }
+
+    &.disabled {
+      color: #bbb;
+      text-decoration: line-through;
+    }
+  }
+}
+
+.btn-plan-action {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.25);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.35);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.btn-plan-current {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: #f0f0f0;
+  color: #888;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+.pricing-back {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    gap: 2rem;
+  }
+
+  .pricing-main-title {
+    font-size: 2rem;
+  }
+
+  .pricing-card {
+    padding: 2rem;
+  }
+}
+
+// Navbar upgrade elements
+.navbar-pro-badge {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #333;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.navbar-upgrade-link {
+  color: #FFD700 !important;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 14px;
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 215, 0, 0.25);
+    border-color: rgba(255, 215, 0, 0.5);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+}
+
+.plan-limit-banner {
+  background: rgba(19, 81, 170, 0.08);
+  border: 1px solid rgba(19, 81, 170, 0.15);
+  border-radius: 12px;
+  padding: 0.75rem 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #1351AA;
+
+  a {
+    color: #1351AA;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+}
+
+.message-limit-info {
+  text-align: center;
+  padding: 0.5rem;
+  color: #888;
+  font-size: 0.85rem;
+
+  a {
+    color: #1351AA;
+    font-weight: 600;
+  }
+}
+
+.pro-badge-nav {
+  font-size: 0.6em;
+  vertical-align: super;
+}
+
+// Dark mode
+[data-theme="dark"] {
+  .pricing-card {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+
+  .pricing-card-pro {
+    border-color: #1a66cc;
+  }
+
+  .pricing-main-title {
+    color: #e0e0e0;
+  }
+
+  .pricing-subtitle {
+    color: #aaa;
+  }
+
+  .pricing-plan-name {
+    color: #e0e0e0;
+  }
+
+  .pricing-price span {
+    color: #aaa;
+  }
+
+  .pricing-plan-desc {
+    color: #999;
+  }
+
+  .pricing-features li {
+    color: #ccc;
+
+    &.disabled {
+      color: #666;
+    }
+  }
+
+  .btn-plan-current {
+    background: #444;
+    color: #999;
+  }
+
+  .plan-limit-banner {
+    background: rgba(19, 81, 170, 0.15);
+    border-color: rgba(19, 81, 170, 0.25);
+    color: #6ba3ff;
+
+    a {
+      color: #6ba3ff;
+    }
+  }
+
+  .message-limit-info {
+    color: #999;
+  }
+}
