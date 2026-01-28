@@ -59,8 +59,8 @@ class LectureAnalyzerService
       raise original_error
     end
 
-    Rails.logger.info "Extracted #{text.length} characters from PDF, retrying with GPT-4o"
-    chat = RubyLLM.chat(model: "gpt-4o")
+    Rails.logger.info "Extracted #{text.length} characters from PDF, retrying with extracted text"
+    chat = RubyLLM.chat(model: "gemini-2.0-flash")
     chat.with_instructions(instructions)
     chat.ask("Analyse ce document et fournis un résumé détaillé.\n\nContenu du document :\n#{text}").content
   end
@@ -84,11 +84,11 @@ class LectureAnalyzerService
              # Pour les PDF: Gemini en priorité, GPT-4o en fallback
              preferred ? RubyLLM.chat(model: "gemini-2.0-flash") : RubyLLM.chat(model: "gpt-4o")
            elsif @lecture.document.image?
-             # Pour les images: toujours GPT-4o (meilleure vision)
-             RubyLLM.chat(model: "gpt-4o")
+             # Pour les images: Gemini Flash (supporte la vision)
+             RubyLLM.chat(model: "gemini-2.0-flash")
            else
-             # Pour les autres: modèle par défaut
-             RubyLLM.chat
+             # Pour les autres: Gemini Flash
+             RubyLLM.chat(model: "gemini-2.0-flash")
            end
 
     chat.with_instructions(instructions)

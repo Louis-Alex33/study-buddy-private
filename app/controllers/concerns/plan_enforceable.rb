@@ -11,11 +11,11 @@ module PlanEnforceable
     false
   end
 
-  def enforce_message_limit!(lecture)
-    return true if current_user.can_send_message?(lecture)
+  def enforce_message_limit!
+    return true if current_user.can_send_message?
 
-    redirect_to lecture_path(lecture),
-      alert: "Vous avez atteint la limite de #{current_user.plan_limit(:max_messages_per_lecture)} messages pour ce cours. Passez a Studigo Pro pour un acces illimite !"
+    redirect_back fallback_location: lectures_path,
+      alert: "Vous avez atteint la limite de #{current_user.plan_limit(:max_messages_total)} messages au total. Passez a Studigo Pro pour un acces illimite !"
     false
   end
 

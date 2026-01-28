@@ -9,12 +9,12 @@ class Message < ApplicationRecord
   def user_message_limit
     return unless role == "user"
 
-    max = user&.plan_limit(:max_messages_per_lecture) || 5
+    max = user&.plan_limit(:max_messages_total) || 10
     return if max == Float::INFINITY
 
-    current_count = lecture.messages.where(role: "user", user: user).count
+    current_count = Message.where(role: "user", user: user).count
     if current_count >= max
-      errors.add(:content, "Vous avez atteint la limite de #{max} messages pour ce cours. Passez a Studigo Pro pour un acces illimite.")
+      errors.add(:content, "Vous avez atteint la limite de #{max} messages au total. Passez a Studigo Pro pour un acces illimite.")
     end
   end
 end

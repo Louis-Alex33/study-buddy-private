@@ -115,8 +115,8 @@
 
         <% unless current_user.pro? %>
           <div class="message-limit-info">
-            <%= current_user.messages_remaining(@lecture) %> messages restants
-            <% unless current_user.can_send_message?(@lecture) %>
+            <%= current_user.messages_remaining %> messages restants au total
+            <% unless current_user.can_send_message? %>
               &mdash; <%= link_to "Passer a Pro", pricing_path %>
             <% end %>
           </div>

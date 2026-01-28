@@ -5,15 +5,15 @@ module Subscribable
     "free" => {
       max_lectures: 3,
       max_file_size_mb: 5,
-      max_messages_per_lecture: 5,
+      max_messages_total: 10,
       max_flashcard_generations: 2,
-      max_quiz_generations: 2,
+      max_quiz_generations: 1,
       multiplayer_access: false
     },
     "pro" => {
       max_lectures: Float::INFINITY,
       max_file_size_mb: 10,
-      max_messages_per_lecture: Float::INFINITY,
+      max_messages_total: Float::INFINITY,
       max_flashcard_generations: Float::INFINITY,
       max_quiz_generations: Float::INFINITY,
       multiplayer_access: true
@@ -49,13 +49,17 @@ module Subscribable
     plan_limit(:max_file_size_mb)
   end
 
-  def can_send_message?(lecture)
-    pro? || lecture.messages.where(role: "user", user: self).count < plan_limit(:max_messages_per_lecture)
+  def can_send_message?
+    pro? || total_user_messages_count < plan_limit(:max_messages_total)
   end
 
-  def messages_remaining(lecture)
+  def messages_remaining
     return Float::INFINITY if pro?
-    [plan_limit(:max_messages_per_lecture) - lecture.messages.where(role: "user", user: self).count, 0].max
+    [plan_limit(:max_messages_total) - total_user_messages_count, 0].max
+  end
+
+  def total_user_messages_count
+    Message.where(role: "user", user: self).count
   end
 
   def can_generate_flashcards?

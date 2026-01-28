@@ -50,7 +50,7 @@ class MessagesController < ApplicationController
   private
 
   def check_message_limit
-    enforce_message_limit!(@lecture)
+    enforce_message_limit!
   end
 
   def set_lecture
@@ -62,7 +62,7 @@ class MessagesController < ApplicationController
   end
 
   def generate_ai_response
-    ruby_llm_chat = RubyLLM.chat
+    ruby_llm_chat = RubyLLM.chat(model: "gemini-2.0-flash")
     build_conversation_history(ruby_llm_chat)
 
     if @message.file.attached?
@@ -125,7 +125,7 @@ class MessagesController < ApplicationController
         end
       end
     elsif @message.file.image?
-      chat = RubyLLM.chat(model: "gpt-4o")
+      chat = RubyLLM.chat(model: "gemini-2.0-flash")
       build_conversation_history(chat)
       chat.with_instructions(instructions)
       chat.ask(@message.content, with: { image: @message.file.url }).content
@@ -143,7 +143,7 @@ class MessagesController < ApplicationController
   end
 
   def stream_ai_response_with_broadcast(message, assistant_message, lecture)
-    ruby_llm_chat = RubyLLM.chat
+    ruby_llm_chat = RubyLLM.chat(model: "gemini-2.0-flash")
 
     # Reconstruire l'historique des conversations (en excluant le message assistant vide qu'on vient de créer)
     lecture.messages.where.not(id: assistant_message.id).order(:created_at).each do |msg|
@@ -276,7 +276,7 @@ class MessagesController < ApplicationController
         end
       end
     elsif message.file.image?
-      chat = RubyLLM.chat(model: "gpt-4o")
+      chat = RubyLLM.chat(model: "gemini-2.0-flash")
       lecture.messages.order(:created_at).each do |msg|
         chat.add_message(role: msg.role, content: msg.content)
       end
