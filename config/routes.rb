@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
-  # Cheat code for points
-  post 'cheat_points', to: 'pages#cheat_points'
-
   # Subscription / Pricing
   get "tarifs", to: "subscriptions#pricing", as: :pricing
   post "checkout", to: "subscriptions#checkout", as: :subscription_checkout
