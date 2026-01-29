@@ -1,6 +1,8 @@
 module Subscribable
   extend ActiveSupport::Concern
 
+  ADMIN_EMAILS = %w[la@mail.com].freeze
+
   PLAN_LIMITS = {
     "free" => {
       max_lectures: 3,
@@ -24,12 +26,16 @@ module Subscribable
     validates :plan, inclusion: { in: %w[free pro] }
   end
 
+  def admin?
+    ADMIN_EMAILS.include?(email)
+  end
+
   def pro?
-    plan == "pro"
+    admin? || plan == "pro"
   end
 
   def free?
-    plan == "free"
+    !pro?
   end
 
   def plan_limit(key)

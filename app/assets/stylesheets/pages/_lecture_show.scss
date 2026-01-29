@@ -56,7 +56,7 @@
   }
 }
 
-// Carte Résumé du cours
+// Carte Fiche de cours
 .lecture-resume-card {
   background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
   padding: 30px;
@@ -110,6 +110,8 @@
     }
 
     .resume-title {
+      flex: 1;
+
       h3 {
         color: white;
         margin: 0;
@@ -123,41 +125,110 @@
         color: rgba(255,255,255,0.9);
       }
     }
+
+    .btn-download-resume {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+
+      i {
+        font-size: 15px;
+      }
+
+      &:hover {
+        background: rgba(255,255,255,0.3);
+        border-color: rgba(255,255,255,0.5);
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+    }
   }
 
   .resume-content {
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.7;
     color: rgba(255,255,255,0.95);
     position: relative;
     z-index: 1;
 
-    // Texte en gras (titres/sous-titres générés par l'IA)
+    // Titres de sections principales (Introduction, Concepts clés, etc.)
+    h3 {
+      color: #FFD700;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 28px 0 12px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+      letter-spacing: 0.3px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    // Sous-titres (noms de concepts, sous-sections)
+    h4 {
+      color: #98FB98;
+      font-size: 17px;
+      font-weight: 600;
+      margin: 20px 0 8px 0;
+      padding-left: 12px;
+      border-left: 3px solid #98FB98;
+    }
+
+    // Paragraphes
+    p {
+      margin: 0 0 12px 0;
+      color: rgba(255,255,255,0.93);
+    }
+
+    // Listes à puces et numérotées
+    ul, ol {
+      margin: 8px 0 16px 0;
+      padding-left: 24px;
+
+      li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+        color: rgba(255,255,255,0.9);
+
+        &::marker {
+          color: #FFD700;
+        }
+      }
+    }
+
+    ol li::marker {
+      color: #98FB98;
+      font-weight: 600;
+    }
+
+    // Termes importants et mots-clés
     strong {
-      display: inline-block;
       color: #FFD700;
       font-weight: 700;
-      font-size: 16px;
-      margin-top: 8px;
-      padding: 6px 14px;
-      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.15) 100%);
-      border-left: 4px solid #FFD700;
-      border-radius: 0 10px 10px 0;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
-    // Texte en italique (éléments importants)
+    // Nuances et précisions secondaires
     em {
       color: #98FB98;
-      font-style: normal;
-      font-weight: 600;
-      background: linear-gradient(135deg, rgba(152, 251, 152, 0.25) 0%, rgba(144, 238, 144, 0.2) 100%);
-      padding: 3px 10px;
-      border-radius: 6px;
-      border-bottom: 2px solid rgba(152, 251, 152, 0.5);
+      font-style: italic;
+      font-weight: 500;
     }
 
-    // Retours à la ligne (espacement entre sections)
+    // Fallback pour ancien contenu avec <br>
     br {
       display: block;
       content: "";

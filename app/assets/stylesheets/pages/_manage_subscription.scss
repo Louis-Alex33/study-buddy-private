@@ -1,0 +1,498 @@
+.manage-subscription-page {
+  min-height: 80vh;
+}
+
+.manage-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.manage-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1351AA;
+  margin-bottom: 0.5rem;
+}
+
+.manage-subtitle {
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 500;
+}
+
+// Current Plan Card
+.manage-plan-card {
+  background: $card-bg;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 2px solid darken($card-bg, 5%);
+  margin-bottom: 2.5rem;
+  transition: all 0.3s ease;
+
+  &.plan-pro {
+    border-color: #1351AA;
+    box-shadow: 0 4px 20px rgba(19, 81, 170, 0.15);
+  }
+}
+
+.plan-status-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.plan-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.plan-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+
+  .plan-pro & {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  }
+}
+
+.plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1351AA;
+  margin: 0;
+}
+
+.plan-price {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 4px 0 0 0;
+  font-weight: 500;
+}
+
+.plan-badge {
+  .badge-pro {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-free {
+    background: #e8e8e8;
+    color: #666;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+}
+
+.plan-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-manage-portal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.25);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.35);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.btn-manage-upgrade {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #333;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 165, 0, 0.25);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 165, 0, 0.35);
+  }
+}
+
+.btn-manage-pricing {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: $card-bg-accent;
+  color: #555;
+  border: 2px solid darken($card-bg-accent, 8%);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: darken($card-bg-accent, 5%);
+    color: #333;
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+}
+
+// Usage Section
+.manage-usage-section {
+  margin-bottom: 2.5rem;
+}
+
+.manage-section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.usage-card {
+  background: $card-bg;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 2px solid darken($card-bg, 5%);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.usage-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.usage-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+
+.usage-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+}
+
+.usage-value {
+  margin-bottom: 10px;
+}
+
+.usage-count {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1351AA;
+}
+
+.usage-limit {
+  font-size: 0.9rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.status-active {
+  color: #28a745 !important;
+  font-size: 1.1rem !important;
+
+  i { margin-right: 4px; }
+}
+
+.status-locked {
+  color: #dc3545 !important;
+  font-size: 1.1rem !important;
+
+  i { margin-right: 4px; }
+}
+
+.usage-bar {
+  height: 6px;
+  background: darken($card-bg, 8%);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.usage-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #1351AA 0%, #1a66cc 100%);
+  transition: width 0.5s ease;
+
+  &.pro {
+    background: linear-gradient(90deg, #1351AA 0%, #28a745 100%);
+  }
+
+  &.warning {
+    background: linear-gradient(90deg, #ffc107 0%, #dc3545 100%);
+  }
+
+  &.locked {
+    background: #dee2e6;
+  }
+}
+
+// Upgrade CTA
+.manage-upgrade-cta {
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 25px rgba(19, 81, 170, 0.25);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+}
+
+.upgrade-cta-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.upgrade-cta-icon {
+  font-size: 3rem;
+  color: #FFD700;
+  margin-bottom: 1rem;
+}
+
+.manage-upgrade-cta h3 {
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.manage-upgrade-cta p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-upgrade-cta {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  color: #333;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(255, 165, 0, 0.35);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(255, 165, 0, 0.45);
+  }
+}
+
+.manage-back {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+// Navbar account link
+.navbar-link-account {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  padding: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    color: white;
+    transform: scale(1.1);
+  }
+}
+
+.navbar-pro-badge-link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+
+    .navbar-pro-badge {
+      transform: scale(1.05);
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 992px) {
+  .usage-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .manage-title {
+    font-size: 2rem;
+  }
+
+  .manage-plan-card {
+    padding: 1.5rem;
+  }
+
+  .plan-status-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .plan-actions {
+    flex-direction: column;
+
+    .btn-manage-portal,
+    .btn-manage-upgrade,
+    .btn-manage-pricing {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .usage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .manage-upgrade-cta {
+    padding: 2rem;
+  }
+}
+
+// Dark mode
+[data-theme="dark"] {
+  .manage-title {
+    color: #6ba3ff;
+  }
+
+  .manage-subtitle {
+    color: #aaa;
+  }
+
+  .manage-plan-card {
+    background: #2a2a2a;
+    border-color: #444;
+
+    &.plan-pro {
+      border-color: #1a66cc;
+    }
+  }
+
+  .plan-name {
+    color: #6ba3ff;
+  }
+
+  .plan-price {
+    color: #aaa;
+  }
+
+  .badge-free {
+    background: #444;
+    color: #aaa;
+  }
+
+  .manage-section-title {
+    color: #e0e0e0;
+  }
+
+  .usage-card {
+    background: #2a2a2a;
+    border-color: #444;
+  }
+
+  .usage-label {
+    color: #aaa;
+  }
+
+  .usage-count {
+    color: #6ba3ff;
+  }
+
+  .usage-limit {
+    color: #777;
+  }
+
+  .usage-bar {
+    background: #444;
+  }
+
+  .btn-manage-pricing {
+    background: #333;
+    border-color: #555;
+    color: #ccc;
+
+    &:hover {
+      background: #444;
+      color: #fff;
+    }
+  }
+}

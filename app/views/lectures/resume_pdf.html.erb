@@ -1,0 +1,13 @@
+<div class="pdf-header">
+  <div class="pdf-brand">Studigo</div>
+  <div class="pdf-title"><%= @lecture.title %></div>
+  <div class="pdf-subtitle">Fiche de cours &mdash; G&eacute;n&eacute;r&eacute;e par l'IA</div>
+</div>
+
+<div class="pdf-content">
+  <%= sanitize(@lecture.resume, tags: %w[h3 h4 p ul ol li strong em br]) %>
+</div>
+
+<div class="pdf-footer">
+  Studigo &mdash; Fiche g&eacute;n&eacute;r&eacute;e le <%= l(Date.today, format: :long) rescue Date.today.strftime("%d/%m/%Y") %>
+</div>

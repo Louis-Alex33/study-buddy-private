@@ -1,0 +1,213 @@
+<div class="manage-subscription-page">
+  <div class="container my-5">
+    <div class="manage-header">
+      <h1 class="manage-title">Mon abonnement</h1>
+      <p class="manage-subtitle">Gerez votre plan et suivez votre utilisation</p>
+    </div>
+
+    <!-- Current Plan Card -->
+    <div class="manage-plan-card <%= 'plan-pro' if @user.pro? %>">
+      <div class="plan-status-header">
+        <div class="plan-info">
+          <div class="plan-icon">
+            <% if @user.pro? %>
+              <i class="fas fa-crown"></i>
+            <% else %>
+              <i class="fas fa-user"></i>
+            <% end %>
+          </div>
+          <div>
+            <h2 class="plan-name"><%= @user.pro? ? "Studigo Pro" : "Gratuit" %></h2>
+            <p class="plan-price">
+              <% if @user.pro? %>
+                9,99&euro; / mois
+              <% else %>
+                0&euro; / mois
+              <% end %>
+            </p>
+          </div>
+        </div>
+        <div class="plan-badge">
+          <span class="badge-<%= @user.pro? ? 'pro' : 'free' %>">
+            <%= @user.pro? ? "Actif" : "Plan actuel" %>
+          </span>
+        </div>
+      </div>
+
+      <div class="plan-actions">
+        <% if @user.pro? %>
+          <%= link_to subscription_portal_path, class: "btn-manage-portal" do %>
+            <i class="fas fa-credit-card"></i> Gerer mon paiement
+          <% end %>
+        <% else %>
+          <%= button_to "Passer a Studigo Pro", subscription_checkout_path, method: :post, class: "btn-manage-upgrade" %>
+        <% end %>
+        <%= link_to pricing_path, class: "btn-manage-pricing" do %>
+          <i class="fas fa-list"></i> Voir les plans
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Usage Stats -->
+    <div class="manage-usage-section">
+      <h3 class="manage-section-title">Mon utilisation</h3>
+
+      <div class="usage-grid">
+        <!-- Cours -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-book"></i></div>
+            <span class="usage-label">Cours</span>
+          </div>
+          <div class="usage-value">
+            <% if @user.pro? %>
+              <span class="usage-count"><%= @user.lectures.count %></span>
+              <span class="usage-limit">/ Illimite</span>
+            <% else %>
+              <span class="usage-count"><%= @user.lectures.count %></span>
+              <span class="usage-limit">/ <%= @user.plan_limit(:max_lectures) %></span>
+            <% end %>
+          </div>
+          <div class="usage-bar">
+            <% if @user.pro? %>
+              <div class="usage-bar-fill pro" style="width: 100%"></div>
+            <% else %>
+              <% pct = [(@user.lectures.count.to_f / @user.plan_limit(:max_lectures) * 100), 100].min %>
+              <div class="usage-bar-fill <%= 'warning' if pct >= 80 %>" style="width: <%= pct %>%"></div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Messages IA -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-comment-dots"></i></div>
+            <span class="usage-label">Messages IA</span>
+          </div>
+          <div class="usage-value">
+            <% if @user.pro? %>
+              <span class="usage-count"><%= @user.total_user_messages_count %></span>
+              <span class="usage-limit">/ Illimite</span>
+            <% else %>
+              <span class="usage-count"><%= @user.total_user_messages_count %></span>
+              <span class="usage-limit">/ <%= @user.plan_limit(:max_messages_total) %></span>
+            <% end %>
+          </div>
+          <div class="usage-bar">
+            <% if @user.pro? %>
+              <div class="usage-bar-fill pro" style="width: 100%"></div>
+            <% else %>
+              <% pct = [(@user.total_user_messages_count.to_f / @user.plan_limit(:max_messages_total) * 100), 100].min %>
+              <div class="usage-bar-fill <%= 'warning' if pct >= 80 %>" style="width: <%= pct %>%"></div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Flashcards -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-layer-group"></i></div>
+            <span class="usage-label">Generations flashcards</span>
+          </div>
+          <div class="usage-value">
+            <% if @user.pro? %>
+              <span class="usage-count"><%= @user.flashcard_generations_count %></span>
+              <span class="usage-limit">/ Illimite</span>
+            <% else %>
+              <span class="usage-count"><%= @user.flashcard_generations_count %></span>
+              <span class="usage-limit">/ <%= @user.plan_limit(:max_flashcard_generations) %></span>
+            <% end %>
+          </div>
+          <div class="usage-bar">
+            <% if @user.pro? %>
+              <div class="usage-bar-fill pro" style="width: 100%"></div>
+            <% else %>
+              <% pct = [(@user.flashcard_generations_count.to_f / @user.plan_limit(:max_flashcard_generations) * 100), 100].min %>
+              <div class="usage-bar-fill <%= 'warning' if pct >= 80 %>" style="width: <%= pct %>%"></div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Quiz -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-question-circle"></i></div>
+            <span class="usage-label">Creations de quiz</span>
+          </div>
+          <div class="usage-value">
+            <% if @user.pro? %>
+              <span class="usage-count"><%= @user.quiz_generations_count %></span>
+              <span class="usage-limit">/ Illimite</span>
+            <% else %>
+              <span class="usage-count"><%= @user.quiz_generations_count %></span>
+              <span class="usage-limit">/ <%= @user.plan_limit(:max_quiz_generations) %></span>
+            <% end %>
+          </div>
+          <div class="usage-bar">
+            <% if @user.pro? %>
+              <div class="usage-bar-fill pro" style="width: 100%"></div>
+            <% else %>
+              <% pct = [(@user.quiz_generations_count.to_f / @user.plan_limit(:max_quiz_generations) * 100), 100].min %>
+              <div class="usage-bar-fill <%= 'warning' if pct >= 80 %>" style="width: <%= pct %>%"></div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Taille fichiers -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-file-upload"></i></div>
+            <span class="usage-label">Taille max par fichier</span>
+          </div>
+          <div class="usage-value">
+            <span class="usage-count"><%= @user.max_file_size_mb %> Mo</span>
+          </div>
+          <div class="usage-bar">
+            <div class="usage-bar-fill pro" style="width: 100%"></div>
+          </div>
+        </div>
+
+        <!-- Multijoueur -->
+        <div class="usage-card">
+          <div class="usage-card-header">
+            <div class="usage-icon"><i class="fas fa-users"></i></div>
+            <span class="usage-label">Mode multijoueur</span>
+          </div>
+          <div class="usage-value">
+            <% if @user.has_multiplayer_access? %>
+              <span class="usage-count status-active"><i class="fas fa-check-circle"></i> Actif</span>
+            <% else %>
+              <span class="usage-count status-locked"><i class="fas fa-lock"></i> Bloque</span>
+            <% end %>
+          </div>
+          <div class="usage-bar">
+            <% if @user.has_multiplayer_access? %>
+              <div class="usage-bar-fill pro" style="width: 100%"></div>
+            <% else %>
+              <div class="usage-bar-fill locked" style="width: 100%"></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% unless @user.pro? %>
+      <!-- Upgrade CTA -->
+      <div class="manage-upgrade-cta">
+        <div class="upgrade-cta-content">
+          <div class="upgrade-cta-icon"><i class="fas fa-rocket"></i></div>
+          <h3>Passez a Studigo Pro</h3>
+          <p>Debloquez un acces illimite a tous les outils : cours, messages IA, flashcards, quiz et mode multijoueur.</p>
+          <%= button_to "Passer a Pro — 9,99€/mois", subscription_checkout_path, method: :post, class: "btn-upgrade-cta" %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="manage-back">
+      <%= link_to lectures_path, class: "btn-back-home" do %>
+        <span>&larr;</span>
+        <span>Retour a mes cours</span>
+      <% end %>
+    </div>
+  </div>
+</div>

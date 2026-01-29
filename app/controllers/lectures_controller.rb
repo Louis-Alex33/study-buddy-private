@@ -53,6 +53,31 @@ class LecturesController < ApplicationController
     redirect_to lectures_path, notice: "Lecture supprimée avec succès"
   end
 
+  def download_resume
+    @lecture = Lecture.find(params[:id])
+
+    unless @lecture.resume.present?
+      redirect_to lecture_path(@lecture), alert: "Aucune fiche de cours disponible pour ce cours."
+      return
+    end
+
+    pdf = WickedPdf.new.pdf_from_string(
+      render_to_string(
+        template: "lectures/resume_pdf",
+        layout: "pdf",
+        formats: [:html]
+      ),
+      encoding: "UTF-8",
+      page_size: "A4",
+      margin: { top: 20, bottom: 20, left: 20, right: 20 }
+    )
+
+    send_data pdf,
+      filename: "#{@lecture.title.parameterize}-fiche-de-cours.pdf",
+      type: "application/pdf",
+      disposition: "attachment"
+  end
+
   private
 
   def check_lecture_limit

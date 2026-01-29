@@ -21,11 +21,16 @@
         <div class="navbar-user-info">
           <span class="navbar-user-email"><%= current_user.display_name %></span>
           <% if current_user.pro? %>
-            <span class="navbar-pro-badge">PRO</span>
+            <%= link_to subscription_manage_path, class: "navbar-pro-badge-link" do %>
+              <span class="navbar-pro-badge">PRO</span>
+            <% end %>
           <% else %>
             <%= link_to "Passer a Pro", pricing_path, class: "navbar-upgrade-link" %>
           <% end %>
         </div>
+        <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement" do %>
+          <i class="fas fa-cog"></i>
+        <% end %>
         <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-btn" %>
       <% else %>
         <button type="button" class="dark-mode-toggle" data-action="click->dark-mode#toggle" data-dark-mode-target="button">

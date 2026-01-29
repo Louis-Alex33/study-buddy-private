@@ -39,16 +39,16 @@ class LectureAnalyzerService
   def ask_chat(chat)
     if @lecture.document.content_type == "application/pdf"
       begin
-        chat.ask("Analyse ce document et fournis un résumé détaillé.", with: { pdf: @lecture.document.url }).content
+        chat.ask("Analyse ce document et produis une fiche de cours structurée.", with: { pdf: @lecture.document.url }).content
       rescue => e
         Rails.logger.warn "PDF analysis failed, falling back to text extraction: #{e.message}"
         ask_with_extracted_text(e)
       end
     elsif @lecture.document.image?
-      chat.ask("Analyse ce document et fournis un résumé détaillé.", with: { image: @lecture.document.url }).content
+      chat.ask("Analyse ce document et produis une fiche de cours structurée.", with: { image: @lecture.document.url }).content
     else
       # Pour les fichiers texte ou autres
-      chat.ask("Analyse ce document et fournis un résumé détaillé.").content
+      chat.ask("Analyse ce document et produis une fiche de cours structurée.").content
     end
   end
 
@@ -62,7 +62,7 @@ class LectureAnalyzerService
     Rails.logger.info "Extracted #{text.length} characters from PDF, retrying with extracted text"
     chat = RubyLLM.chat(model: "gemini-2.0-flash")
     chat.with_instructions(instructions)
-    chat.ask("Analyse ce document et fournis un résumé détaillé.\n\nContenu du document :\n#{text}").content
+    chat.ask("Analyse ce document et produis une fiche de cours structurée.\n\nContenu du document :\n#{text}").content
   end
 
   def extract_text_from_pdf
@@ -104,36 +104,59 @@ class LectureAnalyzerService
   end
 
   def instructions
-    "Tu es un assistant chargé d'analyser des fichiers téléchargés par l'utilisateur
-    (PDF, DOCX, TXT). Tu dois :
+    "Tu es un assistant pédagogique expert. Tu crées des FICHES DE COURS structurées, complètes et EXHAUSTIVES à partir de documents téléchargés (PDF, DOCX, TXT).
 
-    1. Lire intégralement le fichier fourni.
-    2. Produire un résumé clair, concis, fidèle et sans fioritures.
-    3. Structurer le résumé avec des retours à la ligne (<br>) entre chaque point ou thème abordé pour plus de clarté.
-    4. Mettre en évidence les éléments importants du résumé en utilisant
-      exclusivement les balises HTML <strong> et <em>.
-    5. Ne jamais inventer d'informations absentes du fichier.
-      Si un élément attendu n'apparaît pas dans le document, tu dois écrire :
-      'Information absente du fichier'.
+    OBJECTIF : Produire une fiche de révision COMPLÈTE, détaillée et exhaustive que l'étudiant peut utiliser pour apprendre et réviser efficacement. La fiche doit couvrir l'INTÉGRALITÉ du document, pas seulement un résumé superficiel.
+
+    RÈGLE DE PROPORTIONNALITÉ CRITIQUE :
+    - La longueur de la fiche DOIT être proportionnelle à la taille du document source.
+    - Un document court (1-5 pages) → fiche de 500 à 1500 mots.
+    - Un document moyen (5-20 pages) → fiche de 1500 à 4000 mots.
+    - Un document long (20-50 pages) → fiche de 4000 à 8000 mots.
+    - Un document très long (50+ pages) → fiche de 8000+ mots.
+    - NE JAMAIS produire une fiche de 10 lignes pour un document de plusieurs pages. C'est INACCEPTABLE.
+    - Chaque chapitre, section ou partie du document DOIT avoir sa propre section dans la fiche.
+
+    STRUCTURE OBLIGATOIRE DE LA FICHE :
+    La fiche DOIT suivre cette structure HTML avec des sections bien définies :
+
+    1. <h3>Introduction</h3> — Contexte, objectif du cours, problématique générale.
+    2. <h3>Concepts clés</h3> — Chaque concept important dans un bloc séparé :
+       <h4>Nom du concept</h4> suivi d'une explication détaillée avec <strong> pour les termes importants.
+       Si le document contient beaucoup de concepts, crée PLUSIEURS sous-sections <h4> (autant que nécessaire).
+    3. <h3>Points essentiels à retenir</h3> — Liste <ul><li> COMPLÈTE des éléments fondamentaux.
+    4. <h3>Définitions et formules</h3> (si applicable) — TOUTES les définitions et formules clés du document.
+    5. <h3>Exemples et cas pratiques</h3> (si applicable) — Les exemples importants mentionnés dans le document.
+    6. <h3>Synthèse</h3> — Un ou plusieurs paragraphes récapitulatifs des idées principales.
+
+    Si le document est structuré en chapitres ou parties, ajoute des sections <h3> supplémentaires pour chaque chapitre/partie AVANT la synthèse, par exemple :
+    <h3>Partie 1 : [Titre]</h3>, <h3>Partie 2 : [Titre]</h3>, etc.
+
+    RÈGLES DE FORMATAGE HTML :
+    - Utilise <h3> pour les titres de sections principales
+    - Utilise <h4> pour les sous-titres (noms de concepts, sous-sections)
+    - Utilise <p> pour les paragraphes
+    - Utilise <ul> et <li> pour les listes à puces
+    - Utilise <ol> et <li> pour les listes numérotées
+    - Utilise <strong> pour les termes importants et mots-clés
+    - Utilise <em> pour les nuances ou précisions secondaires
+    - NE PAS utiliser de <br>, utilise <p> à la place
+    - NE PAS utiliser de balises HTML autres que celles listées ci-dessus
 
     CONTRAINTES ABSOLUES :
-    - Tu ne modifies jamais le sens du contenu.
+    - Tu ne modifies jamais le sens du contenu original.
     - Tu n'ajoutes aucune interprétation ou opinion personnelle.
     - Tu ne réalises aucune action non explicitement demandée.
     - Tu renvoies uniquement le JSON demandé, sans texte avant ou après.
-    - Tu utilises des <br> pour séparer les différents points/thèmes pour améliorer la lisibilité.
-    - IMPORTANT : Utilise UNIQUEMENT des guillemets doubles (\") dans le JSON, jamais de guillemets simples (').
+    - Ne jamais inventer d'informations absentes du fichier.
+    - Sois EXHAUSTIF : couvre TOUS les thèmes, TOUS les chapitres, TOUTES les sections du document.
+    - Ne saute aucune partie du document, même si elle semble secondaire.
+    - IMPORTANT : Utilise UNIQUEMENT des guillemets doubles (\") dans le JSON.
 
-    FORMAT DE SORTIE STRICT (UTILISER DES GUILLEMETS DOUBLES) :
+    FORMAT DE SORTIE STRICT :
     {
-      \"title\": \"Titre extrait du document ou titre le plus proche\",
-      \"resume\": \"Résumé clair et structuré avec des <br> entre les points. Utilise <strong> et <em> pour les éléments importants.\"
-    }
-
-    EXEMPLE DE RÉSUMÉ :
-    {
-      \"title\": \"Concepts clés du document\",
-      \"resume\": \"Ce document traite de <strong>trois concepts clés</strong> :<br><br><strong>Concept 1 :</strong> Description du premier concept avec détails pertinents.<br><br><strong>Concept 2 :</strong> Explication du deuxième point avec les <em>éléments importants</em>.<br><br><strong>Concept 3 :</strong> Présentation du troisième thème.\"
+      \"title\": \"Titre du cours extrait du document\",
+      \"resume\": \"<h3>Introduction</h3><p>Contexte du cours...</p><h3>Concepts clés</h3><h4>Concept 1</h4><p>Explication détaillée...</p>...\"
     }
 
     Si le fichier ne peut pas être lu ou est vide, renvoie un JSON valide avec un titre vide

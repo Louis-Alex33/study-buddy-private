@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # Subscription / Pricing
   get "tarifs", to: "subscriptions#pricing", as: :pricing
+  get "mon-abonnement", to: "subscriptions#manage", as: :subscription_manage
   post "checkout", to: "subscriptions#checkout", as: :subscription_checkout
   get "checkout/succes", to: "subscriptions#success", as: :subscription_success
   get "portail", to: "subscriptions#portal", as: :subscription_portal
@@ -42,6 +43,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :lectures, only: %i[index show edit update new create destroy] do
+    member do
+      get :download_resume
+    end
     resources :notes, only: %i[new create]
     resources :messages, only: %i[new create]
     resources :flashcards, only: %i[new create]

@@ -4,6 +4,10 @@ class SubscriptionsController < ApplicationController
   def pricing
   end
 
+  def manage
+    @user = current_user
+  end
+
   def checkout
     checkout_session = current_user.payment_processor.checkout(
       mode: "subscription",
