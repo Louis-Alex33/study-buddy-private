@@ -36,7 +36,7 @@ class LecturesController < ApplicationController
       current_user.check_and_award_badges!
       redirect_to lecture_path(@lecture), notice: "Lecture créée avec succès"
     else
-      @categories = Category.all
+      @categories = current_user.categories.order(:title)
       render "pages/home", status: :unprocessable_content
     end
   end
