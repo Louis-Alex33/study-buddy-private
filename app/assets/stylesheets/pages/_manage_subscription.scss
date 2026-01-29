@@ -10,29 +10,29 @@
 .manage-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
 .manage-subtitle {
   font-size: 1.1rem;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
 // Current Plan Card
 .manage-plan-card {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 20px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 2px solid darken($card-bg, 5%);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--border);
   margin-bottom: 2.5rem;
   transition: all 0.3s ease;
 
   &.plan-pro {
-    border-color: #1351AA;
-    box-shadow: 0 4px 20px rgba(19, 81, 170, 0.15);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -52,7 +52,7 @@
 .plan-icon {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -61,28 +61,28 @@
   font-size: 24px;
 
   .plan-pro & {
-    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    background: var(--gold-gradient);
   }
 }
 
 .plan-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
   margin: 0;
 }
 
 .plan-price {
   font-size: 0.95rem;
-  color: #666;
+  color: var(--text-tertiary);
   margin: 4px 0 0 0;
   font-weight: 500;
 }
 
 .plan-badge {
   .badge-pro {
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    color: #333;
+    background: var(--gold-gradient);
+    color: var(--text-inverse);
     padding: 8px 20px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -91,8 +91,8 @@
   }
 
   .badge-free {
-    background: #e8e8e8;
-    color: #666;
+    background: var(--bg-elevated);
+    color: var(--text-tertiary);
     padding: 8px 20px;
     border-radius: 20px;
     font-size: 0.85rem;
@@ -123,7 +123,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   border: none;
   border-radius: 12px;
@@ -131,11 +131,11 @@
   font-size: 0.95rem;
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.25);
+  box-shadow: var(--shadow-glow);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.35);
+    box-shadow: var(--shadow-lg);
     color: white;
     text-decoration: none;
   }
@@ -146,8 +146,8 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #333;
+  background: var(--gold-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 12px;
   font-weight: 700;
@@ -181,9 +181,9 @@
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: $card-bg-accent;
-  color: #555;
-  border: 2px solid darken($card-bg-accent, 8%);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+  border: 2px solid var(--border);
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.95rem;
@@ -191,8 +191,8 @@
   transition: all 0.3s ease;
 
   &:hover {
-    background: darken($card-bg-accent, 5%);
-    color: #333;
+    background: var(--bg-hover);
+    color: var(--text-primary);
     text-decoration: none;
     transform: translateY(-2px);
   }
@@ -206,7 +206,7 @@
 .manage-section-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -217,16 +217,16 @@
 }
 
 .usage-card {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  border: 2px solid darken($card-bg, 5%);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--border);
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
   }
 }
 
@@ -240,7 +240,7 @@
 .usage-icon {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -252,7 +252,7 @@
 .usage-label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #666;
+  color: var(--text-tertiary);
 }
 
 .usage-value {
@@ -262,24 +262,24 @@
 .usage-count {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
 }
 
 .usage-limit {
   font-size: 0.9rem;
-  color: #999;
+  color: var(--text-tertiary);
   font-weight: 500;
 }
 
 .status-active {
-  color: #28a745 !important;
+  color: var(--success) !important;
   font-size: 1.1rem !important;
 
   i { margin-right: 4px; }
 }
 
 .status-locked {
-  color: #dc3545 !important;
+  color: var(--danger) !important;
   font-size: 1.1rem !important;
 
   i { margin-right: 4px; }
@@ -287,7 +287,7 @@
 
 .usage-bar {
   height: 6px;
-  background: darken($card-bg, 8%);
+  background: var(--bg-hover);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -295,29 +295,29 @@
 .usage-bar-fill {
   height: 100%;
   border-radius: 3px;
-  background: linear-gradient(90deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   transition: width 0.5s ease;
 
   &.pro {
-    background: linear-gradient(90deg, #1351AA 0%, #28a745 100%);
+    background: linear-gradient(90deg, var(--accent) 0%, var(--success) 100%);
   }
 
   &.warning {
-    background: linear-gradient(90deg, #ffc107 0%, #dc3545 100%);
+    background: linear-gradient(90deg, var(--warning) 0%, var(--danger) 100%);
   }
 
   &.locked {
-    background: #dee2e6;
+    background: var(--border);
   }
 }
 
 // Upgrade CTA
 .manage-upgrade-cta {
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   border-radius: 20px;
   padding: 3rem;
   margin-bottom: 2rem;
-  box-shadow: 0 8px 25px rgba(19, 81, 170, 0.25);
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
 
@@ -341,7 +341,7 @@
 
 .upgrade-cta-icon {
   font-size: 3rem;
-  color: #FFD700;
+  color: var(--gold);
   margin-bottom: 1rem;
 }
 
@@ -364,8 +364,8 @@
 .btn-upgrade-cta {
   display: inline-block;
   padding: 14px 32px;
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #333;
+  background: var(--gold-gradient);
+  color: var(--text-inverse);
   border: none;
   border-radius: 14px;
   font-weight: 700;
@@ -455,79 +455,5 @@
 
   .manage-upgrade-cta {
     padding: 2rem;
-  }
-}
-
-// Dark mode
-[data-theme="dark"] {
-  .manage-title {
-    color: #6ba3ff;
-  }
-
-  .manage-subtitle {
-    color: #aaa;
-  }
-
-  .manage-plan-card {
-    background: #2a2a2a;
-    border-color: #444;
-
-    &.plan-pro {
-      border-color: #1a66cc;
-    }
-  }
-
-  .plan-name {
-    color: #6ba3ff;
-  }
-
-  .plan-price {
-    color: #aaa;
-  }
-
-  .badge-free {
-    background: #444;
-    color: #aaa;
-  }
-
-  .badge-admin {
-    background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%);
-    color: white;
-  }
-
-  .manage-section-title {
-    color: #e0e0e0;
-  }
-
-  .usage-card {
-    background: #2a2a2a;
-    border-color: #444;
-  }
-
-  .usage-label {
-    color: #aaa;
-  }
-
-  .usage-count {
-    color: #6ba3ff;
-  }
-
-  .usage-limit {
-    color: #777;
-  }
-
-  .usage-bar {
-    background: #444;
-  }
-
-  .btn-manage-pricing {
-    background: #333;
-    border-color: #555;
-    color: #ccc;
-
-    &:hover {
-      background: #444;
-      color: #fff;
-    }
   }
 }

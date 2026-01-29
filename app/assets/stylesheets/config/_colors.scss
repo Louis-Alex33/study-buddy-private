@@ -1,12 +1,116 @@
-// Define variables for your color scheme
+// ============================================
+// Design Tokens — CSS Custom Properties
+// Default: Dark SaaS | Alt: Light mode
+// ============================================
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
+// SCSS variables kept for Bootstrap compatibility
+$red: #ff4d5a;
+$blue: #4f8cff;
 $yellow: #FFC65A;
 $orange: #E67E22;
 $green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #D5D7DE;
-$card-bg: #E4E3ED;
-$card-bg-accent: #DAD9E5;
+$gray: #e8eaf0;
+$light-gray: #0f0f1a;
+$card-bg: #161625;
+$card-bg-accent: #1c1c2e;
+
+// ---- Default mode: Dark SaaS ----
+:root {
+  // Backgrounds
+  --bg-body:       #0f0f1a;
+  --bg-surface:    #161625;
+  --bg-elevated:   #1c1c2e;
+  --bg-input:      #1e1e30;
+  --bg-hover:      #252540;
+
+  // Text
+  --text-primary:   #e8eaf0;
+  --text-secondary: #9ca3b4;
+  --text-tertiary:  #6b7280;
+  --text-inverse:   #0f0f1a;
+
+  // Accent (luminous blue)
+  --accent:         #4f8cff;
+  --accent-hover:   #6aa0ff;
+  --accent-dark:    #3a6fd4;
+  --accent-muted:   rgba(79, 140, 255, 0.15);
+  --accent-glow:    rgba(79, 140, 255, 0.25);
+
+  // Borders
+  --border:         #2a2a40;
+  --border-hover:   #3d3d5c;
+  --border-accent:  rgba(79, 140, 255, 0.3);
+
+  // Shadows
+  --shadow-sm:      0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md:      0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg:      0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow:    0 0 20px rgba(79, 140, 255, 0.15);
+
+  // Glass-morphism
+  --glass-bg:       rgba(22, 22, 37, 0.7);
+  --glass-border:   rgba(79, 140, 255, 0.12);
+  --glass-blur:     12px;
+
+  // Navbar
+  --navbar-bg:      rgba(15, 15, 26, 0.85);
+  --navbar-border:  rgba(79, 140, 255, 0.08);
+
+  // Semantic (same in both modes)
+  --success:        #1EDD88;
+  --danger:         #ff4d5a;
+  --warning:        #FFC65A;
+  --gold:           #FFD700;
+  --gold-secondary: #FFA500;
+  --purple:         #a29bfe;
+
+  // Gradient shortcuts
+  --accent-gradient: linear-gradient(135deg, #4f8cff 0%, #6aa0ff 100%);
+  --gold-gradient:   linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+}
+
+// ---- Light mode ----
+body[data-theme="light"] {
+  // Backgrounds
+  --bg-body:       #f4f5f7;
+  --bg-surface:    #ffffff;
+  --bg-elevated:   #ffffff;
+  --bg-input:      #f0f1f4;
+  --bg-hover:      #e8e9ed;
+
+  // Text
+  --text-primary:   #1a1a2e;
+  --text-secondary: #5a5f72;
+  --text-tertiary:  #8a8fa3;
+  --text-inverse:   #ffffff;
+
+  // Accent (classic blue)
+  --accent:         #1351AA;
+  --accent-hover:   #0d3d8f;
+  --accent-dark:    #0a2f70;
+  --accent-muted:   rgba(19, 81, 170, 0.08);
+  --accent-glow:    rgba(19, 81, 170, 0.15);
+
+  // Borders
+  --border:         #dde0e6;
+  --border-hover:   #c5c9d2;
+  --border-accent:  rgba(19, 81, 170, 0.25);
+
+  // Shadows
+  --shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md:      0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg:      0 8px 25px rgba(0, 0, 0, 0.12);
+  --shadow-glow:    0 0 15px rgba(19, 81, 170, 0.1);
+
+  // Glass
+  --glass-bg:       rgba(255, 255, 255, 0.8);
+  --glass-border:   rgba(19, 81, 170, 0.08);
+  --glass-blur:     12px;
+
+  // Navbar
+  --navbar-bg:      rgba(255, 255, 255, 0.92);
+  --navbar-border:  rgba(0, 0, 0, 0.06);
+
+  // Gradient
+  --accent-gradient: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+}

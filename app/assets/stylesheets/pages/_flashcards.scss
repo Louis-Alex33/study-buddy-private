@@ -4,12 +4,12 @@
 }
 
 .flashcard-show-header {
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   padding: 30px;
   border-radius: 25px;
   margin-bottom: 30px;
-  box-shadow: 0 4px 15px rgba(19, 81, 170, 0.3);
+  box-shadow: var(--shadow-md);
   text-align: center;
 
   h2 {
@@ -20,11 +20,12 @@
 }
 
 .flashcard-progress-card {
-  background-color: $card-bg;
+  background-color: var(--bg-surface);
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 30px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
 
   .progress-header {
     display: flex;
@@ -32,12 +33,12 @@
     margin-bottom: 15px;
 
     .progress-label {
-      color: #1351AA;
+      color: var(--accent);
       font-weight: 600;
     }
 
     .progress-count {
-      color: #666;
+      color: var(--text-tertiary);
       font-weight: 500;
     }
   }
@@ -45,10 +46,10 @@
   .progress {
     height: 30px;
     border-radius: 20px;
-    background-color: #E3E2DE;
+    background-color: var(--bg-hover);
 
     .progress-bar {
-      background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+      background: var(--accent-gradient);
       border-radius: 20px;
       font-weight: 600;
     }
@@ -56,15 +57,15 @@
 }
 
 .flashcard-question {
-  background: linear-gradient(to bottom, $card-bg 0%, $card-bg-accent 100%);
+  background: var(--bg-surface);
   padding: 25px;
   border-radius: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border: 1px solid #E3E2DE;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
 
   .question-header {
-    color: #1351AA;
+    color: var(--accent);
     font-weight: 600;
     margin-bottom: 15px;
   }
@@ -72,7 +73,7 @@
   .question-text {
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: var(--text-primary);
     margin-bottom: 20px;
     line-height: 1.5;
   }
@@ -80,33 +81,36 @@
   .answer-textarea {
     width: 100%;
     padding: 15px;
-    border: 2px solid #E3E2DE;
+    border: 2px solid var(--border);
     border-radius: 15px;
     font-size: 14px;
     outline: none;
     transition: all 0.3s;
     margin-bottom: 15px;
+    background: var(--bg-input);
+    color: var(--text-primary);
 
     &:focus {
-      border-color: #1351AA;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-muted);
     }
   }
 
   .btn-show-answer {
     padding: 12px 30px;
-    background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+    background: var(--accent-gradient);
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
     font-weight: 600;
     font-size: 15px;
-    box-shadow: 0 3px 10px rgba(19, 81, 170, 0.3);
+    box-shadow: 0 3px 10px var(--accent-muted);
     transition: all 0.3s;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(19, 81, 170, 0.4);
+      box-shadow: var(--shadow-glow);
     }
   }
 
@@ -114,18 +118,18 @@
     display: none;
     margin-top: 20px;
     padding: 20px;
-    background-color: #E3E2DE;
-    border-left: 5px solid #1351AA;
+    background-color: var(--bg-elevated);
+    border-left: 5px solid var(--accent);
     border-radius: 15px;
 
     strong {
-      color: #1351AA;
+      color: var(--accent);
       font-size: 15px;
     }
 
     p {
       margin: 10px 0 0 0;
-      color: #333;
+      color: var(--text-primary);
       line-height: 1.5;
     }
   }
@@ -135,15 +139,16 @@
   text-align: center;
   margin-top: 40px;
   padding: 30px;
-  background-color: $card-bg;
+  background-color: var(--bg-surface);
   border-radius: 20px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
 
   .btn-back-to-lecture {
     display: inline-block;
     padding: 12px 30px;
-    background-color: #E3E2DE;
-    color: #333;
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
     border-radius: 20px;
     text-decoration: none;
     font-weight: 600;
@@ -152,10 +157,10 @@
     transition: all 0.3s;
 
     &:hover {
-      background-color: #d5d4d0;
+      background-color: var(--border);
       transform: translateY(-2px);
       text-decoration: none;
-      color: #333;
+      color: var(--text-primary);
     }
   }
 

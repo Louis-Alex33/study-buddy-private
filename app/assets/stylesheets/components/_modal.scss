@@ -1,13 +1,14 @@
 .modal-content {
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-surface);
 }
 
 .modal-header {
   &.modal-header-gradient {
-    background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+    background: var(--accent-gradient);
     color: white;
     padding: 25px 30px;
     border: none;
@@ -37,7 +38,7 @@
     label {
       display: block;
       font-weight: 600;
-      color: #333;
+      color: var(--text-primary);
       margin-bottom: 8px;
       font-size: 14px;
     }
@@ -48,19 +49,21 @@
     textarea {
       width: 100%;
       padding: 12px 16px;
-      border: 2px solid #E3E2DE;
+      border: 2px solid var(--border);
       border-radius: 12px;
       font-size: 14px;
       outline: none;
       transition: all 0.3s;
+      background: var(--bg-input);
+      color: var(--text-primary);
 
       &:focus {
-        border-color: #1351AA;
-        box-shadow: 0 0 0 3px rgba(19, 81, 170, 0.1);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-muted);
       }
 
       &::placeholder {
-        color: #999;
+        color: var(--text-tertiary);
       }
     }
 
@@ -71,22 +74,23 @@
     input[type="file"] {
       width: 100%;
       padding: 12px 16px;
-      border: 2px dashed #E3E2DE;
+      border: 2px dashed var(--border);
       border-radius: 12px;
       font-size: 14px;
       outline: none;
       transition: all 0.3s;
-      background: #fafafa;
+      background: var(--bg-input);
+      color: var(--text-primary);
       cursor: pointer;
 
       &:hover {
-        border-color: #1351AA;
-        background: #f5f8ff;
+        border-color: var(--accent);
+        background: var(--accent-muted);
       }
     }
 
     small {
-      color: #666;
+      color: var(--text-tertiary);
       font-size: 12px;
       margin-top: 6px;
       display: block;
@@ -109,10 +113,10 @@
         display: none;
 
         &:checked + .form-check-label {
-          background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+          background: var(--accent-gradient);
           color: white;
           border-color: transparent;
-          box-shadow: 0 3px 12px rgba(19, 81, 170, 0.3);
+          box-shadow: 0 3px 12px var(--accent-muted);
         }
       }
 
@@ -121,20 +125,20 @@
         align-items: center;
         justify-content: center;
         padding: 12px 16px;
-        background: #f8f9fa;
-        border: 2px solid #E3E2DE;
+        background: var(--bg-input);
+        border: 2px solid var(--border);
         border-radius: 12px;
         cursor: pointer;
         font-weight: 600;
         font-size: 14px;
-        color: #555;
+        color: var(--text-secondary);
         transition: all 0.3s;
         text-align: center;
 
         &:hover {
-          border-color: #1351AA;
-          background: #f0f7ff;
-          color: #1351AA;
+          border-color: var(--accent);
+          background: var(--accent-muted);
+          color: var(--accent);
         }
       }
     }
@@ -145,15 +149,15 @@
   &.modal-footer-centered {
     border: none;
     padding: 20px 30px;
-    background: #fafafa;
+    background: var(--bg-elevated);
     display: flex;
     justify-content: center;
     gap: 12px;
 
     .btn-cancel {
       padding: 12px 28px;
-      background: #E3E2DE;
-      color: #333;
+      background: var(--bg-hover);
+      color: var(--text-secondary);
       border: none;
       border-radius: 15px;
       cursor: pointer;
@@ -162,26 +166,26 @@
       transition: all 0.3s;
 
       &:hover {
-        background: #d5d4d0;
+        background: var(--border);
         transform: translateY(-2px);
       }
     }
 
     .btn-submit {
       padding: 12px 28px;
-      background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+      background: var(--accent-gradient);
       color: white;
       border: none;
       border-radius: 15px;
       cursor: pointer;
       font-weight: 600;
       font-size: 14px;
-      box-shadow: 0 3px 12px rgba(19, 81, 170, 0.3);
+      box-shadow: 0 3px 12px var(--accent-muted);
       transition: all 0.3s;
 
       &:hover {
         transform: translateY(-2px);
-        box-shadow: 0 5px 16px rgba(19, 81, 170, 0.4);
+        box-shadow: var(--shadow-glow);
       }
 
       &:active {

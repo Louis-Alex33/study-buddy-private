@@ -1,29 +1,26 @@
 import { Controller } from "@hotwired/stimulus"
 
+// Dark SaaS is the default (no attribute on body).
+// Light mode sets data-theme="light".
 export default class extends Controller {
-  static targets = ["button"]
-
   connect() {
-    const savedTheme = localStorage.getItem('theme') || 'light'
-    document.body.setAttribute('data-theme', savedTheme)
-    this.updateIcon(savedTheme)
+    const saved = localStorage.getItem('theme')
+    if (saved === 'light') {
+      document.body.setAttribute('data-theme', 'light')
+    } else {
+      document.body.removeAttribute('data-theme')
+      localStorage.setItem('theme', 'dark')
+    }
   }
 
   toggle() {
-    const currentTheme = document.body.getAttribute('data-theme')
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
-
-    document.body.setAttribute('data-theme', newTheme)
-    localStorage.setItem('theme', newTheme)
-    this.updateIcon(newTheme)
-  }
-
-  updateIcon(theme) {
-    if (this.hasButtonTarget) {
-      const icon = this.buttonTarget.querySelector('i')
-      if (icon) {
-        icon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun'
-      }
+    const isLight = document.body.getAttribute('data-theme') === 'light'
+    if (isLight) {
+      document.body.removeAttribute('data-theme')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      document.body.setAttribute('data-theme', 'light')
+      localStorage.setItem('theme', 'light')
     }
   }
 }

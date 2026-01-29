@@ -88,12 +88,12 @@
 }
 
 .multiplayer-feature-card {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 20px;
   padding: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,20 +103,20 @@
 
 .multiplayer-feature-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(19, 81, 170, 0.2);
-  border-color: #1351AA;
+  box-shadow: var(--shadow-glow);
+  border-color: var(--accent);
 }
 
 .feature-icon-wrapper {
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   border-radius: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 2rem;
-  box-shadow: 0 4px 16px rgba(19, 81, 170, 0.25);
+  box-shadow: 0 4px 16px var(--accent-muted);
 }
 
 .feature-icon {
@@ -128,13 +128,13 @@
 .feature-title {
   font-size: 1.85rem;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--text-primary);
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
 }
 
 .feature-description {
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.8;
   margin-bottom: 2.5rem;
   flex-grow: 1;
@@ -144,7 +144,7 @@
 .btn-feature-action {
   width: 100%;
   padding: 1rem 1.75rem;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   border: none;
   border-radius: 12px;
@@ -155,32 +155,14 @@
   text-decoration: none;
   display: inline-block;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.25);
+  box-shadow: 0 4px 12px var(--accent-muted);
 }
 
 .btn-feature-action:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(19, 81, 170, 0.35);
+  box-shadow: var(--shadow-glow);
   color: white;
   text-decoration: none;
-}
-
-/* Dark mode support */
-[data-theme="dark"] .multiplayer-feature-card {
-  background: #2a2a2a;
-  border-color: #444;
-}
-
-[data-theme="dark"] .multiplayer-feature-card:hover {
-  border-color: #1a66cc;
-}
-
-[data-theme="dark"] .feature-title {
-  color: #e0e0e0;
-}
-
-[data-theme="dark"] .feature-description {
-  color: #aaa;
 }
 
 @media (max-width: 992px) {

@@ -3,10 +3,10 @@
 // Animations
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(19, 81, 170, 0.3);
+    box-shadow: 0 0 20px var(--accent-muted);
   }
   50% {
-    box-shadow: 0 0 40px rgba(19, 81, 170, 0.6);
+    box-shadow: 0 0 40px var(--accent-glow);
   }
 }
 
@@ -80,7 +80,7 @@
   transform: translate(-50%, -50%);
   font-size: 3rem;
   font-weight: 800;
-  color: #28a745;
+  color: var(--success);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   animation: points-float 1.5s ease-out forwards;
   z-index: 9999;
@@ -94,7 +94,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,7 +156,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -228,7 +228,7 @@
 
 // Quiz Arena
 .quiz-arena {
-  background: linear-gradient(135deg, darken($light-gray, 2%) 0%, darken($light-gray, 5%) 100%);
+  background: var(--bg-body);
   min-height: 100vh;
   padding: 1.5rem;
   display: grid;
@@ -238,14 +238,14 @@
 }
 
 .quiz-header {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 12px;
   padding: 1.25rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
   margin-bottom: 1.25rem;
 
   h2 {
-    color: #1351AA;
+    color: var(--accent);
     font-weight: 700;
     font-size: 1.5rem;
   }
@@ -254,8 +254,8 @@
 .quiz-timer {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #1351AA;
-  background: linear-gradient(135deg, #fff9e6 0%, #f5f2e6 100%);
+  color: var(--accent);
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, var(--bg-elevated) 100%);
   padding: 0.75rem 1.5rem;
   border-radius: 10px;
   display: inline-block;
@@ -274,8 +274,8 @@
 .quiz-score {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #1351AA;
-  background: $card-bg-accent;
+  color: var(--accent);
+  background: var(--bg-elevated);
   padding: 0.75rem 1.25rem;
   border-radius: 10px;
 }
@@ -283,7 +283,7 @@
 .quiz-progress {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--text-secondary);
 }
 
 // Question Card
@@ -297,15 +297,15 @@
 }
 
 .quiz-question-container {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .question-number {
   display: inline-block;
-  background: #1351AA;
+  background: var(--accent);
   color: white;
   padding: 0.4rem 0.875rem;
   border-radius: 6px;
@@ -317,15 +317,15 @@
 .question-text {
   font-size: 1.375rem;
   font-weight: 700;
-  color: #212529;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
 .question-category {
   display: inline-block;
-  background: linear-gradient(135deg, #e7f3ff 0%, #d8ecff 100%);
-  color: #1351AA;
+  background: var(--accent-muted);
+  color: var(--accent);
   padding: 0.4rem 0.875rem;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -341,8 +341,8 @@
 }
 
 .answer-option {
-  background: linear-gradient(135deg, $card-bg 0%, $card-bg-accent 100%);
-  border: 2px solid darken($card-bg, 8%);
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
   border-radius: 10px;
   padding: 1.125rem;
   cursor: pointer;
@@ -357,14 +357,14 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     transition: left 0.5s;
   }
 
   &:hover {
     transform: translateY(-3px);
-    border-color: #1351AA;
-    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.15);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-glow);
 
     &:before {
       left: 100%;
@@ -372,11 +372,11 @@
   }
 
   &.selected {
-    background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
-    border-color: #1351AA;
+    background: var(--accent-gradient);
+    border-color: var(--accent);
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.3);
+    box-shadow: var(--shadow-glow);
   }
 
   &.correct {
@@ -396,8 +396,8 @@
   display: inline-block;
   width: 36px;
   height: 36px;
-  background: white;
-  color: #1351AA;
+  background: var(--bg-elevated);
+  color: var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -423,15 +423,15 @@
 
 // Live Leaderboard
 .live-leaderboard {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 1.5rem;
 
   h4 {
-    color: #1351AA;
+    color: var(--accent);
     font-weight: 700;
     font-size: 1.125rem;
     margin-bottom: 1rem;
@@ -443,19 +443,19 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem;
-  background: $card-bg-accent;
+  background: var(--bg-elevated);
   border-radius: 8px;
   margin-bottom: 0.625rem;
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateX(3px);
-    background: darken($card-bg-accent, 3%);
+    background: var(--bg-hover);
   }
 
   &.rank-1 {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    border: 2px solid #ffc107;
+    background: linear-gradient(135deg, var(--gold) 0%, #ffed4e 100%);
+    border: 2px solid var(--gold-secondary);
   }
 
   &.rank-2 {
@@ -499,7 +499,7 @@
 .player-score {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
 }
 
 // Quiz Results
@@ -515,17 +515,17 @@
 }
 
 .podium-item {
-  background: linear-gradient(135deg, $card-bg 0%, $card-bg-accent 100%);
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 2rem;
   text-align: center;
-  border: 3px solid #dee2e6;
+  border: 3px solid var(--border);
   transition: all 0.3s ease;
   position: relative;
 
   &.winner {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    border-color: #ffc107;
+    background: linear-gradient(135deg, var(--gold) 0%, #ffed4e 100%);
+    border-color: var(--gold-secondary);
     transform: scale(1.05);
     box-shadow: 0 12px 30px rgba(255, 193, 7, 0.3);
   }
@@ -538,7 +538,7 @@
 .rank-badge {
   width: 60px;
   height: 60px;
-  background: #1351AA;
+  background: var(--accent);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -550,7 +550,7 @@
 }
 
 .winner .rank-badge {
-  background: linear-gradient(135deg, #ffc107 0%, #ff6b6b 100%);
+  background: linear-gradient(135deg, var(--gold-secondary) 0%, #ff6b6b 100%);
   animation: pulse-glow 2s infinite;
 }
 
@@ -563,18 +563,18 @@
 .player-score {
   font-size: 2rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
 .player-accuracy {
   font-size: 1rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
 .winner-badge {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ffc107 100%);
+  background: linear-gradient(135deg, #ff6b6b 0%, var(--gold-secondary) 100%);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 12px;

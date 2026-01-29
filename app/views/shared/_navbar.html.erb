@@ -23,9 +23,13 @@
         <%= link_to search_path, class: "navbar-link #{'active' if current_page?(search_path)}", title: "Recherche" do %>
           <i class="fas fa-search"></i>
         <% end %>
-        <button type="button" class="dark-mode-toggle" data-action="click->dark-mode#toggle" data-dark-mode-target="button">
-          <i class="fas fa-sun"></i>
-        </button>
+        <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
+          <div class="theme-toggle-track">
+            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun"></i>
+            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon"></i>
+            <div class="theme-toggle-thumb"></div>
+          </div>
+        </div>
         <div class="navbar-divider"></div>
         <div class="navbar-user-info">
           <span class="navbar-user-email"><%= current_user.display_name %></span>
@@ -47,9 +51,13 @@
         <% end %>
         <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-btn" %>
       <% else %>
-        <button type="button" class="dark-mode-toggle" data-action="click->dark-mode#toggle" data-dark-mode-target="button">
-          <i class="fas fa-sun"></i>
-        </button>
+        <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
+          <div class="theme-toggle-track">
+            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun"></i>
+            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon"></i>
+            <div class="theme-toggle-thumb"></div>
+          </div>
+        </div>
         <%= link_to "Connexion", new_user_session_path, class: "navbar-btn" %>
         <%= link_to "Inscription", new_user_registration_path, class: "navbar-btn-primary" %>
       <% end %>

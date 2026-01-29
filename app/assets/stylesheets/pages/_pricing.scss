@@ -10,13 +10,13 @@
 .pricing-main-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 }
 
 .pricing-subtitle {
   font-size: 1.2rem;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -29,27 +29,27 @@
 }
 
 .pricing-card {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 20px;
   padding: 3rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border: 2px solid darken($card-bg, 5%);
+  box-shadow: var(--shadow-sm);
+  border: 2px solid var(--border);
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-md);
   }
 }
 
 .pricing-card-pro {
-  border-color: #1351AA;
-  box-shadow: 0 8px 24px rgba(19, 81, 170, 0.2);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
 
   &:hover {
-    box-shadow: 0 12px 32px rgba(19, 81, 170, 0.25);
+    box-shadow: var(--shadow-lg);
   }
 }
 
@@ -58,7 +58,7 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   padding: 6px 20px;
   border-radius: 20px;
@@ -70,25 +70,25 @@
 .pricing-plan-name {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
 .pricing-price {
   font-size: 3rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
 
   span {
     font-size: 1rem;
-    color: #666;
+    color: var(--text-tertiary);
     font-weight: 400;
   }
 }
 
 .pricing-plan-desc {
-  color: #888;
+  color: var(--text-tertiary);
   margin-bottom: 2rem;
   font-size: 0.95rem;
 }
@@ -102,7 +102,7 @@
   li {
     padding: 0.6rem 0;
     font-size: 0.95rem;
-    color: #333;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
     gap: 10px;
@@ -113,15 +113,15 @@
     }
 
     .fa-check {
-      color: #28a745;
+      color: var(--success);
     }
 
     .fa-times {
-      color: #dc3545;
+      color: var(--danger);
     }
 
     &.disabled {
-      color: #bbb;
+      color: var(--text-tertiary);
       text-decoration: line-through;
     }
   }
@@ -131,7 +131,7 @@
   display: block;
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   border: none;
   border-radius: 12px;
@@ -141,11 +141,11 @@
   transition: all 0.3s ease;
   text-decoration: none;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.25);
+  box-shadow: var(--shadow-glow);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(19, 81, 170, 0.35);
+    box-shadow: var(--shadow-lg);
     color: white;
     text-decoration: none;
   }
@@ -155,8 +155,8 @@
   display: block;
   width: 100%;
   padding: 1rem;
-  background: #f0f0f0;
-  color: #888;
+  background: var(--bg-elevated);
+  color: var(--text-tertiary);
   border: none;
   border-radius: 12px;
   font-weight: 600;
@@ -188,8 +188,8 @@
 
 // Navbar upgrade elements
 .navbar-pro-badge {
-  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-  color: #333;
+  background: var(--gold-gradient);
+  color: var(--text-inverse);
   padding: 8px 16px;
   border-radius: 25px;
   font-size: 0.75rem;
@@ -253,7 +253,7 @@
 }
 
 .navbar-upgrade-link {
-  color: #FFD700 !important;
+  color: var(--gold) !important;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
@@ -272,9 +272,9 @@
 }
 
 .plan-limit-banner {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 0.75rem 1.5rem;
   margin-bottom: 1.5rem;
@@ -304,63 +304,4 @@
 .pro-badge-nav {
   font-size: 0.6em;
   vertical-align: super;
-}
-
-// Dark mode
-[data-theme="dark"] {
-  .pricing-card {
-    background: #2a2a2a;
-    border-color: #444;
-  }
-
-  .pricing-card-pro {
-    border-color: #1a66cc;
-  }
-
-  .pricing-main-title {
-    color: #e0e0e0;
-  }
-
-  .pricing-subtitle {
-    color: #aaa;
-  }
-
-  .pricing-plan-name {
-    color: #e0e0e0;
-  }
-
-  .pricing-price span {
-    color: #aaa;
-  }
-
-  .pricing-plan-desc {
-    color: #999;
-  }
-
-  .pricing-features li {
-    color: #ccc;
-
-    &.disabled {
-      color: #666;
-    }
-  }
-
-  .btn-plan-current {
-    background: #444;
-    color: #999;
-  }
-
-  .plan-limit-banner {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: rgba(255, 255, 255, 0.85);
-
-    a {
-      color: #fff;
-    }
-  }
-
-  .message-limit-info {
-    color: rgba(255, 255, 255, 0.6);
-  }
 }

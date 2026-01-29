@@ -92,7 +92,7 @@
 .league-page-wrapper {
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(135deg, #e8eaed 0%, #d4d7db 100%);
+  background: var(--bg-body);
   padding: 2rem 0;
 }
 
@@ -116,9 +116,9 @@
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle at 20% 30%, rgba(19, 81, 170, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(19, 81, 170, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(19, 81, 170, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 20% 30%, var(--accent-muted) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--accent-muted) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, var(--accent-muted) 0%, transparent 50%);
   animation: pulse-soft 8s ease-in-out infinite;
 }
 
@@ -130,11 +130,11 @@
   width: 100%;
   height: 100%;
   background-image:
-    radial-gradient(circle, rgba(19, 81, 170, 0.4) 4px, transparent 4px),
-    radial-gradient(circle, rgba(19, 81, 170, 0.35) 3px, transparent 3px),
-    radial-gradient(circle, rgba(19, 81, 170, 0.3) 2.5px, transparent 2.5px),
-    radial-gradient(circle, rgba(19, 81, 170, 0.25) 2px, transparent 2px),
-    radial-gradient(circle, rgba(19, 81, 170, 0.2) 1.5px, transparent 1.5px);
+    radial-gradient(circle, var(--accent-glow) 4px, transparent 4px),
+    radial-gradient(circle, var(--accent-glow) 3px, transparent 3px),
+    radial-gradient(circle, var(--accent-glow) 2.5px, transparent 2.5px),
+    radial-gradient(circle, var(--accent-glow) 2px, transparent 2px),
+    radial-gradient(circle, var(--accent-muted) 1.5px, transparent 1.5px);
   background-size:
     500px 500px,
     400px 400px,
@@ -157,7 +157,7 @@
   left: 0;
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(19, 81, 170, 0.15) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, var(--accent-muted) 0%, transparent 70%);
   animation: fluid-wave 20s ease-in-out infinite;
 }
 
@@ -167,7 +167,7 @@
   right: 0;
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at center, rgba(19, 81, 170, 0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, var(--accent-muted) 0%, transparent 70%);
   animation: fluid-wave-2 25s ease-in-out infinite;
 }
 
@@ -178,7 +178,7 @@
   left: 10%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(19, 81, 170, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
   animation: fluid-blob 15s ease-in-out infinite;
   filter: blur(40px);
 }
@@ -189,7 +189,7 @@
   right: 15%;
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(19, 81, 170, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
   animation: fluid-blob 18s ease-in-out infinite reverse;
   filter: blur(35px);
 }
@@ -200,7 +200,7 @@
   left: 50%;
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(19, 81, 170, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
   animation: fluid-blob 22s ease-in-out infinite;
   animation-delay: -7s;
   filter: blur(45px);
@@ -211,23 +211,23 @@
   text-align: center;
   padding: 3rem 2rem 2.5rem;
   margin-bottom: 3rem;
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
   animation: slide-in-up 0.6s ease;
 }
 
 .league-title-epic {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.75rem;
   letter-spacing: -0.5px;
 }
 
 .league-subtitle-epic {
   font-size: 1.125rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-weight: 500;
   margin-bottom: 1.5rem;
 }
@@ -235,7 +235,7 @@
 .header-decorative-line {
   width: 80px;
   height: 3px;
-  background: #1351AA;
+  background: var(--accent);
   margin: 0 auto;
   border-radius: 2px;
 }
@@ -245,7 +245,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #1351AA;
+  color: var(--accent);
   text-transform: uppercase;
   margin-bottom: 1.25rem;
   opacity: 0.8;
@@ -260,7 +260,7 @@
 /* Glow effects based on rank intensity (0-9) */
 /* Iron - Minimal glow */
 .rank-glow-0 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 10px rgba(74, 74, 74, 0.1);
+  box-shadow: var(--shadow-md), 0 0 10px rgba(74, 74, 74, 0.1);
 }
 
 .emblem-glow-ring.rank-glow-0 {
@@ -269,7 +269,7 @@
 
 /* Bronze - Subtle bronze glow */
 .rank-glow-1 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 15px rgba(205, 127, 50, 0.15);
+  box-shadow: var(--shadow-md), 0 0 15px rgba(205, 127, 50, 0.15);
 }
 
 .emblem-glow-ring.rank-glow-1 {
@@ -278,7 +278,7 @@
 
 /* Silver - Light silver glow */
 .rank-glow-2 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 20px rgba(192, 192, 192, 0.2);
+  box-shadow: var(--shadow-md), 0 0 20px rgba(192, 192, 192, 0.2);
 }
 
 .emblem-glow-ring.rank-glow-2 {
@@ -287,7 +287,7 @@
 
 /* Gold - Golden glow */
 .rank-glow-3 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 25px rgba(255, 215, 0, 0.25);
+  box-shadow: var(--shadow-md), 0 0 25px rgba(255, 215, 0, 0.25);
 }
 
 .emblem-glow-ring.rank-glow-3 {
@@ -296,7 +296,7 @@
 
 /* Platinum - Cyan glow */
 .rank-glow-4 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 30px rgba(0, 206, 209, 0.3);
+  box-shadow: var(--shadow-md), 0 0 30px rgba(0, 206, 209, 0.3);
 }
 
 .emblem-glow-ring.rank-glow-4 {
@@ -305,7 +305,7 @@
 
 /* Emerald - Emerald green glow */
 .rank-glow-5 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 35px rgba(80, 200, 120, 0.35);
+  box-shadow: var(--shadow-md), 0 0 35px rgba(80, 200, 120, 0.35);
 }
 
 .emblem-glow-ring.rank-glow-5 {
@@ -314,7 +314,7 @@
 
 /* Diamond - Bright blue glow */
 .rank-glow-6 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 40px rgba(185, 242, 255, 0.4);
+  box-shadow: var(--shadow-md), 0 0 40px rgba(185, 242, 255, 0.4);
 }
 
 .emblem-glow-ring.rank-glow-6 {
@@ -323,7 +323,7 @@
 
 /* Master - Purple glow */
 .rank-glow-7 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 45px rgba(155, 48, 255, 0.45);
+  box-shadow: var(--shadow-md), 0 0 45px rgba(155, 48, 255, 0.45);
 }
 
 .emblem-glow-ring.rank-glow-7 {
@@ -332,7 +332,7 @@
 
 /* Grandmaster - Intense red-orange glow */
 .rank-glow-8 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 0 50px rgba(255, 69, 0, 0.5);
+  box-shadow: var(--shadow-md), 0 0 50px rgba(255, 69, 0, 0.5);
 }
 
 .emblem-glow-ring.rank-glow-8 {
@@ -341,7 +341,7 @@
 
 /* Challenger - Maximum golden glow with animation */
 .rank-glow-9 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08),
+  box-shadow: var(--shadow-md),
               0 0 25px rgba(244, 196, 48, 0.2),
               0 0 35px rgba(255, 215, 0, 0.12);
   animation: challenger-pulse 4s ease-in-out infinite;
@@ -362,10 +362,10 @@
 }
 
 .rank-card-mega {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .rank-badge-mega {
@@ -375,8 +375,8 @@
   padding: 2rem;
   border-radius: 12px;
   margin-bottom: 2rem;
-  background: linear-gradient(135deg, #e8eaed 0%, #d8dade 100%);
-  border: 2px solid #d4d7db;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
 }
 
 .rank-emblem-container {
@@ -392,7 +392,7 @@
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(19, 81, 170, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-muted) 0%, transparent 70%);
 }
 
 .rank-info-mega {
@@ -402,7 +402,7 @@
 .rank-name-mega {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
   letter-spacing: -0.5px;
 }
@@ -410,7 +410,7 @@
 .rank-subtitle {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #6c757d;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -428,21 +428,21 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem;
-  background: #e8eaed;
+  background: var(--bg-elevated);
   border-radius: 12px;
-  border: 2px solid #d4d7db;
+  border: 2px solid var(--border);
   transition: all 0.3s ease;
 }
 
 .rank-stat-epic:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-  border-color: #1351AA;
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 
 .stat-icon {
   font-size: 1.5rem;
-  color: #1351AA;
+  color: var(--accent);
   opacity: 0.7;
   margin-bottom: 0.5rem;
 }
@@ -450,13 +450,13 @@
 .stat-value-epic {
   font-size: 1.75rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.25rem;
 }
 
 .stat-label-epic {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -475,7 +475,7 @@
 .progress-label {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #495057;
+  color: var(--text-secondary);
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -483,21 +483,21 @@
 .progress-percentage {
   font-size: 1.125rem;
   font-weight: 600;
-  color: #1351AA;
+  color: var(--accent);
 }
 
 .progress-bar-epic {
   position: relative;
   height: 24px;
   border-radius: 12px;
-  background: #d4d7db;
+  background: var(--bg-elevated);
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
 
 .progress-bar-fill-epic {
   height: 100%;
-  background: linear-gradient(90deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   border-radius: 12px;
   transition: width 0.6s ease;
   position: relative;
@@ -514,7 +514,7 @@
 .progress-hint {
   text-align: center;
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-style: italic;
 }
 
@@ -525,10 +525,10 @@
 }
 
 .leaderboard-card-epic {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .leaderboard-header-epic {
@@ -539,7 +539,7 @@
 .leaderboard-title-epic {
   font-size: 2rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 0.5rem;
   letter-spacing: -0.5px;
 }
@@ -550,7 +550,7 @@
 
 .leaderboard-subtitle-epic {
   font-size: 1rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -563,10 +563,10 @@
 }
 
 .podium-position {
-  background: #e8eaed;
+  background: var(--bg-elevated);
   border-radius: 12px;
   padding: 2rem 1.5rem;
-  border: 2px solid #d4d7db;
+  border: 2px solid var(--border);
   text-align: center;
   transition: all 0.3s ease;
   position: relative;
@@ -574,19 +574,19 @@
 
 .podium-position:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-color: #1351AA;
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 
 .podium-1 {
-  background: linear-gradient(135deg, #fff9e6 0%, #f5f2e6 100%);
-  border-color: #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, var(--bg-elevated) 100%);
+  border-color: var(--gold);
 }
 
 .podium-position.is-current-user {
-  background: linear-gradient(135deg, #e7f3ff 0%, #d8ecff 100%);
-  border-color: #1351AA;
-  box-shadow: 0 4px 16px rgba(19, 81, 170, 0.15);
+  background: linear-gradient(135deg, var(--accent-muted) 0%, var(--bg-elevated) 100%);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
 }
 
 .podium-rank-number {
@@ -596,7 +596,7 @@
   transform: translateX(-50%);
   width: 36px;
   height: 36px;
-  background: #1351AA;
+  background: var(--accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -604,7 +604,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: white;
-  box-shadow: 0 2px 8px rgba(19, 81, 170, 0.3);
+  box-shadow: 0 2px 8px var(--accent-glow);
 }
 
 .podium-medal {
@@ -613,12 +613,12 @@
 }
 
 .podium-medal i {
-  color: #1351AA;
+  color: var(--accent);
   opacity: 0.6;
 }
 
 .podium-1 .podium-medal i {
-  color: #FFD700;
+  color: var(--gold);
   opacity: 1;
 }
 
@@ -635,7 +635,7 @@
 .podium-user-name {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #212529;
+  color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
 
@@ -657,11 +657,11 @@
 
 .podium-lp, .podium-wr {
   padding: 0.375rem 0.875rem;
-  background: #d4d7db;
+  background: var(--bg-hover);
   border-radius: 8px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #495057;
+  color: var(--text-secondary);
 }
 
 /* Leaderboard List */
@@ -676,27 +676,27 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1.25rem;
-  background: #e8eaed;
+  background: var(--bg-elevated);
   border-radius: 12px;
-  border: 2px solid #d4d7db;
+  border: 2px solid var(--border);
   transition: all 0.3s ease;
 }
 
 .leaderboard-item-epic:hover {
   transform: translateX(5px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  border-color: #1351AA;
+  box-shadow: var(--shadow-sm);
+  border-color: var(--accent);
 }
 
 .leaderboard-item-epic.is-current-user {
-  background: linear-gradient(135deg, #e7f3ff 0%, #d8ecff 100%);
-  border-color: #1351AA;
+  background: linear-gradient(135deg, var(--accent-muted) 0%, var(--bg-elevated) 100%);
+  border-color: var(--accent);
 }
 
 .item-rank {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1351AA;
+  color: var(--accent);
   min-width: 50px;
   text-align: center;
 }
@@ -708,7 +708,7 @@
 .item-user-name {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #212529;
+  color: var(--text-primary);
   margin-bottom: 0.375rem;
 }
 
@@ -735,11 +735,11 @@
 }
 
 .item-stat.lp {
-  background: #1351AA;
+  background: var(--accent);
 }
 
 .item-stat.wr {
-  background: #28a745;
+  background: var(--success);
 }
 
 /* Rank Ladder */
@@ -749,17 +749,17 @@
 }
 
 .rank-ladder-card-epic {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 16px;
   padding: 2.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-md);
 }
 
 .ladder-title-epic {
   text-align: center;
   font-size: 2rem;
   font-weight: 800;
-  color: #1351AA;
+  color: var(--accent);
   margin-bottom: 2rem;
   letter-spacing: -0.5px;
 }
@@ -773,7 +773,7 @@
 
 .rank-tier-card {
   min-width: 150px;
-  background: #e8eaed;
+  background: var(--bg-elevated);
   border-radius: 12px;
   padding: 1.75rem 1.25rem;
   display: flex;
@@ -781,21 +781,21 @@
   align-items: center;
   gap: 1rem;
   transition: all 0.3s ease;
-  border: 2px solid #d4d7db;
+  border: 2px solid var(--border);
   flex-shrink: 0;
 }
 
 .rank-tier-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-color: #1351AA;
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent);
 }
 
 .rank-tier-card.current {
-  background: linear-gradient(135deg, #e7f3ff 0%, #d8ecff 100%);
-  border-color: #1351AA;
+  background: linear-gradient(135deg, var(--accent-muted) 0%, var(--bg-elevated) 100%);
+  border-color: var(--accent);
   border-width: 3px;
-  box-shadow: 0 8px 20px rgba(19, 81, 170, 0.15);
+  box-shadow: var(--shadow-glow);
 }
 
 .tier-badge-large {
@@ -805,59 +805,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .tier-name-card {
   font-weight: 700;
   font-size: 1rem;
-  color: #212529;
+  color: var(--text-primary);
   text-align: center;
 }
 
 .tier-divisions-card {
   font-size: 0.875rem;
-  color: #6c757d;
+  color: var(--text-secondary);
   text-align: center;
   font-weight: 500;
 }
 
 /* Info Banner */
 .info-banner-epic {
-  background: linear-gradient(135deg, #fff9e6 0%, #f5f2e6 100%);
-  border: 2px solid #ffd700;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, var(--bg-elevated) 100%);
+  border: 2px solid var(--gold);
   border-radius: 12px;
   padding: 2rem;
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.1);
   animation: slide-in-up 1s ease;
 }
 
 .info-banner-icon-epic {
   font-size: 2rem;
   flex-shrink: 0;
-  color: #1351AA;
+  color: var(--accent);
   opacity: 0.8;
 }
 
 .info-title {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #212529;
+  color: var(--text-primary);
   margin-bottom: 0.75rem;
 }
 
 .info-text {
   font-size: 1rem;
-  color: #495057;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .info-text strong {
-  color: #1351AA;
+  color: var(--accent);
   font-weight: 700;
 }
 
@@ -872,22 +872,22 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.875rem 1.75rem;
-  background: $card-bg;
-  border: 2px solid #d4d7db;
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
   border-radius: 12px;
-  color: #1351AA;
+  color: var(--accent);
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
 }
 
 .btn-back-epic:hover {
   transform: translateY(-2px);
-  background: #1351AA;
-  border-color: #1351AA;
-  box-shadow: 0 4px 12px rgba(19, 81, 170, 0.2);
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
   color: white;
 }
 
@@ -970,17 +970,17 @@
 }
 
 .rank-ladder-horizontal-scroll::-webkit-scrollbar-track {
-  background: #e9ecef;
+  background: var(--bg-elevated);
   border-radius: 3px;
 }
 
 .rank-ladder-horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #1351AA;
+  background: var(--accent);
   border-radius: 3px;
 }
 
 .rank-ladder-horizontal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #0d3a7a;
+  background: var(--accent-hover);
 }
 
 /* Hidden elements from old design */
@@ -991,294 +991,4 @@
 .info-banner-glow,
 .animated-bg-particles {
   display: none !important;
-}
-
-/* ========== DARK MODE ========== */
-[data-theme="dark"] .league-page-wrapper {
-  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-}
-
-[data-theme="dark"] .league-bg-pulse {
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(74, 158, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(74, 158, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(74, 158, 255, 0.06) 0%, transparent 50%);
-}
-
-[data-theme="dark"] .league-bg-particles {
-  background-image:
-    radial-gradient(circle, rgba(74, 158, 255, 0.4) 3px, transparent 3px),
-    radial-gradient(circle, rgba(74, 158, 255, 0.3) 2px, transparent 2px),
-    radial-gradient(circle, rgba(74, 158, 255, 0.35) 2.5px, transparent 2.5px);
-}
-
-[data-theme="dark"] .league-bg-fluid-wave {
-  background: radial-gradient(ellipse at center, rgba(74, 158, 255, 0.2) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .league-bg-fluid-wave-2 {
-  background: radial-gradient(ellipse at center, rgba(74, 158, 255, 0.15) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .league-bg-blob-1 {
-  background: radial-gradient(circle, rgba(74, 158, 255, 0.12) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .league-bg-blob-2 {
-  background: radial-gradient(circle, rgba(74, 158, 255, 0.15) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .league-bg-blob-3 {
-  background: radial-gradient(circle, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .league-header-epic,
-[data-theme="dark"] .rank-card-mega,
-[data-theme="dark"] .leaderboard-card-epic,
-[data-theme="dark"] .rank-ladder-card-epic {
-  background: #2a2a2a;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .league-title-epic,
-[data-theme="dark"] .rank-name-mega,
-[data-theme="dark"] .leaderboard-title-epic,
-[data-theme="dark"] .ladder-title-epic,
-[data-theme="dark"] .stat-value-epic,
-[data-theme="dark"] .item-rank {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .league-subtitle-epic,
-[data-theme="dark"] .leaderboard-subtitle-epic,
-[data-theme="dark"] .rank-subtitle,
-[data-theme="dark"] .stat-label-epic,
-[data-theme="dark"] .progress-hint,
-[data-theme="dark"] .tier-divisions-card {
-  color: #adb5bd;
-}
-
-[data-theme="dark"] .section-label-epic {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .header-decorative-line {
-  background: #4a9eff;
-}
-
-[data-theme="dark"] .rank-badge-mega,
-[data-theme="dark"] .rank-stat-epic,
-[data-theme="dark"] .podium-position,
-[data-theme="dark"] .leaderboard-item-epic,
-[data-theme="dark"] .rank-tier-card {
-  background: #1a1a1a;
-  border-color: #3a3a3a;
-}
-
-[data-theme="dark"] .rank-stat-epic:hover,
-[data-theme="dark"] .podium-position:hover,
-[data-theme="dark"] .leaderboard-item-epic:hover,
-[data-theme="dark"] .rank-tier-card:hover {
-  border-color: #4a9eff;
-  background: #252525;
-}
-
-[data-theme="dark"] .podium-1 {
-  background: linear-gradient(135deg, #2a2a1a 0%, #1a1a1a 100%);
-  border-color: #ffd700;
-}
-
-[data-theme="dark"] .podium-position.is-current-user,
-[data-theme="dark"] .leaderboard-item-epic.is-current-user,
-[data-theme="dark"] .rank-tier-card.current {
-  background: linear-gradient(135deg, #1a2a3a 0%, #1a1a1a 100%);
-  border-color: #4a9eff;
-}
-
-[data-theme="dark"] .podium-user-name,
-[data-theme="dark"] .item-user-name,
-[data-theme="dark"] .tier-name-card,
-[data-theme="dark"] .info-title {
-  color: #e9ecef;
-}
-
-[data-theme="dark"] .podium-lp,
-[data-theme="dark"] .podium-wr {
-  background: #3a3a3a;
-  color: #adb5bd;
-}
-
-[data-theme="dark"] .progress-bar-epic {
-  background: #1a1a1a;
-}
-
-[data-theme="dark"] .progress-bar-fill-epic {
-  background: linear-gradient(90deg, #4a9eff 0%, #1351AA 100%);
-}
-
-[data-theme="dark"] .progress-percentage {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .progress-label {
-  color: #adb5bd;
-}
-
-[data-theme="dark"] .info-banner-epic {
-  background: linear-gradient(135deg, #2a2a1a 0%, #1a1a1a 100%);
-  border-color: #ffd700;
-  box-shadow: 0 4px 16px rgba(255, 215, 0, 0.1);
-}
-
-[data-theme="dark"] .info-text {
-  color: #adb5bd;
-}
-
-[data-theme="dark"] .info-text strong {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .btn-back-epic {
-  background: #2a2a2a;
-  border-color: #3a3a3a;
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .btn-back-epic:hover {
-  background: #4a9eff;
-  border-color: #4a9eff;
-  color: white;
-}
-
-[data-theme="dark"] .tier-badge-large {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-[data-theme="dark"] .emblem-glow-ring {
-  background: radial-gradient(circle, rgba(74, 158, 255, 0.15) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .podium-rank-number,
-[data-theme="dark"] .item-stat.lp {
-  background: #4a9eff;
-}
-
-[data-theme="dark"] .rank-ladder-horizontal-scroll::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-
-[data-theme="dark"] .rank-ladder-horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #4a9eff;
-}
-
-[data-theme="dark"] .rank-ladder-horizontal-scroll::-webkit-scrollbar-thumb:hover {
-  background: #1351AA;
-}
-
-[data-theme="dark"] .stat-icon {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .info-banner-icon-epic {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .podium-medal i {
-  color: #4a9eff;
-}
-
-[data-theme="dark"] .podium-1 .podium-medal i {
-  color: #FFD700;
-}
-
-[data-theme="dark"] .podium-2 .podium-medal i {
-  color: #E8E8E8;
-}
-
-[data-theme="dark"] .podium-3 .podium-medal i {
-  color: #E89E6B;
-}
-
-/* Dark mode glow effects - Enhanced for visibility */
-[data-theme="dark"] .rank-glow-0 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(120, 120, 120, 0.2);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-0 {
-  background: radial-gradient(circle, rgba(120, 120, 120, 0.15) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-1 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(205, 127, 50, 0.25);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-1 {
-  background: radial-gradient(circle, rgba(205, 127, 50, 0.2) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-2 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 25px rgba(220, 220, 220, 0.3);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-2 {
-  background: radial-gradient(circle, rgba(220, 220, 220, 0.25) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-3 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 215, 0, 0.35);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-3 {
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-4 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 35px rgba(0, 206, 209, 0.4);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-4 {
-  background: radial-gradient(circle, rgba(0, 206, 209, 0.35) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-5 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(80, 200, 120, 0.45);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-5 {
-  background: radial-gradient(circle, rgba(80, 200, 120, 0.4) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-6 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 45px rgba(185, 242, 255, 0.5);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-6 {
-  background: radial-gradient(circle, rgba(185, 242, 255, 0.45) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-7 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 50px rgba(155, 48, 255, 0.55);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-7 {
-  background: radial-gradient(circle, rgba(155, 48, 255, 0.5) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-8 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 55px rgba(255, 69, 0, 0.6);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-8 {
-  background: radial-gradient(circle, rgba(255, 69, 0, 0.55) 0%, transparent 70%);
-}
-
-[data-theme="dark"] .rank-glow-9 {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
-              0 0 30px rgba(244, 196, 48, 0.3),
-              0 0 45px rgba(255, 215, 0, 0.2);
-}
-
-[data-theme="dark"] .emblem-glow-ring.rank-glow-9 {
-  background: radial-gradient(circle, rgba(244, 196, 48, 0.25) 0%, rgba(255, 215, 0, 0.15) 50%, transparent 70%);
 }

@@ -11,7 +11,7 @@
 
   .pro-upgrade-icon {
     font-size: 32px;
-    color: #FFD700;
+    color: var(--gold);
     flex-shrink: 0;
   }
 
@@ -19,14 +19,14 @@
     flex: 1;
 
     h3 {
-      color: #fff;
+      color: var(--text-primary);
       font-size: 16px;
       font-weight: 700;
       margin: 0 0 4px 0;
     }
 
     p {
-      color: rgba(255, 255, 255, 0.65);
+      color: var(--text-tertiary);
       font-size: 13px;
       margin: 0;
       line-height: 1.4;
@@ -38,8 +38,8 @@
     align-items: center;
     gap: 8px;
     padding: 10px 22px;
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    color: #333;
+    background: var(--gold-gradient);
+    color: var(--text-inverse);
     border-radius: 12px;
     text-decoration: none;
     font-weight: 700;
@@ -51,7 +51,7 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
       text-decoration: none;
-      color: #333;
+      color: var(--text-inverse);
     }
   }
 }

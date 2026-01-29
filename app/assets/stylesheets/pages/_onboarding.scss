@@ -12,12 +12,12 @@
 .onboarding-container {
   max-width: 650px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   border-radius: 30px;
   padding: 50px 40px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
 }
 
 .onboarding-header {
@@ -27,7 +27,7 @@
   .onboarding-logo {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #1351AA, #1a66cc);
+    background: var(--accent-gradient);
     border-radius: 16px;
     display: inline-flex;
     align-items: center;
@@ -39,14 +39,14 @@
   }
 
   h1 {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 28px;
     font-weight: 800;
     margin: 0 0 10px 0;
   }
 
   p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     font-size: 16px;
     margin: 0;
   }
@@ -67,7 +67,7 @@
   .onboarding-step-number {
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #1351AA, #1a66cc);
+    background: var(--accent-gradient);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -80,7 +80,7 @@
 
   .onboarding-step-content {
     h3 {
-      color: #fff;
+      color: var(--text-primary);
       font-size: 17px;
       font-weight: 700;
       margin: 0 0 6px 0;
@@ -89,7 +89,7 @@
     }
 
     p {
-      color: rgba(255, 255, 255, 0.65);
+      color: var(--text-tertiary);
       font-size: 14px;
       line-height: 1.5;
       margin: 0;
@@ -98,13 +98,13 @@
 }
 
 .onboarding-plan-info {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-bg);
   border-radius: 16px;
   padding: 22px;
   margin-bottom: 30px;
 
   h3 {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 16px;
     font-weight: 700;
     margin: 0 0 12px 0;
@@ -116,12 +116,12 @@
     margin: 0 0 14px 0;
 
     li {
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--text-secondary);
       font-size: 14px;
       padding: 4px 0;
 
       i {
-        color: #4CAF50;
+        color: var(--success);
         margin-right: 8px;
         width: 16px;
         text-align: center;
@@ -130,7 +130,7 @@
   }
 
   .onboarding-upgrade-hint {
-    color: #FFD700;
+    color: var(--gold);
     font-size: 14px;
     margin: 0;
     font-weight: 600;
@@ -147,18 +147,18 @@
     align-items: center;
     gap: 10px;
     padding: 16px 40px;
-    background: linear-gradient(135deg, #1351AA, #1a66cc);
+    background: var(--accent-gradient);
     color: white;
     border-radius: 20px;
     text-decoration: none;
     font-weight: 700;
     font-size: 17px;
-    box-shadow: 0 4px 15px rgba(19, 81, 170, 0.3);
+    box-shadow: var(--shadow-glow);
     transition: all 0.3s;
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(19, 81, 170, 0.4);
+      box-shadow: var(--shadow-lg);
       color: white;
       text-decoration: none;
     }

@@ -8,10 +8,11 @@
 }
 
 .friendship-card {
-  background: white;
+  background: var(--bg-surface);
   border-radius: 25px;
   overflow: hidden;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
 }
 
 .friendship-card-header {
@@ -30,7 +31,7 @@
   }
 
   &.header-friends {
-    background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+    background: var(--accent-gradient);
   }
 
   h5 {
@@ -62,10 +63,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px 18px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: var(--bg-elevated);
   border-radius: 15px;
   margin-bottom: 12px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border);
   transition: all 0.3s ease;
 
   &:last-child {
@@ -74,8 +75,8 @@
 
   &:hover {
     transform: translateX(5px);
-    box-shadow: 0 4px 15px rgba(19, 81, 170, 0.1);
-    border-color: #1351AA;
+    box-shadow: var(--shadow-glow);
+    border-color: var(--accent);
   }
 }
 
@@ -86,23 +87,23 @@
 
   .friendship-name {
     font-weight: 600;
-    color: #333;
+    color: var(--text-primary);
     text-decoration: none;
     font-size: 1rem;
 
     &:hover {
-      color: #1351AA;
+      color: var(--accent);
     }
   }
 
   .friendship-email {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--text-tertiary);
   }
 
   .friendship-stats {
     font-size: 0.85rem;
-    color: #1351AA;
+    color: var(--accent);
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -141,32 +142,32 @@
 
   &.btn-reject {
     background: transparent;
-    color: #e74c3c;
-    border: 2px solid #e74c3c;
+    color: var(--danger);
+    border: 2px solid var(--danger);
 
     &:hover {
-      background: #e74c3c;
+      background: var(--danger);
       color: white;
     }
   }
 
   &.btn-cancel {
-    background: #E3E2DE;
-    color: #666;
+    background: var(--bg-hover);
+    color: var(--text-secondary);
 
     &:hover {
-      background: #d5d4d0;
+      background: var(--border);
     }
   }
 
   &.btn-profile {
-    background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+    background: var(--accent-gradient);
     color: white;
-    box-shadow: 0 3px 10px rgba(19, 81, 170, 0.3);
+    box-shadow: 0 3px 10px var(--accent-muted);
 
     &:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(19, 81, 170, 0.4);
+      box-shadow: var(--shadow-glow);
     }
   }
 }
@@ -174,7 +175,7 @@
 .friendship-empty {
   text-align: center;
   padding: 40px 20px;
-  color: #888;
+  color: var(--text-tertiary);
 
   .empty-icon {
     font-size: 3rem;
@@ -193,18 +194,18 @@
   align-items: center;
   gap: 10px;
   padding: 16px 32px;
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   color: white;
   border-radius: 20px;
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
-  box-shadow: 0 5px 20px rgba(19, 81, 170, 0.3);
+  box-shadow: 0 5px 20px var(--accent-muted);
   transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(19, 81, 170, 0.4);
+    box-shadow: var(--shadow-glow);
     color: white;
     text-decoration: none;
   }

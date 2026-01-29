@@ -1,20 +1,21 @@
 // Quizzes page styles
 
-// Container card blanc pour chaque section
+// Container card for each section
 .quizzes-section-container {
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 25px;
   padding: 30px;
   margin-top: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
 }
 
 .quizzes-section-public {
-  border-top: 4px solid #1351AA;
+  border-top: 4px solid var(--accent);
 }
 
 .quizzes-section-shared {
-  border-top: 4px solid #6c5ce7;
+  border-top: 4px solid var(--purple);
 }
 
 .quizzes-section-header {
@@ -24,7 +25,7 @@
 .quizzes-section-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
@@ -32,19 +33,19 @@
 
   .quizzes-section-public & {
     i {
-      color: #1351AA;
+      color: var(--accent);
     }
   }
 
   .quizzes-section-shared & {
     i {
-      color: #6c5ce7;
+      color: var(--purple);
     }
   }
 }
 
 .quizzes-section-subtitle {
-  color: #666;
+  color: var(--text-tertiary);
   font-size: 0.95rem;
   margin: 0;
 }
@@ -60,7 +61,7 @@
 .quizzes-category-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #444;
+  color: var(--text-secondary);
   margin-bottom: 20px;
   display: flex;
   align-items: center;
@@ -72,7 +73,7 @@
 
   .category-count {
     font-weight: 400;
-    color: #888;
+    color: var(--text-tertiary);
     font-size: 0.9rem;
   }
 }
@@ -133,11 +134,11 @@
 }
 
 .quiz-card-public {
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 50%, #2980b9 100%);
-  box-shadow: 0 8px 30px rgba(19, 81, 170, 0.3);
+  background: var(--accent-gradient);
+  box-shadow: 0 8px 30px var(--accent-muted);
 
   &:hover {
-    box-shadow: 0 12px 40px rgba(19, 81, 170, 0.4);
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -174,7 +175,7 @@
 
   i {
     margin-left: 2px;
-    color: #ffd700;
+    color: var(--gold);
   }
 
   .far {
@@ -215,16 +216,16 @@
   gap: 6px;
   margin-top: 10px;
   padding: 8px 14px;
-  background: #f0f0f0;
+  background: var(--bg-hover);
   border-radius: 20px;
   font-size: 13px;
   font-weight: 500;
-  color: #6c5ce7;
+  color: var(--purple);
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: #6c5ce7;
+    background: var(--purple);
     color: white;
     transform: scale(1.02);
   }
@@ -298,8 +299,8 @@
   font-size: 15px;
 
   &:hover {
-    background: #e74c3c;
-    border-color: #e74c3c;
+    background: var(--danger);
+    border-color: var(--danger);
     color: white;
   }
 }
@@ -319,12 +320,12 @@
   border: 2px solid rgba(255, 255, 255, 0.3);
 
   .quiz-card:hover & {
-    background: $card-bg;
-    color: #1351AA;
+    background: var(--bg-surface);
+    color: var(--accent);
   }
 
   .quiz-card-shared:hover & {
-    color: #6c5ce7;
+    color: var(--purple);
   }
 
   i {
@@ -335,9 +336,10 @@
 .quizzes-empty {
   text-align: center;
   padding: 80px 20px;
-  background: $card-bg;
+  background: var(--bg-surface);
   border-radius: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
   margin-top: 40px;
 }
 
@@ -348,14 +350,14 @@
 }
 
 .quizzes-empty h3 {
-  color: #333;
+  color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 0 0.75rem 0;
 }
 
 .quizzes-empty p {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 1rem;
   margin: 0;
 }

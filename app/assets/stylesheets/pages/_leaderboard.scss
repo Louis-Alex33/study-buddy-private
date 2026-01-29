@@ -9,12 +9,12 @@
 }
 
 .leaderboard-header {
-  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  background: var(--accent-gradient);
   padding: 40px;
   border-radius: 25px;
   margin-bottom: 30px;
   text-align: center;
-  box-shadow: 0 8px 25px rgba(19, 81, 170, 0.25);
+  box-shadow: var(--shadow-lg);
 
   .leaderboard-header-content {
     h1 {
@@ -23,7 +23,7 @@
       font-weight: 800;
       margin: 0 0 10px 0;
 
-      i { margin-right: 10px; color: #FFD700; }
+      i { margin-right: 10px; color: var(--gold); }
     }
 
     p {
@@ -31,20 +31,20 @@
       font-size: 16px;
       margin: 0;
 
-      strong { color: #FFD700; }
+      strong { color: var(--gold); }
     }
   }
 }
 
 .leaderboard-section {
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--glass-bg);
   border-radius: 20px;
   padding: 28px;
   margin-bottom: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--glass-border);
 
   h2 {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 20px;
     font-weight: 700;
     margin: 0 0 20px 0;
@@ -63,18 +63,18 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--glass-bg);
   border-radius: 14px;
   padding: 14px 20px;
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--bg-hover);
   }
 
   &.leaderboard-current {
-    background: rgba(19, 81, 170, 0.2);
-    border: 1px solid rgba(19, 81, 170, 0.4);
+    background: var(--accent-muted);
+    border: 1px solid var(--border-accent);
   }
 }
 
@@ -87,13 +87,13 @@
 .leaderboard-medal {
   font-size: 24px;
 
-  &.leaderboard-medal-1 { color: #FFD700; }
+  &.leaderboard-medal-1 { color: var(--gold); }
   &.leaderboard-medal-2 { color: #C0C0C0; }
   &.leaderboard-medal-3 { color: #CD7F32; }
 }
 
 .leaderboard-position {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-tertiary);
   font-size: 16px;
   font-weight: 700;
 }
@@ -105,14 +105,14 @@
   gap: 10px;
 
   .leaderboard-name {
-    color: #fff;
+    color: var(--text-primary);
     font-weight: 600;
     font-size: 15px;
   }
 
   .leaderboard-pro-badge {
-    background: linear-gradient(135deg, #FFD700, #FFA500);
-    color: #333;
+    background: var(--gold-gradient);
+    color: var(--text-inverse);
     padding: 2px 8px;
     border-radius: 8px;
     font-size: 10px;
@@ -126,7 +126,7 @@
 }
 
 .leaderboard-score {
-  color: #FFD700;
+  color: var(--gold);
   font-weight: 800;
   font-size: 16px;
 }
