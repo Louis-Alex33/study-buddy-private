@@ -1,0 +1,124 @@
+// Search Page
+.search-page {
+  min-height: calc(100vh - 70px);
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-page-header {
+  text-align: center;
+  margin-bottom: 40px;
+
+  h1 {
+    color: #fff;
+    font-size: 32px;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+
+    i { margin-right: 10px; }
+  }
+}
+
+.search-page-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.search-results-count {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  margin-bottom: 30px;
+
+  strong { color: #fff; }
+}
+
+.search-section {
+  margin-bottom: 40px;
+
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+
+    i { margin-right: 8px; }
+  }
+}
+
+.search-results-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.search-result-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .search-result-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #1351AA, #1a66cc);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .search-result-content {
+    h3 {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      margin: 0;
+    }
+  }
+}
+
+.search-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: rgba(255, 255, 255, 0.5);
+
+  .empty-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+  }
+
+  h3 {
+    color: #fff;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+}

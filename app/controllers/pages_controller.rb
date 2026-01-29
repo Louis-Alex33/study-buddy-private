@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :legal_notice, :privacy_policy, :terms ]
 
   def home
-    @categories = Category.all
+    @categories = current_user&.categories&.order(:title)
     @lecture = Lecture.new
   end
 
@@ -18,7 +18,7 @@ class PagesController < ApplicationController
   end
 
   def message_params
-    pararms.require(:message).permit(:content,:title)
+    params.require(:message).permit(:content, :title)
   end
 
 end

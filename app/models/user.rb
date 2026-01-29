@@ -4,7 +4,7 @@ class User < ApplicationRecord
   pay_customer stripe_attributes: :stripe_attributes
 
   has_many :lectures
-  has_many :categories, through: :lectures
+  has_many :categories, dependent: :destroy
   has_many :flashcard_completions
   has_many :flashcards, through: :flashcard_completions
   has_many :attempts
@@ -14,6 +14,10 @@ class User < ApplicationRecord
   has_one :user_league, dependent: :destroy
   has_many :quiz_participants, dependent: :destroy
   has_many :quiz_rooms, through: :quiz_participants
+  has_many :user_badges, dependent: :destroy
+  has_many :badges, through: :user_badges
+  has_many :quiz_bookmarks, dependent: :destroy
+  has_many :bookmarked_quizzes, through: :quiz_bookmarks, source: :quiz
 
   # Friendships - demandes envoyées
   has_many :sent_friendships, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy
@@ -22,6 +26,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
+
+  after_create :send_welcome_email
 
   # Retourne tous les amis acceptés (dans les deux sens)
   def friends
@@ -70,6 +76,46 @@ class User < ApplicationRecord
     create_user_league! unless user_league
   end
 
+  def has_badge?(badge_name)
+    badges.exists?(name: badge_name)
+  end
+
+  def bookmarked?(quiz)
+    quiz_bookmarks.exists?(quiz: quiz)
+  end
+
+  def check_and_award_badges!
+    Badge.find_each do |badge|
+      next if has_badge?(badge.name)
+      award_badge!(badge) if badge_earned?(badge)
+    end
+  end
+
+  def badge_earned?(badge)
+    case badge.name
+    when "Premier pas" then lectures.count >= 1
+    when "Étudiant assidu" then lectures.count >= 5
+    when "Bibliothécaire" then lectures.count >= 10
+    when "Encyclopédie" then lectures.count >= 25
+    when "Curieux" then attempts.completed.count >= 1
+    when "Quiz master" then attempts.completed.count >= 10
+    when "Perfectionniste" then attempts.completed.any? { |a| a.percentage_score == 100 }
+    when "Sans faute" then attempts.completed.select { |a| a.percentage_score == 100 }.map(&:quiz_id).uniq.count >= 5
+    when "Mémorisation" then flashcard_completions.count >= 1
+    when "Révision express" then flashcard_completions.where("CAST(status AS INTEGER) >= 100").count >= 10
+    when "Social" then friends.count >= 1
+    when "Populaire" then friends.count >= 5
+    when "Débutant" then points >= 100
+    when "Intermédiaire" then points >= 500
+    when "Expert" then points >= 1000
+    else false
+    end
+  end
+
+  def award_badge!(badge)
+    user_badges.create!(badge: badge)
+  end
+
   def stripe_attributes(pay_customer)
     {
       metadata: {
@@ -77,5 +123,11 @@ class User < ApplicationRecord
         user_id: id
       }
     }
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_later
   end
 end

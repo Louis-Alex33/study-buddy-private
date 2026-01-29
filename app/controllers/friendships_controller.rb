@@ -35,6 +35,8 @@ class FriendshipsController < ApplicationController
   def accept
     if @friendship.friend == current_user
       @friendship.accepted!
+      current_user.check_and_award_badges!
+      @friendship.user.check_and_award_badges!
       redirect_to friendships_path, notice: "Demande d'ami acceptée."
     else
       redirect_to friendships_path, alert: "Action non autorisée."

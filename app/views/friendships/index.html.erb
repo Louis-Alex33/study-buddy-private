@@ -20,7 +20,7 @@
       <!-- Pending Requests -->
       <div class="friendship-card">
         <div class="friendship-card-header header-pending">
-          <span class="header-icon">📬</span>
+          <span class="header-icon"><i class="fas fa-inbox"></i></span>
           <h5>Demandes reçues</h5>
           <span class="header-count"><%= @pending_requests.count %></span>
         </div>
@@ -44,7 +44,7 @@
             <% end %>
           <% else %>
             <div class="friendship-empty">
-              <div class="empty-icon">📭</div>
+              <div class="empty-icon"><i class="fas fa-inbox"></i></div>
               <p>Aucune demande en attente</p>
             </div>
           <% end %>
@@ -54,7 +54,7 @@
       <!-- Sent Requests -->
       <div class="friendship-card" style="margin-top: 25px;">
         <div class="friendship-card-header header-sent">
-          <span class="header-icon">📤</span>
+          <span class="header-icon"><i class="fas fa-paper-plane"></i></span>
           <h5>Demandes envoyées</h5>
           <span class="header-count"><%= @sent_requests.count %></span>
         </div>
@@ -75,7 +75,7 @@
             <% end %>
           <% else %>
             <div class="friendship-empty">
-              <div class="empty-icon">✉️</div>
+              <div class="empty-icon"><i class="fas fa-paper-plane"></i></div>
               <p>Aucune demande envoyée</p>
             </div>
           <% end %>
@@ -87,7 +87,7 @@
     <div>
       <div class="friendship-card">
         <div class="friendship-card-header header-friends">
-          <span class="header-icon">👥</span>
+          <span class="header-icon"><i class="fas fa-user-group"></i></span>
           <h5>Mes amis</h5>
           <span class="header-count"><%= @friends.count %></span>
         </div>
@@ -111,7 +111,7 @@
             <% end %>
           <% else %>
             <div class="friendship-empty">
-              <div class="empty-icon">👥</div>
+              <div class="empty-icon"><i class="fas fa-user-group"></i></div>
               <p>Tu n'as pas encore d'amis</p>
               <%= link_to users_path, class: "btn-find-friends" do %>
                 <i class="fas fa-user-plus"></i> Trouver des amis

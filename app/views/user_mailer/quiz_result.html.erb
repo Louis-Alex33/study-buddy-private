@@ -1,0 +1,19 @@
+<h1>Résultat de votre quiz</h1>
+
+<p>Bonjour <%= @user.display_name %>,</p>
+
+<p>Vous avez terminé le quiz <strong><%= @quiz.title %></strong>.</p>
+
+<h2>Votre score : <%= @attempt.score %>/<%= @attempt.total_questions %> (<%= @attempt.percentage_score %>%)</h2>
+
+<% if @attempt.percentage_score >= 80 %>
+  <p>Excellent travail ! Vous maîtrisez bien ce sujet.</p>
+<% elsif @attempt.percentage_score >= 50 %>
+  <p>Bon travail ! Continuez à réviser pour améliorer votre score.</p>
+<% else %>
+  <p>N'hésitez pas à revoir le cours et à retenter le quiz. La persévérance paie !</p>
+<% end %>
+
+<p><%= link_to "Voir le détail", quiz_attempt_url(@quiz, @attempt) %></p>
+
+<p>Bonne continuation,<br>L'équipe Studigo</p>

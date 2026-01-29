@@ -1,6 +1,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_lecture, only: [:new, :create]
   before_action :check_flashcard_limit, only: [:create]
+  before_action -> { enforce_rate_limit!(:ai_flashcard, max_per_minute: 3) }, only: [:create]
 
   def new
   end
@@ -27,6 +28,7 @@ class FlashcardsController < ApplicationController
     completion = current_user.flashcard_completions.find_or_initialize_by(flashcard: @flashcard)
     completion.status = params[:progress]
     completion.save
+    current_user.check_and_award_badges!
     head :ok
   end
 

@@ -9,10 +9,16 @@ class SubscriptionsController < ApplicationController
   end
 
   def checkout
+    price_id = if params[:plan] == "annual"
+                 ENV["STRIPE_PRO_ANNUAL_PRICE_ID"]
+               else
+                 ENV["STRIPE_PRO_MONTHLY_PRICE_ID"]
+               end
+
     processor = current_user.set_payment_processor(:stripe)
     checkout_session = processor.checkout(
       mode: "subscription",
-      line_items: ENV["STRIPE_PRO_MONTHLY_PRICE_ID"],
+      line_items: price_id,
       success_url: subscription_success_url + "?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: pricing_url
     )

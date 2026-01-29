@@ -1,0 +1,137 @@
+// Leaderboard Page
+.leaderboard-page {
+  min-height: calc(100vh - 70px);
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.leaderboard-header {
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  padding: 40px;
+  border-radius: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(19, 81, 170, 0.25);
+
+  .leaderboard-header-content {
+    h1 {
+      color: white;
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+
+      i { margin-right: 10px; color: #FFD700; }
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      margin: 0;
+
+      strong { color: #FFD700; }
+    }
+  }
+}
+
+.leaderboard-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+
+    i { margin-right: 8px; }
+  }
+}
+
+.leaderboard-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px 20px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &.leaderboard-current {
+    background: rgba(19, 81, 170, 0.2);
+    border: 1px solid rgba(19, 81, 170, 0.4);
+  }
+}
+
+.leaderboard-rank {
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.leaderboard-medal {
+  font-size: 24px;
+
+  &.leaderboard-medal-1 { color: #FFD700; }
+  &.leaderboard-medal-2 { color: #C0C0C0; }
+  &.leaderboard-medal-3 { color: #CD7F32; }
+}
+
+.leaderboard-position {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.leaderboard-user {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .leaderboard-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .leaderboard-pro-badge {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .leaderboard-league-rank {
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+
+.leaderboard-score {
+  color: #FFD700;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.leaderboard-back {
+  text-align: center;
+  margin-top: 40px;
+}

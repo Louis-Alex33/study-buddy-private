@@ -22,9 +22,9 @@
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  max-width: 900px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -272,17 +272,18 @@
 }
 
 .plan-limit-banner {
-  background: rgba(19, 81, 170, 0.08);
-  border: 1px solid rgba(19, 81, 170, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 0.75rem 1.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
   font-size: 0.9rem;
-  color: #1351AA;
+  color: rgba(255, 255, 255, 0.9);
 
   a {
-    color: #1351AA;
+    color: #fff;
     font-weight: 600;
     text-decoration: underline;
   }
@@ -291,11 +292,11 @@
 .message-limit-info {
   text-align: center;
   padding: 0.5rem;
-  color: #888;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.85rem;
 
   a {
-    color: #1351AA;
+    color: #fff;
     font-weight: 600;
   }
 }
@@ -350,16 +351,16 @@
   }
 
   .plan-limit-banner {
-    background: rgba(19, 81, 170, 0.15);
-    border-color: rgba(19, 81, 170, 0.25);
-    color: #6ba3ff;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.85);
 
     a {
-      color: #6ba3ff;
+      color: #fff;
     }
   }
 
   .message-limit-info {
-    color: #999;
+    color: rgba(255, 255, 255, 0.6);
   }
 }

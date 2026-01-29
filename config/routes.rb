@@ -15,6 +15,22 @@ Rails.application.routes.draw do
   get "checkout/succes", to: "subscriptions#success", as: :subscription_success
   get "portail", to: "subscriptions#portal", as: :subscription_portal
 
+  # Admin
+  get "admin", to: "admin#dashboard", as: :admin_dashboard
+
+  # Onboarding
+  get "bienvenue", to: "onboarding#show", as: :onboarding
+  patch "bienvenue/complete", to: "onboarding#complete", as: :complete_onboarding
+
+  # Search
+  get "recherche", to: "search#index", as: :search
+
+  # Stats
+  get "statistiques", to: "stats#index", as: :stats
+
+  # Leaderboard
+  get "classement", to: "leaderboard#index", as: :leaderboard
+
   # Multiplayer section
   get 'multiplayer', to: 'multiplayer#index', as: :multiplayer
   get 'league', to: 'multiplayer#league', as: :league
@@ -38,6 +54,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # Categories
+  resources :categories, only: [:create, :destroy]
+
   # Users listing and profiles
   resources :users, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -57,12 +76,15 @@ Rails.application.routes.draw do
   end
 
   # New quiz system - standalone, organized by category
-  resources :quizzes, only: [:index, :show, :new, :create] do
+  resources :quizzes, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     resources :attempts, only: [:create, :show] do
       member do
         patch :submit
       end
     end
+    # Bookmarks
+    post :bookmark, on: :member
+    delete :unbookmark, on: :member
   end
 
   resources :notes, only: :destroy

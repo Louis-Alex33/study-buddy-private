@@ -25,10 +25,10 @@
 
               <div class="user-stats mb-3">
                 <span class="badge bg-light text-dark me-2">
-                  🎯 <%= user.attempts.completed.count %> quiz
+                  <i class="fas fa-bullseye"></i> <%= user.attempts.completed.count %> quiz
                 </span>
                 <span class="badge bg-light text-dark">
-                  📚 <%= user.lectures.count %> cours
+                  <i class="fas fa-book-open"></i> <%= user.lectures.count %> cours
                 </span>
               </div>
 
@@ -38,7 +38,7 @@
                 <% end %>
 
                 <% if current_user.friend_with?(user) %>
-                  <span class="btn btn-success btn-sm disabled">✓ Ami</span>
+                  <span class="btn btn-success btn-sm disabled"><i class="fas fa-check"></i> Ami</span>
                 <% elsif current_user.pending_request_with?(user) %>
                   <span class="btn btn-secondary btn-sm disabled">En attente</span>
                 <% else %>
@@ -54,7 +54,7 @@
     </div>
   <% else %>
     <div class="empty-lectures">
-      <div class="empty-icon">👥</div>
+      <div class="empty-icon"><i class="fas fa-user-group"></i></div>
       <h3>Aucun autre utilisateur</h3>
       <p>Tu es le seul utilisateur pour le moment !</p>
     </div>

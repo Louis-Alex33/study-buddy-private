@@ -279,6 +279,29 @@
   position: relative;
   z-index: 1;
   margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-quiz-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 15px;
+
+  &:hover {
+    background: #e74c3c;
+    border-color: #e74c3c;
+    color: white;
+  }
 }
 
 .btn-quiz-play {

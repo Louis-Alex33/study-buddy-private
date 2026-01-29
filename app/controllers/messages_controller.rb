@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   before_action :set_lecture
   before_action :check_message_limit, only: [:create]
+  before_action -> { enforce_rate_limit!(:ai_message, max_per_minute: 10) }, only: [:create]
 
   def create
     @message = @lecture.messages.new(message_params)

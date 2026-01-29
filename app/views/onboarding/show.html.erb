@@ -1,0 +1,65 @@
+<% content_for(:title, "Bienvenue sur Studigo") %>
+
+<div class="onboarding-page">
+  <div class="onboarding-container">
+    <div class="onboarding-header">
+      <div class="onboarding-logo">S</div>
+      <h1>Bienvenue sur Studigo, <%= current_user.display_name %> !</h1>
+      <p>Découvrez comment tirer le meilleur parti de votre compagnon d'étude intelligent.</p>
+    </div>
+
+    <div class="onboarding-steps">
+      <div class="onboarding-step">
+        <div class="onboarding-step-number">1</div>
+        <div class="onboarding-step-content">
+          <h3><i class="fas fa-cloud-upload-alt"></i> Téléchargez un document</h3>
+          <p>Importez vos cours en PDF ou image. Notre IA analyse le contenu et génère automatiquement une fiche de cours structurée.</p>
+        </div>
+      </div>
+
+      <div class="onboarding-step">
+        <div class="onboarding-step-number">2</div>
+        <div class="onboarding-step-content">
+          <h3><i class="fas fa-layer-group"></i> Créez des flashcards</h3>
+          <p>Générez des flashcards à partir de vos cours en un clic. L'IA crée des questions pertinentes pour vous aider à mémoriser.</p>
+        </div>
+      </div>
+
+      <div class="onboarding-step">
+        <div class="onboarding-step-number">3</div>
+        <div class="onboarding-step-content">
+          <h3><i class="fas fa-comments"></i> Posez des questions</h3>
+          <p>Discutez avec l'assistant IA intégré à chaque cours. Il vous aide à comprendre les concepts difficiles.</p>
+        </div>
+      </div>
+
+      <div class="onboarding-step">
+        <div class="onboarding-step-number">4</div>
+        <div class="onboarding-step-content">
+          <h3><i class="fas fa-question-circle"></i> Testez-vous avec des quiz</h3>
+          <p>Créez des quiz générés par l'IA et défiez vos amis en mode multijoueur.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="onboarding-plan-info">
+      <h3>Votre plan gratuit inclut :</h3>
+      <ul>
+        <li><i class="fas fa-check"></i> 3 cours maximum</li>
+        <li><i class="fas fa-check"></i> 10 messages avec l'IA</li>
+        <li><i class="fas fa-check"></i> 2 générations de flashcards</li>
+        <li><i class="fas fa-check"></i> 1 création de quiz</li>
+      </ul>
+      <p class="onboarding-upgrade-hint">
+        <i class="fas fa-crown"></i> Passez à <strong>Studigo Pro</strong> pour un accès illimité à toutes les fonctionnalités !
+      </p>
+    </div>
+
+    <div class="onboarding-actions">
+      <%= link_to complete_onboarding_path, data: { turbo_method: :patch }, class: "onboarding-btn-start" do %>
+        <span>C'est parti !</span>
+        <i class="fas fa-arrow-right"></i>
+      <% end %>
+    </div>
+  </div>
+</div>

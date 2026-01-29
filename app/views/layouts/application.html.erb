@@ -1,8 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Studigo</title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} | Studigo" : "Studigo — Votre compagnon d'étude intelligent" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Studigo transforme vos cours en expériences d'apprentissage interactives. Organisez vos documents, créez des flashcards et boostez votre réussite grâce à l'IA." %>">
+    <meta name="keywords" content="étude, flashcards, quiz, IA, apprentissage, cours, étudiants, révision">
+    <meta name="author" content="Studigo">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo" %>">
+    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Votre compagnon d'étude intelligent. Flashcards, quiz et IA pour réussir vos examens." %>">
+    <meta property="og:site_name" content="Studigo">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo" %>">
+    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Votre compagnon d'étude intelligent." %>">
+    <link rel="canonical" href="<%= request.original_url %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 

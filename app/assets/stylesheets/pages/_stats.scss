@@ -1,0 +1,245 @@
+// Stats Page
+.stats-page {
+  min-height: calc(100vh - 70px);
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.stats-header {
+  background: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+  padding: 40px;
+  border-radius: 25px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(19, 81, 170, 0.25);
+
+  .stats-header-content {
+    h1 {
+      color: white;
+      font-size: 32px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+
+      i { margin-right: 10px; }
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+
+.stats-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stats-summary-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 22px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  .stats-summary-icon {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+  }
+
+  .stats-summary-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .stats-summary-label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+}
+
+.stats-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  h2 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+
+    i { margin-right: 8px; }
+  }
+}
+
+.stats-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.stats-category-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 14px 18px;
+
+  .stats-category-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .stats-category-count {
+    color: #fff;
+    font-weight: 800;
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 12px;
+    border-radius: 10px;
+  }
+}
+
+.stats-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.stats-activity-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+
+  .stats-activity-week {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .stats-activity-data {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    span {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+
+      i { margin-right: 5px; width: 14px; text-align: center; }
+    }
+  }
+}
+
+// Badges
+.stats-badges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.stats-badge-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 14px;
+  text-align: center;
+  position: relative;
+  transition: all 0.2s;
+
+  &.earned {
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    background: rgba(255, 215, 0, 0.08);
+  }
+
+  &.locked {
+    opacity: 0.5;
+  }
+
+  .stats-badge-icon {
+    font-size: 28px;
+    color: #FFD700;
+    margin-bottom: 8px;
+  }
+
+  .stats-badge-name {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .stats-badge-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .stats-badge-lock {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 12px;
+  }
+}
+
+// League
+.stats-league-card {
+  text-align: center;
+  padding: 20px;
+
+  .stats-league-rank {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .stats-league-details {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    span {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+    }
+  }
+}
+
+.stats-back {
+  text-align: center;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .stats-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-activity-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

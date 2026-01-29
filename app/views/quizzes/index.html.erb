@@ -7,6 +7,8 @@
     </div>
   </div>
 
+  <%= render "shared/pro_upgrade_prompt" %>
+
   <!-- Filter by difficulty -->
   <div class="filter_button_card">
     <%= link_to "Tous", quizzes_path, class: "filter_button #{params[:level].blank? ? 'active' : ''}" %>
@@ -31,7 +33,7 @@
 
         <div class="quizzes-category-block">
           <h3 class="quizzes-category-title">
-            <span class="category-icon">📁</span>
+            <span class="category-icon"><i class="fas fa-folder"></i></span>
             <%= category.title %>
             <span class="category-count">(<%= filtered_quizzes.count %> quiz)</span>
           </h3>
@@ -43,7 +45,7 @@
                 best_score = best_attempt&.score || 0
                 percentage = total > 0 ? (best_score.to_f / total * 100).round : 0
               %>
-              <%= link_to quiz_path(quiz), class: "quiz-card-link" do %>
+              <div class="quiz-card-wrapper">
                 <div class="quiz-card quiz-card-public">
                   <div class="quiz-card-header">
                     <span class="quiz-card-category"><%= quiz.category.title %></span>
@@ -65,12 +67,15 @@
                     </div>
                   <% end %>
                   <div class="quiz-card-actions">
-                    <span class="btn-quiz-play">
+                    <%= link_to quiz_path(quiz), class: "btn-quiz-play" do %>
                       <i class="fas fa-play"></i> Jouer
-                    </span>
+                    <% end %>
+                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "btn-quiz-delete" do %>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
                   </div>
                 </div>
-              <% end %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -94,7 +99,7 @@
 
         <div class="quizzes-category-block">
           <h3 class="quizzes-category-title">
-            <span class="category-icon">📁</span>
+            <span class="category-icon"><i class="fas fa-folder"></i></span>
             <%= category.title %>
             <span class="category-count">(<%= filtered_quizzes.count %> quiz)</span>
           </h3>
@@ -142,6 +147,9 @@
                     <%= link_to quiz_path(quiz), class: "btn-quiz-play" do %>
                       <i class="fas fa-play"></i> Jouer
                     <% end %>
+                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "btn-quiz-delete" do %>
+                      <i class="fas fa-trash"></i>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -180,7 +188,7 @@
   <!-- État vide -->
   <% if @public_quizzes.empty? && @shared_quizzes.empty? %>
     <div class="quizzes-empty">
-      <div class="quizzes-empty-icon">🧠</div>
+      <div class="quizzes-empty-icon"><i class="fas fa-brain"></i></div>
       <h3>Aucun quiz disponible</h3>
       <p>Les quiz seront bientôt disponibles !</p>
     </div>

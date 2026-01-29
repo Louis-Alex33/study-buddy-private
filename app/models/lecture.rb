@@ -10,8 +10,17 @@ class Lecture < ApplicationRecord
   validates :title, presence: true
   validates :category, presence: true
 
+  ALLOWED_CONTENT_TYPES = %w[
+    application/pdf
+    image/png image/jpeg image/jpg image/gif image/webp
+    text/plain
+    application/msword
+    application/vnd.openxmlformats-officedocument.wordprocessingml.document
+  ].freeze
+
   validate :document_presence
   validate :file_size_limit
+  validate :file_content_type
 
   after_commit :analyze_document, on: :create
 
@@ -25,7 +34,13 @@ class Lecture < ApplicationRecord
 
   def file_size_limit
     if document.attached? && document.byte_size > max_file_size_mb.megabytes
-      errors.add(:document, "La taille du fichier doit etre inferieure a #{max_file_size_mb}Mo")
+      errors.add(:document, "La taille du fichier doit être inférieure à #{max_file_size_mb}Mo")
+    end
+  end
+
+  def file_content_type
+    if document.attached? && !ALLOWED_CONTENT_TYPES.include?(document.content_type)
+      errors.add(:document, "Type de fichier non autorisé. Formats acceptés : PDF, images (PNG, JPEG, GIF, WebP), texte, Word")
     end
   end
 

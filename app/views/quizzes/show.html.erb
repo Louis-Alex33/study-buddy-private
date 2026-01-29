@@ -1,9 +1,20 @@
 <div class="container my-5">
   <div class="flashcard-show-header">
-    <h2>🧠 <%= @quiz.title %></h2>
+    <h2><i class="fas fa-brain"></i> <%= @quiz.title %></h2>
     <p class="text-muted">
       <%= @quiz.category.title %> | Niveau <%= @quiz.level %> | <%= @questions.count %> questions
     </p>
+    <div class="quiz-bookmark-action">
+      <% if current_user.bookmarked?(@quiz) %>
+        <%= button_to unbookmark_quiz_path(@quiz), method: :delete, class: "btn btn-sm btn-outline-warning" do %>
+          <i class="fas fa-bookmark"></i> Retirer des favoris
+        <% end %>
+      <% else %>
+        <%= button_to bookmark_quiz_path(@quiz), method: :post, class: "btn btn-sm btn-outline-secondary" do %>
+          <i class="far fa-bookmark"></i> Ajouter aux favoris
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <!-- Best Score Card -->

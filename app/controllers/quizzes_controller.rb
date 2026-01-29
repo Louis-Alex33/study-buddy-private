@@ -1,6 +1,7 @@
 class QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_quiz_limit, only: [:create]
+  before_action -> { enforce_rate_limit!(:ai_quiz, max_per_minute: 3) }, only: [:create]
 
   def index
     @categories = Category.includes(:quizzes).where.not(quizzes: { id: nil })
@@ -19,8 +20,47 @@ class QuizzesController < ApplicationController
     @quiz = Quiz.new
   end
 
+  def edit
+    @quiz = Quiz.find(params[:id])
+    @questions = @quiz.questions.includes(:options).ordered
+  end
+
+  def update
+    @quiz = Quiz.find(params[:id])
+    if @quiz.update(quiz_params)
+      redirect_to quiz_path(@quiz), notice: "Quiz mis à jour avec succès."
+    else
+      @questions = @quiz.questions.includes(:options).ordered
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def bookmark
+    @quiz = Quiz.find(params[:id])
+    current_user.quiz_bookmarks.find_or_create_by(quiz: @quiz)
+    redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz ajouté aux favoris."
+  end
+
+  def unbookmark
+    @quiz = Quiz.find(params[:id])
+    current_user.quiz_bookmarks.find_by(quiz: @quiz)&.destroy
+    redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz retiré des favoris."
+  end
+
+  def destroy
+    @quiz = Quiz.find(params[:id])
+    @quiz.destroy
+    redirect_back fallback_location: quizzes_path, notice: "Quiz supprimé avec succès."
+  end
+
   def create
     @quiz = Quiz.new(quiz_params)
+
+    # Handle new category creation
+    if params[:new_category_title].present?
+      category = current_user.categories.find_or_create_by(title: params[:new_category_title].strip)
+      @quiz.category = category
+    end
 
     if @quiz.save
       # Générer les questions avec l'IA
@@ -37,9 +77,9 @@ class QuizzesController < ApplicationController
         end
       end
 
-      redirect_to challenges_path, notice: "Défi créé avec succès !"
+      redirect_to (params[:redirect_to] || challenges_path), notice: "Quiz créé avec succès !"
     else
-      redirect_to challenges_path, alert: "Erreur lors de la création du défi."
+      redirect_to (params[:redirect_to] || challenges_path), alert: "Erreur lors de la création du quiz : #{@quiz.errors.full_messages.join(', ')}"
     end
   end
 

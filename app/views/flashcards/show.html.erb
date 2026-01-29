@@ -7,7 +7,7 @@
      data-flashcard-progress-update-url-value="<%= update_progress_flashcard_path(@flashcard) %>">
 
   <div class="flashcard-show-header">
-    <h2>📚 Flashcard - <%= @flashcard.lecture.title %></h2>
+    <h2><i class="fas fa-layer-group"></i> Flashcard - <%= @flashcard.lecture.title %></h2>
   </div>
 
   <!-- Barre de progression -->
@@ -34,11 +34,11 @@
         <button data-action="click->flashcard-progress#showAnswer"
                 data-flashcard-progress-index-param="<%= index %>"
                 class="btn-show-answer">
-          👁️ Voir la reponse
+          <i class="far fa-eye"></i> Voir la réponse
         </button>
 
         <div data-flashcard-progress-target="answer" class="correct-answer-box">
-          <strong>✅ Reponse correcte:</strong>
+          <strong><i class="fas fa-check-circle" style="color: #28a745;"></i> Réponse correcte :</strong>
           <p><%= q['answer'] %></p>
         </div>
       </div>
@@ -47,6 +47,6 @@
 
   <div class="flashcard-actions-footer">
     <%= link_to "← Retour a la lecture", lecture_path(@flashcard.lecture), class: "btn-back-to-lecture" %>
-    <%= button_to "🗑️ Supprimer cette flashcard", flashcard_path(@flashcard), method: :delete, data: { confirm: "Es-tu sur de vouloir supprimer cette flashcard ?" }, class: "btn-delete-flashcard-main" %>
+    <%= button_to flashcard_path(@flashcard), method: :delete, data: { confirm: "Es-tu sûr de vouloir supprimer cette flashcard ?" }, class: "btn-delete-flashcard-main" do %><i class="fas fa-trash-alt"></i> Supprimer cette flashcard<% end %>
   </div>
 </div>

@@ -57,8 +57,11 @@ kamal = User.create!(
 
 puts "Creating categories..."
 categories = {}
-Category::CATEGORIES.each do |cat|
-  categories[cat] = Category.create!(title: cat)
+# Categories belong to users now - create per user
+{ henry => ["Mathématiques", "Physique"], jp => ["Physique", "Histoire"], la => ["Informatique"], kamal => ["Informatique"] }.each do |user, cats|
+  cats.each do |cat|
+    categories["#{user.first_name}-#{cat}"] = Category.create!(title: cat, user: user)
+  end
 end
 
 puts "Add friendships..."
@@ -94,7 +97,7 @@ lecture1 = Lecture.new(
   title: "Introduction aux Mathematiques",
   resume: "Cours d'introduction aux concepts mathematiques de base",
   user: henry,
-  category: categories["Mathématiques"],
+  category: categories["Henry-Mathématiques"],
 )
 lecture1.save!(validate: false)
 
@@ -102,7 +105,7 @@ lecture2 = Lecture.new(
   title: "Physique Quantique",
   resume: "Introduction a la mecanique quantique",
   user: jp,
-  category: categories["Physique"],
+  category: categories["JP-Physique"],
 )
 lecture2.save!(validate: false)
 
@@ -113,7 +116,7 @@ math_quiz_1 = Quiz.create!(
   title: "Bases des Mathematiques",
   level: 1,
   status: "public",
-  category: categories["Mathématiques"]
+  category: categories["Henry-Mathématiques"]
 )
 
 q1 = Question.create!(quiz: math_quiz_1, title: "Quel est le resultat de 2 + 2 ?", multiple_answers: false, position: 1)
@@ -139,7 +142,7 @@ math_quiz_2 = Quiz.create!(
   title: "Algebre Intermediaire",
   level: 2,
   status: "public",
-  category: categories["Mathématiques"]
+  category: categories["Henry-Mathématiques"]
 )
 
 q4 = Question.create!(quiz: math_quiz_2, title: "Resoudre: x + 5 = 10. Que vaut x ?", multiple_answers: false, position: 1)
@@ -159,7 +162,7 @@ physics_quiz_1 = Quiz.create!(
   title: "Introduction a la Physique",
   level: 1,
   status: "public",
-  category: categories["Physique"]
+  category: categories["JP-Physique"]
 )
 
 q6 = Question.create!(quiz: physics_quiz_1, title: "Quelle est l'unite de mesure de la force ?", multiple_answers: false, position: 1)
@@ -185,7 +188,7 @@ history_quiz_1 = Quiz.create!(
   title: "Histoire de France",
   level: 1,
   status: "shared",
-  category: categories["Histoire"]
+  category: categories["JP-Histoire"]
 )
 
 q9 = Question.create!(quiz: history_quiz_1, title: "En quelle annee a eu lieu la Revolution francaise ?", multiple_answers: false, position: 1)
@@ -205,7 +208,7 @@ info_quiz_1 = Quiz.create!(
   title: "Bases de la Programmation",
   level: 1,
   status: "public",
-  category: categories["Informatique"]
+  category: categories["LA-Informatique"]
 )
 
 q11 = Question.create!(quiz: info_quiz_1, title: "Quel langage est utilise pour le developpement web cote client ?", multiple_answers: false, position: 1)
@@ -231,7 +234,7 @@ info_quiz_2 = Quiz.create!(
   title: "Algorithmes et Structures de Donnees",
   level: 3,
   status: "shared",
-  category: categories["Informatique"]
+  category: categories["Kamal-Informatique"]
 )
 
 q14 = Question.create!(quiz: info_quiz_2, title: "Quelle est la complexite temporelle d'une recherche binaire ?", multiple_answers: false, position: 1)
@@ -264,6 +267,9 @@ algo_challenge = Challenge.create!(user: kamal, quiz: info_quiz_2)
 ChallengerUser.create!(challenge: algo_challenge, user: jp)
 ChallengerUser.create!(challenge: algo_challenge, user: henry)
 
+puts "Creating badges..."
+Badge.seed_badges!
+
 puts "Seeding completed!"
 puts "Created #{User.count} users"
 puts "Created #{Category.count} categories"
@@ -271,3 +277,4 @@ puts "Created #{Lecture.count} lectures"
 puts "Created #{Quiz.count} quizzes"
 puts "Created #{Question.count} questions"
 puts "Created #{Option.count} options"
+puts "Created #{Badge.count} badges"

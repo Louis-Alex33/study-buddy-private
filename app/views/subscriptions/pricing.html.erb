@@ -24,9 +24,10 @@
         <% end %>
       </div>
 
-      <!-- Plan Pro -->
+      <!-- Plan Pro Mensuel -->
       <div class="pricing-card pricing-card-pro">
-        <h3 class="pricing-plan-name">Studigo Pro</h3>
+        <span class="pricing-badge">Populaire</span>
+        <h3 class="pricing-plan-name">Pro Mensuel</h3>
         <div class="pricing-price">9,99&euro;<span>/mois</span></div>
         <p class="pricing-plan-desc">Pour les étudiants sérieux</p>
         <ul class="pricing-features">
@@ -45,6 +46,27 @@
           <%= link_to "Commencer", new_user_registration_path, class: "btn-plan-action" %>
         <% end %>
       </div>
+
+      <!-- Plan Pro Annuel -->
+      <div class="pricing-card pricing-card-pro">
+        <span class="pricing-badge">-33%</span>
+        <h3 class="pricing-plan-name">Pro Annuel</h3>
+        <div class="pricing-price">79,99&euro;<span>/an</span></div>
+        <p class="pricing-plan-desc">Soit 6,67&euro;/mois — Économisez 40&euro;</p>
+        <ul class="pricing-features">
+          <li><i class="fas fa-check"></i> Tout le plan Pro Mensuel</li>
+          <li><i class="fas fa-check"></i> Économie de 33%</li>
+          <li><i class="fas fa-check"></i> Accès complet pendant 12 mois</li>
+          <li><i class="fas fa-check"></i> Support prioritaire</li>
+        </ul>
+        <% if user_signed_in? && current_user.pro? %>
+          <%= link_to "Gérer mon abonnement", subscription_manage_path, class: "btn-plan-action" %>
+        <% elsif user_signed_in? %>
+          <%= button_to "Passer à Pro Annuel", subscription_checkout_path(plan: "annual"), method: :post, class: "btn-plan-action", data: { turbo: false } %>
+        <% else %>
+          <%= link_to "Commencer", new_user_registration_path, class: "btn-plan-action" %>
+        <% end %>
+      </div>
     </div>
 
     <div class="pricing-back">
@@ -55,3 +77,4 @@
     </div>
   </div>
 </div>
+

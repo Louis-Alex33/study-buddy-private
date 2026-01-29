@@ -16,7 +16,7 @@
   <div class="text-center mb-4">
     <% if @user != current_user %>
       <% if @is_friend %>
-        <span class="btn btn-success btn-lg disabled">✓ Vous etes amis</span>
+        <span class="btn btn-success btn-lg disabled"><i class="fas fa-check"></i> Vous etes amis</span>
       <% elsif @pending_request %>
         <span class="btn btn-secondary btn-lg disabled">Demande en attente</span>
       <% else %>
@@ -61,7 +61,7 @@
   <!-- Quiz History -->
   <div class="card">
     <div class="card-header">
-      <h5 class="mb-0">🎯 Quiz realises</h5>
+      <h5 class="mb-0"><i class="fas fa-bullseye"></i> Quiz realises</h5>
     </div>
     <div class="card-body">
       <% if @completed_attempts.any? %>
@@ -97,7 +97,7 @@
         </div>
       <% else %>
         <div class="text-center py-4">
-          <div style="font-size: 3rem;">🎯</div>
+          <div style="font-size: 3rem; color: #1351AA;"><i class="fas fa-bullseye"></i></div>
           <p class="text-muted">Aucun quiz termine pour le moment</p>
         </div>
       <% end %>

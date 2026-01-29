@@ -1,0 +1,84 @@
+<% content_for(:title, "Administration") %>
+
+<div class="admin-page">
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1><i class="fas fa-shield-alt"></i> Tableau de bord administrateur</h1>
+    </div>
+
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon"><i class="fas fa-users"></i></div>
+        <div class="admin-stat-value"><%= @total_users %></div>
+        <div class="admin-stat-label">Utilisateurs</div>
+      </div>
+      <div class="admin-stat-card admin-stat-pro">
+        <div class="admin-stat-icon"><i class="fas fa-crown"></i></div>
+        <div class="admin-stat-value"><%= @pro_users %></div>
+        <div class="admin-stat-label">Abonnés Pro</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon"><i class="fas fa-book"></i></div>
+        <div class="admin-stat-value"><%= @total_lectures %></div>
+        <div class="admin-stat-label">Cours créés</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon"><i class="fas fa-question-circle"></i></div>
+        <div class="admin-stat-value"><%= @total_quizzes %></div>
+        <div class="admin-stat-label">Quiz créés</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon"><i class="fas fa-clipboard-check"></i></div>
+        <div class="admin-stat-value"><%= @total_attempts %></div>
+        <div class="admin-stat-label">Quiz complétés</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-icon"><i class="fas fa-user-plus"></i></div>
+        <div class="admin-stat-value"><%= @users_this_week %></div>
+        <div class="admin-stat-label">Nouveaux (7j)</div>
+      </div>
+    </div>
+
+    <div class="admin-section">
+      <h2><i class="fas fa-clock"></i> Derniers inscrits</h2>
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Plan</th>
+              <th>Cours</th>
+              <th>Points</th>
+              <th>Inscription</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recent_users.each do |user| %>
+              <tr>
+                <td><%= user.display_name %></td>
+                <td><%= user.email %></td>
+                <td>
+                  <% if user.pro? %>
+                    <span class="admin-badge-pro">PRO</span>
+                  <% else %>
+                    <span class="admin-badge-free">FREE</span>
+                  <% end %>
+                </td>
+                <td><%= user.lectures.count %></td>
+                <td><%= user.points %></td>
+                <td><%= user.created_at.strftime("%d/%m/%Y") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="admin-back">
+      <%= link_to root_path, class: "btn-back-home" do %>
+        <i class="fas fa-arrow-left"></i> Retour à l'accueil
+      <% end %>
+    </div>
+  </div>
+</div>

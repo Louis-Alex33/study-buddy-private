@@ -47,6 +47,8 @@ class AttemptsController < ApplicationController
       @attempt.percentage_score
     )
 
+    current_user.check_and_award_badges!
+
     redirect_to quiz_attempt_path(@quiz, @attempt),
       notice: "Quiz terminé ! Score: #{@attempt.score}/#{@attempt.total_questions} | +#{result[:points]} points ! | +#{result[:league_points]} LP"
   end

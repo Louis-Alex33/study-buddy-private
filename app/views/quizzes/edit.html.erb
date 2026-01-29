@@ -1,0 +1,52 @@
+<% content_for(:title, "Modifier le quiz") %>
+
+<div class="quiz-edit-page">
+  <div class="quiz-edit-header">
+    <h1><i class="fas fa-edit"></i> Modifier le quiz</h1>
+  </div>
+
+  <div class="quiz-edit-container">
+    <%= form_with(model: @quiz, local: true, class: "quiz-edit-form") do |f| %>
+      <div class="quiz-edit-section">
+        <h2>Informations générales</h2>
+        <div class="quiz-edit-field">
+          <%= f.label :title, "Titre du quiz", class: "quiz-edit-label" %>
+          <%= f.text_field :title, class: "quiz-edit-input" %>
+        </div>
+
+        <div class="quiz-edit-field">
+          <%= f.label :level, "Niveau de difficulté", class: "quiz-edit-label" %>
+          <%= f.select :level, (1..5).map { |n| ["#{n}/5", n] }, {}, class: "quiz-edit-input" %>
+        </div>
+
+        <div class="quiz-edit-field">
+          <%= f.label :status, "Visibilité", class: "quiz-edit-label" %>
+          <%= f.select :status, [["Public", "public"], ["Partagé", "shared"]], {}, class: "quiz-edit-input" %>
+        </div>
+      </div>
+
+      <div class="quiz-edit-section">
+        <h2>Questions (<%= @questions.count %>)</h2>
+        <% @questions.each_with_index do |question, i| %>
+          <div class="quiz-edit-question">
+            <h3>Question <%= i + 1 %></h3>
+            <p class="quiz-edit-question-title"><%= question.title %></p>
+            <div class="quiz-edit-options">
+              <% question.options.each do |option| %>
+                <div class="quiz-edit-option <%= option.correct? ? 'correct' : '' %>">
+                  <i class="fas <%= option.correct? ? 'fa-check-circle' : 'fa-circle' %>"></i>
+                  <%= option.content %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="quiz-edit-actions">
+        <%= f.submit "Enregistrer les modifications", class: "quiz-edit-btn-save" %>
+        <%= link_to "Annuler", quiz_path(@quiz), class: "quiz-edit-btn-cancel" %>
+      </div>
+    <% end %>
+  </div>
+</div>

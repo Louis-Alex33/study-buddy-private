@@ -1,7 +1,29 @@
-<%= simple_form_for lecture, url: lectures_path, html: { data: { turbo: false, controller: "file-validation upload-loading", action: "change->file-validation#validate submit->upload-loading#submit" } } do |f| %>
+<%= simple_form_for lecture, url: lectures_path, html: { data: { turbo: false, controller: "file-validation upload-loading category-toggle", action: "change->file-validation#validate submit->upload-loading#submit" } } do |f| %>
   <div class="modal-body modal-body-padded">
     <%= f.input :title, label: "Titre de votre fiche de cours", placeholder: "Ex: Cours de mathématiques", required: true, wrapper_html: { class: "form-group-modal" } %>
-    <%= f.association :category, label: "Catégorie", prompt: "Sélectionnez une catégorie", required: true, wrapper_html: { class: "form-group-modal" } %>
+
+    <div class="form-group-modal" data-category-toggle-target="selectWrapper">
+      <label class="form-label">Catégorie</label>
+      <%= f.input :category_id, as: :select,
+          collection: current_user.categories.order(:title).map { |c| [c.title, c.id] },
+          prompt: "Sélectionnez une catégorie",
+          required: true,
+          label: false,
+          wrapper_html: { class: "" },
+          input_html: { data: { category_toggle_target: "select" } } %>
+      <a href="#" class="btn-new-category-link" data-action="click->category-toggle#showNew">
+        <i class="fas fa-plus"></i> Créer une nouvelle catégorie
+      </a>
+    </div>
+
+    <div class="form-group-modal" data-category-toggle-target="newWrapper" style="display: none;">
+      <label class="form-label">Nouvelle catégorie</label>
+      <input type="text" name="new_category_title" placeholder="Ex: Mathématiques" class="form-control" data-category-toggle-target="newInput">
+      <a href="#" class="btn-new-category-link" data-action="click->category-toggle#showSelect">
+        <i class="fas fa-list"></i> Choisir une catégorie existante
+      </a>
+    </div>
+
     <%= f.input :document, as: :file, label: "Document (PDF, image, audio)", input_html: { accept: "application/pdf,image/*,audio/*" }, required: true, hint: "Formats acceptés: PDF, images (JPG, PNG), audio (MP3, WAV)", wrapper_html: { class: "form-group-modal" } %>
     <%= f.input :resume, as: :text, label: "Résumé (optionnel)", input_html: { rows: 3, placeholder: "Ajoutez un bref résumé..." }, wrapper_html: { class: "form-group-modal" } %>
   </div>

@@ -17,6 +17,8 @@
     </div>
   <% end %>
 
+  <%= render "shared/pro_upgrade_prompt" %>
+
   <!-- Search Bar -->
   <div class="lectures-search-container">
     <%= form_with url: lectures_path, method: :get, local: true, class: "lectures-search-form" do %>
@@ -100,7 +102,7 @@
       </div>
     <% else %>
       <div class="empty-lectures">
-        <div class="empty-icon">📚</div>
+        <div class="empty-icon"><i class="fas fa-book-open"></i></div>
         <h3>Aucune lecture pour le moment</h3>
         <p>Commence par ajouter ta premiere lecture</p>
         <%= link_to root_path, class: "btn-back-home" do %>
@@ -112,7 +114,7 @@
   <% else %>
     <!-- Card blanche pour l'état vide -->
     <div class="filter_button_card empty-lectures-card">
-      <div class="empty-icon">📚</div>
+      <div class="empty-icon"><i class="fas fa-book-open"></i></div>
       <h3>Aucun cours pour le moment</h3>
       <p>Commence par ajouter ton premier cours</p>
       <%= link_to root_path, class: "btn-back-home" do %>

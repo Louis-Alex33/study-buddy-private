@@ -26,9 +26,17 @@ class LecturesController < ApplicationController
     @lecture = Lecture.new(lecture_params)
     @lecture.user = current_user
 
+    # Handle new category creation
+    if params[:new_category_title].present?
+      category = current_user.categories.find_or_create_by(title: params[:new_category_title].strip)
+      @lecture.category = category
+    end
+
     if @lecture.save
+      current_user.check_and_award_badges!
       redirect_to lecture_path(@lecture), notice: "Lecture créée avec succès"
     else
+      @categories = Category.all
       render "pages/home", status: :unprocessable_content
     end
   end

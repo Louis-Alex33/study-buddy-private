@@ -1,0 +1,83 @@
+<% content_for(:title, "Recherche") %>
+
+<div class="search-page">
+  <div class="search-page-header">
+    <h1><i class="fas fa-search"></i> Recherche</h1>
+    <div class="search-page-form">
+      <%= form_tag search_path, method: :get, class: "global-search-form" do %>
+        <div class="search-input-wrapper">
+          <%= text_field_tag :q, @query, placeholder: "Rechercher des cours, quiz, utilisateurs...", class: "search-input", autofocus: true %>
+          <button type="submit" class="search-icon-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @query.present? %>
+    <p class="search-results-count"><%= @total_results %> résultat<%= @total_results > 1 ? "s" : "" %> pour "<strong><%= @query %></strong>"</p>
+
+    <% if @lectures.any? %>
+      <div class="search-section">
+        <h2><i class="fas fa-book"></i> Cours (<%= @lectures.count %>)</h2>
+        <div class="search-results-grid">
+          <% @lectures.each do |lecture| %>
+            <%= link_to lecture_path(lecture), class: "search-result-card" do %>
+              <div class="search-result-icon"><i class="fas fa-book"></i></div>
+              <div class="search-result-content">
+                <h3><%= lecture.title %></h3>
+                <p><%= lecture.category.title %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @quizzes.any? %>
+      <div class="search-section">
+        <h2><i class="fas fa-question-circle"></i> Quiz (<%= @quizzes.count %>)</h2>
+        <div class="search-results-grid">
+          <% @quizzes.each do |quiz| %>
+            <%= link_to quiz_path(quiz), class: "search-result-card" do %>
+              <div class="search-result-icon"><i class="fas fa-question-circle"></i></div>
+              <div class="search-result-content">
+                <h3><%= quiz.title %></h3>
+                <p>Niveau <%= quiz.level %>/5 — <%= quiz.category.title %></p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @users.any? %>
+      <div class="search-section">
+        <h2><i class="fas fa-users"></i> Utilisateurs (<%= @users.count %>)</h2>
+        <div class="search-results-grid">
+          <% @users.each do |user| %>
+            <%= link_to user_path(user), class: "search-result-card" do %>
+              <div class="search-result-icon"><i class="fas fa-user"></i></div>
+              <div class="search-result-content">
+                <h3><%= user.display_name %></h3>
+                <p><%= user.points %> points</p>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @total_results == 0 %>
+      <div class="search-empty">
+        <div class="empty-icon"><i class="fas fa-search"></i></div>
+        <h3>Aucun résultat</h3>
+        <p>Essayez avec d'autres mots-clés.</p>
+      </div>
+    <% end %>
+  <% end %>
+</div>
