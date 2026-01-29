@@ -1,20 +1,84 @@
-<h2>Log in</h2>
+<div class="auth-page">
+  <div class="auth-container">
+    <!-- Left panel — branding -->
+    <div class="auth-panel-left">
+      <div class="auth-brand">
+        <div class="auth-brand-logo">S</div>
+        <h2 class="auth-brand-name">Studigo</h2>
+      </div>
+      <h1 class="auth-panel-title">Bon retour parmi nous.</h1>
+      <p class="auth-panel-desc">Connectez-vous pour retrouver vos cours, flashcards et notes.</p>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: false,
-                autofocus: true,
-                input_html: { autocomplete: "email" } %>
-    <%= f.input :password,
-                required: false,
-                input_html: { autocomplete: "current-password" } %>
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+      <div class="auth-panel-cta">
+        <p class="auth-panel-cta-label">Pas encore de compte ?</p>
+        <%= link_to new_registration_path(resource_name), class: "auth-panel-cta-btn" do %>
+          <i class="fas fa-user-plus"></i>
+          <span>Créer un compte</span>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Right panel — form -->
+    <div class="auth-panel-right">
+      <div class="auth-form-header">
+        <h2 class="auth-form-title">Connexion</h2>
+        <p class="auth-form-subtitle">Accédez à votre espace</p>
+      </div>
+
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form" }) do |f| %>
+        <div class="auth-form-inputs">
+          <div class="auth-field">
+            <label>E-mail</label>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-envelope"></i>
+              <%= f.input :email,
+                          required: false,
+                          autofocus: true,
+                          label: false,
+                          placeholder: "votre@email.com",
+                          input_html: { autocomplete: "email", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
+          <div class="auth-field">
+            <label>Mot de passe</label>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-lock"></i>
+              <%= f.input :password,
+                          required: false,
+                          label: false,
+                          placeholder: "Votre mot de passe",
+                          input_html: { autocomplete: "current-password", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
+
+          <div class="auth-options">
+            <% if devise_mapping.rememberable? %>
+              <label class="auth-check">
+                <%= f.input :remember_me, as: :boolean, label: false, wrapper: false %>
+                <span class="auth-checkmark"></span>
+                Se souvenir de moi
+              </label>
+            <% end %>
+            <%- if devise_mapping.recoverable? %>
+              <%= link_to "Mot de passe oublié ?", new_password_path(resource_name), class: "auth-forgot-link" %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="auth-actions">
+          <%= f.button :submit, class: "auth-btn-submit" do %>
+            <span>Se connecter</span>
+            <i class="fas fa-arrow-right"></i>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="auth-footer">
+        <span>Pas encore de compte ?</span>
+        <%= link_to "S'inscrire", new_registration_path(resource_name), class: "auth-footer-link" %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

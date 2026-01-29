@@ -2,7 +2,7 @@
   <div class="container my-5">
     <div class="pricing-header">
       <h1 class="pricing-main-title">Choisissez votre plan</h1>
-      <p class="pricing-subtitle">Debloquez tout le potentiel de Studigo</p>
+      <p class="pricing-subtitle">Débloquez tout le potentiel de Studigo</p>
     </div>
 
     <div class="pricing-grid">
@@ -10,13 +10,13 @@
       <div class="pricing-card">
         <h3 class="pricing-plan-name">Gratuit</h3>
         <div class="pricing-price">0&euro;<span>/mois</span></div>
-        <p class="pricing-plan-desc">Pour decouvrir Studigo</p>
+        <p class="pricing-plan-desc">Pour découvrir Studigo</p>
         <ul class="pricing-features">
           <li><i class="fas fa-check"></i> 3 cours maximum</li>
           <li><i class="fas fa-check"></i> 5 Mo par document</li>
           <li><i class="fas fa-check"></i> 10 messages IA au total</li>
-          <li><i class="fas fa-check"></i> 2 generations de flashcards</li>
-          <li><i class="fas fa-check"></i> 1 creation de quiz</li>
+          <li><i class="fas fa-check"></i> 2 générations de flashcards</li>
+          <li><i class="fas fa-check"></i> 1 création de quiz</li>
           <li class="disabled"><i class="fas fa-times"></i> Mode multijoueur</li>
         </ul>
         <% if user_signed_in? && current_user.free? %>
@@ -26,22 +26,21 @@
 
       <!-- Plan Pro -->
       <div class="pricing-card pricing-card-pro">
-        <span class="pricing-badge">Populaire</span>
         <h3 class="pricing-plan-name">Studigo Pro</h3>
         <div class="pricing-price">9,99&euro;<span>/mois</span></div>
-        <p class="pricing-plan-desc">Pour les etudiants serieux</p>
+        <p class="pricing-plan-desc">Pour les étudiants sérieux</p>
         <ul class="pricing-features">
-          <li><i class="fas fa-check"></i> Cours illimites</li>
+          <li><i class="fas fa-check"></i> Cours illimités</li>
           <li><i class="fas fa-check"></i> 10 Mo par document</li>
           <li><i class="fas fa-check"></i> Accès complet aux fonctionnalités IA</li>
-          <li><i class="fas fa-check"></i> Flashcards illimitees</li>
-          <li><i class="fas fa-check"></i> Quiz illimites</li>
+          <li><i class="fas fa-check"></i> Flashcards illimitées</li>
+          <li><i class="fas fa-check"></i> Quiz illimités</li>
           <li><i class="fas fa-check"></i> Mode multijoueur complet</li>
         </ul>
         <% if user_signed_in? && current_user.pro? %>
-          <%= link_to "Gerer mon abonnement", subscription_portal_path, class: "btn-plan-action" %>
+          <%= link_to "Gérer mon abonnement", subscription_manage_path, class: "btn-plan-action" %>
         <% elsif user_signed_in? %>
-          <%= button_to "Passer a Pro", subscription_checkout_path, method: :post, class: "btn-plan-action" %>
+          <%= button_to "Passer à Pro", subscription_checkout_path, method: :post, class: "btn-plan-action", data: { turbo: false } %>
         <% else %>
           <%= link_to "Commencer", new_user_registration_path, class: "btn-plan-action" %>
         <% end %>
@@ -51,7 +50,7 @@
     <div class="pricing-back">
       <%= link_to root_path, class: "btn-back-home" do %>
         <span>&larr;</span>
-        <span>Retour a l'accueil</span>
+        <span>Retour à l'accueil</span>
       <% end %>
     </div>
   </div>

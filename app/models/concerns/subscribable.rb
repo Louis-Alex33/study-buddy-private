@@ -39,7 +39,8 @@ module Subscribable
   end
 
   def plan_limit(key)
-    PLAN_LIMITS.dig(plan, key)
+    effective_plan = pro? ? "pro" : plan
+    PLAN_LIMITS.dig(effective_plan, key)
   end
 
   def can_create_lecture?

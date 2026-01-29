@@ -2,7 +2,7 @@
   <div class="container my-5">
     <div class="manage-header">
       <h1 class="manage-title">Mon abonnement</h1>
-      <p class="manage-subtitle">Gerez votre plan et suivez votre utilisation</p>
+      <p class="manage-subtitle">Gérez votre plan et suivez votre utilisation</p>
     </div>
 
     <!-- Current Plan Card -->
@@ -28,19 +28,21 @@
           </div>
         </div>
         <div class="plan-badge">
-          <span class="badge-<%= @user.pro? ? 'pro' : 'free' %>">
-            <%= @user.pro? ? "Actif" : "Plan actuel" %>
-          </span>
+          <% if @user.pro? %>
+            <span class="badge-pro">Actif</span>
+          <% else %>
+            <span class="badge-free">Plan actuel</span>
+          <% end %>
         </div>
       </div>
 
       <div class="plan-actions">
-        <% if @user.pro? %>
+        <% if @user.active_subscription %>
           <%= link_to subscription_portal_path, class: "btn-manage-portal" do %>
-            <i class="fas fa-credit-card"></i> Gerer mon paiement
+            <i class="fas fa-credit-card"></i> Gérer mon paiement
           <% end %>
         <% else %>
-          <%= button_to "Passer a Studigo Pro", subscription_checkout_path, method: :post, class: "btn-manage-upgrade" %>
+          <%= button_to "Passer à Studigo Pro", subscription_checkout_path, method: :post, class: "btn-manage-upgrade", data: { turbo: false } %>
         <% end %>
         <%= link_to pricing_path, class: "btn-manage-pricing" do %>
           <i class="fas fa-list"></i> Voir les plans
@@ -62,7 +64,7 @@
           <div class="usage-value">
             <% if @user.pro? %>
               <span class="usage-count"><%= @user.lectures.count %></span>
-              <span class="usage-limit">/ Illimite</span>
+              <span class="usage-limit">/ Illimité</span>
             <% else %>
               <span class="usage-count"><%= @user.lectures.count %></span>
               <span class="usage-limit">/ <%= @user.plan_limit(:max_lectures) %></span>
@@ -87,7 +89,7 @@
           <div class="usage-value">
             <% if @user.pro? %>
               <span class="usage-count"><%= @user.total_user_messages_count %></span>
-              <span class="usage-limit">/ Illimite</span>
+              <span class="usage-limit">/ Illimité</span>
             <% else %>
               <span class="usage-count"><%= @user.total_user_messages_count %></span>
               <span class="usage-limit">/ <%= @user.plan_limit(:max_messages_total) %></span>
@@ -107,12 +109,12 @@
         <div class="usage-card">
           <div class="usage-card-header">
             <div class="usage-icon"><i class="fas fa-layer-group"></i></div>
-            <span class="usage-label">Generations flashcards</span>
+            <span class="usage-label">Générations flashcards</span>
           </div>
           <div class="usage-value">
             <% if @user.pro? %>
               <span class="usage-count"><%= @user.flashcard_generations_count %></span>
-              <span class="usage-limit">/ Illimite</span>
+              <span class="usage-limit">/ Illimité</span>
             <% else %>
               <span class="usage-count"><%= @user.flashcard_generations_count %></span>
               <span class="usage-limit">/ <%= @user.plan_limit(:max_flashcard_generations) %></span>
@@ -132,12 +134,12 @@
         <div class="usage-card">
           <div class="usage-card-header">
             <div class="usage-icon"><i class="fas fa-question-circle"></i></div>
-            <span class="usage-label">Creations de quiz</span>
+            <span class="usage-label">Créations de quiz</span>
           </div>
           <div class="usage-value">
             <% if @user.pro? %>
               <span class="usage-count"><%= @user.quiz_generations_count %></span>
-              <span class="usage-limit">/ Illimite</span>
+              <span class="usage-limit">/ Illimité</span>
             <% else %>
               <span class="usage-count"><%= @user.quiz_generations_count %></span>
               <span class="usage-limit">/ <%= @user.plan_limit(:max_quiz_generations) %></span>
@@ -177,7 +179,7 @@
             <% if @user.has_multiplayer_access? %>
               <span class="usage-count status-active"><i class="fas fa-check-circle"></i> Actif</span>
             <% else %>
-              <span class="usage-count status-locked"><i class="fas fa-lock"></i> Bloque</span>
+              <span class="usage-count status-locked"><i class="fas fa-lock"></i> Bloqué</span>
             <% end %>
           </div>
           <div class="usage-bar">
@@ -196,9 +198,9 @@
       <div class="manage-upgrade-cta">
         <div class="upgrade-cta-content">
           <div class="upgrade-cta-icon"><i class="fas fa-rocket"></i></div>
-          <h3>Passez a Studigo Pro</h3>
-          <p>Debloquez un acces illimite a tous les outils : cours, messages IA, flashcards, quiz et mode multijoueur.</p>
-          <%= button_to "Passer a Pro — 9,99€/mois", subscription_checkout_path, method: :post, class: "btn-upgrade-cta" %>
+          <h3>Passez à Studigo Pro</h3>
+          <p>Débloquez un accès illimité à tous les outils : cours, messages IA, flashcards, quiz et mode multijoueur.</p>
+          <%= button_to "Passer à Pro — 9,99€/mois", subscription_checkout_path, method: :post, class: "btn-upgrade-cta", data: { turbo: false } %>
         </div>
       </div>
     <% end %>
@@ -206,7 +208,7 @@
     <div class="manage-back">
       <%= link_to lectures_path, class: "btn-back-home" do %>
         <span>&larr;</span>
-        <span>Retour a mes cours</span>
+        <span>Retour à mes cours</span>
       <% end %>
     </div>
   </div>

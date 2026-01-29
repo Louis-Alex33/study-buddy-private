@@ -11,7 +11,7 @@
         <%= link_to multiplayer_path, class: "navbar-link #{'active' if current_page?(multiplayer_path)}" do %>
           Multijoueur
           <% unless current_user.pro? %>
-            <span class="navbar-pro-badge">PRO</span>
+            <span class="navbar-pro-badge navbar-pro-badge--small">PRO</span>
           <% end %>
         <% end %>
         <button type="button" class="dark-mode-toggle" data-action="click->dark-mode#toggle" data-dark-mode-target="button">
@@ -25,7 +25,7 @@
               <span class="navbar-pro-badge">PRO</span>
             <% end %>
           <% else %>
-            <%= link_to "Passer a Pro", pricing_path, class: "navbar-upgrade-link" %>
+            <%= link_to "Passer à Pro", pricing_path, class: "navbar-upgrade-link" %>
           <% end %>
         </div>
         <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement" do %>

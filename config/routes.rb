@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
+  # Legal pages
+  get "mentions-legales", to: "pages#legal_notice", as: :legal_notice
+  get "politique-de-confidentialite", to: "pages#privacy_policy", as: :privacy_policy
+  get "conditions-generales", to: "pages#terms", as: :terms
+
   # Subscription / Pricing
   get "tarifs", to: "subscriptions#pricing", as: :pricing
   get "mon-abonnement", to: "subscriptions#manage", as: :subscription_manage

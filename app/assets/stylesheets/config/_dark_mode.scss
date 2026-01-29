@@ -69,9 +69,11 @@ body[data-theme="dark"] {
 
   .navbar-studigo {
     .navbar-logo {
+      width: 45px !important;
+      height: 45px !important;
       background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%) !important;
       color: #1351AA !important;
-      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2) !important;
     }
 
     .navbar-title {
@@ -1620,5 +1622,147 @@ body[data-theme="dark"] {
         ) !important;
       }
     }
+  }
+
+  // Auth pages (login, register, password reset)
+  .auth-container {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  .auth-panel-left {
+    background: linear-gradient(160deg, #0a2d6b 0%, #0f3d91 40%, #1351AA 100%);
+  }
+
+  .auth-panel-right,
+  .auth-card-single {
+    background: var(--bg-secondary);
+  }
+
+  .auth-card-single {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+
+  .auth-form-title {
+    color: var(--text-primary);
+  }
+
+  .auth-form-subtitle {
+    color: var(--text-secondary);
+  }
+
+  .auth-field {
+    > label {
+      color: var(--text-secondary);
+    }
+
+    .auth-input {
+      background: var(--bg-tertiary);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+      }
+
+      &:focus {
+        background: var(--bg-primary);
+        border-color: var(--blue-primary);
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+      }
+    }
+  }
+
+  .auth-input-icon-wrap > i {
+    color: var(--text-secondary);
+  }
+
+  .auth-check {
+    color: var(--text-secondary);
+
+    .auth-checkmark {
+      border-color: var(--border-color);
+    }
+  }
+
+  .auth-forgot-link {
+    color: var(--blue-secondary);
+    &:hover { color: var(--blue-primary); }
+  }
+
+  .auth-legal-notice {
+    color: var(--text-secondary);
+    a {
+      color: var(--blue-secondary);
+      &:hover { color: var(--blue-primary); }
+    }
+  }
+
+  .auth-footer {
+    color: var(--text-secondary);
+  }
+
+  .auth-footer-link {
+    color: var(--blue-secondary);
+    &:hover { color: var(--blue-primary); }
+  }
+
+  .auth-form .error_notification {
+    background: rgba(220, 38, 38, 0.1);
+    border-color: rgba(220, 38, 38, 0.25);
+    color: #ff6b6b;
+  }
+
+  // Legal pages
+  .legal-container {
+    background: var(--bg-secondary);
+    box-shadow: 0 10px 40px var(--shadow-color);
+  }
+
+  .legal-title {
+    color: var(--text-primary);
+  }
+
+  .legal-updated {
+    color: var(--text-secondary);
+  }
+
+  .legal-section {
+    h2 { color: var(--text-primary); }
+    p { color: var(--text-secondary); }
+    li { color: var(--text-secondary); }
+    strong { color: var(--text-primary); }
+    a {
+      color: var(--blue-secondary);
+      &:hover { color: var(--blue-primary); }
+    }
+  }
+
+  .legal-back .btn-back-home {
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    &:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+  }
+
+  // Footer
+  .site-footer {
+    border-top-color: var(--border-color);
+  }
+
+  .footer-name {
+    color: var(--text-secondary);
+  }
+
+  .footer-link {
+    color: var(--text-secondary);
+    opacity: 0.6;
+    &:hover { opacity: 1; color: var(--text-primary); }
+  }
+
+  .footer-copy {
+    color: var(--text-secondary);
+    opacity: 0.4;
   }
 }

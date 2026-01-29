@@ -9,7 +9,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def checkout
-    checkout_session = current_user.payment_processor.checkout(
+    processor = current_user.set_payment_processor(:stripe)
+    checkout_session = processor.checkout(
       mode: "subscription",
       line_items: ENV["STRIPE_PRO_MONTHLY_PRICE_ID"],
       success_url: subscription_success_url + "?session_id={CHECKOUT_SESSION_ID}",
@@ -17,25 +18,40 @@ class SubscriptionsController < ApplicationController
     )
 
     redirect_to checkout_session.url, allow_other_host: true, status: :see_other
+  rescue => e
+    Rails.logger.error "Checkout error: #{e.message}"
+    redirect_to pricing_path, alert: "Impossible de lancer le paiement. Veuillez réessayer."
   end
 
   def success
     sync_plan_if_needed
-    redirect_to lectures_path, notice: "Bienvenue dans Studigo Pro ! Profitez de toutes les fonctionnalites."
+    redirect_to lectures_path, notice: "Bienvenue dans Studigo Pro ! Profitez de toutes les fonctionnalités."
   end
 
   def portal
-    portal_session = current_user.payment_processor.billing_portal(
-      return_url: lectures_url
+    processor = current_user.payment_processor
+    unless processor&.subscription&.active?
+      redirect_to subscription_manage_path, alert: "Aucun abonnement Stripe actif. Le portail de paiement n'est pas disponible."
+      return
+    end
+
+    portal_session = processor.billing_portal(
+      return_url: subscription_manage_url
     )
 
     redirect_to portal_session.url, allow_other_host: true, status: :see_other
+  rescue => e
+    Rails.logger.error "Portal error: #{e.message}"
+    redirect_to subscription_manage_path, alert: "Impossible d'accéder au portail de gestion. Veuillez réessayer."
   end
 
   private
 
   def sync_plan_if_needed
-    current_user.payment_processor.sync_subscriptions
+    processor = current_user.payment_processor
+    return unless processor
+
+    processor.sync_subscriptions
     current_user.sync_plan_from_subscription!
   end
 end
