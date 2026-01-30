@@ -24,6 +24,12 @@
     <script>
       (function() {
         var saved = localStorage.getItem('theme');
+        // Migration: old code stored 'dark' — clear it so system detection works
+        if (saved === 'dark') {
+          localStorage.removeItem('theme');
+          saved = null;
+        }
+        // Apply light mode if explicitly saved OR if system prefers light (and no manual override)
         if (saved === 'light' || (!saved && window.matchMedia('(prefers-color-scheme: light)').matches)) {
           document.documentElement.setAttribute('data-theme', 'light');
         }
