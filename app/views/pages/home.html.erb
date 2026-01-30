@@ -113,94 +113,104 @@
         <span>Flashcards intelligentes</span>
       </div>
     </div>
-    <button type="button" class="btn btn-upload-document" data-bs-toggle="modal" data-bs-target="#uploadModal">
-      <i class="fas fa-cloud-upload-alt"></i> Télécharger un document
-    </button>
-  </div>
-  <!-- Categories Section -->
-  <div class="categories-section">
-    <div class="categories-section-header">
-      <h3 class="section-title">Mes catégories</h3>
-      <button type="button" class="btn-add-category" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
-        <i class="fas fa-plus"></i> Nouvelle catégorie
+    <% if user_signed_in? %>
+      <button type="button" class="btn btn-upload-document" data-bs-toggle="modal" data-bs-target="#uploadModal">
+        <i class="fas fa-cloud-upload-alt"></i> Télécharger un document
       </button>
-    </div>
-    <% if @categories&.any? %>
-      <div class="categories-grid">
-        <% @categories.each do |category| %>
-          <div class="category-card-wrapper">
-            <%= link_to lectures_path(query: category.title), class: "category-card-link" do %>
-              <div class="category-card">
-                <div class="category-card-icon">
-                  <i class="fas fa-folder"></i>
-                </div>
-                <div class="category-card-content">
-                  <h5 class="category-card-title"><%= category.title %></h5>
-                  <span class="category-card-count"><%= category.lectures.count %> cours</span>
-                </div>
-              </div>
-            <% end %>
-            <% if category.lectures.empty? && category.quizzes.empty? %>
-              <%= button_to category_path(category), method: :delete, class: "btn-delete-category", data: { turbo_confirm: "Supprimer la catégorie « #{category.title} » ?" } do %>
-                <i class="fas fa-times"></i>
-              <% end %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
     <% else %>
-      <div class="empty-state">
-        <div class="empty-state-icon">
-          <i class="fas fa-folder-open"></i>
-        </div>
-        <p class="empty-state-text">
-          Aucune catégorie pour le moment. Crée ta première catégorie pour organiser tes cours.
-        </p>
-      </div>
+      <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
+        <i class="fas fa-rocket"></i> Commencer gratuitement
+      <% end %>
     <% end %>
   </div>
-</div>
-
-<!-- Modal pour uploader un document -->
-<div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header modal-header-gradient">
-        <div>
-          <h5 class="modal-title">Telecharger un document</h5>
-          <p class="modal-subtitle">Creez une nouvelle fiche de cours à partir de votre fichier</p>
-        </div>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+  <% if user_signed_in? %>
+    <!-- Categories Section -->
+    <div class="categories-section">
+      <div class="categories-section-header">
+        <h3 class="section-title">Mes catégories</h3>
+        <button type="button" class="btn-add-category" data-bs-toggle="modal" data-bs-target="#newCategoryModal">
+          <i class="fas fa-plus"></i> Nouvelle catégorie
+        </button>
       </div>
-
-      <%= render "lectures/form", lecture: @lecture %>
-    </div>
-  </div>
-</div>
-
-<!-- Modal pour créer une catégorie -->
-<div class="modal fade" id="newCategoryModal" tabindex="-1" aria-labelledby="newCategoryModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm">
-    <div class="modal-content">
-      <div class="modal-header modal-header-gradient">
-        <div>
-          <h5 class="modal-title">Nouvelle catégorie</h5>
-          <p class="modal-subtitle">Organise tes cours par matière</p>
+      <% if @categories&.any? %>
+        <div class="categories-grid">
+          <% @categories.each do |category| %>
+            <div class="category-card-wrapper">
+              <%= link_to lectures_path(query: category.title), class: "category-card-link" do %>
+                <div class="category-card">
+                  <div class="category-card-icon">
+                    <i class="fas fa-folder"></i>
+                  </div>
+                  <div class="category-card-content">
+                    <h5 class="category-card-title"><%= category.title %></h5>
+                    <span class="category-card-count"><%= category.lectures.count %> cours</span>
+                  </div>
+                </div>
+              <% end %>
+              <% if category.lectures.empty? && category.quizzes.empty? %>
+                <%= button_to category_path(category), method: :delete, class: "btn-delete-category", data: { turbo_confirm: "Supprimer la catégorie « #{category.title} » ?" } do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <%= form_with url: categories_path, method: :post, local: true do |f| %>
-        <div class="modal-body modal-body-padded">
-          <div class="form-group-modal">
-            <label class="form-label" for="category_title">Nom de la catégorie</label>
-            <input type="text" name="category[title]" id="category_title" class="form-control" placeholder="Ex: Mathématiques" required>
+      <% else %>
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <i class="fas fa-folder-open"></i>
           </div>
-        </div>
-        <div class="modal-footer modal-footer-centered">
-          <button type="button" data-bs-dismiss="modal" class="btn-cancel">Annuler</button>
-          <button type="submit" class="btn-submit">Créer</button>
+          <p class="empty-state-text">
+            Aucune catégorie pour le moment. Crée ta première catégorie pour organiser tes cours.
+          </p>
         </div>
       <% end %>
     </div>
-  </div>
+  <% end %>
 </div>
+
+<% if user_signed_in? %>
+  <!-- Modal pour uploader un document -->
+  <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header modal-header-gradient">
+          <div>
+            <h5 class="modal-title">Telecharger un document</h5>
+            <p class="modal-subtitle">Creez une nouvelle fiche de cours à partir de votre fichier</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <%= render "lectures/form", lecture: @lecture %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal pour créer une catégorie -->
+  <div class="modal fade" id="newCategoryModal" tabindex="-1" aria-labelledby="newCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header modal-header-gradient">
+          <div>
+            <h5 class="modal-title">Nouvelle catégorie</h5>
+            <p class="modal-subtitle">Organise tes cours par matière</p>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <%= form_with url: categories_path, method: :post, local: true do |f| %>
+          <div class="modal-body modal-body-padded">
+            <div class="form-group-modal">
+              <label class="form-label" for="category_title">Nom de la catégorie</label>
+              <input type="text" name="category[title]" id="category_title" class="form-control" placeholder="Ex: Mathématiques" required>
+            </div>
+          </div>
+          <div class="modal-footer modal-footer-centered">
+            <button type="button" data-bs-dismiss="modal" class="btn-cancel">Annuler</button>
+            <button type="submit" class="btn-submit">Créer</button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
