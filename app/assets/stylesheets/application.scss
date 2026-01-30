@@ -7,3 +7,8 @@
 
 @import "components/index";
 @import "pages/index";
+
+// Offset body content for fixed navbar
+body {
+  padding-top: 70px;
+}

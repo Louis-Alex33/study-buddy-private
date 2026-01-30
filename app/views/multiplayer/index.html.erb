@@ -1,188 +1,200 @@
-<div class="container my-5">
-  <!-- Header Section -->
-  <div class="lectures-header">
-    <div class="lectures-header-content">
-      <h1>Mode Multijoueur</h1>
-      <p>Défie tes amis et progresse ensemble</p>
-    </div>
-  </div>
+<div class="lectures-index-v2">
+  <!-- Animated dot grid background -->
+  <div class="li-dot-grid" aria-hidden="true"></div>
 
-  <!-- Features Grid -->
-  <div class="multiplayer-features-grid">
-    <!-- Quiz en temps réel -->
-    <div class="multiplayer-feature-card">
-      <div class="feature-icon-wrapper">
-        <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+  <!-- ===== IMMERSIVE HEADER ===== -->
+  <header class="li-header">
+    <div class="li-header-mesh" aria-hidden="true">
+      <div class="li-mesh-orb li-mesh-orb--1"></div>
+      <div class="li-mesh-orb li-mesh-orb--2"></div>
+      <div class="li-mesh-orb li-mesh-orb--3"></div>
+      <div class="li-mesh-orb li-mesh-orb--4"></div>
+    </div>
+    <div class="li-header-particles" aria-hidden="true">
+      <span class="li-particle li-particle--1"></span>
+      <span class="li-particle li-particle--2"></span>
+      <span class="li-particle li-particle--3"></span>
+      <span class="li-particle li-particle--4"></span>
+      <span class="li-particle li-particle--5"></span>
+      <span class="li-particle li-particle--6"></span>
+    </div>
+    <div class="li-header-noise" aria-hidden="true"></div>
+    <div class="li-header-content">
+      <div class="li-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
       </div>
-      <h3 class="feature-title">Quiz en temps réel</h3>
-      <p class="feature-description">
-        Lance des quiz multijoueurs et affronte tes amis en direct. Le plus rapide et le plus précis gagne !
-      </p>
-      <%= link_to real_time_quizzes_path, class: "btn-feature-action" do %>
-        Jouer maintenant
-      <% end %>
+      <h1 class="li-header-title">
+        <span class="li-gradient-text">Mode Multijoueur</span>
+      </h1>
+      <p class="li-header-subtitle">Défie tes amis et progresse ensemble</p>
+
+    </div>
+  </header>
+
+  <!-- ===== FEATURES GRID ===== -->
+  <div class="mp-v2-grid">
+    <!-- Quiz en temps réel -->
+    <div class="li-card" style="animation-delay: 0s">
+      <div class="li-card-glow" aria-hidden="true"></div>
+      <div class="li-card-accent"></div>
+      <div class="li-card-body">
+        <div class="li-card-top">
+          <span class="li-card-category">
+            <span class="li-card-category-dot"></span>
+            En direct
+          </span>
+          <span class="mp-v2-badge mp-v2-badge--live">
+            <span class="mp-v2-live-dot"></span>
+            Live
+          </span>
+        </div>
+
+        <div class="mp-v2-icon-box mp-v2-icon-box--blue">
+          <i class="fas fa-bolt"></i>
+        </div>
+
+        <h3 class="li-card-title">Quiz en temps réel</h3>
+        <p class="li-card-desc">Lance des quiz multijoueurs et affronte tes amis en direct. Le plus rapide et le plus précis gagne !</p>
+
+        <div class="li-card-actions">
+          <%= link_to real_time_quizzes_path, class: "li-card-btn-view" do %>
+            <span>Jouer maintenant</span>
+            <span class="li-card-btn-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <!-- Ligue -->
-    <div class="multiplayer-feature-card">
-      <div class="feature-icon-wrapper">
-        <div class="feature-icon"><i class="fas fa-medal"></i></div>
+    <div class="li-card" style="animation-delay: 0.07s">
+      <div class="li-card-glow" aria-hidden="true"></div>
+      <div class="li-card-accent mp-v2-accent--gold"></div>
+      <div class="li-card-body">
+        <div class="li-card-top">
+          <span class="li-card-category mp-v2-cat--gold">
+            <span class="li-card-category-dot mp-v2-dot--gold"></span>
+            Classement
+          </span>
+          <span class="mp-v2-badge mp-v2-badge--popular">
+            <i class="fas fa-fire"></i>
+            Populaire
+          </span>
+        </div>
+
+        <div class="mp-v2-icon-box mp-v2-icon-box--gold">
+          <i class="fas fa-medal"></i>
+        </div>
+
+        <h3 class="li-card-title">Ligue</h3>
+        <p class="li-card-desc">Monte dans les rangs, gagne des points et deviens le meilleur joueur de Studigo.</p>
+
+        <div class="li-card-actions">
+          <%= link_to league_path, class: "li-card-btn-view mp-v2-btn--gold" do %>
+            <span>Voir la ligue</span>
+            <span class="li-card-btn-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          <% end %>
+        </div>
       </div>
-      <h3 class="feature-title">Ligue</h3>
-      <p class="feature-description">
-        Monte dans les rangs, gagne des points et deviens le meilleur joueur de Studigo.
-      </p>
-      <%= link_to league_path, class: "btn-feature-action" do %>
-        Voir la ligue
-      <% end %>
     </div>
 
     <!-- Défis personnalisés -->
-    <div class="multiplayer-feature-card">
-      <div class="feature-icon-wrapper">
-        <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+    <div class="li-card" style="animation-delay: 0.14s">
+      <div class="li-card-glow" aria-hidden="true"></div>
+      <div class="li-card-accent mp-v2-accent--purple"></div>
+      <div class="li-card-body">
+        <div class="li-card-top">
+          <span class="li-card-category mp-v2-cat--purple">
+            <span class="li-card-category-dot mp-v2-dot--purple"></span>
+            Défi
+          </span>
+          <span class="mp-v2-badge mp-v2-badge--challenge">
+            <i class="fas fa-gamepad"></i>
+            Défi
+          </span>
+        </div>
+
+        <div class="mp-v2-icon-box mp-v2-icon-box--purple">
+          <i class="fas fa-bullseye"></i>
+        </div>
+
+        <h3 class="li-card-title">Défis personnalisés</h3>
+        <p class="li-card-desc">Crée des défis sur mesure et envoie-les à tes amis pour tester leurs connaissances.</p>
+
+        <div class="li-card-actions">
+          <%= link_to challenges_path, class: "li-card-btn-view mp-v2-btn--purple" do %>
+            <span>Défie un ami</span>
+            <span class="li-card-btn-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          <% end %>
+        </div>
       </div>
-      <h3 class="feature-title">Défis personnalisés</h3>
-      <p class="feature-description">
-        Crée des défis sur mesure et envoie-les à tes amis pour tester leurs connaissances.
-      </p>
-      <%= link_to challenges_path, class: "btn-feature-action" do %>
-        Défie un ami
-      <% end %>
     </div>
 
     <!-- Communauté -->
-    <div class="multiplayer-feature-card">
-      <div class="feature-icon-wrapper">
-        <div class="feature-icon"><i class="fas fa-user-group"></i></div>
+    <div class="li-card" style="animation-delay: 0.21s">
+      <div class="li-card-glow" aria-hidden="true"></div>
+      <div class="li-card-accent mp-v2-accent--green"></div>
+      <div class="li-card-body">
+        <div class="li-card-top">
+          <span class="li-card-category mp-v2-cat--green">
+            <span class="li-card-category-dot mp-v2-dot--green"></span>
+            Social
+          </span>
+          <span class="mp-v2-badge mp-v2-badge--social">
+            <i class="fas fa-users"></i>
+            Social
+          </span>
+        </div>
+
+        <div class="mp-v2-icon-box mp-v2-icon-box--green">
+          <i class="fas fa-user-group"></i>
+        </div>
+
+        <h3 class="li-card-title">Communauté</h3>
+        <p class="li-card-desc">Ajoute des amis, consulte leurs profils et compare vos performances sur les quiz.</p>
+
+        <div class="li-card-actions">
+          <%= link_to friendships_path, class: "li-card-btn-view mp-v2-btn--green" do %>
+            <span>Accéder à la communauté</span>
+            <span class="li-card-btn-arrow">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </span>
+          <% end %>
+        </div>
       </div>
-      <h3 class="feature-title">Communauté</h3>
-      <p class="feature-description">
-        Ajoute des amis, consulte leurs profils et compare vos performances sur les quiz.
-      </p>
-      <%= link_to friendships_path, class: "btn-feature-action" do %>
-        Acceder a la communaute
-      <% end %>
     </div>
   </div>
 
-  <!-- Back Button -->
-  <div class="lectures-back-section">
-    <%= link_to root_path, class: "btn-back-home" do %>
-      <span>←</span>
+  <!-- ===== BACK BUTTON ===== -->
+  <div class="li-back-section">
+    <%= link_to root_path, class: "li-btn-back" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
       <span>Retour à l'accueil</span>
     <% end %>
   </div>
 </div>
-
-<style>
-.multiplayer-features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  margin-bottom: 4rem;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 2rem;
-}
-
-.multiplayer-feature-card {
-  background: var(--bg-surface);
-  border-radius: 20px;
-  padding: 3rem;
-  box-shadow: var(--shadow-md);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  min-height: 360px;
-}
-
-.multiplayer-feature-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-glow);
-  border-color: var(--accent);
-}
-
-.feature-icon-wrapper {
-  width: 100px;
-  height: 100px;
-  background: var(--accent-gradient);
-  border-radius: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 2rem;
-  box-shadow: 0 4px 16px var(--accent-muted);
-}
-
-.feature-icon {
-  font-size: 3.5rem;
-  color: white;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.feature-title {
-  font-size: 1.85rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.02em;
-}
-
-.feature-description {
-  color: var(--text-secondary);
-  line-height: 1.8;
-  margin-bottom: 2.5rem;
-  flex-grow: 1;
-  font-size: 1.1rem;
-}
-
-.btn-feature-action {
-  width: 100%;
-  padding: 1rem 1.75rem;
-  background: var(--accent-gradient);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.05rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  box-shadow: 0 4px 12px var(--accent-muted);
-}
-
-.btn-feature-action:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-glow);
-  color: white;
-  text-decoration: none;
-}
-
-@media (max-width: 992px) {
-  .multiplayer-features-grid {
-    grid-template-columns: 1fr;
-    max-width: 650px;
-    gap: 2.5rem;
-    padding: 0 1rem;
-  }
-
-  .multiplayer-feature-card {
-    min-height: 320px;
-    padding: 2.5rem;
-  }
-}
-
-@media (min-width: 1400px) {
-  .multiplayer-features-grid {
-    max-width: 1400px;
-    gap: 4rem;
-  }
-}
-</style>

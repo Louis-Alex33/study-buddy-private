@@ -1,77 +1,162 @@
-<div class="container my-5">
-  <!-- Header Section -->
-  <div class="lectures-header">
-    <div class="lectures-header-content">
-      <h1>Quiz</h1>
-      <p>Teste tes connaissances par catégorie</p>
+<div class="quizzes-page">
+  <!-- Animated dot grid background -->
+  <div class="li-dot-grid" aria-hidden="true"></div>
+
+  <!-- ===== IMMERSIVE HEADER ===== -->
+  <header class="li-header">
+    <div class="li-header-mesh" aria-hidden="true">
+      <div class="li-mesh-orb li-mesh-orb--1"></div>
+      <div class="li-mesh-orb li-mesh-orb--2"></div>
+      <div class="li-mesh-orb li-mesh-orb--3"></div>
+      <div class="li-mesh-orb li-mesh-orb--4"></div>
     </div>
-  </div>
+    <div class="li-header-particles" aria-hidden="true">
+      <span class="li-particle li-particle--1"></span>
+      <span class="li-particle li-particle--2"></span>
+      <span class="li-particle li-particle--3"></span>
+      <span class="li-particle li-particle--4"></span>
+      <span class="li-particle li-particle--5"></span>
+      <span class="li-particle li-particle--6"></span>
+    </div>
+    <div class="li-header-noise" aria-hidden="true"></div>
+    <div class="li-header-content">
+      <div class="li-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+      </div>
+      <h1 class="li-header-title">
+        <span class="li-gradient-text">Quiz</span>
+      </h1>
+      <p class="li-header-subtitle">Teste tes connaissances par catégorie</p>
+
+      <!-- Stats row inside header -->
+      <div class="li-header-stats">
+        <div class="li-header-stat">
+          <div class="li-header-stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <path d="M12 17h.01"></path>
+            </svg>
+          </div>
+          <div class="li-header-stat-value"><%= @public_quizzes.values.flatten.count + @shared_quizzes.values.flatten.count %></div>
+          <div class="li-header-stat-label">Quiz</div>
+        </div>
+        <div class="li-header-stat-divider"></div>
+        <div class="li-header-stat">
+          <div class="li-header-stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+            </svg>
+          </div>
+          <div class="li-header-stat-value"><%= @public_quizzes.keys.count + @shared_quizzes.keys.count %></div>
+          <div class="li-header-stat-label">Catégories</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <%= render "shared/pro_upgrade_prompt" %>
 
-  <!-- Filter by difficulty -->
-  <div class="filter_button_card">
-    <%= link_to "Tous", quizzes_path, class: "filter_button #{params[:level].blank? ? 'active' : ''}" %>
-    <% (1..5).each do |level| %>
-      <%= link_to "Niveau #{level}", quizzes_path(level: level), class: "filter_button #{params[:level].to_i == level ? 'active' : ''}" %>
-    <% end %>
+  <!-- ===== FILTER PILLS ===== -->
+  <div class="li-filters">
+    <div class="li-filters-track">
+      <%= link_to quizzes_path, class: "li-filter-pill #{params[:level].blank? ? 'li-filter-pill--active' : ''}" do %>
+        <span class="li-filter-pill-dot"></span>
+        <span>Tous</span>
+      <% end %>
+      <% (1..5).each do |level| %>
+        <%= link_to quizzes_path(level: level), class: "li-filter-pill #{params[:level].to_i == level ? 'li-filter-pill--active' : ''}" do %>
+          <span class="li-filter-pill-dot"></span>
+          <span>Niveau <%= level %></span>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 
   <!-- Section Quizzes Publics -->
   <% if @public_quizzes.any? %>
-    <div class="quizzes-section-container quizzes-section-public">
-      <div class="quizzes-section-header">
-        <h2 class="quizzes-section-title">
-          <i class="fas fa-globe"></i> Quizzes Publics
-        </h2>
-        <p class="quizzes-section-subtitle">Accessibles à tous les utilisateurs</p>
+    <div class="qz-section">
+      <div class="qz-section-header">
+        <div class="qz-section-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <h2 class="qz-section-title">Quiz Publics</h2>
+        <span class="qz-section-count"><%= @public_quizzes.values.flatten.count %></span>
       </div>
 
       <% @public_quizzes.each do |category, quizzes| %>
         <% filtered_quizzes = params[:level].present? ? quizzes.select { |q| q.level == params[:level].to_i } : quizzes %>
         <% next if filtered_quizzes.empty? %>
 
-        <div class="quizzes-category-block">
-          <h3 class="quizzes-category-title">
-            <span class="category-icon"><i class="fas fa-folder"></i></span>
-            <%= category.title %>
-            <span class="category-count">(<%= filtered_quizzes.count %> quiz)</span>
-          </h3>
-          <div class="quizzes-grid">
-            <% filtered_quizzes.each do |quiz| %>
+        <div class="qz-category">
+          <div class="qz-category-header">
+            <span class="qz-category-dot"></span>
+            <h3 class="qz-category-name"><%= category.title %></h3>
+            <span class="qz-category-badge"><%= filtered_quizzes.count %></span>
+          </div>
+          <div class="li-grid">
+            <% filtered_quizzes.each_with_index do |quiz, idx| %>
               <%
                 total = quiz.questions.count
                 best_attempt = quiz.attempts.select { |a| a.user_id == current_user.id && a.done }.max_by(&:score)
                 best_score = best_attempt&.score || 0
                 percentage = total > 0 ? (best_score.to_f / total * 100).round : 0
               %>
-              <div class="quiz-card-wrapper">
-                <div class="quiz-card quiz-card-public">
-                  <div class="quiz-card-header">
-                    <span class="quiz-card-category"><%= quiz.category.title %></span>
-                    <span class="quiz-card-level">
+              <div class="li-card" style="animation-delay: <%= idx * 0.07 %>s">
+                <div class="li-card-glow" aria-hidden="true"></div>
+                <div class="li-card-accent"></div>
+                <div class="li-card-body">
+                  <div class="li-card-top">
+                    <span class="li-card-category">
+                      <span class="li-card-category-dot"></span>
+                      <%= quiz.category.title %>
+                    </span>
+                    <span class="qz-stars">
                       <% quiz.level.times do %><i class="fas fa-star"></i><% end %>
                       <% (5 - quiz.level).times do %><i class="far fa-star"></i><% end %>
                     </span>
                   </div>
-                  <h4 class="quiz-card-title"><%= quiz.title %></h4>
-                  <div class="quiz-card-stats">
-                    <span><i class="fas fa-question-circle"></i> <%= total %> questions</span>
+
+                  <h3 class="li-card-title"><%= quiz.title %></h3>
+
+                  <div class="qz-meta">
+                    <span class="qz-stat">
+                      <i class="fas fa-question-circle"></i> <%= total %> questions
+                    </span>
                   </div>
+
                   <% if best_attempt %>
-                    <div class="quiz-card-progress">
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: <%= percentage %>%; background: <%= percentage == 100 ? '#28a745' : '#ffd700' %>;"></div>
+                    <div class="qz-progress">
+                      <div class="qz-progress-info">
+                        <span class="qz-progress-label">Meilleur score</span>
+                        <span class="qz-progress-value"><%= best_score %>/<%= total %></span>
                       </div>
-                      <span class="progress-text">Meilleur: <%= best_score %>/<%= total %></span>
+                      <div class="qz-progress-track">
+                        <div class="qz-progress-fill qz-progress-fill--<%= percentage == 100 ? 'complete' : 'partial' %>" style="width: <%= percentage %>%;"></div>
+                      </div>
                     </div>
                   <% end %>
-                  <div class="quiz-card-actions">
-                    <%= link_to quiz_path(quiz), class: "btn-quiz-play" do %>
-                      <i class="fas fa-play"></i> Jouer
+
+                  <div class="li-card-actions">
+                    <%= link_to quiz_path(quiz), class: "li-card-btn-view" do %>
+                      <span>Jouer</span>
+                      <span class="li-card-btn-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </span>
                     <% end %>
-                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "btn-quiz-delete" do %>
-                      <i class="fas fa-trash"></i>
+                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "li-card-btn-delete" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                      </svg>
                     <% end %>
                   </div>
                 </div>
@@ -85,26 +170,27 @@
 
   <!-- Section Quizzes Partagés -->
   <% if @shared_quizzes.any? %>
-    <div class="quizzes-section-container quizzes-section-shared">
-      <div class="quizzes-section-header">
-        <h2 class="quizzes-section-title">
-          <i class="fas fa-share-alt"></i> Quizzes Partagés
-        </h2>
-        <p class="quizzes-section-subtitle">Créés et partagés avec moi par la communauté</p>
+    <div class="qz-section qz-section--shared">
+      <div class="qz-section-header qz-section-header--purple">
+        <div class="qz-section-icon qz-section-icon--purple">
+          <i class="fas fa-share-alt"></i>
+        </div>
+        <h2 class="qz-section-title">Quiz Partagés</h2>
+        <span class="qz-section-count qz-section-count--purple"><%= @shared_quizzes.values.flatten.count %></span>
       </div>
 
       <% @shared_quizzes.each do |category, quizzes| %>
         <% filtered_quizzes = params[:level].present? ? quizzes.select { |q| q.level == params[:level].to_i } : quizzes %>
         <% next if filtered_quizzes.empty? %>
 
-        <div class="quizzes-category-block">
-          <h3 class="quizzes-category-title">
-            <span class="category-icon"><i class="fas fa-folder"></i></span>
-            <%= category.title %>
-            <span class="category-count">(<%= filtered_quizzes.count %> quiz)</span>
-          </h3>
-          <div class="quizzes-grid">
-            <% filtered_quizzes.each do |quiz| %>
+        <div class="qz-category">
+          <div class="qz-category-header">
+            <span class="qz-category-dot qz-category-dot--purple"></span>
+            <h3 class="qz-category-name"><%= category.title %></h3>
+            <span class="qz-category-badge qz-category-badge--purple"><%= filtered_quizzes.count %></span>
+          </div>
+          <div class="li-grid">
+            <% filtered_quizzes.each_with_index do |quiz, idx| %>
               <%
                 total = quiz.questions.count
                 best_attempt = quiz.attempts.select { |a| a.user_id == current_user.id && a.done }.max_by(&:score)
@@ -112,58 +198,83 @@
                 percentage = total > 0 ? (best_score.to_f / total * 100).round : 0
                 challenge = quiz.challenges.first
               %>
-              <div class="quiz-card-wrapper">
-                <div class="quiz-card quiz-card-shared">
-                  <div class="quiz-card-header">
-                    <span class="quiz-card-category"><%= quiz.category.title %></span>
-                    <span class="quiz-card-level">
+              <div class="li-card" style="animation-delay: <%= idx * 0.07 %>s">
+                <div class="li-card-glow" aria-hidden="true"></div>
+                <div class="li-card-accent qz-accent--purple"></div>
+                <div class="li-card-body">
+                  <div class="li-card-top">
+                    <span class="li-card-category qz-category-pill--purple">
+                      <span class="li-card-category-dot qz-dot--purple"></span>
+                      <%= quiz.category.title %>
+                    </span>
+                    <span class="qz-stars">
                       <% quiz.level.times do %><i class="fas fa-star"></i><% end %>
                       <% (5 - quiz.level).times do %><i class="far fa-star"></i><% end %>
                     </span>
                   </div>
-                  <h4 class="quiz-card-title"><%= quiz.title %></h4>
+
+                  <h3 class="li-card-title"><%= quiz.title %></h3>
+
                   <% if challenge&.user %>
-                    <p class="quiz-card-from">
+                    <p class="qz-creator">
                       <i class="fas fa-user"></i> Créé par <%= challenge.user.display_name %>
                     </p>
                   <% end %>
-                  <div class="quiz-card-stats">
-                    <span><i class="fas fa-question-circle"></i> <%= total %> questions</span>
+
+                  <div class="qz-meta">
+                    <span class="qz-stat">
+                      <i class="fas fa-question-circle"></i> <%= total %> questions
+                    </span>
                     <% if challenge && challenge.invited_users.any? %>
-                      <span data-bs-toggle="modal" data-bs-target="#sharedQuizModal<%= quiz.id %>" class="quiz-invited-link">
+                      <span data-bs-toggle="modal" data-bs-target="#sharedQuizModal<%= quiz.id %>" class="qz-invited-link">
                         <i class="fas fa-users"></i> <%= challenge.invited_users.count %> invité(s)
                       </span>
                     <% end %>
                   </div>
+
                   <% if best_attempt %>
-                    <div class="quiz-card-progress">
-                      <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: <%= percentage %>%; background: <%= percentage == 100 ? '#28a745' : '#ffd700' %>;"></div>
+                    <div class="qz-progress">
+                      <div class="qz-progress-info">
+                        <span class="qz-progress-label">Meilleur score</span>
+                        <span class="qz-progress-value"><%= best_score %>/<%= total %></span>
                       </div>
-                      <span class="progress-text">Meilleur: <%= best_score %>/<%= total %></span>
+                      <div class="qz-progress-track">
+                        <div class="qz-progress-fill qz-progress-fill--<%= percentage == 100 ? 'complete' : 'partial' %>" style="width: <%= percentage %>%;"></div>
+                      </div>
                     </div>
                   <% end %>
-                  <div class="quiz-card-actions">
-                    <%= link_to quiz_path(quiz), class: "btn-quiz-play" do %>
-                      <i class="fas fa-play"></i> Jouer
+
+                  <div class="li-card-actions">
+                    <%= link_to quiz_path(quiz), class: "li-card-btn-view qz-btn--purple" do %>
+                      <span>Jouer</span>
+                      <span class="li-card-btn-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </span>
                     <% end %>
-                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "btn-quiz-delete" do %>
-                      <i class="fas fa-trash"></i>
+                    <%= button_to quiz_path(quiz), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer ce quiz ?" }, class: "li-card-btn-delete" do %>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 6h18"></path>
+                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                      </svg>
                     <% end %>
                   </div>
                 </div>
               </div>
 
               <% if challenge %>
-                <!-- Modal invités -->
+                <!-- Modal invites -->
                 <div class="modal fade" id="sharedQuizModal<%= quiz.id %>" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-sm">
-                    <div class="modal-content">
-                      <div class="modal-header modal-header-gradient">
+                    <div class="modal-content quizzes-modal">
+                      <div class="modal-header quizzes-modal__header">
                         <h5 class="modal-title">Invités au quiz</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body quizzes-modal__body">
                         <% if challenge.invited_users.any? %>
                           <ul class="invited-users-list">
                             <% challenge.invited_users.each do |user| %>
@@ -187,17 +298,27 @@
 
   <!-- État vide -->
   <% if @public_quizzes.empty? && @shared_quizzes.empty? %>
-    <div class="quizzes-empty">
-      <div class="quizzes-empty-icon"><i class="fas fa-brain"></i></div>
-      <h3>Aucun quiz disponible</h3>
-      <p>Les quiz seront bientôt disponibles !</p>
+    <div class="li-empty">
+      <div class="li-empty-glow" aria-hidden="true"></div>
+      <div class="li-empty-visual">
+        <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <path d="M12 17h.01"></path>
+        </svg>
+      </div>
+      <h3 class="li-empty-title">Aucun quiz disponible</h3>
+      <p class="li-empty-desc">Crée un quiz depuis une lecture pour commencer</p>
     </div>
   <% end %>
 
-  <!-- Back Button -->
-  <div class="lectures-back-section">
-    <%= link_to root_path, class: "btn-back-home" do %>
-      <span>←</span>
+  <!-- ===== BACK BUTTON ===== -->
+  <div class="li-back-section">
+    <%= link_to root_path, class: "li-btn-back" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
       <span>Retour à l'accueil</span>
     <% end %>
   </div>

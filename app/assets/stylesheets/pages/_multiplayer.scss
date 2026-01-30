@@ -1,0 +1,223 @@
+// ============================================
+// Multiplayer v2 — Uses lectures-index-v2 base styles (li- classes)
+// Only multiplayer-specific additions here
+// ============================================
+
+@keyframes mp-v2-live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 77, 90, 0.6); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 4px rgba(255, 77, 90, 0); }
+}
+
+// ---- 2x2 Grid for feature cards ----
+.mp-v2-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  z-index: 1;
+  position: relative;
+}
+
+// ---- Large icon box inside cards ----
+.mp-v2-icon-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  position: relative;
+
+  i {
+    font-size: 1.6rem;
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    position: relative;
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &--blue {
+    background: var(--accent-gradient);
+    box-shadow: 0 8px 24px var(--accent-muted);
+  }
+
+  &--gold {
+    background: var(--gold-gradient);
+    box-shadow: 0 8px 24px rgba(255, 215, 0, 0.25);
+  }
+
+  &--purple {
+    background: linear-gradient(135deg, var(--purple) 0%, #c4b5fd 100%);
+    box-shadow: 0 8px 24px rgba(162, 155, 254, 0.25);
+  }
+
+  &--green {
+    background: linear-gradient(135deg, var(--success) 0%, #6ee7b7 100%);
+    box-shadow: 0 8px 24px rgba(30, 221, 136, 0.25);
+  }
+}
+
+// ---- Color-variant accent bars ----
+.mp-v2-accent--gold {
+  background: var(--gold-gradient) !important;
+}
+
+.mp-v2-accent--purple {
+  background: linear-gradient(135deg, var(--purple) 0%, #c4b5fd 100%) !important;
+}
+
+.mp-v2-accent--green {
+  background: linear-gradient(135deg, var(--success) 0%, #6ee7b7 100%) !important;
+}
+
+// ---- Color-variant category pills ----
+.mp-v2-cat--gold {
+  background: rgba(255, 215, 0, 0.1) !important;
+  color: var(--gold) !important;
+  border-color: rgba(255, 215, 0, 0.2) !important;
+}
+
+.mp-v2-cat--purple {
+  background: rgba(162, 155, 254, 0.12) !important;
+  color: var(--purple) !important;
+  border-color: rgba(162, 155, 254, 0.2) !important;
+}
+
+.mp-v2-cat--green {
+  background: rgba(30, 221, 136, 0.1) !important;
+  color: var(--success) !important;
+  border-color: rgba(30, 221, 136, 0.2) !important;
+}
+
+// ---- Color-variant dots ----
+.mp-v2-dot--gold {
+  background: var(--gold) !important;
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.5) !important;
+}
+
+.mp-v2-dot--purple {
+  background: var(--purple) !important;
+  box-shadow: 0 0 6px var(--purple) !important;
+}
+
+.mp-v2-dot--green {
+  background: var(--success) !important;
+  box-shadow: 0 0 6px rgba(30, 221, 136, 0.5) !important;
+}
+
+// ---- Color-variant buttons ----
+.mp-v2-btn--gold {
+  background: var(--gold-gradient) !important;
+  box-shadow: 0 4px 14px rgba(255, 215, 0, 0.25) !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 8px 24px rgba(255, 215, 0, 0.2) !important;
+  }
+}
+
+.mp-v2-btn--purple {
+  background: linear-gradient(135deg, var(--purple) 0%, #c4b5fd 100%) !important;
+  box-shadow: 0 4px 14px rgba(162, 155, 254, 0.3) !important;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(162, 155, 254, 0.3), 0 8px 24px rgba(162, 155, 254, 0.2) !important;
+  }
+}
+
+.mp-v2-btn--green {
+  background: linear-gradient(135deg, var(--success) 0%, #6ee7b7 100%) !important;
+  box-shadow: 0 4px 14px rgba(30, 221, 136, 0.25) !important;
+  color: rgba(0, 0, 0, 0.8) !important;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.9) !important;
+    box-shadow: 0 0 20px rgba(30, 221, 136, 0.3), 0 8px 24px rgba(30, 221, 136, 0.2) !important;
+  }
+}
+
+// ---- Status badges ----
+.mp-v2-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  i { font-size: 10px; }
+
+  &--live {
+    background: rgba(255, 77, 90, 0.12);
+    color: var(--danger);
+    border: 1px solid rgba(255, 77, 90, 0.25);
+  }
+
+  &--popular {
+    background: rgba(255, 215, 0, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+  }
+
+  &--challenge {
+    background: rgba(162, 155, 254, 0.1);
+    color: var(--purple);
+    border: 1px solid rgba(162, 155, 254, 0.2);
+  }
+
+  &--social {
+    background: rgba(30, 221, 136, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(30, 221, 136, 0.2);
+  }
+}
+
+.mp-v2-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--danger);
+  animation: mp-v2-live-pulse 1.5s ease-in-out infinite;
+}
+
+// ============================================
+// RESPONSIVE
+// ============================================
+
+@media (max-width: 768px) {
+  .mp-v2-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .mp-v2-icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+
+    i { font-size: 1.4rem; }
+  }
+}
+
+@media (max-width: 480px) {
+  .mp-v2-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+
+    i { font-size: 1.2rem; }
+  }
+}

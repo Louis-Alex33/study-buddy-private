@@ -18,19 +18,6 @@ Category.destroy_all
 User.destroy_all
 
 puts "Creating users..."
-henry = User.create!(
-  first_name: "Henry",
-  last_name: "Thierry",
-  email: "henry@mail.com",
-  password: "secret",
-)
-
-jp = User.create!(
-  first_name: "JP",
-  last_name: "Ben",
-  email: "jp@mail.com",
-  password: "secret",
-)
 
 la = User.create!(
   first_name: "LA",
@@ -38,22 +25,6 @@ la = User.create!(
   email: "la@mail.com",
   password: "secret",
 )
-
-leo = User.create!(
-  first_name: "Léo",
-  last_name: "Gosse",
-  email: "leo@mail.com",
-  password: "secret",
-)
-
-kamal = User.create!(
-  first_name: "Kamal",
-  last_name: "Kaims",
-  email: "kamal@mail.com",
-  password: "secret",
-)
-
-
 
 puts "Creating categories..."
 categories = {}

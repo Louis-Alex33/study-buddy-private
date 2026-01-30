@@ -67,6 +67,26 @@ $card-bg-accent: #1c1c2e;
   // Gradient shortcuts
   --accent-gradient: linear-gradient(135deg, #4f8cff 0%, #6aa0ff 100%);
   --gold-gradient:   linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+
+  // Header (immersive sections — white text on dark bg)
+  --header-text:          #ffffff;
+  --header-text-muted:    rgba(255, 255, 255, 0.65);
+  --header-text-subtle:   rgba(255, 255, 255, 0.55);
+  --header-icon-bg:       rgba(255, 255, 255, 0.1);
+  --header-icon-border:   rgba(255, 255, 255, 0.15);
+  --header-icon-color:    #ffffff;
+  --header-stat-bg:       rgba(255, 255, 255, 0.08);
+  --header-stat-border:   rgba(255, 255, 255, 0.12);
+  --header-stat-divider:  rgba(255, 255, 255, 0.12);
+  --header-particle:      rgba(255, 255, 255, 0.5);
+  --header-gradient-from: rgba(255, 255, 255, 1);
+  --header-gradient-mid:  rgba(255, 255, 255, 0.7);
+  --header-gradient-to:   rgba(255, 255, 255, 1);
+  --header-search-bg:     rgba(255, 255, 255, 0.08);
+  --header-search-border: rgba(255, 255, 255, 0.15);
+  --header-search-text:   #ffffff;
+  --header-search-placeholder: rgba(255, 255, 255, 0.4);
+  --header-search-icon:   rgba(255, 255, 255, 0.5);
 }
 
 // ---- Light mode ----
@@ -113,4 +133,24 @@ body[data-theme="light"] {
 
   // Gradient
   --accent-gradient: linear-gradient(135deg, #1351AA 0%, #1a66cc 100%);
+
+  // Header (immersive sections — dark text on light bg)
+  --header-text:          #1a1a2e;
+  --header-text-muted:    rgba(26, 26, 46, 0.6);
+  --header-text-subtle:   rgba(26, 26, 46, 0.45);
+  --header-icon-bg:       rgba(19, 81, 170, 0.12);
+  --header-icon-border:   rgba(19, 81, 170, 0.18);
+  --header-icon-color:    #1351AA;
+  --header-stat-bg:       rgba(19, 81, 170, 0.08);
+  --header-stat-border:   rgba(19, 81, 170, 0.15);
+  --header-stat-divider:  rgba(19, 81, 170, 0.15);
+  --header-particle:      rgba(19, 81, 170, 0.35);
+  --header-gradient-from: #1351AA;
+  --header-gradient-mid:  rgba(19, 81, 170, 0.65);
+  --header-gradient-to:   #1351AA;
+  --header-search-bg:     rgba(19, 81, 170, 0.06);
+  --header-search-border: rgba(19, 81, 170, 0.18);
+  --header-search-text:   #1a1a2e;
+  --header-search-placeholder: rgba(26, 26, 46, 0.45);
+  --header-search-icon:   rgba(26, 26, 46, 0.4);
 }

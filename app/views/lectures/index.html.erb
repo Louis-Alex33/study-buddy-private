@@ -1,133 +1,293 @@
-<div class="container my-5">
-  <!-- Header Section -->
-  <div class="lectures-header">
-    <div class="lectures-header-content">
-      <h1>Mes cours</h1>
-      <p>Tous tes cours en un seul endroit</p>
-    </div>
-  </div>
+<div class="lectures-index-v2">
+  <!-- Animated dot grid background -->
+  <div class="li-dot-grid" aria-hidden="true"></div>
 
+  <!-- ===== IMMERSIVE HEADER ===== -->
+  <header class="li-header">
+    <div class="li-header-mesh" aria-hidden="true">
+      <div class="li-mesh-orb li-mesh-orb--1"></div>
+      <div class="li-mesh-orb li-mesh-orb--2"></div>
+      <div class="li-mesh-orb li-mesh-orb--3"></div>
+      <div class="li-mesh-orb li-mesh-orb--4"></div>
+    </div>
+    <div class="li-header-particles" aria-hidden="true">
+      <span class="li-particle li-particle--1"></span>
+      <span class="li-particle li-particle--2"></span>
+      <span class="li-particle li-particle--3"></span>
+      <span class="li-particle li-particle--4"></span>
+      <span class="li-particle li-particle--5"></span>
+      <span class="li-particle li-particle--6"></span>
+    </div>
+    <div class="li-header-noise" aria-hidden="true"></div>
+    <div class="li-header-content">
+      <div class="li-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+          <path d="M8 7h6"></path>
+          <path d="M8 11h8"></path>
+        </svg>
+      </div>
+      <h1 class="li-header-title">
+        <span class="li-gradient-text">Mes cours</span>
+      </h1>
+      <p class="li-header-subtitle">Tous tes cours en un seul endroit</p>
+
+      <!-- Stats row inside header -->
+      <div class="li-header-stats">
+        <div class="li-header-stat">
+          <div class="li-header-stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+            </svg>
+          </div>
+          <div class="li-header-stat-value"><%= @lectures.count %></div>
+          <div class="li-header-stat-label">Cours</div>
+        </div>
+        <div class="li-header-stat-divider"></div>
+        <div class="li-header-stat">
+          <div class="li-header-stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+              <path d="M3 9h18"></path>
+              <path d="M9 21V9"></path>
+            </svg>
+          </div>
+          <div class="li-header-stat-value"><%= @lectures.sum { |l| l.flashcards.count } %></div>
+          <div class="li-header-stat-label">Flashcards</div>
+        </div>
+        <div class="li-header-stat-divider"></div>
+        <div class="li-header-stat">
+          <div class="li-header-stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <div class="li-header-stat-value"><%= @lectures.sum { |l| l.messages.count } %></div>
+          <div class="li-header-stat-label">Messages</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PLAN LIMIT BANNER ===== -->
   <% unless current_user.pro? %>
-    <div class="plan-limit-banner">
-      <i class="fas fa-info-circle"></i>
-      <%= current_user.lectures.count %>/<%= current_user.plan_limit(:max_lectures) %> cours utilises
-      <% unless current_user.can_create_lecture? %>
-        &mdash; <%= link_to "Passer a Studigo Pro", pricing_path %> pour un acces illimite
-      <% end %>
+    <div class="li-plan-banner">
+      <div class="li-plan-banner-glow" aria-hidden="true"></div>
+      <div class="li-plan-banner-icon">
+        <i class="fas fa-info-circle"></i>
+      </div>
+      <div class="li-plan-banner-text">
+        <span class="li-plan-banner-count"><%= current_user.lectures.count %>/<%= current_user.plan_limit(:max_lectures) %></span> cours utilises
+        <% unless current_user.can_create_lecture? %>
+          &mdash; <%= link_to "Passer a Studigo Pro", pricing_path %> pour un acces illimite
+        <% end %>
+      </div>
+      <div class="li-plan-banner-bar">
+        <div class="li-plan-banner-bar-fill" style="width: <%= (current_user.lectures.count.to_f / current_user.plan_limit(:max_lectures) * 100).clamp(0, 100) %>%"></div>
+      </div>
     </div>
   <% end %>
 
   <%= render "shared/pro_upgrade_prompt" %>
 
-  <!-- Search Bar -->
-  <div class="lectures-search-container">
-    <%= form_with url: lectures_path, method: :get, local: true, class: "lectures-search-form" do %>
-      <div class="search-input-wrapper">
-        <button type="submit" class="search-icon-btn">
+  <!-- ===== SEARCH BAR ===== -->
+  <div class="li-search-section">
+    <%= form_with url: lectures_path, method: :get, local: true, class: "li-search-form" do %>
+      <div class="li-search-wrapper">
+        <div class="li-search-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="11" cy="11" r="8"></circle>
             <path d="m21 21-4.3-4.3"></path>
           </svg>
-        </button>
-        <%= text_field_tag :search, params[:search], placeholder: "Rechercher un cours...", class: "search-input" %>
+        </div>
+        <%= text_field_tag :search, params[:search], placeholder: "Rechercher un cours...", class: "li-search-input" %>
         <% if params[:search].present? %>
-          <%= link_to lectures_path, class: "search-clear-btn" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <%= link_to lectures_path, class: "li-search-clear" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M18 6 6 18"></path>
               <path d="m6 6 12 12"></path>
             </svg>
           <% end %>
         <% end %>
+        <button type="submit" class="li-search-submit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
       </div>
     <% end %>
   </div>
 
   <% if @lectures.any? || @quizzes.any? %>
-    <!-- Filter Buttons -->
-    <div class="filter_button_card">
-      <%= link_to "ALL", lectures_path, class: "filter_button #{params[:query].blank? && params[:search].blank? ? 'active' : ''}" %>
-      <% @categories.each do |category| %>
-        <%= link_to category.title, lectures_path(query: category.title), class: "filter_button #{params[:query] == category.title ? 'active' : ''}" %>
-      <% end %>
+    <!-- ===== FILTER PILLS ===== -->
+    <div class="li-filters">
+      <div class="li-filters-track">
+        <%= link_to lectures_path, class: "li-filter-pill #{params[:query].blank? && params[:search].blank? ? 'li-filter-pill--active' : ''}" do %>
+          <span class="li-filter-pill-dot"></span>
+          <span>Tous</span>
+        <% end %>
+        <% @categories.each do |category| %>
+          <%= link_to lectures_path(query: category.title), class: "li-filter-pill #{params[:query] == category.title ? 'li-filter-pill--active' : ''}" do %>
+            <span class="li-filter-pill-dot"></span>
+            <span><%= category.title %></span>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
     <% if @lectures.any? %>
-      <!-- Lectures Grid -->
-      <div class="lectures-grid">
-        <% @lectures.each do |lecture| %>
-          <div class="lecture-card">
-            <span class="lecture-card-badge">
-              <%= lecture.category.title %>
-            </span>
+      <!-- ===== LECTURES GRID ===== -->
+      <div class="li-grid">
+        <% @lectures.each_with_index do |lecture, index| %>
+          <div class="li-card" style="animation-delay: <%= index * 0.07 %>s">
+            <div class="li-card-glow" aria-hidden="true"></div>
+            <div class="li-card-accent"></div>
+            <div class="li-card-body">
+              <!-- Card top row: badge + notes indicator -->
+              <div class="li-card-top">
+                <span class="li-card-category">
+                  <span class="li-card-category-dot"></span>
+                  <%= lecture.category.title %>
+                </span>
+                <% if lecture.notes.any? %>
+                  <span class="li-card-indicator" title="Notes disponibles">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 20h9"></path>
+                      <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                  </span>
+                <% end %>
+              </div>
 
-            <h3 class="lecture-card-title">
-              <%= lecture.title %>
-            </h3>
+              <!-- Title -->
+              <h3 class="li-card-title"><%= lecture.title %></h3>
 
-            <p class="lecture-card-resume">
-              <%= strip_tags(lecture.resume) %>
-            </p>
+              <!-- Description -->
+              <p class="li-card-desc"><%= strip_tags(lecture.resume) %></p>
 
-            <div class="lecture-card-stats">
-              <div class="stat-item">
-                <div class="stat-number">
-                  <%= lecture.flashcards.count %>
+              <!-- Content richness bar -->
+              <div class="li-card-richness">
+                <div class="li-card-richness-bar">
+                  <% richness = [lecture.flashcards.count * 10 + lecture.messages.count * 5 + lecture.notes.count * 15, 100].min %>
+                  <div class="li-card-richness-fill" style="width: <%= richness %>%"></div>
                 </div>
-                <div class="stat-label">
-                  Flashcards
+                <span class="li-card-richness-label">Contenu</span>
+              </div>
+
+              <!-- Stats -->
+              <div class="li-card-stats">
+                <div class="li-card-stat">
+                  <div class="li-card-stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                      <path d="M3 9h18"></path>
+                      <path d="M9 21V9"></path>
+                    </svg>
+                  </div>
+                  <span class="li-card-stat-num"><%= lecture.flashcards.count %></span>
+                  <span class="li-card-stat-label">Flashcards</span>
+                </div>
+                <div class="li-card-stat-sep"></div>
+                <div class="li-card-stat">
+                  <div class="li-card-stat-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                  </div>
+                  <span class="li-card-stat-num"><%= lecture.messages.count %></span>
+                  <span class="li-card-stat-label">Messages</span>
                 </div>
               </div>
-              <div class="stat-divider"></div>
-              <div class="stat-item">
-                <div class="stat-number">
-                  <%= lecture.messages.count %>
-                </div>
-                <div class="stat-label">
-                  Messages
-                </div>
-              </div>
-            </div>
 
-            <div class="lecture-card-actions">
-              <%= link_to lecture_path(lecture), class: "btn-view-lecture" do %>
-                <span>Voir le cours</span>
-                <span>→</span>
-              <% end %>
-              <%= button_to lecture_path(lecture), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette lecture ?" }, class: "btn-delete-lecture" do %>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="24" stroke-dashoffset="24" d="M12 20h5c0.5 0 1 -0.5 1 -1v-14M12 20h-5c-0.5 0 -1 -0.5 -1 -1v-14"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path><path stroke-dasharray="20" stroke-dashoffset="20" d="M4 5h16"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.4s" dur="0.2s" values="20;0"/></path><path stroke-dasharray="8" stroke-dashoffset="8" d="M10 4h4M10 9v7M14 9v7"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="8;0"/></path></g></svg>
-              <% end %>
+              <!-- Actions -->
+              <div class="li-card-actions">
+                <%= link_to lecture_path(lecture), class: "li-card-btn-view" do %>
+                  <span>Voir le cours</span>
+                  <span class="li-card-btn-arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                  </span>
+                <% end %>
+                <%= button_to lecture_path(lecture), method: :delete, data: { turbo_confirm: "Êtes-vous sûr de vouloir supprimer cette lecture ?" }, class: "li-card-btn-delete" do %>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 6h18"></path>
+                    <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                    <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                    <line x1="10" x2="10" y1="11" y2="17"></line>
+                    <line x1="14" x2="14" y1="11" y2="17"></line>
+                  </svg>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
       </div>
     <% else %>
-      <div class="empty-lectures">
-        <div class="empty-icon"><i class="fas fa-book-open"></i></div>
-        <h3>Aucune lecture pour le moment</h3>
-        <p>Commence par ajouter ta premiere lecture</p>
-        <%= link_to root_path, class: "btn-back-home" do %>
-          <span>+</span>
+      <!-- Empty state for filtered results -->
+      <div class="li-empty">
+        <div class="li-empty-glow" aria-hidden="true"></div>
+        <div class="li-empty-visual">
+          <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+            <path d="M8 11h6"></path>
+          </svg>
+        </div>
+        <h3 class="li-empty-title">Aucune lecture pour le moment</h3>
+        <p class="li-empty-desc">Commence par ajouter ta premiere lecture</p>
+        <%= link_to root_path, class: "li-empty-cta" do %>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"></path>
+            <path d="M5 12h14"></path>
+          </svg>
           <span>Ajouter une lecture</span>
         <% end %>
       </div>
     <% end %>
   <% else %>
-    <!-- Card blanche pour l'état vide -->
-    <div class="filter_button_card empty-lectures-card">
-      <div class="empty-icon"><i class="fas fa-book-open"></i></div>
-      <h3>Aucun cours pour le moment</h3>
-      <p>Commence par ajouter ton premier cours</p>
-      <%= link_to root_path, class: "btn-back-home" do %>
-        <span>+</span>
+    <!-- Full empty state -->
+    <div class="li-empty li-empty--full">
+      <div class="li-empty-glow" aria-hidden="true"></div>
+      <div class="li-empty-visual">
+        <div class="li-empty-illustration">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none">
+            <!-- Book base -->
+            <rect x="25" y="30" width="70" height="65" rx="6" stroke="currentColor" stroke-width="1.2" opacity="0.3"/>
+            <!-- Book pages -->
+            <rect x="30" y="25" width="60" height="65" rx="5" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+            <rect x="35" y="20" width="50" height="65" rx="4" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+            <!-- Plus sign -->
+            <line x1="60" y1="42" x2="60" y2="62" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <line x1="50" y1="52" x2="70" y2="52" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <!-- Sparkle -->
+            <circle cx="82" cy="28" r="2" fill="currentColor" opacity="0.4"/>
+            <circle cx="90" cy="40" r="1.5" fill="currentColor" opacity="0.3"/>
+            <circle cx="28" cy="45" r="1.5" fill="currentColor" opacity="0.3"/>
+          </svg>
+        </div>
+      </div>
+      <h3 class="li-empty-title">Aucun cours pour le moment</h3>
+      <p class="li-empty-desc">Commence par ajouter ton premier cours</p>
+      <%= link_to root_path, class: "li-empty-cta" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"></path>
+          <path d="M5 12h14"></path>
+        </svg>
         <span>Ajouter un cours</span>
       <% end %>
     </div>
   <% end %>
 
-  <!-- Back Button -->
-  <div class="lectures-back-section">
-    <%= link_to root_path, class: "btn-back-home" do %>
-      <span>←</span>
+  <!-- ===== BACK BUTTON ===== -->
+  <div class="li-back-section">
+    <%= link_to root_path, class: "li-btn-back" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
       <span>Retour a l'accueil</span>
     <% end %>
   </div>

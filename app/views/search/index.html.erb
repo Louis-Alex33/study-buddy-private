@@ -1,83 +1,387 @@
 <% content_for(:title, "Recherche") %>
 
-<div class="search-page">
-  <div class="search-page-header">
-    <h1><i class="fas fa-search"></i> Recherche</h1>
-    <div class="search-page-form">
-      <%= form_tag search_path, method: :get, class: "global-search-form" do %>
-        <div class="search-input-wrapper">
-          <%= text_field_tag :q, @query, placeholder: "Rechercher des cours, quiz, utilisateurs...", class: "search-input", autofocus: true %>
-          <button type="submit" class="search-icon-btn">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-        </div>
-      <% end %>
+<div class="search-v2">
+  <!-- Animated dot grid background -->
+  <div class="sv2-dot-grid" aria-hidden="true"></div>
+
+  <!-- ===== IMMERSIVE HEADER ===== -->
+  <header class="sv2-header">
+    <div class="sv2-header-mesh" aria-hidden="true">
+      <div class="sv2-mesh-orb sv2-mesh-orb--1"></div>
+      <div class="sv2-mesh-orb sv2-mesh-orb--2"></div>
+      <div class="sv2-mesh-orb sv2-mesh-orb--3"></div>
     </div>
-  </div>
+    <div class="sv2-header-particles" aria-hidden="true">
+      <span class="sv2-particle sv2-particle--1"></span>
+      <span class="sv2-particle sv2-particle--2"></span>
+      <span class="sv2-particle sv2-particle--3"></span>
+      <span class="sv2-particle sv2-particle--4"></span>
+    </div>
+    <div class="sv2-header-noise" aria-hidden="true"></div>
+    <div class="sv2-header-content">
+      <div class="sv2-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+      </div>
+      <h1 class="sv2-header-title">
+        <span class="sv2-gradient-text">Recherche</span>
+      </h1>
+      <p class="sv2-header-subtitle">Trouve tes cours, quiz et amis en un instant</p>
+
+      <!-- Search form inside header -->
+      <div class="sv2-search-box">
+        <%= form_tag search_path, method: :get, class: "sv2-search-form" do %>
+          <div class="sv2-search-wrapper">
+            <div class="sv2-search-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </svg>
+            </div>
+            <%= text_field_tag :q, @query, placeholder: "Rechercher des cours, quiz, utilisateurs...", class: "sv2-search-input", autofocus: true %>
+            <% if @query.present? %>
+              <%= link_to search_path, class: "sv2-search-clear" do %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 6 6 18"></path>
+                  <path d="m6 6 12 12"></path>
+                </svg>
+              <% end %>
+            <% end %>
+            <button type="submit" class="sv2-search-submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"></path>
+                <path d="m12 5 7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </header>
 
   <% if @query.present? %>
-    <p class="search-results-count"><%= @total_results %> résultat<%= @total_results > 1 ? "s" : "" %> pour "<strong><%= @query %></strong>"</p>
+    <!-- Results summary -->
+    <div class="sv2-results-summary">
+      <div class="sv2-results-count">
+        <span class="sv2-count-number"><%= @total_results %></span>
+        <span class="sv2-count-text">résultat<%= @total_results > 1 ? "s" : "" %> pour</span>
+        <span class="sv2-count-query">"<%= @query %>"</span>
+      </div>
+    </div>
 
-    <% if @lectures.any? %>
-      <div class="search-section">
-        <h2><i class="fas fa-book"></i> Cours (<%= @lectures.count %>)</h2>
-        <div class="search-results-grid">
-          <% @lectures.each do |lecture| %>
-            <%= link_to lecture_path(lecture), class: "search-result-card" do %>
-              <div class="search-result-icon"><i class="fas fa-book"></i></div>
-              <div class="search-result-content">
-                <h3><%= lecture.title %></h3>
-                <p><%= lecture.category.title %></p>
-              </div>
-            <% end %>
+    <!-- Filter tabs -->
+    <div class="sv2-tabs">
+      <div class="sv2-tabs-track">
+        <button class="sv2-tab sv2-tab--active" data-tab="all">
+          <span class="sv2-tab-dot"></span>
+          <span>Tout</span>
+          <span class="sv2-tab-count"><%= @total_results %></span>
+        </button>
+        <% if @lectures.any? %>
+          <button class="sv2-tab" data-tab="lectures">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+            </svg>
+            <span>Cours</span>
+            <span class="sv2-tab-count"><%= @lectures.count %></span>
+          </button>
+        <% end %>
+        <% if @quizzes.any? %>
+          <button class="sv2-tab" data-tab="quizzes">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <path d="M12 17h.01"></path>
+            </svg>
+            <span>Quiz</span>
+            <span class="sv2-tab-count"><%= @quizzes.count %></span>
+          </button>
+        <% end %>
+        <% if @users.any? %>
+          <button class="sv2-tab" data-tab="users">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <span>Utilisateurs</span>
+            <span class="sv2-tab-count"><%= @users.count %></span>
+          </button>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Results content -->
+    <div class="sv2-results">
+      <% if @total_results == 0 %>
+        <!-- Empty state -->
+        <div class="sv2-empty">
+          <div class="sv2-empty-glow" aria-hidden="true"></div>
+          <div class="sv2-empty-visual">
+            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+              <path d="M8 11h6"></path>
+            </svg>
+          </div>
+          <h3 class="sv2-empty-title">Aucun résultat</h3>
+          <p class="sv2-empty-desc">Essaie avec d'autres mots-clés ou vérifie l'orthographe.</p>
+          <%= link_to search_path, class: "sv2-empty-cta" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"></path>
+              <path d="m6 6 12 12"></path>
+            </svg>
+            <span>Effacer la recherche</span>
           <% end %>
         </div>
-      </div>
-    <% end %>
+      <% else %>
 
-    <% if @quizzes.any? %>
-      <div class="search-section">
-        <h2><i class="fas fa-question-circle"></i> Quiz (<%= @quizzes.count %>)</h2>
-        <div class="search-results-grid">
-          <% @quizzes.each do |quiz| %>
-            <%= link_to quiz_path(quiz), class: "search-result-card" do %>
-              <div class="search-result-icon"><i class="fas fa-question-circle"></i></div>
-              <div class="search-result-content">
-                <h3><%= quiz.title %></h3>
-                <p>Niveau <%= quiz.level %>/5 — <%= quiz.category.title %></p>
+        <% if @lectures.any? %>
+          <div class="sv2-section" data-section="lectures">
+            <div class="sv2-section-header">
+              <div class="sv2-section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                </svg>
               </div>
-            <% end %>
-          <% end %>
+              <h2 class="sv2-section-title">Cours</h2>
+              <span class="sv2-section-count"><%= @lectures.count %></span>
+            </div>
+            <div class="sv2-grid">
+              <% @lectures.each_with_index do |lecture, index| %>
+                <%= link_to lecture_path(lecture), class: "sv2-card sv2-card--lecture", style: "animation-delay: #{index * 0.06}s" do %>
+                  <div class="sv2-card-glow" aria-hidden="true"></div>
+                  <div class="sv2-card-accent"></div>
+                  <div class="sv2-card-body">
+                    <div class="sv2-card-top">
+                      <span class="sv2-card-badge">
+                        <span class="sv2-card-badge-dot"></span>
+                        <%= lecture.category.title %>
+                      </span>
+                      <% if lecture.flashcards.any? %>
+                        <span class="sv2-card-indicator" title="<%= lecture.flashcards.count %> flashcards">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                            <path d="M3 9h18"></path>
+                            <path d="M9 21V9"></path>
+                          </svg>
+                        </span>
+                      <% end %>
+                    </div>
+                    <h3 class="sv2-card-title"><%= lecture.title %></h3>
+                    <% if lecture.resume.present? %>
+                      <p class="sv2-card-desc"><%= strip_tags(lecture.resume).truncate(100) %></p>
+                    <% end %>
+                    <div class="sv2-card-footer">
+                      <div class="sv2-card-stats">
+                        <span class="sv2-card-stat">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect>
+                            <path d="M3 9h18"></path>
+                            <path d="M9 21V9"></path>
+                          </svg>
+                          <%= lecture.flashcards.count %>
+                        </span>
+                        <span class="sv2-card-stat">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                          </svg>
+                          <%= lecture.messages.count %>
+                        </span>
+                      </div>
+                      <span class="sv2-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @quizzes.any? %>
+          <div class="sv2-section" data-section="quizzes">
+            <div class="sv2-section-header">
+              <div class="sv2-section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <path d="M12 17h.01"></path>
+                </svg>
+              </div>
+              <h2 class="sv2-section-title">Quiz</h2>
+              <span class="sv2-section-count"><%= @quizzes.count %></span>
+            </div>
+            <div class="sv2-grid">
+              <% @quizzes.each_with_index do |quiz, index| %>
+                <%= link_to quiz_path(quiz), class: "sv2-card sv2-card--quiz", style: "animation-delay: #{index * 0.06}s" do %>
+                  <div class="sv2-card-glow" aria-hidden="true"></div>
+                  <div class="sv2-card-accent sv2-card-accent--purple"></div>
+                  <div class="sv2-card-body">
+                    <div class="sv2-card-top">
+                      <span class="sv2-card-badge sv2-card-badge--purple">
+                        <span class="sv2-card-badge-dot sv2-card-badge-dot--purple"></span>
+                        <%= quiz.category.title %>
+                      </span>
+                      <span class="sv2-card-level">
+                        <% quiz.level.times do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                          </svg>
+                        <% end %>
+                        <% (5 - quiz.level).times do %>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                          </svg>
+                        <% end %>
+                      </span>
+                    </div>
+                    <h3 class="sv2-card-title"><%= quiz.title %></h3>
+                    <div class="sv2-card-footer">
+                      <div class="sv2-card-stats">
+                        <span class="sv2-card-stat">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                            <path d="M12 17h.01"></path>
+                          </svg>
+                          Niveau <%= quiz.level %>/5
+                        </span>
+                      </div>
+                      <span class="sv2-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if @users.any? %>
+          <div class="sv2-section" data-section="users">
+            <div class="sv2-section-header">
+              <div class="sv2-section-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h2 class="sv2-section-title">Utilisateurs</h2>
+              <span class="sv2-section-count"><%= @users.count %></span>
+            </div>
+            <div class="sv2-grid sv2-grid--users">
+              <% @users.each_with_index do |user, index| %>
+                <%= link_to user_path(user), class: "sv2-card sv2-card--user", style: "animation-delay: #{index * 0.06}s" do %>
+                  <div class="sv2-card-glow" aria-hidden="true"></div>
+                  <div class="sv2-card-accent sv2-card-accent--green"></div>
+                  <div class="sv2-card-body">
+                    <div class="sv2-user-row">
+                      <div class="sv2-user-avatar">
+                        <span><%= user.display_name[0].upcase %></span>
+                      </div>
+                      <div class="sv2-user-info">
+                        <h3 class="sv2-card-title"><%= user.display_name %></h3>
+                        <div class="sv2-user-points">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                          </svg>
+                          <span><%= user.points %> points</span>
+                        </div>
+                      </div>
+                      <span class="sv2-card-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M5 12h14"></path>
+                          <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+      <% end %>
+    </div>
+  <% else %>
+    <!-- Initial state: no query yet -->
+    <div class="sv2-initial">
+      <div class="sv2-initial-glow" aria-hidden="true"></div>
+      <div class="sv2-initial-suggestions">
+        <h3 class="sv2-initial-title">Suggestions rapides</h3>
+        <div class="sv2-suggestions-grid">
+          <a href="<%= search_path(q: 'cours') %>" class="sv2-suggestion">
+            <div class="sv2-suggestion-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+              </svg>
+            </div>
+            <span>Mes cours</span>
+          </a>
+          <a href="<%= search_path(q: 'quiz') %>" class="sv2-suggestion">
+            <div class="sv2-suggestion-icon sv2-suggestion-icon--purple">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                <path d="M12 17h.01"></path>
+              </svg>
+            </div>
+            <span>Quiz</span>
+          </a>
         </div>
       </div>
-    <% end %>
-
-    <% if @users.any? %>
-      <div class="search-section">
-        <h2><i class="fas fa-users"></i> Utilisateurs (<%= @users.count %>)</h2>
-        <div class="search-results-grid">
-          <% @users.each do |user| %>
-            <%= link_to user_path(user), class: "search-result-card" do %>
-              <div class="search-result-icon"><i class="fas fa-user"></i></div>
-              <div class="search-result-content">
-                <h3><%= user.display_name %></h3>
-                <p><%= user.points %> points</p>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-
-    <% if @total_results == 0 %>
-      <div class="search-empty">
-        <div class="empty-icon"><i class="fas fa-search"></i></div>
-        <h3>Aucun résultat</h3>
-        <p>Essayez avec d'autres mots-clés.</p>
-      </div>
-    <% end %>
+    </div>
   <% end %>
+
+  <!-- Back button -->
+  <div class="sv2-back-section">
+    <%= link_to root_path, class: "sv2-btn-back" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m12 19-7-7 7-7"></path>
+        <path d="M19 12H5"></path>
+      </svg>
+      <span>Retour à l'accueil</span>
+    <% end %>
+  </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.sv2-tab');
+    const sections = document.querySelectorAll('.sv2-section');
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        const target = this.dataset.tab;
+
+        // Update active tab
+        tabs.forEach(function(t) { t.classList.remove('sv2-tab--active'); });
+        this.classList.add('sv2-tab--active');
+
+        // Show/hide sections
+        if (target === 'all') {
+          sections.forEach(function(s) { s.style.display = ''; });
+        } else {
+          sections.forEach(function(s) {
+            s.style.display = s.dataset.section === target ? '' : 'none';
+          });
+        }
+      });
+    });
+  });
+</script>
