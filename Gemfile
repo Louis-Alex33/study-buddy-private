@@ -57,7 +57,6 @@ gem "solid_cable"
 gem 'image_processing', '~> 1.2'
 gem 'pdf-reader'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
 
 group :development, :test do
   gem "dotenv-rails"

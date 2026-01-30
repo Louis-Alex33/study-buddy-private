@@ -1,0 +1,9 @@
+/test
+/spec
+/.git
+/log
+/tmp
+/doc
+/app/assets/images/originals
+*.psd
+*.pdf
