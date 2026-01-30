@@ -83,6 +83,23 @@
       color: var(--text-primary);
       cursor: pointer;
 
+      &::file-selector-button {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-right: 12px;
+        transition: background 0.3s;
+
+        &:hover {
+          background: var(--accent-hover);
+        }
+      }
+
       &:hover {
         border-color: var(--accent);
         background: var(--accent-muted);
