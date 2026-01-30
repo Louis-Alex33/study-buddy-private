@@ -364,6 +364,7 @@
 }
 
 // Light mode: thumb slides to the left (sun)
+:root[data-theme="light"],
 body[data-theme="light"] {
   .theme-toggle-icon--sun {
     color: #f59e0b;

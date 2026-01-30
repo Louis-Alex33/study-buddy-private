@@ -90,6 +90,8 @@ $card-bg-accent: #1c1c2e;
 }
 
 // ---- Light mode ----
+// Targets both html[data-theme] (early inline script) and body[data-theme] (Stimulus)
+:root[data-theme="light"],
 body[data-theme="light"] {
   // Backgrounds
   --bg-body:       #f4f5f7;
