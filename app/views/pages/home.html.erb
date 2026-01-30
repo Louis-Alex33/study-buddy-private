@@ -92,34 +92,38 @@
 <div class="home-content">
   <!-- Hero Section -->
   <div class="hero-section">
-    <p class="hero-tagline">Votre compagnon d'étude intelligent</p>
+    <p class="hero-tagline">🎓 La plateforme d'apprentissage propulsee par l'IA</p>
     <h1 class="hero-title">Bienvenue sur <span class="hero-highlight" data-controller="text-animation">Studigo</span></h1>
     <p class="hero-subtitle">
-      Transformez vos cours en expériences d'apprentissage interactives.<br>
-      <strong>Organisez</strong> vos documents, <strong>créez</strong> des flashcards personnalisées<br>
-      et <strong>boostez</strong> votre réussite grâce à l'intelligence artificielle.
+      Importez vos cours, et laissez l'IA faire le reste.<br>
+      Flashcards, quiz, assistant personnel — tout est <strong>automatise</strong>.<br>
+      Concentrez-vous sur l'essentiel : <strong>comprendre et reussir</strong>.
     </p>
     <div class="hero-features">
       <div class="hero-feature">
-        <i class="fas fa-folder-open"></i>
-        <span>Organisation intuitive</span>
+        <span>📂</span>
+        <span>Import en 1 clic</span>
       </div>
       <div class="hero-feature">
-        <i class="fas fa-brain"></i>
-        <span>IA intégrée</span>
+        <span>🤖</span>
+        <span>IA integree</span>
       </div>
       <div class="hero-feature">
-        <i class="fas fa-layer-group"></i>
-        <span>Flashcards intelligentes</span>
+        <span>⚡</span>
+        <span>Flashcards auto</span>
+      </div>
+      <div class="hero-feature">
+        <span>🏆</span>
+        <span>Quiz & classement</span>
       </div>
     </div>
     <% if user_signed_in? %>
       <button type="button" class="btn btn-upload-document" data-bs-toggle="modal" data-bs-target="#uploadModal">
-        <i class="fas fa-cloud-upload-alt"></i> Télécharger un document
+        <i class="fas fa-cloud-upload-alt"></i> Telecharger un document
       </button>
     <% else %>
       <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
-        <i class="fas fa-rocket"></i> Commencer gratuitement
+        🚀 Commencer gratuitement
       <% end %>
     <% end %>
   </div>
@@ -158,10 +162,10 @@
       <% else %>
         <div class="empty-state">
           <div class="empty-state-icon">
-            <i class="fas fa-folder-open"></i>
+            <span style="font-size: 2.5rem;">📁</span>
           </div>
           <p class="empty-state-text">
-            Aucune catégorie pour le moment. Crée ta première catégorie pour organiser tes cours.
+            Aucune categorie pour le moment.<br>Cree ta premiere categorie pour commencer a organiser tes cours !
           </p>
         </div>
       <% end %>
@@ -176,8 +180,8 @@
       <div class="modal-content">
         <div class="modal-header modal-header-gradient">
           <div>
-            <h5 class="modal-title">Telecharger un document</h5>
-            <p class="modal-subtitle">Creez une nouvelle fiche de cours à partir de votre fichier</p>
+            <h5 class="modal-title">📄 Telecharger un document</h5>
+            <p class="modal-subtitle">Importez un fichier et laissez l'IA generer votre fiche de cours</p>
           </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -193,8 +197,8 @@
       <div class="modal-content">
         <div class="modal-header modal-header-gradient">
           <div>
-            <h5 class="modal-title">Nouvelle catégorie</h5>
-            <p class="modal-subtitle">Organise tes cours par matière</p>
+            <h5 class="modal-title">📚 Nouvelle categorie</h5>
+            <p class="modal-subtitle">Organise tes cours par matiere pour y voir plus clair</p>
           </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
