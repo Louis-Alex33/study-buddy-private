@@ -1,4 +1,17 @@
 fr:
+  helpers:
+    submit:
+      create: "Créer"
+      update: "Enregistrer"
+      submit: "Enregistrer"
+      user:
+        create: "Créer mon compte"
+        update: "Mettre à jour"
+    label:
+      user:
+        email: "E-mail"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
   activerecord:
     errors:
       messages:
