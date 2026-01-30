@@ -1,0 +1,65 @@
+fr:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "La validation a échoué : %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Impossible de supprimer cet enregistrement car un(e) %{record} dépendant(e) existe"
+          has_many: "Impossible de supprimer cet enregistrement car des %{record} dépendant(e)s existent"
+      models:
+        user:
+          attributes:
+            email:
+              taken: "est déjà utilisé(e)"
+              blank: "doit être rempli(e)"
+              invalid: "n'est pas valide"
+            password:
+              too_short: "est trop court (minimum %{count} caractères)"
+              blank: "doit être rempli(e)"
+            password_confirmation:
+              confirmation: "ne correspond pas au mot de passe"
+    models:
+      user: "utilisateur"
+    attributes:
+      user:
+        email: "E-mail"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+        current_password: "Mot de passe actuel"
+        remember_me: "Se souvenir de moi"
+        first_name: "Prénom"
+        last_name: "Nom"
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: "doit être accepté(e)"
+      blank: "doit être rempli(e)"
+      confirmation: "ne correspond pas à %{attribute}"
+      empty: "doit être rempli(e)"
+      equal_to: "doit être égal à %{count}"
+      even: "doit être pair"
+      exclusion: "n'est pas disponible"
+      greater_than: "doit être supérieur à %{count}"
+      greater_than_or_equal_to: "doit être supérieur ou égal à %{count}"
+      in: "doit être dans %{count}"
+      inclusion: "n'est pas inclus(e) dans la liste"
+      invalid: "n'est pas valide"
+      less_than: "doit être inférieur à %{count}"
+      less_than_or_equal_to: "doit être inférieur ou égal à %{count}"
+      model_invalid: "Validation échouée : %{errors}"
+      not_a_number: "n'est pas un nombre"
+      not_an_integer: "doit être un nombre entier"
+      odd: "doit être impair"
+      other_than: "doit être différent de %{count}"
+      present: "doit être vide"
+      required: "doit exister"
+      taken: "est déjà utilisé(e)"
+      too_long:
+        one: "est trop long (pas plus d'un caractère)"
+        other: "est trop long (pas plus de %{count} caractères)"
+      too_short:
+        one: "est trop court (au moins un caractère)"
+        other: "est trop court (au moins %{count} caractères)"
+      wrong_length:
+        one: "ne fait pas la bonne longueur (doit comporter exactement un caractère)"
+        other: "ne fait pas la bonne longueur (doit comporter exactement %{count} caractères)"
