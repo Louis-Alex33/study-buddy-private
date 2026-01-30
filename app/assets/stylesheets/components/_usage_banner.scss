@@ -1,0 +1,104 @@
+.usage-banner {
+  position: fixed;
+  top: 69px; // just below the navbar
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  padding: 6px 40px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.usage-banner-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.usage-banner-items {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.usage-banner-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+
+  i {
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  strong {
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+}
+
+.usage-banner-sep {
+  width: 1px;
+  height: 14px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.usage-banner-upgrade {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 8px;
+  background: var(--accent-gradient);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-glow);
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+// Add extra top padding to body when banner is present
+body:has(.usage-banner) {
+  padding-top: 105px;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .usage-banner {
+    padding: 6px 16px;
+    font-size: 11px;
+  }
+
+  .usage-banner-items {
+    gap: 8px;
+  }
+
+  .usage-banner-item {
+    gap: 3px;
+  }
+
+  .usage-banner-sep {
+    display: none;
+  }
+
+  .usage-banner-upgrade {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+}

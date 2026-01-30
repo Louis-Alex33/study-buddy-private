@@ -14,7 +14,7 @@
   <div class="flashcard-progress-card">
     <div class="progress-header">
       <span class="progress-label">Progression</span>
-      <span data-flashcard-progress-target="progressText" class="progress-count">0 / <%= questions.count %> questions completees</span>
+      <span data-flashcard-progress-target="progressText" class="progress-count">0 / <%= questions.count %> questions complétées</span>
     </div>
     <div class="progress">
       <div data-flashcard-progress-target="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
@@ -28,7 +28,7 @@
         <p class="question-text"><%= q['question'] %></p>
 
         <div>
-          <textarea id="answer-<%= index %>" rows="3" placeholder="Tape ta reponse ici..." class="answer-textarea"></textarea>
+          <textarea id="answer-<%= index %>" rows="3" placeholder="Tape ta réponse ici..." class="answer-textarea"></textarea>
         </div>
 
         <button data-action="click->flashcard-progress#showAnswer"
@@ -46,7 +46,7 @@
   </div>
 
   <div class="flashcard-actions-footer">
-    <%= link_to "← Retour a la lecture", lecture_path(@flashcard.lecture), class: "btn-back-to-lecture" %>
+    <%= link_to "← Retour au cours", lecture_path(@flashcard.lecture), class: "btn-back-to-lecture" %>
     <%= button_to flashcard_path(@flashcard), method: :delete, data: { confirm: "Es-tu sûr de vouloir supprimer cette flashcard ?" }, class: "btn-delete-flashcard-main" do %><i class="fas fa-trash-alt"></i> Supprimer cette flashcard<% end %>
   </div>
 </div>

@@ -1,0 +1,30 @@
+<% if user_signed_in? && current_user.free? %>
+  <div class="usage-banner">
+    <div class="usage-banner-inner">
+      <div class="usage-banner-items">
+        <span class="usage-banner-item">
+          <i class="fas fa-book"></i>
+          <strong><%= current_user.lectures.count %></strong> / <%= current_user.plan_limit(:max_lectures) %> cours
+        </span>
+        <span class="usage-banner-sep"></span>
+        <span class="usage-banner-item">
+          <i class="fas fa-comment-dots"></i>
+          <strong><%= current_user.messages_remaining %></strong> / <%= current_user.plan_limit(:max_messages_total) %> messages IA
+        </span>
+        <span class="usage-banner-sep"></span>
+        <span class="usage-banner-item">
+          <i class="fas fa-layer-group"></i>
+          <strong><%= current_user.flashcard_generations_remaining %></strong> / <%= current_user.plan_limit(:max_flashcard_generations) %> gen. flashcards
+        </span>
+        <span class="usage-banner-sep"></span>
+        <span class="usage-banner-item">
+          <i class="fas fa-question-circle"></i>
+          <strong><%= current_user.quiz_generations_remaining %></strong> / <%= current_user.plan_limit(:max_quiz_generations) %> gen. quiz
+        </span>
+      </div>
+      <%= link_to pricing_path, class: "usage-banner-upgrade" do %>
+        <i class="fas fa-bolt"></i> Passer à Pro
+      <% end %>
+    </div>
+  </div>
+<% end %>

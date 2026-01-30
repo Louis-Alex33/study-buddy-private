@@ -1,14 +1,14 @@
 <div class="container my-5">
   <div class="flashcards-new-card">
     <div class="card-body text-center">
-      <h2>Generer des flashcards avec l'IA</h2>
-      <p class="mb-4">Pour la lecture: <strong><%= @lecture.title %></strong></p>
+      <h2>Générer des flashcards avec l'IA</h2>
+      <p class="mb-4">Pour le cours : <strong><%= @lecture.title %></strong></p>
 
-      <p class="text-muted">L'IA va generer automatiquement 5 flashcards basees sur le contenu de cette lecture.</p>
+      <p class="text-muted">L'IA va générer automatiquement 5 flashcards basées sur le contenu de ce cours.</p>
 
       <%= form_with url: lecture_flashcards_path(@lecture), method: :post, local: true do |f| %>
         <div class="d-flex gap-2 justify-content-center mt-4">
-          <%= f.submit "Generer les flashcards", class: "btn btn-primary btn-lg" %>
+          <%= f.submit "Générer les flashcards", class: "btn btn-primary btn-lg" %>
           <%= link_to "Annuler", lecture_path(@lecture), class: "btn btn-secondary" %>
         </div>
       <% end %>

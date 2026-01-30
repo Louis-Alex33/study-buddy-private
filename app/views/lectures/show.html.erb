@@ -48,7 +48,7 @@
               <%= f.input :content %>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
             <%= f.button :submit, "Ajouter une note" %>
           </div>
         <% end %>
@@ -120,7 +120,7 @@
           <div class="message-limit-info">
             <%= current_user.messages_remaining %> messages restants au total
             <% unless current_user.can_send_message? %>
-              &mdash; <%= link_to "Passer a Pro", pricing_path %>
+              &mdash; <%= link_to "Passer à Pro", pricing_path %>
             <% end %>
           </div>
         <% end %>
@@ -142,7 +142,7 @@
               <div class="flashcards-icon"><i class="fas fa-layer-group"></i></div>
               <div class="flashcards-title">
                 <h3>Flashcards</h3>
-                <p>Revise tes connaissances</p>
+                <p>Révise tes connaissances</p>
               </div>
               <button type="button" data-bs-toggle="modal" data-bs-target="#generateFlashcardsModal" class="btn-generate-flashcards">
                 <i class="fas fa-wand-magic-sparkles"></i> Générer avec IA
@@ -170,7 +170,7 @@
                         <div class="flashcard-stats">
                           <span><%= total %> questions</span>
                           <span class="stat-separator">•</span>
-                          <span><%= progress %> completees</span>
+                          <span><%= progress %> complétées</span>
                         </div>
                       </div>
 
@@ -196,7 +196,7 @@
             <% else %>
               <div class="empty-flashcards">
                 <div class="empty-icon"><i class="fas fa-layer-group"></i></div>
-                <p>Aucune flashcard pour le Cours</p>
+                <p>Aucune flashcard pour ce cours</p>
               </div>
             <% end %>
           </div>
@@ -314,13 +314,13 @@
       </div>
       <div class="modal-body text-center">
         <div class="modal-icon"><i class="fas fa-microchip"></i></div>
-        <p>L'IA va generer automatiquement <strong>10 questions</strong> basees sur le contenu de cette lecture.</p>
+        <p>L'IA va générer automatiquement <strong>10 questions</strong> basées sur le contenu de ce cours.</p>
         <p class="modal-note">Ces flashcards te permettront de réviser régulièrement.</p>
       </div>
       <div class="modal-footer" >
         <button type="button" data-bs-dismiss="modal" class="btn-modal-cancel">Annuler</button>
         <%= form_with url: lecture_flashcards_path(@lecture), data: { controller: "flashcard-loading", action: "submit->flashcard-loading#submit" }, method: :post, local: true, style: "display: inline;" do |f| %>
-          <%= f.submit "Generer maintenant", class: "btn-modal-submit" %>
+          <%= f.submit "Générer maintenant", class: "btn-modal-submit" %>
         <% end %>
       </div>
     </div>

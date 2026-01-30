@@ -1,35 +1,110 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="account-page">
+  <div class="account-container">
+    <div class="account-header">
+      <h1 class="account-title">Mon compte</h1>
+      <p class="account-subtitle">Gérez vos informations personnelles et votre mot de passe.</p>
+    </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+    <!-- Profile Section -->
+    <div class="account-section">
+      <h2 class="account-section-title">Modifier mes informations</h2>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "account-form" }) do |f| %>
+        <%= f.error_notification message: "Veuillez corriger les erreurs suivantes :" %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+        <div class="account-form-inputs">
+          <div class="account-field">
+            <label>E-mail</label>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-envelope"></i>
+              <%= f.input :email,
+                          required: true,
+                          autofocus: true,
+                          label: false,
+                          input_html: { autocomplete: "email", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="account-pending-email">
+              <i class="fas fa-clock"></i>
+              En attente de confirmation pour : <strong><%= resource.unconfirmed_email %></strong>
+            </p>
+          <% end %>
+
+          <div class="account-field">
+            <label>Nouveau mot de passe</label>
+            <p class="account-field-hint">Laissez vide si vous ne souhaitez pas le changer.</p>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-lock"></i>
+              <%= f.input :password,
+                          required: false,
+                          label: false,
+                          placeholder: "Nouveau mot de passe",
+                          input_html: { autocomplete: "new-password", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
+
+          <div class="account-field">
+            <label>Confirmation du nouveau mot de passe</label>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-check-double"></i>
+              <%= f.input :password_confirmation,
+                          required: false,
+                          label: false,
+                          placeholder: "Retapez le nouveau mot de passe",
+                          input_html: { autocomplete: "new-password", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
+
+          <div class="account-field">
+            <label>Mot de passe actuel <span class="account-required">*</span></label>
+            <p class="account-field-hint">Requis pour confirmer les modifications.</p>
+            <div class="auth-input-icon-wrap">
+              <i class="fas fa-key"></i>
+              <%= f.input :current_password,
+                          required: true,
+                          label: false,
+                          placeholder: "Votre mot de passe actuel",
+                          input_html: { autocomplete: "current-password", class: "auth-input auth-input-with-icon" },
+                          wrapper_html: { class: "auth-input-wrapper" } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="account-actions">
+          <%= f.button :submit, class: "auth-btn-submit" do %>
+            <span>Enregistrer les modifications</span>
+            <i class="fas fa-save"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="account-section account-danger-zone">
+      <h2 class="account-section-title account-danger-title">Supprimer mon compte</h2>
+      <p class="account-danger-desc">
+        Cette action est irréversible. Toutes vos données (cours, flashcards, quiz, messages)
+        seront définitivement supprimées sous 30 jours.
+      </p>
+      <%= button_to "Supprimer mon compte",
+            registration_path(resource_name),
+            method: :delete,
+            class: "account-btn-delete",
+            data: {
+              confirm: "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
+              turbo_confirm: "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible."
+            } %>
+    </div>
+
+    <div class="account-back">
+      <%= link_to lectures_path, class: "account-back-link" do %>
+        <i class="fas fa-arrow-left"></i> Retour à mes cours
+      <% end %>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

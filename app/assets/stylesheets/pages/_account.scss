@@ -1,0 +1,162 @@
+.account-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.account-container {
+  width: 100%;
+  max-width: 640px;
+}
+
+.account-header {
+  margin-bottom: 32px;
+}
+
+.account-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.account-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.account-section {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 28px;
+  margin-bottom: 24px;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.account-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 20px;
+}
+
+.account-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.account-field {
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+}
+
+.account-field-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin: 0 0 6px;
+}
+
+.account-required {
+  color: #ef4444;
+}
+
+.account-pending-email {
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: var(--accent-muted);
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin: 0;
+
+  i {
+    margin-right: 6px;
+    color: var(--accent);
+  }
+}
+
+.account-actions {
+  margin-top: 24px;
+}
+
+// Danger zone
+.account-danger-zone {
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.account-danger-title {
+  color: #ef4444;
+}
+
+.account-danger-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.account-btn-delete {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: transparent;
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+  }
+}
+
+// Back link
+.account-back {
+  margin-top: 8px;
+}
+
+.account-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .account-page {
+    padding: 24px 16px;
+  }
+
+  .account-title {
+    font-size: 24px;
+  }
+
+  .account-section {
+    padding: 20px;
+  }
+}
