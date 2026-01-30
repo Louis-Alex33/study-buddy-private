@@ -4,60 +4,19 @@
   <div class="onboarding-container">
     <div class="onboarding-header">
       <div class="onboarding-logo">S</div>
-      <h1>🎉 Bienvenue sur Studigo, <%= current_user.display_name %> !</h1>
-      <p>Decouvrez en 4 etapes comment Studigo va transformer votre facon d'apprendre.</p>
+      <h1>🎉 Bienvenue, <%= current_user.display_name %> !</h1>
+      <p>Ajoute ton premier cours pour générer tes supports de révision.</p>
     </div>
 
-    <div class="onboarding-steps">
-      <div class="onboarding-step">
-        <div class="onboarding-step-number">1</div>
-        <div class="onboarding-step-content">
-          <h3>📄 Importez un document</h3>
-          <p>Deposez vos cours en PDF ou image. L'IA analyse le contenu et genere automatiquement une fiche structuree.</p>
-        </div>
-      </div>
-
-      <div class="onboarding-step">
-        <div class="onboarding-step-number">2</div>
-        <div class="onboarding-step-content">
-          <h3>⚡ Generez des flashcards</h3>
-          <p>En un clic, l'IA cree des flashcards intelligentes pour vous aider a memoriser efficacement.</p>
-        </div>
-      </div>
-
-      <div class="onboarding-step">
-        <div class="onboarding-step-number">3</div>
-        <div class="onboarding-step-content">
-          <h3>🤖 Discutez avec l'IA</h3>
-          <p>Un assistant personnel integre a chaque cours. Posez vos questions, obtenez des explications claires.</p>
-        </div>
-      </div>
-
-      <div class="onboarding-step">
-        <div class="onboarding-step-number">4</div>
-        <div class="onboarding-step-content">
-          <h3>🏆 Testez-vous avec des quiz</h3>
-          <p>Quiz generes par l'IA, mode multijoueur, classement — apprenez en vous amusant !</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="onboarding-plan-info">
-      <h3>🎁 Votre plan gratuit inclut :</h3>
-      <ul>
-        <li>✅ 3 cours maximum</li>
-        <li>✅ 10 messages avec l'IA</li>
-        <li>✅ 2 generations de flashcards</li>
-        <li>✅ 1 creation de quiz</li>
-      </ul>
-      <p class="onboarding-upgrade-hint">
-        👑 Passez a <strong>Studigo Pro</strong> pour un acces illimite a toutes les fonctionnalites !
-      </p>
+    <div class="onboarding-bullets">
+      <div class="onboarding-bullet">📄 <strong>PDF, image ou texte</strong> — importez n'importe quel format</div>
+      <div class="onboarding-bullet">⚡ <strong>Flashcards auto</strong> — générées en un clic par l'IA</div>
+      <div class="onboarding-bullet">🤖 <strong>Quiz auto</strong> — testez-vous et défiez vos amis</div>
     </div>
 
     <div class="onboarding-actions">
       <%= link_to complete_onboarding_path, data: { turbo_method: :patch }, class: "onboarding-btn-start" do %>
-        <span>🚀 C'est parti !</span>
+        <span>📂 Importer un cours</span>
         <i class="fas fa-arrow-right"></i>
       <% end %>
     </div>
