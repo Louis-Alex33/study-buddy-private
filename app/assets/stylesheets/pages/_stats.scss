@@ -231,8 +231,25 @@
 }
 
 @media (max-width: 768px) {
+  .stats-page {
+    padding: 24px 16px;
+  }
+
+  .stats-header {
+    padding: 24px 20px;
+    border-radius: 20px;
+
+    .stats-header-content h1 {
+      font-size: clamp(1.25rem, 5vw, 2rem);
+    }
+  }
+
   .stats-summary-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-section {
+    padding: 20px;
   }
 
   .stats-activity-grid {
@@ -241,5 +258,51 @@
 
   .stats-badges-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-page {
+    padding: 16px 12px;
+  }
+
+  .stats-header {
+    padding: 20px 16px;
+
+    .stats-header-content {
+      h1 { font-size: 1.25rem; }
+      p { font-size: 14px; }
+    }
+  }
+
+  .stats-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-summary-card .stats-summary-value {
+    font-size: 24px;
+  }
+
+  .stats-section {
+    padding: 16px;
+
+    h2 { font-size: 18px; }
+  }
+
+  .stats-activity-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-badges-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-league-card .stats-league-rank {
+    font-size: 24px;
+  }
+
+  .stats-league-card .stats-league-details {
+    flex-direction: column;
+    gap: 8px;
   }
 }

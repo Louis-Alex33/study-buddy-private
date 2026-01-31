@@ -457,3 +457,46 @@
     padding: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .manage-title {
+    font-size: 1.5rem;
+  }
+
+  .manage-plan-card {
+    padding: 1.25rem;
+  }
+
+  .plan-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .plan-name {
+    font-size: 1.2rem;
+  }
+
+  .usage-card {
+    padding: 1rem;
+  }
+
+  .usage-count {
+    font-size: 1.25rem;
+  }
+
+  .manage-upgrade-cta {
+    padding: 1.5rem;
+
+    h3 {
+      font-size: 1.3rem;
+    }
+  }
+
+  .btn-upgrade-cta {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    width: 100%;
+    text-align: center;
+  }
+}

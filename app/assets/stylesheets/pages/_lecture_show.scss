@@ -48,11 +48,139 @@
     h1 {
       color: white;
       margin: 0 0 15px 0;
-      font-size: 38px;
+      font-size: clamp(1.5rem, 5vw, 2.375rem);
       font-weight: 800;
       line-height: 1.2;
     }
 
+  }
+}
+
+// ============================================
+// RESPONSIVE — Lecture Show
+// ============================================
+
+@media (max-width: 768px) {
+  .lecture-show-header {
+    padding: 30px 20px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+  }
+
+  .lecture-resume-card {
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 25px;
+
+    .resume-header {
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+
+      .resume-actions {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+      }
+    }
+
+    .resume-content {
+      font-size: 14px;
+
+      h3 { font-size: 18px; }
+      h4 { font-size: 15px; }
+    }
+  }
+
+  .assistant-ia-card {
+    padding: 20px;
+    border-radius: 18px;
+
+    .chat-messages-container {
+      padding: 14px;
+
+      .chat-message .message-bubble {
+        max-width: 90%;
+      }
+    }
+
+    .chat-input-form .submit-button {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+  }
+
+  .flashcards-card {
+    height: auto;
+    padding: 20px;
+    border-radius: 18px;
+
+    .flashcards-header {
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .btn-generate-flashcards {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 20px;
+      }
+    }
+
+    .flashcard-item {
+      padding: 18px;
+
+      .flashcard-content {
+        flex-wrap: wrap;
+
+        .flashcard-actions {
+          width: 100%;
+          justify-content: center;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+
+  .modal-generate-flashcards {
+    .modal-header { padding: 20px; }
+    .modal-body { padding: 24px 20px; }
+    .modal-footer { padding: 16px 20px; }
+  }
+}
+
+@media (max-width: 480px) {
+  .lecture-show-header {
+    padding: 24px 16px;
+    border-radius: 16px;
+  }
+
+  .lecture-resume-card {
+    padding: 16px;
+
+    .resume-header {
+      .btn-download-resume,
+      .btn-reanalyze-resume {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .flashcards-card .flashcard-item .flashcard-content {
+    .flashcard-info .flashcard-link {
+      font-size: 15px;
+    }
+
+    .flashcard-actions .progress-circle {
+      width: 56px;
+      height: 56px;
+
+      svg {
+        width: 56px;
+        height: 56px;
+      }
+    }
   }
 }
 

@@ -182,3 +182,87 @@
     }
   }
 }
+
+// Responsive
+@media (max-width: 768px) {
+  .flashcard-show-header {
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+
+    h2 {
+      font-size: clamp(1.25rem, 5vw, 1.75rem);
+    }
+  }
+
+  .flashcard-progress-card {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .flashcard-question {
+    padding: 20px;
+    margin-bottom: 16px;
+
+    .btn-show-answer {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .flashcard-actions-footer {
+    padding: 20px;
+    margin-top: 24px;
+
+    .btn-back-to-lecture {
+      display: block;
+      margin-right: 0;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .btn-delete-flashcard-main {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard-show-header {
+    padding: 16px;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .flashcard-question {
+    padding: 16px;
+
+    .question-text {
+      font-size: 14px;
+    }
+
+    .answer-textarea {
+      font-size: 13px;
+      padding: 12px;
+    }
+
+    .btn-show-answer {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+
+  .flashcard-actions-footer {
+    padding: 16px;
+
+    .btn-back-to-lecture,
+    .btn-delete-flashcard-main {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }
+}

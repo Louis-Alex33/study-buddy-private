@@ -85,16 +85,15 @@
 
             <div class="options-list">
               <% question.options.each do |option| %>
-                <div class="quiz-option">
+                <label class="quiz-option quiz-option--selectable" for="option_<%= option.id %>">
                   <% if question.multiple_answers %>
-                    <%= check_box_tag "answers[#{question.id}][]", option.id, false, class: "form-check-input", id: "option_#{option.id}" %>
+                    <%= check_box_tag "answers[#{question.id}][]", option.id, false, class: "quiz-option-input", id: "option_#{option.id}" %>
                   <% else %>
-                    <%= radio_button_tag "answers[#{question.id}]", option.id, false, class: "form-check-input", id: "option_#{option.id}" %>
+                    <%= radio_button_tag "answers[#{question.id}]", option.id, false, class: "quiz-option-input", id: "option_#{option.id}" %>
                   <% end %>
-                  <label class="form-check-label" for="option_<%= option.id %>">
-                    <%= option.content %>
-                  </label>
-                </div>
+                  <span class="quiz-option-indicator"></span>
+                  <span class="quiz-option-text"><%= option.content %></span>
+                </label>
               <% end %>
             </div>
           </div>
@@ -106,5 +105,25 @@
         <%= f.submit "Soumettre mes réponses", class: "quiz-btn-primary" %>
       </div>
     <% end %>
+
+    <script>
+      // Visual feedback for option selection (fallback for browsers without :has())
+      document.querySelectorAll('.quiz-option-input').forEach(function(input) {
+        input.addEventListener('change', function() {
+          if (input.type === 'radio') {
+            var name = input.getAttribute('name');
+            document.querySelectorAll('input[name="' + name + '"]').forEach(function(sibling) {
+              sibling.closest('.quiz-option--selectable').classList.remove('is-selected');
+            });
+          }
+          var option = input.closest('.quiz-option--selectable');
+          if (input.checked) {
+            option.classList.add('is-selected');
+          } else {
+            option.classList.remove('is-selected');
+          }
+        });
+      });
+    </script>
   <% end %>
 </div>

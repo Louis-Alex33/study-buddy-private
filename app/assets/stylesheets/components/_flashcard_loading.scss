@@ -55,6 +55,7 @@
 .flashcard-loading .wrapper {
   position: relative;
   width: 350px;
+  max-width: 90vw;
   height: 200px;
   transform: scale(1.2);
   margin: 0 auto;
@@ -65,6 +66,7 @@
   left: 50%;
   top: 70%;
   width: 350px;
+  max-width: 90vw;
   height: 5px;
   background: #673C63;
   transform: translate(-50%, -50%);
@@ -556,5 +558,16 @@
     float: left;
     transform-origin: bottom left;
     transform: rotate(135deg) translate(-80%, 20%);
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .flashcard-loading .wrapper {
+    transform: scale(0.9);
+  }
+
+  .flashcard-loading-content p {
+    font-size: 1.1rem;
   }
 }

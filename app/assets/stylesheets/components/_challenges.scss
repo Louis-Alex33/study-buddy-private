@@ -15,7 +15,7 @@
 
 .challenges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 25px;
 }
 
@@ -277,6 +277,75 @@
         color: var(--accent);
       }
     }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .challenges-section {
+    margin-top: 24px;
+  }
+
+  .challenges-grid {
+    gap: 16px;
+  }
+
+  .challenge-card {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .challenge-card-title {
+    font-size: 1.2rem;
+  }
+
+  .challenges-empty {
+    padding: 48px 16px;
+    border-radius: 20px;
+  }
+
+  .challenges-empty-icon {
+    font-size: 3.5rem;
+  }
+
+  .quiz-loading-content {
+    h2 {
+      font-size: 1.4rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .challenge-card {
+    padding: 16px;
+  }
+
+  .challenge-card-title {
+    font-size: 1.1rem;
+  }
+
+  .challenge-card-stats {
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .btn-challenge-play {
+    padding: 10px 18px;
+    font-size: 14px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .challenges-empty h3 {
+    font-size: 1.2rem;
+  }
+
+  .challenges-empty p {
+    font-size: 0.9rem;
   }
 }
 
@@ -669,5 +738,20 @@ $sub-color2: #D93A54;
   }
   100% {
     transform: scale(0.9);
+  }
+}
+
+// Submarine loader responsive
+@media (max-width: 480px) {
+  .quiz-loading .sea .circle-wrapper {
+    width: 220px;
+    height: 220px;
+    padding: 0 30px;
+  }
+
+  .quiz-loading .sea .submarine-wrapper {
+    height: 220px;
+    width: 220px;
+    transform: scale(0.75);
   }
 }

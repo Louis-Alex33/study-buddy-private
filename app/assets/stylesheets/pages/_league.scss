@@ -955,12 +955,43 @@
     font-size: 1.75rem;
   }
 
+  .rank-card-mega {
+    padding: 1.5rem;
+  }
+
+  .rank-badge-mega {
+    padding: 1.25rem;
+  }
+
   .rank-stats-mega {
     grid-template-columns: 1fr;
   }
 
+  .leaderboard-card-epic {
+    padding: 1.5rem;
+  }
+
+  .rank-ladder-card-epic {
+    padding: 1.5rem;
+  }
+
+  .ladder-title-epic {
+    font-size: 1.5rem;
+  }
+
   .podium-medal {
     font-size: 3rem;
+  }
+
+  .league-bg-blob-1,
+  .league-bg-blob-2,
+  .league-bg-blob-3 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .info-banner-epic {
+    padding: 1.25rem;
   }
 }
 

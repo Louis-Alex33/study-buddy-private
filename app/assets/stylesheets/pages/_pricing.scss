@@ -8,7 +8,7 @@
 }
 
 .pricing-main-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 0.5rem;
@@ -75,7 +75,7 @@
 }
 
 .pricing-price {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 800;
   color: var(--accent);
   margin-bottom: 0.5rem;
@@ -170,19 +170,36 @@
 }
 
 // Responsive
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .pricing-grid {
-    grid-template-columns: 1fr;
-    max-width: 450px;
-    gap: 2rem;
-  }
-
-  .pricing-main-title {
-    font-size: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
   }
 
   .pricing-card {
     padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    gap: 1.5rem;
+  }
+
+  .pricing-card {
+    padding: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .pricing-features li {
+    font-size: 0.85rem;
   }
 }
 
