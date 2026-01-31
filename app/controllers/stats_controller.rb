@@ -18,8 +18,8 @@ class StatsController < ApplicationController
 
     # Points et badges
     @total_points = @user.points
-    @badges = @user.badges.order(:category)
-    @all_badges = Badge.all.order(:category)
+    @badges = @user.badges.order(:category, :points_required)
+    @all_badges = Badge.all.order(:category, :points_required)
 
     # Activité récente (dernières 4 semaines)
     @weekly_activity = (0..3).map do |weeks_ago|
