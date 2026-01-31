@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home, :legal_notice, :privacy_policy, :terms ]
 
   def home
-    @categories = current_user&.categories&.order(:title)
+    @categories = current_user&.categories&.includes(:quizzes, lectures: :flashcards)&.order(:title)
     @lecture = Lecture.new
   end
 

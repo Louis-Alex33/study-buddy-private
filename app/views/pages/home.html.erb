@@ -125,7 +125,7 @@
                   </div>
                   <div class="category-card-content">
                     <h5 class="category-card-title"><%= category.title %></h5>
-                    <span class="category-card-count"><%= category.lectures.count %> cours</span>
+                    <span class="category-card-count"><%= category.lectures.count %> cours · <%= category.quizzes.count %> quiz · <%= category.lectures.sum { |l| l.flashcards.size } %> flashcards</span>
                   </div>
                 </div>
               <% end %>
