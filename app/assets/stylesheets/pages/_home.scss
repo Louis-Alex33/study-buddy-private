@@ -459,6 +459,13 @@
   opacity: 1;
 }
 
+// On mobile, always show delete button (no hover)
+@media (max-width: 768px) {
+  .btn-delete-category {
+    opacity: 1;
+  }
+}
+
 .btn-new-category-link {
   display: inline-flex;
   align-items: center;
