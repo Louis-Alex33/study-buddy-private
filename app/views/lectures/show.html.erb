@@ -79,9 +79,14 @@
           <h3>Fiche de cours</h3>
           <p>Générée par l'IA</p>
         </div>
-        <%= link_to download_resume_lecture_path(@lecture), class: "btn-download-resume" do %>
-          <i class="fas fa-file-pdf"></i> Télécharger en PDF
-        <% end %>
+        <div class="resume-actions">
+          <%= link_to download_resume_lecture_path(@lecture), class: "btn-download-resume" do %>
+            <i class="fas fa-file-pdf"></i> Télécharger en PDF
+          <% end %>
+          <%= button_to re_analyze_lecture_path(@lecture), method: :post, class: "btn-reanalyze-resume", data: { turbo: false, turbo_confirm: "Ré-analyser ce document ? La fiche actuelle sera remplacée." } do %>
+            <i class="fas fa-rotate"></i> Ré-analyser
+          <% end %>
+        </div>
       </div>
       <div class="resume-content">
         <%= sanitize(@lecture.resume, tags: %w[h3 h4 p ul ol li strong em br]) %>

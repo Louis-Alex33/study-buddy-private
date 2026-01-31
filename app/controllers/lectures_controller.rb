@@ -61,6 +61,12 @@ class LecturesController < ApplicationController
     redirect_to lectures_path, notice: "Lecture supprimée avec succès"
   end
 
+  def re_analyze
+    @lecture = Lecture.find(params[:id])
+    LectureAnalyzerService.new(@lecture).call
+    redirect_to lecture_path(@lecture), notice: "Fiche de cours ré-analysée avec succès"
+  end
+
   def download_resume
     @lecture = Lecture.find(params[:id])
 

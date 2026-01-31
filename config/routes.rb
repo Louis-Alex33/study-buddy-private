@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   resources :lectures, only: %i[index show edit update new create destroy] do
     member do
       get :download_resume
+      post :re_analyze
     end
     resources :notes, only: %i[new create]
     resources :messages, only: %i[new create]

@@ -126,7 +126,15 @@
       }
     }
 
-    .btn-download-resume {
+    .resume-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .btn-download-resume,
+    .btn-reanalyze-resume {
       display: inline-flex;
       align-items: center;
       gap: 8px;
@@ -140,6 +148,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       white-space: nowrap;
+      cursor: pointer;
 
       i {
         font-size: 15px;

@@ -164,21 +164,25 @@ class LectureAnalyzerService
   end
 
   def parse_json_response(response)
-    # Nettoyer la réponse si elle contient du texte avant/après le JSON
-    json_match = response.match(/\{.*\}/m)
-    json_string = json_match ? json_match[0] : response
+    # Nettoyer les blocs de code markdown (```json ... ```)
+    cleaned = response.gsub(/```(?:json)?\s*/i, '').strip
+
+    # Extraire le JSON
+    json_match = cleaned.match(/\{.*\}/m)
+    json_string = json_match ? json_match[0] : cleaned
+
+    # Supprimer les caractères de contrôle ASCII invalides dans les strings JSON
+    # (tabs, form feeds, etc. qui ne sont pas échappés)
+    json_string = json_string.gsub(/[\x00-\x08\x0b\x0c\x0e-\x1f]/, ' ')
 
     # Remplacer les guillemets simples par des doubles pour la compatibilité JSON
-    # Gère les clés et valeurs avec guillemets simples
-    json_string = json_string.gsub(/'([^']*)'(\s*:)/, '"\1"\2')  # Clés: 'key': -> "key":
-    json_string = json_string.gsub(/:\s*'([^']*)'(\s*[,}])/, ': "\1"\2')  # Valeurs simples: : 'value', -> : "value",
-
-    # Gère les valeurs longues avec guillemets simples (multilignes avec balises HTML)
+    json_string = json_string.gsub(/'([^']*)'(\s*:)/, '"\1"\2')
+    json_string = json_string.gsub(/:\s*'([^']*)'(\s*[,}])/, ': "\1"\2')
     json_string = json_string.gsub(/:\s*'((?:[^']|'(?=[^:,}]))*)'(\s*[,}])/m, ': "\1"\2')
 
     JSON.parse(json_string)
   rescue JSON::ParserError => e
-    Rails.logger.error "Failed to parse JSON response: #{response}"
+    Rails.logger.error "Failed to parse JSON response: #{response&.first(500)}"
     Rails.logger.error "JSON Parser Error: #{e.message}"
 
     # Fallback : tenter d'extraire le résumé même si le JSON est cassé
@@ -186,26 +190,61 @@ class LectureAnalyzerService
   end
 
   def extract_resume_fallback(response)
-    # Tenter d'extraire le résumé avec différentes patterns
-    # Pattern 1 : Guillemets doubles
-    resume_match = response.match(/"resume"\s*:\s*"((?:[^"\\]|\\.)*)"/m)
-    resume = resume_match[1] if resume_match
+    # Nettoyer les blocs de code markdown
+    cleaned = response.gsub(/```(?:json)?\s*/i, '').strip
+    # Supprimer les caractères de contrôle
+    cleaned = cleaned.gsub(/[\x00-\x08\x0b\x0c\x0e-\x1f]/, ' ')
 
-    # Pattern 2 : Guillemets simples si pattern 1 échoue
-    unless resume
-      resume_match = response.match(/'resume'\s*:\s*'((?:[^'\\]|\\.)*)'/m)
-      resume = resume_match[1] if resume_match
+    # Pattern 1 : Extraire tout après "resume": " jusqu'au dernier " avant }
+    resume = nil
+    if cleaned =~ /"resume"\s*:\s*"/m
+      # Trouver la position après "resume": "
+      start_pos = cleaned.index(/"resume"\s*:\s*"/m)
+      if start_pos
+        after_key = cleaned[start_pos..]
+        # Sauter "resume": "
+        content_start = after_key.index('"', after_key.index(':') + 1) + 1
+        content = after_key[content_start..]
+        # Trouver la fin : dernier " avant } ou fin de string
+        end_pos = content.rindex('"')
+        resume = content[0...end_pos] if end_pos && end_pos > 0
+      end
     end
 
-    # Pattern 3 : Extraire tout après "resume": jusqu'à la fin
+    # Pattern 2 : Guillemets simples
     unless resume
-      resume_match = response.match(/["']resume["']\s*:\s*["'](.*)["']\s*[,}]/m)
-      resume = resume_match[1] if resume_match
+      if cleaned =~ /'resume'\s*:\s*'/m
+        start_pos = cleaned.index(/'resume'\s*:\s*'/m)
+        if start_pos
+          after_key = cleaned[start_pos..]
+          content_start = after_key.index("'", after_key.index(':') + 1) + 1
+          content = after_key[content_start..]
+          end_pos = content.rindex("'")
+          resume = content[0...end_pos] if end_pos && end_pos > 0
+        end
+      end
     end
 
-    resume ||= 'Erreur lors du parsing de la réponse AI. Impossible d\'extraire le résumé.'
+    # Pattern 3 : Extraire tout le contenu HTML si on voit des balises <h3>
+    unless resume
+      html_match = cleaned.match(/(<h3>.*<\/(?:p|li|ul|ol|h[34])>)/m)
+      resume = html_match[1] if html_match
+    end
 
-    Rails.logger.info "Fallback extraction successful, resume length: #{resume.length}"
-    { 'title' => '', 'resume' => resume }
+    if resume && resume.length > 50
+      # Dé-échapper les séquences JSON
+      resume = resume.gsub('\\"', '"').gsub('\\n', "\n").gsub('\\t', "\t").gsub('\\/', '/')
+      Rails.logger.info "Fallback extraction successful, resume length: #{resume.length}"
+    else
+      resume = "Erreur lors du parsing de la réponse AI. Veuillez réessayer en cliquant sur 'Ré-analyser'."
+      Rails.logger.warn "Fallback extraction failed, no resume content found"
+    end
+
+    # Tenter d'extraire le titre aussi
+    title = nil
+    title_match = cleaned.match(/"title"\s*:\s*"((?:[^"\\]|\\.)*)"/m)
+    title = title_match[1] if title_match
+
+    { 'title' => title || '', 'resume' => resume }
   end
 end
