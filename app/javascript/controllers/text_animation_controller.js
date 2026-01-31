@@ -3,17 +3,14 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     if (typeof anime !== 'undefined') {
+      this.originalText = this.element.textContent
       this.splitText()
-      this.updateColors()
       this.animateText()
-      this.observeThemeChanges()
     }
   }
 
   disconnect() {
-    if (this.observer) {
-      this.observer.disconnect()
-    }
+    // Clean up
   }
 
   splitText() {
@@ -22,9 +19,13 @@ export default class extends Controller {
 
     text.split('').forEach(char => {
       const span = document.createElement('span')
-      span.textContent = char
+      if (char === ' ') {
+        span.innerHTML = '&nbsp;'
+      } else {
+        span.textContent = char
+      }
       span.style.display = 'inline-block'
-      span.className = 'hero-highlight-char'
+      span.style.opacity = '0'
       this.element.appendChild(span)
     })
   }
@@ -40,46 +41,11 @@ export default class extends Controller {
         opacity: [0, 1],
         easing: 'easeOutExpo',
         duration: 1400,
-        delay: anime.stagger(50)
-      })
-  }
-
-  updateColors() {
-    const spans = this.element.querySelectorAll('span')
-    const isLightMode = document.documentElement.getAttribute('data-theme') === 'light'
-
-    spans.forEach(span => {
-      if (isLightMode) {
-        span.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'
-        span.style.webkitBackgroundClip = 'text'
-        span.style.backgroundClip = 'text'
-        span.style.webkitTextFillColor = 'transparent'
-        span.style.filter = 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
-        span.style.color = ''
-      } else {
-        // Dark mode (default): use gold gradient too for consistency
-        span.style.background = 'var(--gold-gradient)'
-        span.style.webkitBackgroundClip = 'text'
-        span.style.backgroundClip = 'text'
-        span.style.webkitTextFillColor = 'transparent'
-        span.style.filter = 'drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4))'
-        span.style.color = ''
-      }
-    })
-  }
-
-  observeThemeChanges() {
-    this.observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-          this.updateColors()
+        delay: anime.stagger(50),
+        complete: () => {
+          // After animation, restore original text so CSS .hero-highlight handles the gradient
+          this.element.textContent = this.originalText
         }
       })
-    })
-
-    this.observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-theme']
-    })
   }
 }
