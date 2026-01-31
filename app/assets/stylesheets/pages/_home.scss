@@ -151,7 +151,7 @@
 
   .hero-title {
     color: var(--text-primary);
-    font-size: 3.5rem;
+    font-size: clamp(1.75rem, 5vw, 3.5rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: -1px;
@@ -161,12 +161,13 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      white-space: nowrap;
     }
   }
 
   .hero-subtitle {
     color: var(--text-secondary);
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
     max-width: 700px;
     margin: 0 auto 2rem;
     line-height: 1.8;
@@ -555,7 +556,7 @@
 
 .landing-section-title {
   color: var(--text-primary);
-  font-size: 2.25rem;
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
   font-weight: 700;
   margin-bottom: 0.75rem;
   letter-spacing: -0.5px;
@@ -742,13 +743,25 @@
 // Responsive
 // ==========================================
 
+@media (max-width: 1024px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .step-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     padding: 30px 15px 40px;
-
-    .hero-title {
-      font-size: 1.75rem;
-    }
 
     .hero-subtitle {
       font-size: 1rem;
@@ -799,10 +812,6 @@
     padding: 50px 15px;
   }
 
-  .landing-section-title {
-    font-size: 1.75rem;
-  }
-
   .steps-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -823,9 +832,5 @@
 
   .landing-final-cta {
     padding-bottom: 60px;
-
-    .landing-section-title {
-      font-size: 1.5rem;
-    }
   }
 }
