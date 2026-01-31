@@ -1,7 +1,7 @@
 class Question < ApplicationRecord
   belongs_to :quiz
   has_many :options, dependent: :destroy
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   validates :title, presence: true
   validates :position, presence: true
