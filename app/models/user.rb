@@ -18,6 +18,7 @@ class User < ApplicationRecord
   has_many :badges, through: :user_badges
   has_many :quiz_bookmarks, dependent: :destroy
   has_many :bookmarked_quizzes, through: :quiz_bookmarks, source: :quiz
+  has_many :user_ip_logs, dependent: :destroy
 
   # Friendships - demandes envoyées
   has_many :sent_friendships, class_name: 'Friendship', foreign_key: 'user_id', dependent: :destroy

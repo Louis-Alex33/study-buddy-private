@@ -10,7 +10,8 @@ module Subscribable
       max_messages_total: 10,
       max_flashcard_generations: 2,
       max_quiz_generations: 1,
-      multiplayer_access: false
+      multiplayer_access: false,
+      max_ips_per_day: 3
     },
     "pro" => {
       max_lectures: Float::INFINITY,
@@ -18,7 +19,8 @@ module Subscribable
       max_messages_total: Float::INFINITY,
       max_flashcard_generations: Float::INFINITY,
       max_quiz_generations: Float::INFINITY,
-      multiplayer_access: true
+      multiplayer_access: true,
+      max_ips_per_day: 5
     }
   }.freeze
 
@@ -89,6 +91,29 @@ module Subscribable
 
   def has_multiplayer_access?
     pro?
+  end
+
+  def log_ip!(ip_address)
+    return if ip_address.blank?
+
+    # Only insert if this IP wasn't already logged in the last 24h
+    unless user_ip_logs.where(ip_address: ip_address).where("created_at > ?", 24.hours.ago).exists?
+      user_ip_logs.create!(ip_address: ip_address)
+    end
+  end
+
+  def distinct_ips_last_24h
+    user_ip_logs.where("created_at > ?", 24.hours.ago).distinct.count(:ip_address)
+  end
+
+  def ip_allowed?(ip_address)
+    return true if ip_address.blank?
+
+    # If this IP is already known in the last 24h, it's always allowed
+    return true if user_ip_logs.where(ip_address: ip_address).where("created_at > ?", 24.hours.ago).exists?
+
+    # Otherwise, check if adding a new IP would exceed the limit
+    distinct_ips_last_24h < plan_limit(:max_ips_per_day)
   end
 
   def active_subscription

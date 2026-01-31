@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_29_213911) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_31_090324) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -353,6 +353,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_213911) do
     t.index ["user_id"], name: "index_user_badges_on_user_id"
   end
 
+  create_table "user_ip_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_user_ip_logs_on_created_at"
+    t.index ["user_id", "ip_address"], name: "index_user_ip_logs_on_user_id_and_ip_address"
+    t.index ["user_id"], name: "index_user_ip_logs_on_user_id"
+  end
+
   create_table "user_leagues", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "rank", default: "iron", null: false
@@ -382,9 +392,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_213911) do
     t.integer "flashcard_generations_count", default: 0, null: false
     t.integer "quiz_generations_count", default: 0, null: false
     t.boolean "onboarding_completed"
+    t.string "session_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["plan"], name: "index_users_on_plan"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -425,5 +437,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_213911) do
   add_foreign_key "quizzes", "categories"
   add_foreign_key "user_badges", "badges"
   add_foreign_key "user_badges", "users"
+  add_foreign_key "user_ip_logs", "users"
   add_foreign_key "user_leagues", "users"
 end

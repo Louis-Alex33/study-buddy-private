@@ -15,7 +15,7 @@ class Badge < ApplicationRecord
     badges = [
       # Cours
       { name: "Premier pas", description: "Créer votre premier cours", icon: "fa-book", category: "courses", points_required: 0 },
-      { name: "Étudiant assidu", description: "Créer 5 cours", icon: "fa-books", category: "courses", points_required: 0 },
+      { name: "Étudiant assidu", description: "Créer 5 cours", icon: "fa-graduation-cap", category: "courses", points_required: 0 },
       { name: "Bibliothécaire", description: "Créer 10 cours", icon: "fa-book-open", category: "courses", points_required: 0 },
       { name: "Encyclopédie", description: "Créer 25 cours", icon: "fa-landmark", category: "courses", points_required: 0 },
 
