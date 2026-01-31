@@ -4,6 +4,7 @@ export default class extends Controller {
   connect() {
     if (typeof anime !== 'undefined') {
       this.originalText = this.element.textContent
+      this.element.classList.add('is-animating')
       this.splitText()
       this.animateText()
     }
@@ -43,7 +44,8 @@ export default class extends Controller {
         duration: 1400,
         delay: anime.stagger(50),
         complete: () => {
-          // After animation, restore original text so CSS .hero-highlight handles the gradient
+          // Restore original text — CSS .hero-highlight handles the gradient
+          this.element.classList.remove('is-animating')
           this.element.textContent = this.originalText
         }
       })

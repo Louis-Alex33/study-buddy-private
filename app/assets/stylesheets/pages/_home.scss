@@ -162,6 +162,16 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       white-space: nowrap;
+
+      // During animation: disable gradient (doesn't work on inline-block children)
+      // Use a simple gold color instead
+      &.is-animating {
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        -webkit-text-fill-color: var(--gold);
+        color: var(--gold);
+      }
     }
   }
 
