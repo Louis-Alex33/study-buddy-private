@@ -22,7 +22,7 @@ export default class extends Controller {
           <i class="fas fa-brain" style="color: #1351AA; margin-right: 0.5rem;"></i>
           Analyse en cours
         </h2>
-        <p>L'IA génère votre résumé personnalisé</p>
+        <p>L'IA génère ton résumé personnalisé</p>
         <div style="margin-top: 1.5rem; color: #666; font-size: 0.9rem; opacity: 0.8;">
           <i class="fas fa-hourglass-half" style="margin-right: 0.3rem;"></i>
           Cela peut prendre quelques secondes...

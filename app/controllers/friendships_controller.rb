@@ -13,7 +13,7 @@ class FriendshipsController < ApplicationController
 
     # Vérifier si une amitié existe déjà
     if current_user.friend_with?(friend)
-      redirect_back fallback_location: users_path, alert: "Vous êtes déjà amis."
+      redirect_back fallback_location: users_path, alert: "Tu es déjà ami(e) avec cette personne."
       return
     end
 

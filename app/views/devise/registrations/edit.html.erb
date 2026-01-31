@@ -2,7 +2,7 @@
   <div class="account-container">
     <div class="account-header">
       <h1 class="account-title">Mon compte</h1>
-      <p class="account-subtitle">Gérez vos informations personnelles et votre mot de passe.</p>
+      <p class="account-subtitle">Gère tes informations personnelles et ton mot de passe.</p>
     </div>
 
     <!-- Profile Section -->
@@ -10,7 +10,7 @@
       <h2 class="account-section-title">Modifier mes informations</h2>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "account-form" }) do |f| %>
-        <%= f.error_notification message: "Veuillez corriger les erreurs suivantes :" %>
+        <%= f.error_notification message: "Corrige les erreurs suivantes :" %>
 
         <div class="account-form-inputs">
           <div class="account-field">
@@ -35,7 +35,7 @@
 
           <div class="account-field">
             <label>Nouveau mot de passe</label>
-            <p class="account-field-hint">Laissez vide si vous ne souhaitez pas le changer.</p>
+            <p class="account-field-hint">Laisse vide si tu ne souhaites pas le changer.</p>
             <div class="auth-input-icon-wrap">
               <i class="fas fa-lock"></i>
               <%= f.input :password,
@@ -68,7 +68,7 @@
               <%= f.input :current_password,
                           required: true,
                           label: false,
-                          placeholder: "Votre mot de passe actuel",
+                          placeholder: "Ton mot de passe actuel",
                           input_html: { autocomplete: "current-password", class: "auth-input auth-input-with-icon" },
                           wrapper_html: { class: "auth-input-wrapper" } %>
             </div>
@@ -88,7 +88,7 @@
     <div class="account-section account-danger-zone">
       <h2 class="account-section-title account-danger-title">Supprimer mon compte</h2>
       <p class="account-danger-desc">
-        Cette action est irréversible. Toutes vos données (cours, flashcards, quiz, messages)
+        Cette action est irréversible. Toutes tes données (cours, flashcards, quiz, messages)
         seront définitivement supprimées sous 30 jours.
       </p>
       <%= button_to "Supprimer mon compte",
@@ -96,8 +96,8 @@
             method: :delete,
             class: "account-btn-delete",
             data: {
-              confirm: "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.",
-              turbo_confirm: "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible."
+              confirm: "Es-tu sûr(e) de vouloir supprimer ton compte ? Cette action est irréversible.",
+              turbo_confirm: "Es-tu sûr(e) de vouloir supprimer ton compte ? Cette action est irréversible."
             } %>
     </div>
 

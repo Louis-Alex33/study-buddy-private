@@ -104,7 +104,7 @@
                   <% end %>
                   <% if room.owner == current_user %>
                     <%= button_to real_time_quiz_path(room), method: :delete,
-                        data: { turbo_confirm: 'Êtes-vous sûr de vouloir supprimer ce quiz ?' },
+                        data: { turbo_confirm: 'Es-tu sûr(e) de vouloir supprimer ce quiz ?' },
                         class: 'btn btn-outline-danger btn-sm' do %>
                       <i class="fas fa-trash"></i>
                     <% end %>

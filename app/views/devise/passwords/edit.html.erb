@@ -3,11 +3,11 @@
     <div class="auth-form-header">
       <div class="auth-brand-logo auth-brand-logo-sm">S</div>
       <h2 class="auth-form-title">Nouveau mot de passe</h2>
-      <p class="auth-form-subtitle">Choisissez votre nouveau mot de passe</p>
+      <p class="auth-form-subtitle">Choisis ton nouveau mot de passe</p>
     </div>
 
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "auth-form" }) do |f| %>
-      <%= f.error_notification message: "Veuillez corriger les erreurs suivantes :" %>
+      <%= f.error_notification message: "Corrige les erreurs suivantes :" %>
       <%= f.input :reset_password_token, as: :hidden %>
       <%= f.full_error :reset_password_token %>
 
@@ -33,7 +33,7 @@
             <%= f.input :password_confirmation,
                         required: true,
                         label: false,
-                        placeholder: "Retapez votre mot de passe",
+                        placeholder: "Retape ton mot de passe",
                         input_html: { autocomplete: "new-password", class: "auth-input auth-input-with-icon" },
                         wrapper_html: { class: "auth-input-wrapper" } %>
           </div>

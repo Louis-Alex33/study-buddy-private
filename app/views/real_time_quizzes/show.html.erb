@@ -19,7 +19,7 @@
                       <span class="badge bg-warning text-dark"><i class="fas fa-crown"></i> Hôte</span>
                     <% end %>
                     <% if participant.user == current_user %>
-                      <span class="badge bg-primary">Vous</span>
+                      <span class="badge bg-primary">Toi</span>
                     <% end %>
                   </div>
                   <span class="badge bg-success">Prêt</span>
@@ -30,7 +30,7 @@
             <div class="alert alert-info">
               <i class="fas fa-info-circle"></i>
               <% if @quiz_room.can_start? %>
-                Tous les joueurs sont prêts ! Vous pouvez lancer la partie.
+                Tous les joueurs sont prêts ! Tu peux lancer la partie.
               <% else %>
                 En attente de <%= 2 - @participants.count %> joueur(s) supplémentaire(s) pour commencer...
               <% end %>
@@ -64,7 +64,7 @@
               <i class="fas fa-info-circle"></i> En attente que <%= @quiz_room.owner.display_name %> lance le quiz...
             </div>
           <% end %>
-          <%= button_to 'Quitter la Room', leave_real_time_quiz_path(@quiz_room), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Êtes-vous sûr de vouloir quitter ?' } %>
+          <%= button_to 'Quitter la Room', leave_real_time_quiz_path(@quiz_room), method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Es-tu sûr(e) de vouloir quitter ?' } %>
         </div>
       </div>
     </div>
@@ -160,7 +160,7 @@
       <div class="quiz-header">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <h2 class="mb-0"><%= @quiz_room.name %></h2>
-          <%= button_to leave_real_time_quiz_path(@quiz_room), method: :delete, class: 'btn btn-outline-danger btn-sm', data: { confirm: 'Êtes-vous sûr de vouloir abandonner le quiz ?' } do %>
+          <%= button_to leave_real_time_quiz_path(@quiz_room), method: :delete, class: 'btn btn-outline-danger btn-sm', data: { confirm: 'Es-tu sûr(e) de vouloir abandonner le quiz ?' } do %>
             <i class="fas fa-sign-out-alt"></i> Quitter
           <% end %>
         </div>

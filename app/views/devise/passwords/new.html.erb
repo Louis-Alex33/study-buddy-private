@@ -7,7 +7,7 @@
     </div>
 
     <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "auth-form" }) do |f| %>
-      <%= f.error_notification message: "Veuillez corriger les erreurs suivantes :" %>
+      <%= f.error_notification message: "Corrige les erreurs suivantes :" %>
 
       <div class="auth-form-inputs">
         <div class="auth-field">
@@ -18,7 +18,7 @@
                         required: true,
                         autofocus: true,
                         label: false,
-                        placeholder: "votre@email.com",
+                        placeholder: "ton@email.com",
                         input_html: { autocomplete: "email", class: "auth-input auth-input-with-icon" },
                         wrapper_html: { class: "auth-input-wrapper" } %>
           </div>

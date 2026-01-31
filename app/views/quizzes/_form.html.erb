@@ -1,12 +1,12 @@
 <%= simple_form_for quiz, url: quizzes_path, html: { data: { controller: "quiz-form quiz-loading category-toggle", action: "submit->quiz-loading#submit" } } do |f| %>
   <div class="modal-body modal-body-padded">
-    <%= f.input :title, label: "Titre de votre défi", placeholder: "Ex: Check tes maths bro...", required: true, wrapper_html: { class: "form-group-modal" } %>
+    <%= f.input :title, label: "Titre de ton défi", placeholder: "Ex: Check tes maths bro...", required: true, wrapper_html: { class: "form-group-modal" } %>
 
     <div class="form-group-modal" data-category-toggle-target="selectWrapper">
       <label class="form-label">Catégorie</label>
       <%= f.input :category_id, as: :select,
           collection: current_user.categories.order(:title).map { |c| [c.title, c.id] },
-          prompt: "Sélectionnez une catégorie",
+          prompt: "Sélectionne une catégorie",
           required: true,
           label: false,
           wrapper_html: { class: "" },

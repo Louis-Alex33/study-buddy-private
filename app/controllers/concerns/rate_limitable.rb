@@ -10,7 +10,7 @@ module RateLimitable
 
     if count >= max_per_minute
       redirect_back fallback_location: lectures_path,
-        alert: "Trop de requêtes. Veuillez patienter quelques instants avant de réessayer."
+        alert: "Trop de requêtes. Patiente quelques instants avant de réessayer."
       return false
     end
 

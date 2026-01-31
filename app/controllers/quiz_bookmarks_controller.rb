@@ -6,7 +6,7 @@ class QuizBookmarksController < ApplicationController
     if bookmark.save
       redirect_back fallback_location: quizzes_path, notice: "Quiz ajouté aux favoris."
     else
-      redirect_back fallback_location: quizzes_path, alert: "Ce quiz est déjà dans vos favoris."
+      redirect_back fallback_location: quizzes_path, alert: "Ce quiz est déjà dans tes favoris."
     end
   end
 

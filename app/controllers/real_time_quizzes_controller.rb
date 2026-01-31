@@ -44,7 +44,7 @@ class RealTimeQuizzesController < ApplicationController
     end
 
     if @quiz_room.quiz_participants.exists?(user: current_user)
-      redirect_to real_time_quiz_path(@quiz_room), notice: 'Vous êtes déjà dans cette room!'
+      redirect_to real_time_quiz_path(@quiz_room), notice: 'Tu es déjà dans cette room !'
       return
     end
 
@@ -58,7 +58,7 @@ class RealTimeQuizzesController < ApplicationController
       can_start: @quiz_room.can_start?
     })
 
-    redirect_to real_time_quiz_path(@quiz_room), notice: 'Vous avez rejoint la room!'
+    redirect_to real_time_quiz_path(@quiz_room), notice: 'Tu as rejoint la room !'
   end
 
   def leave
@@ -72,9 +72,9 @@ class RealTimeQuizzesController < ApplicationController
         @quiz_room.destroy
       end
 
-      redirect_to real_time_quizzes_path, notice: 'Vous avez quitté la room'
+      redirect_to real_time_quizzes_path, notice: 'Tu as quitté la room'
     else
-      redirect_to real_time_quizzes_path, alert: 'Vous n\'êtes pas dans cette room'
+      redirect_to real_time_quizzes_path, alert: 'Tu n\'es pas dans cette room'
     end
   end
 
@@ -192,12 +192,12 @@ class RealTimeQuizzesController < ApplicationController
   def destroy
     # Seul l'owner peut supprimer la room, et seulement si elle est terminée
     if @quiz_room.owner != current_user
-      redirect_to real_time_quizzes_path, alert: 'Vous ne pouvez pas supprimer cette room!'
+      redirect_to real_time_quizzes_path, alert: 'Tu ne peux pas supprimer cette room !'
       return
     end
 
     if @quiz_room.status != 'finished'
-      redirect_to real_time_quizzes_path, alert: 'Vous ne pouvez supprimer que les rooms terminées!'
+      redirect_to real_time_quizzes_path, alert: 'Tu ne peux supprimer que les rooms terminées !'
       return
     end
 

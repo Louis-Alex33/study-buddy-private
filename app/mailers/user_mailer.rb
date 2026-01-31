@@ -8,6 +8,6 @@ class UserMailer < ApplicationMailer
     @attempt = attempt
     @user = attempt.user
     @quiz = attempt.quiz
-    mail(to: @user.email, subject: "Résultat de votre quiz : #{@quiz.title}")
+    mail(to: @user.email, subject: "Résultat de ton quiz : #{@quiz.title}")
   end
 end

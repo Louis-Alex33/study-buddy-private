@@ -26,12 +26,12 @@ class SubscriptionsController < ApplicationController
     redirect_to checkout_session.url, allow_other_host: true, status: :see_other
   rescue => e
     Rails.logger.error "Checkout error: #{e.message}"
-    redirect_to pricing_path, alert: "Impossible de lancer le paiement. Veuillez réessayer."
+    redirect_to pricing_path, alert: "Impossible de lancer le paiement. Réessaie plus tard."
   end
 
   def success
     sync_plan_if_needed
-    redirect_to lectures_path, notice: "Bienvenue dans Studigo Pro ! Profitez de toutes les fonctionnalités."
+    redirect_to lectures_path, notice: "Bienvenue dans Studigo Pro ! Profite de toutes les fonctionnalités."
   end
 
   def portal
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
     redirect_to portal_session.url, allow_other_host: true, status: :see_other
   rescue => e
     Rails.logger.error "Portal error: #{e.message}"
-    redirect_to subscription_manage_path, alert: "Impossible d'accéder au portail de gestion. Veuillez réessayer."
+    redirect_to subscription_manage_path, alert: "Impossible d'accéder au portail de gestion. Réessaie plus tard."
   end
 
   private

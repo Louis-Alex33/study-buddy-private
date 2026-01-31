@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
   def verify_session_token!
     return unless user_signed_in?
     return if devise_controller?
+    return if current_user.admin?
     return if current_user.session_token.nil?
 
     stored_token = warden.session(:user)["session_token"] rescue nil
@@ -19,12 +20,13 @@ class ApplicationController < ActionController::Base
 
     sign_out(current_user)
     redirect_to new_user_session_path,
-      alert: "Votre session a expiré car une connexion a été effectuée depuis un autre appareil."
+      alert: "Ta session a expiré car une connexion a été effectuée depuis un autre appareil."
   end
 
   def enforce_ip_limit!
     return unless user_signed_in?
     return if devise_controller?
+    return if current_user.admin?
 
     ip = request.remote_ip
 
@@ -33,7 +35,7 @@ class ApplicationController < ActionController::Base
     else
       sign_out(current_user)
       redirect_to new_user_session_path,
-        alert: "Activité suspecte détectée : trop d'appareils différents. Veuillez réessayer plus tard ou contacter le support."
+        alert: "Activité suspecte détectée : trop d'appareils différents. Réessaie plus tard ou contacte le support."
     end
   end
 

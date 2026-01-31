@@ -14,7 +14,7 @@ class Message < ApplicationRecord
 
     current_count = Message.where(role: "user", user: user).count
     if current_count >= max
-      errors.add(:content, "Vous avez atteint la limite de #{max} messages au total. Passez a Studigo Pro pour un acces illimite.")
+      errors.add(:content, "Tu as atteint la limite de #{max} messages au total. Passe à Studigo Pro pour un accès illimité.")
     end
   end
 end

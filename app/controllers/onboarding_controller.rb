@@ -5,6 +5,6 @@ class OnboardingController < ApplicationController
 
   def complete
     current_user.update!(onboarding_completed: true)
-    redirect_to root_path, notice: "Bienvenue sur Studigo ! Commencez par télécharger votre premier document."
+    redirect_to root_path, notice: "Bienvenue sur Studigo ! Commence par télécharger ton premier document."
   end
 end

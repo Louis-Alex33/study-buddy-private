@@ -16,7 +16,7 @@
   <div class="text-center mb-4">
     <% if @user != current_user %>
       <% if @is_friend %>
-        <span class="btn btn-success btn-lg disabled"><i class="fas fa-check"></i> Vous êtes amis</span>
+        <span class="btn btn-success btn-lg disabled"><i class="fas fa-check"></i> Tu es ami(e) avec cette personne</span>
       <% elsif @pending_request %>
         <span class="btn btn-secondary btn-lg disabled">Demande en attente</span>
       <% else %>

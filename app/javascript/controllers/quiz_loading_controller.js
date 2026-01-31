@@ -29,7 +29,7 @@ export default class extends Controller {
           <i class="fas fa-brain" style="color: #1351AA; margin-right: 0.5rem;"></i>
           Génération du quiz
         </h2>
-        <p>L'IA crée vos questions personnalisées</p>
+        <p>L'IA crée tes questions personnalisées</p>
         <div class="quiz-loading-hint">
           <i class="fas fa-hourglass-half"></i>
           Cela peut prendre quelques secondes...
