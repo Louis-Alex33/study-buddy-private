@@ -1,16 +1,16 @@
 <div class="container my-5">
   <div class="flashcard-show-header">
     <h2><i class="fas fa-brain"></i> <%= @quiz.title %></h2>
-    <p class="text-muted">
+    <p style="color: rgba(255,255,255,0.75); margin: 8px 0 0;">
       <%= @quiz.category.title %> | Niveau <%= @quiz.level %> | <%= @questions.count %> questions
     </p>
     <div class="quiz-bookmark-action">
       <% if current_user.bookmarked?(@quiz) %>
-        <%= button_to unbookmark_quiz_path(@quiz), method: :delete, class: "btn btn-sm btn-outline-warning" do %>
+        <%= button_to unbookmark_quiz_path(@quiz), method: :delete, class: "quiz-btn-outline" do %>
           <i class="fas fa-bookmark"></i> Retirer des favoris
         <% end %>
       <% else %>
-        <%= button_to bookmark_quiz_path(@quiz), method: :post, class: "btn btn-sm btn-outline-secondary" do %>
+        <%= button_to bookmark_quiz_path(@quiz), method: :post, class: "quiz-btn-outline" do %>
           <i class="far fa-bookmark"></i> Ajouter aux favoris
         <% end %>
       <% end %>
@@ -26,7 +26,7 @@
       </div>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar"
-             style="width: <%= @best_attempt.percentage_score %>%; background-color: <%= @best_attempt.percentage_score == 100 ? '#28a745' : '#1351AA' %>;"
+             style="width: <%= @best_attempt.percentage_score %>%;"
              aria-valuenow="<%= @best_attempt.percentage_score %>" aria-valuemin="0" aria-valuemax="100">
           <%= @best_attempt.percentage_score %>%
         </div>
@@ -36,17 +36,17 @@
 
   <!-- Start Quiz Button -->
   <div class="text-center my-4">
-    <%= button_to "Commencer le quizz", quiz_attempts_path(@quiz), method: :post, class: "btn btn-primary btn-lg" %>
+    <%= button_to "Commencer le quizz", quiz_attempts_path(@quiz), method: :post, class: "quiz-btn-primary" %>
   </div>
 
   <!-- Previous Attempts -->
   <% if @user_attempts.any? %>
-    <div class="card mt-4">
-      <div class="card-header">
+    <div class="quiz-attempts-card">
+      <div class="quiz-attempts-header">
         <h5>Mes tentatives</h5>
       </div>
-      <div class="card-body">
-        <table class="table table-striped">
+      <div class="quiz-attempts-body">
+        <table class="quiz-attempts-table">
           <thead>
             <tr>
               <th>Date</th>
@@ -68,13 +68,13 @@
                 </td>
                 <td>
                   <% if attempt.done? %>
-                    <span class="badge bg-success">Terminé</span>
+                    <span class="quiz-badge quiz-badge--correct">Terminé</span>
                   <% else %>
-                    <span class="badge bg-warning">En cours</span>
+                    <span class="quiz-badge quiz-badge--pending">En cours</span>
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to "Voir", quiz_attempt_path(@quiz, attempt), class: "btn btn-sm btn-outline-primary" %>
+                  <%= link_to "Voir", quiz_attempt_path(@quiz, attempt), class: "quiz-btn-outline" %>
                 </td>
               </tr>
             <% end %>

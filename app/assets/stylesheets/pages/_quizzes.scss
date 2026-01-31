@@ -365,6 +365,228 @@
 }
 
 // ============================================
+// QUIZ SHOW + ATTEMPT SHOW — Themed
+// ============================================
+
+// Bookmark action
+.quiz-bookmark-action {
+  margin-top: 10px;
+
+  .btn {
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+}
+
+// Attempts table card
+.quiz-attempts-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-top: 24px;
+
+  .quiz-attempts-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+
+    h5 {
+      margin: 0;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+  }
+
+  .quiz-attempts-body {
+    padding: 0;
+  }
+}
+
+.quiz-attempts-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background: var(--bg-elevated);
+
+    th {
+      padding: 12px 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  tbody tr {
+    transition: background 0.2s;
+
+    &:hover {
+      background: var(--bg-hover);
+    }
+
+    td {
+      padding: 14px 20px;
+      font-size: 14px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    &:last-child td {
+      border-bottom: none;
+    }
+  }
+}
+
+// Quiz badges (correct / incorrect / in progress)
+.quiz-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+
+  &--correct {
+    background: rgba(30, 221, 136, 0.15);
+    color: var(--success);
+  }
+
+  &--wrong {
+    background: rgba(255, 77, 90, 0.15);
+    color: var(--danger);
+  }
+
+  &--pending {
+    background: rgba(255, 198, 90, 0.15);
+    color: var(--warning);
+  }
+}
+
+// Question card states (attempt results)
+.flashcard-question--correct {
+  border-left: 4px solid var(--success);
+}
+
+.flashcard-question--wrong {
+  border-left: 4px solid var(--danger);
+}
+
+// Option items (quiz play + results)
+.quiz-option {
+  padding: 12px 16px;
+  margin: 6px 0;
+  border-radius: 12px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--border);
+  color: var(--text-primary);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-hover);
+  }
+
+  // Correct option (green tint)
+  &--correct {
+    background: rgba(30, 221, 136, 0.1);
+    border-color: var(--success);
+  }
+
+  // Wrong + selected (red tint)
+  &--wrong-selected {
+    background: rgba(255, 77, 90, 0.1);
+    border-color: var(--danger);
+  }
+
+  // Neutral unselected (default state in results)
+  &--neutral {
+    opacity: 0.7;
+  }
+
+  .option-icon {
+    flex-shrink: 0;
+    font-size: 16px;
+
+    &--correct { color: var(--success); }
+    &--wrong { color: var(--danger); }
+  }
+
+  .form-check-input {
+    background-color: var(--bg-input);
+    border-color: var(--border);
+
+    &:checked {
+      background-color: var(--accent);
+      border-color: var(--accent);
+    }
+  }
+
+  label {
+    color: var(--text-primary);
+    cursor: pointer;
+    flex: 1;
+  }
+}
+
+// Primary quiz button (start, submit, retry)
+.quiz-btn-primary {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--accent-gradient);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  box-shadow: 0 3px 10px var(--accent-muted);
+  transition: all 0.3s;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+    color: white;
+    text-decoration: none;
+  }
+}
+
+// Small outline button (view attempt)
+.quiz-btn-outline {
+  display: inline-block;
+  padding: 6px 16px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--accent-muted);
+    color: var(--accent);
+    text-decoration: none;
+  }
+}
+
+// Multiple answers hint
+.quiz-hint {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-style: italic;
+  margin-bottom: 8px;
+}
+
+// ============================================
 // RESPONSIVE
 // ============================================
 

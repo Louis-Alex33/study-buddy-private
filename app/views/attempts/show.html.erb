@@ -1,7 +1,7 @@
 <div class="container my-5">
   <div class="flashcard-show-header">
     <h2><i class="fas fa-brain"></i> <%= @quiz.title %></h2>
-    <p class="text-muted">
+    <p style="color: rgba(255,255,255,0.75); margin: 8px 0 0;">
       <%= @quiz.category.title %> | Niveau <%= @quiz.level %>
     </p>
   </div>
@@ -15,7 +15,7 @@
       </div>
       <div class="progress">
         <div class="progress-bar progress-bar-striped" role="progressbar"
-             style="width: <%= @attempt.percentage_score %>%; background-color: <%= @attempt.percentage_score >= 80 ? '#28a745' : (@attempt.percentage_score >= 50 ? '#ffc107' : '#dc3545') %>;"
+             style="width: <%= @attempt.percentage_score %>%;"
              aria-valuenow="<%= @attempt.percentage_score %>" aria-valuemin="0" aria-valuemax="100">
           <%= @attempt.percentage_score %>%
         </div>
@@ -30,13 +30,13 @@
           correct_option_ids = question.correct_options.pluck(:id)
           is_correct = question.multiple_answers ? (user_option_ids.sort == correct_option_ids.sort) : user_option_ids.any? { |id| correct_option_ids.include?(id) }
         %>
-        <div class="flashcard-question <%= is_correct ? 'border-success' : 'border-danger' %>" style="border-left: 4px solid <%= is_correct ? '#28a745' : '#dc3545' %>;">
+        <div class="flashcard-question <%= is_correct ? 'flashcard-question--correct' : 'flashcard-question--wrong' %>">
           <h5 class="question-header">
             Question <%= index + 1 %> / <%= @questions.count %>
             <% if is_correct %>
-              <span class="badge bg-success ms-2">Correct</span>
+              <span class="quiz-badge quiz-badge--correct ms-2">Correct</span>
             <% else %>
-              <span class="badge bg-danger ms-2">Incorrect</span>
+              <span class="quiz-badge quiz-badge--wrong ms-2">Incorrect</span>
             <% end %>
           </h5>
           <p class="question-text"><%= question.title %></p>
@@ -47,14 +47,15 @@
                 selected = user_option_ids.include?(option.id)
                 is_correct_option = option.correct?
               %>
-              <div class="option-item <%= selected ? 'selected' : '' %> <%= is_correct_option ? 'correct-option' : '' %>"
-                   style="padding: 10px; margin: 5px 0; border-radius: 5px;
-                          background-color: <%= is_correct_option ? '#d4edda' : (selected ? '#f8d7da' : '#f8f9fa') %>;
-                          border: 2px solid <%= selected ? (is_correct_option ? '#28a745' : '#dc3545') : (is_correct_option ? '#28a745' : '#dee2e6') %>;">
+              <div class="quiz-option <%= is_correct_option ? 'quiz-option--correct' : (selected ? 'quiz-option--wrong-selected' : 'quiz-option--neutral') %>">
                 <% if selected %>
-                  <strong><% if is_correct_option %><i class="fas fa-check-circle" style="color: #28a745;"></i><% else %><i class="fas fa-times-circle" style="color: #dc3545;"></i><% end %></strong>
+                  <% if is_correct_option %>
+                    <span class="option-icon option-icon--correct"><i class="fas fa-check-circle"></i></span>
+                  <% else %>
+                    <span class="option-icon option-icon--wrong"><i class="fas fa-times-circle"></i></span>
+                  <% end %>
                 <% elsif is_correct_option %>
-                  <strong><i class="fas fa-check-circle" style="color: #28a745;"></i></strong>
+                  <span class="option-icon option-icon--correct"><i class="fas fa-check-circle"></i></span>
                 <% end %>
                 <%= option.content %>
               </div>
@@ -66,7 +67,7 @@
 
     <div class="flashcard-actions-footer">
       <%= link_to "← Retour au quizz", quiz_path(@quiz), class: "btn-back-to-lecture" %>
-      <%= button_to "Recommencer", quiz_attempts_path(@quiz), method: :post, class: "btn btn-primary" %>
+      <%= button_to "Recommencer", quiz_attempts_path(@quiz), method: :post, class: "quiz-btn-primary" %>
     </div>
 
   <% else %>
@@ -79,12 +80,12 @@
             <p class="question-text"><%= question.title %></p>
 
             <% if question.multiple_answers %>
-              <p class="text-muted"><em>Plusieurs reponses possibles</em></p>
+              <p class="quiz-hint">Plusieurs réponses possibles</p>
             <% end %>
 
             <div class="options-list">
               <% question.options.each do |option| %>
-                <div class="form-check" style="padding: 10px; margin: 5px 0; border-radius: 5px; background-color: #f8f9fa;">
+                <div class="quiz-option">
                   <% if question.multiple_answers %>
                     <%= check_box_tag "answers[#{question.id}][]", option.id, false, class: "form-check-input", id: "option_#{option.id}" %>
                   <% else %>
@@ -102,7 +103,7 @@
 
       <div class="flashcard-actions-footer">
         <%= link_to "← Annuler", quiz_path(@quiz), class: "btn-back-to-lecture" %>
-        <%= f.submit "Soumettre mes reponses", class: "btn btn-primary btn-lg" %>
+        <%= f.submit "Soumettre mes réponses", class: "quiz-btn-primary" %>
       </div>
     <% end %>
   <% end %>
