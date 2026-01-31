@@ -1,7 +1,7 @@
 module Subscribable
   extend ActiveSupport::Concern
 
-  ADMIN_EMAILS = %w[la@mail.com].freeze
+  ADMIN_EMAILS = %w[la@mail.com famille@studigo.fr].freeze
 
   PLAN_LIMITS = {
     "free" => {
