@@ -308,6 +308,50 @@
 }
 
 // ============================================
+// Hamburger Button
+// ============================================
+.navbar-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: var(--bg-hover);
+  }
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  &.is-active {
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
+
+// ============================================
 // Theme Toggle Pill
 // ============================================
 .theme-toggle-pill {
@@ -385,15 +429,20 @@ body[data-theme="light"] {
 
 // Responsive
 @media (max-width: 768px) {
+  .navbar-burger {
+    display: flex;
+  }
+
   .navbar-studigo {
     padding: 10px 16px;
 
     .navbar-container {
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .navbar-title {
-      font-size: 18px;
+      display: none;
     }
 
     .navbar-logo {
@@ -403,13 +452,23 @@ body[data-theme="light"] {
     }
 
     .navbar-links {
-      gap: 2px;
-      flex-wrap: wrap;
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      gap: 4px;
+      padding: 12px 0 4px;
+      border-top: 1px solid var(--border);
+
+      &--open {
+        display: flex;
+      }
     }
 
     .navbar-link {
-      padding: 6px 10px;
-      font-size: 13px;
+      padding: 10px 14px;
+      font-size: 14px;
+      border-radius: 10px;
+      width: 100%;
     }
 
     .navbar-divider {
@@ -417,23 +476,42 @@ body[data-theme="light"] {
     }
 
     .navbar-user-info {
-      gap: 4px;
+      gap: 8px;
+      width: 100%;
+      justify-content: center;
+      padding: 8px;
 
       .navbar-user-email {
-        display: none;
+        display: flex;
+        max-width: none;
       }
 
       .navbar-league {
-        font-size: 11px;
-        padding: 5px 10px;
-        height: 32px;
+        font-size: 12px;
+        padding: 6px 12px;
+        height: 34px;
       }
+    }
+
+    .navbar-link-account {
+      padding: 10px 14px;
+      width: 100%;
+      justify-content: flex-start;
+      gap: 8px;
     }
 
     .navbar-btn,
     .navbar-btn-primary {
-      padding: 8px 14px;
-      font-size: 13px;
+      padding: 12px 20px;
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+      display: block;
+    }
+
+    .theme-toggle-pill {
+      align-self: flex-start;
+      padding: 6px 0;
     }
   }
 }
@@ -442,27 +520,15 @@ body[data-theme="light"] {
   .navbar-studigo {
     padding: 8px 12px;
 
-    .navbar-container {
-      gap: 8px;
-    }
-
-    .navbar-title {
-      display: none;
-    }
-
     .navbar-logo {
       width: 34px;
       height: 34px;
       font-size: 12px;
     }
 
-    .navbar-links {
-      gap: 2px;
-    }
-
     .navbar-link {
-      padding: 6px 8px;
-      font-size: 12px;
+      padding: 10px 12px;
+      font-size: 13px;
     }
 
     .navbar-user-info {
@@ -475,13 +541,13 @@ body[data-theme="light"] {
 
     .navbar-btn,
     .navbar-btn-primary {
-      padding: 6px 12px;
-      font-size: 12px;
+      padding: 10px 16px;
+      font-size: 13px;
     }
 
     .navbar-upgrade-link {
-      font-size: 11px;
-      padding: 4px 10px;
+      font-size: 12px;
+      padding: 6px 14px;
     }
 
     .navbar-pro-badge {

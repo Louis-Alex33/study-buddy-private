@@ -1,26 +1,31 @@
-<nav class="navbar-studigo">
+<nav class="navbar-studigo" data-controller="navbar">
   <div class="navbar-container">
     <%= link_to root_path, class: "navbar-brand" do %>
       <div class="navbar-logo">S</div>
       <h1 class="navbar-title">Studigo</h1>
     <% end %>
-    <div class="navbar-links">
+    <button class="navbar-burger" data-navbar-target="burger" data-action="click->navbar#toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="navbar-links" data-navbar-target="links">
       <% if user_signed_in? %>
-        <%= link_to "Mes cours", lectures_path, class: "navbar-link #{'active' if current_page?(lectures_path)}" %>
-        <%= link_to "Mes Quiz", quizzes_path, class: "navbar-link #{'active' if current_page?(quizzes_path)}" %>
-        <%= link_to multiplayer_path, class: "navbar-link #{'active' if current_page?(multiplayer_path)}" do %>
+        <%= link_to "Mes cours", lectures_path, class: "navbar-link #{'active' if current_page?(lectures_path)}", data: { action: "click->navbar#closeMenu" } %>
+        <%= link_to "Mes Quiz", quizzes_path, class: "navbar-link #{'active' if current_page?(quizzes_path)}", data: { action: "click->navbar#closeMenu" } %>
+        <%= link_to multiplayer_path, class: "navbar-link #{'active' if current_page?(multiplayer_path)}", data: { action: "click->navbar#closeMenu" } do %>
           Multijoueur
           <% unless current_user.pro? %>
             <span class="navbar-pro-badge navbar-pro-badge--small">PRO</span>
           <% end %>
         <% end %>
-        <%= link_to leaderboard_path, class: "navbar-link #{'active' if current_page?(leaderboard_path)}", title: "Classement" do %>
+        <%= link_to leaderboard_path, class: "navbar-link #{'active' if current_page?(leaderboard_path)}", title: "Classement", data: { action: "click->navbar#closeMenu" } do %>
           <i class="fas fa-trophy"></i>
         <% end %>
-        <%= link_to stats_path, class: "navbar-link #{'active' if current_page?(stats_path)}", title: "Statistiques" do %>
+        <%= link_to stats_path, class: "navbar-link #{'active' if current_page?(stats_path)}", title: "Statistiques", data: { action: "click->navbar#closeMenu" } do %>
           <i class="fas fa-chart-bar"></i>
         <% end %>
-        <%= link_to search_path, class: "navbar-link #{'active' if current_page?(search_path)}", title: "Recherche" do %>
+        <%= link_to search_path, class: "navbar-link #{'active' if current_page?(search_path)}", title: "Recherche", data: { action: "click->navbar#closeMenu" } do %>
           <i class="fas fa-search"></i>
         <% end %>
         <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
@@ -41,21 +46,21 @@
             <%= link_to "Passer à Pro", pricing_path, class: "navbar-upgrade-link" %>
           <% end %>
         </div>
-        <%= link_to edit_user_registration_path, class: "navbar-link-account", title: "Mon compte" do %>
+        <%= link_to edit_user_registration_path, class: "navbar-link-account", title: "Mon compte", data: { action: "click->navbar#closeMenu" } do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
-        <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement" do %>
+        <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement", data: { action: "click->navbar#closeMenu" } do %>
           <i class="fas fa-cog"></i>
         <% end %>
         <% if current_user.admin? %>
-          <%= link_to admin_dashboard_path, class: "navbar-link-account", title: "Admin" do %>
+          <%= link_to admin_dashboard_path, class: "navbar-link-account", title: "Admin", data: { action: "click->navbar#closeMenu" } do %>
             <i class="fas fa-shield-alt"></i>
           <% end %>
         <% end %>
-        <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete }, class: "navbar-btn" %>
+        <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete, action: "click->navbar#closeMenu" }, class: "navbar-btn" %>
       <% else %>
-        <a href="/#features" class="navbar-link">Produit</a>
-        <%= link_to "Tarifs", pricing_path, class: "navbar-link #{'active' if current_page?(pricing_path)}" %>
+        <a href="/#features" class="navbar-link" data-action="click->navbar#closeMenu">Produit</a>
+        <%= link_to "Tarifs", pricing_path, class: "navbar-link #{'active' if current_page?(pricing_path)}", data: { action: "click->navbar#closeMenu" } %>
         <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
           <div class="theme-toggle-track">
             <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun"></i>
@@ -63,8 +68,8 @@
             <div class="theme-toggle-thumb"></div>
           </div>
         </div>
-        <%= link_to "Connexion", new_user_session_path, class: "navbar-btn" %>
-        <%= link_to "Créer un compte", new_user_registration_path, class: "navbar-btn-primary" %>
+        <%= link_to "Connexion", new_user_session_path, class: "navbar-btn", data: { action: "click->navbar#closeMenu" } %>
+        <%= link_to "Créer un compte", new_user_registration_path, class: "navbar-btn-primary", data: { action: "click->navbar#closeMenu" } %>
       <% end %>
     </div>
   </div>

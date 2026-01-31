@@ -46,22 +46,23 @@ export default class extends Controller {
 
   updateColors() {
     const spans = this.element.querySelectorAll('span')
-    const isDarkMode = document.body.getAttribute('data-theme') === 'dark'
+    const isLightMode = document.documentElement.getAttribute('data-theme') === 'light'
 
     spans.forEach(span => {
-      if (isDarkMode) {
-        span.style.color = '#4a90e2'
-        span.style.background = 'transparent'
-        span.style.webkitTextFillColor = '#4a90e2'
-        span.style.webkitBackgroundClip = 'unset'
-        span.style.backgroundClip = 'unset'
-        span.style.filter = 'none'
-      } else {
+      if (isLightMode) {
         span.style.background = 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)'
         span.style.webkitBackgroundClip = 'text'
         span.style.backgroundClip = 'text'
         span.style.webkitTextFillColor = 'transparent'
         span.style.filter = 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3))'
+        span.style.color = ''
+      } else {
+        // Dark mode (default): use gold gradient too for consistency
+        span.style.background = 'var(--gold-gradient)'
+        span.style.webkitBackgroundClip = 'text'
+        span.style.backgroundClip = 'text'
+        span.style.webkitTextFillColor = 'transparent'
+        span.style.filter = 'drop-shadow(0 2px 8px rgba(255, 215, 0, 0.4))'
         span.style.color = ''
       }
     })
@@ -76,7 +77,7 @@ export default class extends Controller {
       })
     })
 
-    this.observer.observe(document.body, {
+    this.observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['data-theme']
     })

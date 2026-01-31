@@ -13,6 +13,8 @@ export default class extends Controller {
       this.applySystem()
     } else if (saved === 'light') {
       this.applyLight()
+    } else if (saved === 'dark-manual') {
+      this.applyDark()
     } else {
       this.applySystem()
     }
