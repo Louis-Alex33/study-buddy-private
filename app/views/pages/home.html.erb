@@ -125,7 +125,11 @@
                   </div>
                   <div class="category-card-content">
                     <h5 class="category-card-title"><%= category.title %></h5>
-                    <span class="category-card-count"><%= category.lectures.count %> cours · <%= category.quizzes.count %> quiz · <%= category.lectures.sum { |l| l.flashcards.size } %> flashcards</span>
+                    <div class="category-card-stats">
+                      <span class="category-stat"><i class="fas fa-book"></i> <%= category.lectures.count %></span>
+                      <span class="category-stat"><i class="fas fa-question-circle"></i> <%= category.quizzes.count %></span>
+                      <span class="category-stat"><i class="fas fa-clone"></i> <%= category.lectures.sum { |l| l.flashcards.size } %></span>
+                    </div>
                   </div>
                 </div>
               <% end %>
