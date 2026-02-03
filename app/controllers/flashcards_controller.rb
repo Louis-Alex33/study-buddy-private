@@ -1,5 +1,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_lecture, only: [:new, :create]
+  before_action :set_flashcard, only: [:show, :update_progress, :destroy]
+  before_action :authorize_flashcard!, only: [:destroy]
   before_action :check_flashcard_limit, only: [:create]
   before_action -> { enforce_rate_limit!(:ai_flashcard, max_per_minute: 3) }, only: [:create]
 
@@ -18,13 +20,11 @@ class FlashcardsController < ApplicationController
   end
 
   def show
-    @flashcard = Flashcard.find(params[:id])
     @completion = current_user.flashcard_completions.find_or_initialize_by(flashcard: @flashcard)
     @progress = @completion.status.to_i
   end
 
   def update_progress
-    @flashcard = Flashcard.find(params[:id])
     completion = current_user.flashcard_completions.find_or_initialize_by(flashcard: @flashcard)
     completion.status = params[:progress]
     completion.save
@@ -33,13 +33,22 @@ class FlashcardsController < ApplicationController
   end
 
   def destroy
-    @flashcard = Flashcard.find(params[:id])
     lecture = @flashcard.lecture
     @flashcard.destroy
     redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: "Flashcard supprimee avec succes"
   end
 
   private
+
+  def set_flashcard
+    @flashcard = Flashcard.find(params[:id])
+  end
+
+  def authorize_flashcard!
+    unless @flashcard.lecture.user == current_user
+      redirect_to lectures_path, alert: "Accès non autorisé"
+    end
+  end
 
   def check_flashcard_limit
     enforce_flashcard_generation_limit!

@@ -1,5 +1,7 @@
 class LecturesController < ApplicationController
   before_action :check_lecture_limit, only: [:create]
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume]
+  before_action :authorize_lecture!, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume]
 
   def index
     @lectures = current_user.lectures
@@ -14,7 +16,6 @@ class LecturesController < ApplicationController
   end
 
   def show
-    @lecture = Lecture.find(params[:id])
     @note = Note.new
   end
 
@@ -42,12 +43,9 @@ class LecturesController < ApplicationController
   end
 
   def edit
-    @lecture = Lecture.find(params[:id])
   end
 
   def update
-    @lecture = Lecture.find(params[:id])
-
     if @lecture.update(lecture_params)
       redirect_to lecture_path(@lecture), notice: "Lecture mise a jour"
     else
@@ -56,20 +54,16 @@ class LecturesController < ApplicationController
   end
 
   def destroy
-    @lecture = Lecture.find(params[:id])
     @lecture.destroy
     redirect_to lectures_path, notice: "Lecture supprimée avec succès"
   end
 
   def re_analyze
-    @lecture = Lecture.find(params[:id])
     LectureAnalyzerService.new(@lecture).call
     redirect_to lecture_path(@lecture), notice: "Fiche de cours ré-analysée avec succès"
   end
 
   def download_resume
-    @lecture = Lecture.find(params[:id])
-
     unless @lecture.resume.present?
       redirect_to lecture_path(@lecture), alert: "Aucune fiche de cours disponible pour ce cours."
       return
@@ -93,6 +87,16 @@ class LecturesController < ApplicationController
   end
 
   private
+
+  def set_lecture
+    @lecture = Lecture.find(params[:id])
+  end
+
+  def authorize_lecture!
+    unless @lecture.user == current_user
+      redirect_to lectures_path, alert: "Accès non autorisé"
+    end
+  end
 
   def check_lecture_limit
     enforce_lecture_limit!

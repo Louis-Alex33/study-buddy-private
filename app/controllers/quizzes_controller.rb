@@ -2,6 +2,8 @@ class QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_quiz_limit, only: [:create]
   before_action -> { enforce_rate_limit!(:ai_quiz, max_per_minute: 3) }, only: [:create]
+  before_action :set_quiz, only: [:show, :edit, :update, :destroy, :bookmark, :unbookmark]
+  before_action :authorize_quiz_modification!, only: [:edit, :update, :destroy]
 
   def index
     @categories = Category.includes(:quizzes).where.not(quizzes: { id: nil })
@@ -10,7 +12,6 @@ class QuizzesController < ApplicationController
   end
 
   def show
-    @quiz = Quiz.includes(questions: :options).find(params[:id])
     @questions = @quiz.questions.ordered
     @user_attempts = @quiz.attempts.where(user: current_user).order(created_at: :desc)
     @best_attempt = @user_attempts.completed.order(score: :desc).first
@@ -21,12 +22,10 @@ class QuizzesController < ApplicationController
   end
 
   def edit
-    @quiz = Quiz.find(params[:id])
     @questions = @quiz.questions.includes(:options).ordered
   end
 
   def update
-    @quiz = Quiz.find(params[:id])
     if @quiz.update(quiz_params)
       redirect_to quiz_path(@quiz), notice: "Quiz mis à jour avec succès."
     else
@@ -36,19 +35,16 @@ class QuizzesController < ApplicationController
   end
 
   def bookmark
-    @quiz = Quiz.find(params[:id])
     current_user.quiz_bookmarks.find_or_create_by(quiz: @quiz)
     redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz ajouté aux favoris."
   end
 
   def unbookmark
-    @quiz = Quiz.find(params[:id])
     current_user.quiz_bookmarks.find_by(quiz: @quiz)&.destroy
     redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz retiré des favoris."
   end
 
   def destroy
-    @quiz = Quiz.find(params[:id])
     lecture = @quiz.lecture
     @quiz.destroy
     if lecture
@@ -89,6 +85,27 @@ class QuizzesController < ApplicationController
   end
 
   private
+
+  def set_quiz
+    @quiz = Quiz.includes(questions: :options).find(params[:id])
+  end
+
+  def authorize_quiz_modification!
+    # Le quiz appartient à l'utilisateur si:
+    # 1. Le quiz est lié à une lecture qui appartient à l'utilisateur
+    # 2. OU l'utilisateur a créé un challenge pour ce quiz
+    is_owner = false
+
+    if @quiz.lecture.present?
+      is_owner = @quiz.lecture.user == current_user
+    else
+      is_owner = current_user.challenges.exists?(quiz: @quiz)
+    end
+
+    unless is_owner
+      redirect_to quizzes_path, alert: "Accès non autorisé"
+    end
+  end
 
   def check_quiz_limit
     enforce_quiz_generation_limit!
