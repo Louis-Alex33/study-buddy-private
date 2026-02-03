@@ -141,7 +141,7 @@
     <div class="col-lg-6">
       <div class="row g-3">
         <!-- Flashcards Section (Top 50%) -->
-        <div class="col-12">
+        <div class="col-12" id="flashcards-section">
           <div class="flashcards-card">
             <div class="flashcards-header">
               <div class="flashcards-icon"><i class="fas fa-layer-group"></i></div>
@@ -208,7 +208,7 @@
         </div>
 
         <!-- Quiz Section (Below Flashcards) -->
-        <div class="col-12">
+        <div class="col-12" id="quiz-section">
           <div class="flashcards-card">
             <div class="flashcards-header">
               <div class="flashcards-icon"><i class="fas fa-brain"></i></div>
@@ -221,10 +221,9 @@
               </button>
             </div>
 
-            <% lecture_quizzes = Quiz.where(category: @lecture.category) %>
-            <% if lecture_quizzes.any? %>
+            <% if @lecture.quizzes.any? %>
               <div class="flashcards-list">
-                <% lecture_quizzes.each do |quiz| %>
+                <% @lecture.quizzes.each do |quiz| %>
                   <%
                     best_attempt = quiz.attempts.where(user: current_user, done: true).order(score: :desc).first
                     total = quiz.questions.count
@@ -292,8 +291,9 @@
         <p style="text-align: center;">L'IA va générer automatiquement <strong>10 questions</strong> basées sur la catégorie <strong><%= @lecture.category.title %></strong>.</p>
         <%= simple_form_for Quiz.new, url: quizzes_path, html: { data: { controller: "quiz-loading", action: "submit->quiz-loading#submit" } } do |f| %>
           <%= f.hidden_field :category_id, value: @lecture.category.id %>
+          <%= f.hidden_field :lecture_id, value: @lecture.id %>
           <%= f.hidden_field :status, value: "public" %>
-          <%= hidden_field_tag :redirect_to, lecture_path(@lecture) %>
+          <%= hidden_field_tag :redirect_to, lecture_path(@lecture, anchor: "quiz-section") %>
           <%= f.input :title, label: "Titre du quiz", input_html: { value: "Quiz - #{@lecture.title}" }, placeholder: "Ex: Quiz #{@lecture.title}", required: true, wrapper_html: { class: "form-group-modal" } %>
           <%= f.input :level, as: :radio_buttons, collection: (1..5).map { |n| ["Niveau #{n}", n] }, label: "Niveau de difficulté", required: true, wrapper_html: { class: "form-group-modal level-radio-group" } %>
           <div class="modal-footer">

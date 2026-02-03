@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_31_090324) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_03_083212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -331,7 +331,9 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_31_090324) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "shared", null: false
+    t.bigint "lecture_id"
     t.index ["category_id"], name: "index_quizzes_on_category_id"
+    t.index ["lecture_id"], name: "index_quizzes_on_lecture_id"
     t.index ["level"], name: "index_quizzes_on_level"
   end
 
@@ -435,6 +437,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_31_090324) do
   add_foreign_key "quiz_questions", "quiz_rooms"
   add_foreign_key "quiz_rooms", "users", column: "owner_id"
   add_foreign_key "quizzes", "categories"
+  add_foreign_key "quizzes", "lectures"
   add_foreign_key "user_badges", "badges"
   add_foreign_key "user_badges", "users"
   add_foreign_key "user_ip_logs", "users"

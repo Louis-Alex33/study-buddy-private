@@ -11,9 +11,9 @@ class FlashcardsController < ApplicationController
 
     if generated_flashcards.present?
       current_user.increment!(:flashcard_generations_count)
-      redirect_to lecture_path(@lecture), notice: "#{generated_flashcards.count} flashcards generees avec succes"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: "#{generated_flashcards.count} flashcards generees avec succes"
     else
-      redirect_to lecture_path(@lecture), alert: "Erreur lors de la generation des flashcards"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: "Erreur lors de la generation des flashcards"
     end
   end
 
@@ -36,7 +36,7 @@ class FlashcardsController < ApplicationController
     @flashcard = Flashcard.find(params[:id])
     lecture = @flashcard.lecture
     @flashcard.destroy
-    redirect_to lecture_path(lecture), notice: "Flashcard supprimee avec succes"
+    redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: "Flashcard supprimee avec succes"
   end
 
   private

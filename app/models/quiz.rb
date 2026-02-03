@@ -1,5 +1,6 @@
 class Quiz < ApplicationRecord
   belongs_to :category
+  belongs_to :lecture, optional: true
   has_many :questions, dependent: :destroy
   has_many :attempts, dependent: :destroy
   has_many :challenges, dependent: :destroy
