@@ -205,17 +205,6 @@
     border-radius: 50%;
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -30px;
-    left: -30px;
-    width: 150px;
-    height: 150px;
-    background: var(--glass-bg);
-    border-radius: 50%;
-  }
-
   .resume-header {
     display: flex;
     align-items: center;
