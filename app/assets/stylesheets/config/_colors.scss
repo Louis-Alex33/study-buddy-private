@@ -16,6 +16,10 @@ $card-bg-accent: #1c1c2e;
 
 // ---- Default mode: Dark SaaS ----
 :root {
+  // Typography
+  --font-title: "Space Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
   // Backgrounds
   --bg-body:       #0f0f1a;
   --bg-surface:    #161625;

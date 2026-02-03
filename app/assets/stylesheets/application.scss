@@ -8,7 +8,78 @@
 @import "components/index";
 @import "pages/index";
 
-// Offset body content for fixed navbar
+// ============================================
+// Global Typography — SaaS Modern
+// ============================================
+
+// Body defaults
 body {
   padding-top: 70px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Headings — Space Grotesk
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-title);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+h1, .h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+// Paragraphs — better readability for landing pages
+p {
+  line-height: 1.7;
+}
+
+// Landing page specific: max-width for readability
+.hero-section p,
+.feature-description,
+.landing-text {
+  max-width: 65ch;
+}
+
+// UI elements — Inter with medium weight
+.btn,
+.nav-link,
+.navbar,
+label,
+.form-label,
+.badge,
+.alert,
+input,
+select,
+textarea,
+button {
+  font-family: var(--font-body);
+}
+
+.btn {
+  font-weight: 500;
+}
+
+.nav-link {
+  font-weight: 500;
+}
+
+label,
+.form-label {
+  font-weight: 500;
+}
+
+// Strong text
+strong, b {
+  font-weight: 600;
 }
