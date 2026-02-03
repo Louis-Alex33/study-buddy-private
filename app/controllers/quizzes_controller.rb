@@ -49,8 +49,13 @@ class QuizzesController < ApplicationController
 
   def destroy
     @quiz = Quiz.find(params[:id])
+    lecture = @quiz.lecture
     @quiz.destroy
-    redirect_back fallback_location: quizzes_path, notice: "Quiz supprimé avec succès."
+    if lecture
+      redirect_to lecture_path(lecture, anchor: "quiz-section"), notice: "Quiz supprimé avec succès."
+    else
+      redirect_back fallback_location: quizzes_path, notice: "Quiz supprimé avec succès."
+    end
   end
 
   def create
