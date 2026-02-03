@@ -289,7 +289,7 @@
       <div class="modal-body">
         <div class="modal-icon" style="text-align: center;"><i class="fas fa-microchip"></i></div>
         <p style="text-align: center;">L'IA va générer automatiquement <strong>10 questions</strong> basées sur la catégorie <strong><%= @lecture.category.title %></strong>.</p>
-        <%= simple_form_for Quiz.new, url: quizzes_path, html: { data: { controller: "quiz-loading", action: "submit->quiz-loading#submit" } } do |f| %>
+        <%= simple_form_for Quiz.new, url: quizzes_path, html: { data: { controller: "quiz-loading", action: "submit->quiz-loading#submit", turbo: false } } do |f| %>
           <%= f.hidden_field :category_id, value: @lecture.category.id %>
           <%= f.hidden_field :lecture_id, value: @lecture.id %>
           <%= f.hidden_field :status, value: "public" %>
@@ -324,7 +324,7 @@
       </div>
       <div class="modal-footer" >
         <button type="button" data-bs-dismiss="modal" class="btn-modal-cancel">Annuler</button>
-        <%= form_with url: lecture_flashcards_path(@lecture), data: { controller: "flashcard-loading", action: "submit->flashcard-loading#submit" }, method: :post, local: true, style: "display: inline;" do |f| %>
+        <%= form_with url: lecture_flashcards_path(@lecture), data: { controller: "flashcard-loading", action: "submit->flashcard-loading#submit", turbo: false }, method: :post, local: true, style: "display: inline;" do |f| %>
           <%= f.submit "Générer maintenant", class: "btn-modal-submit" %>
         <% end %>
       </div>
