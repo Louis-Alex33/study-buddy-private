@@ -79,10 +79,6 @@ export default class extends Controller {
     }
   }
 
-  submitNote(event) {
-    // Form will submit via Turbo, we just need to close popup after
-  }
-
   closePopup() {
     this.hidePopup()
     window.getSelection().removeAllRanges()
@@ -91,7 +87,6 @@ export default class extends Controller {
   onSubmitSuccess(event) {
     this.hidePopup()
     window.getSelection().removeAllRanges()
-    // Refresh page to show annotations
-    Turbo.visit(window.location.href, { action: "replace" })
+    // Don't reload - Turbo Streams will handle the update
   }
 }
