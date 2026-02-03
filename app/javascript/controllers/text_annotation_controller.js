@@ -132,23 +132,36 @@ export default class extends Controller {
       this.textStartInputTarget.value = textStart
       this.textEndInputTarget.value = textEnd
 
-      // Store scroll position before showing popup
-      const scrollY = window.scrollY
-
-      // Position popup near selection
+      // Position popup near selection (using viewport coordinates with fixed positioning)
       const rect = range.getBoundingClientRect()
-      this.showPopup(rect, scrollY)
+      this.showPopup(rect)
     } else {
       this.hidePopup()
     }
   }
 
-  showPopup(rect, scrollY) {
+  showPopup(rect) {
     const popup = this.popupTarget
 
-    // Position relative to viewport, accounting for current scroll
-    const top = rect.bottom + scrollY + 10
-    const left = rect.left + (rect.width / 2)
+    // Use fixed positioning with viewport coordinates
+    let top = rect.bottom + 10
+    let left = rect.left + (rect.width / 2)
+
+    // Ensure popup doesn't go off screen
+    const popupWidth = 350 // approximate width
+    const popupHeight = 200 // approximate height
+
+    // Adjust horizontal position if too close to edges
+    if (left - popupWidth / 2 < 10) {
+      left = popupWidth / 2 + 10
+    } else if (left + popupWidth / 2 > window.innerWidth - 10) {
+      left = window.innerWidth - popupWidth / 2 - 10
+    }
+
+    // If popup would go below viewport, show it above the selection
+    if (top + popupHeight > window.innerHeight - 10) {
+      top = rect.top - popupHeight - 10
+    }
 
     popup.style.top = `${top}px`
     popup.style.left = `${left}px`

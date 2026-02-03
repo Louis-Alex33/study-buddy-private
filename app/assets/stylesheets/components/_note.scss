@@ -189,7 +189,7 @@
 
 // Annotation Popup
 .annotation-popup {
-  position: absolute;
+  position: fixed;
   z-index: 1000;
   background: var(--bg-surface);
   border-radius: 12px;
@@ -204,13 +204,13 @@
   &.hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateY(-10px);
   }
 
   &.visible {
     opacity: 1;
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
   }
 
   .annotation-popup-header {
