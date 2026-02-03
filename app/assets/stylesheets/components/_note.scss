@@ -400,6 +400,58 @@
   }
 }
 
+// Annotated text highlighting
+.annotated-text {
+  background: rgba(255, 215, 0, 0.25);
+  border-bottom: 2px solid var(--gold);
+  padding: 1px 2px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(255, 215, 0, 0.4);
+  }
+}
+
+// Annotation marker (small icon next to annotated text)
+.annotation-marker {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: var(--gold);
+  color: #1a1a2e;
+  border-radius: 50%;
+  font-size: 9px;
+  margin-left: 4px;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: all 0.2s;
+  box-shadow: 0 2px 6px rgba(255, 215, 0, 0.4);
+
+  &:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 10px rgba(255, 215, 0, 0.6);
+  }
+}
+
+// Flash animation for highlighting annotation in list
+.highlight-flash {
+  animation: flashHighlight 1.5s ease;
+}
+
+@keyframes flashHighlight {
+  0%, 100% {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  25%, 75% {
+    background: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  }
+}
+
 // ==========================================
 // Integrated Notes Section
 // ==========================================
