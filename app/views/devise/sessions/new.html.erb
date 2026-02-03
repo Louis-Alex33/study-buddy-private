@@ -56,7 +56,7 @@
           <div class="auth-options">
             <% if devise_mapping.rememberable? %>
               <label class="auth-check">
-                <%= f.input :remember_me, as: :boolean, label: false, wrapper: false %>
+                <%= f.check_box :remember_me %>
                 <span class="auth-checkmark"></span>
                 Se souvenir de moi
               </label>

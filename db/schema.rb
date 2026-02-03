@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_03_083212) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -161,6 +161,10 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_083212) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "selected_text"
+    t.integer "text_start"
+    t.integer "text_end"
+    t.string "annotation_type", default: "sidebar"
     t.index ["lecture_id"], name: "index_notes_on_lecture_id"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end

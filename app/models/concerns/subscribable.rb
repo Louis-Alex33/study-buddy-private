@@ -108,12 +108,17 @@ module Subscribable
 
   def ip_allowed?(ip_address)
     return true if ip_address.blank?
+    return true if test_account?
 
     # If this IP is already known in the last 24h, it's always allowed
     return true if user_ip_logs.where(ip_address: ip_address).where("created_at > ?", 24.hours.ago).exists?
 
     # Otherwise, check if adding a new IP would exceed the limit
     distinct_ips_last_24h < plan_limit(:max_ips_per_day)
+  end
+
+  def test_account?
+    email.match?(/\Atest\d+@studigo\.fr\z/)
   end
 
   def active_subscription

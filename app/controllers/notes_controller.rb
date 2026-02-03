@@ -41,6 +41,6 @@ class NotesController < ApplicationController
   end
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :selected_text, :text_start, :text_end, :annotation_type)
   end
 end

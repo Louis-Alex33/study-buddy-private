@@ -72,12 +72,16 @@
 
   <!-- Resume Section -->
   <% if @lecture.resume.present? %>
-    <div class="lecture-resume-card">
+    <%
+      # Get inline annotations for this lecture
+      inline_annotations = @lecture.notes.where(annotation_type: "inline").where.not(selected_text: nil)
+    %>
+    <div class="lecture-resume-card" data-controller="text-annotation" data-text-annotation-lecture-id-value="<%= @lecture.id %>">
       <div class="resume-header">
         <div class="resume-icon"><i class="fas fa-file-alt"></i></div>
         <div class="resume-title">
           <h3>Fiche de cours</h3>
-          <p>Générée par l'IA</p>
+          <p>Générée par l'IA <span class="annotation-hint"><i class="fas fa-highlighter"></i> Sélectionne du texte pour annoter</span></p>
         </div>
         <div class="resume-actions">
           <%= link_to download_resume_lecture_path(@lecture), class: "btn-download-resume" do %>
@@ -88,8 +92,53 @@
           <% end %>
         </div>
       </div>
-      <div class="resume-content">
+      <div class="resume-content" data-text-annotation-target="content" data-action="mouseup->text-annotation#handleSelection">
         <%= sanitize(@lecture.resume, tags: %w[h3 h4 p ul ol li strong em br]) %>
+      </div>
+
+      <!-- Inline annotations indicators -->
+      <% if inline_annotations.any? %>
+        <div class="annotations-summary">
+          <div class="annotations-toggle" data-bs-toggle="collapse" data-bs-target="#annotationsList">
+            <i class="fas fa-sticky-note"></i>
+            <span><%= inline_annotations.count %> annotation<%= inline_annotations.count > 1 ? 's' : '' %></span>
+            <i class="fas fa-chevron-down toggle-icon"></i>
+          </div>
+          <div class="collapse" id="annotationsList">
+            <div class="annotations-list-inline">
+              <% inline_annotations.each do |annotation| %>
+                <div class="annotation-item-inline">
+                  <div class="annotation-quote">"<%= truncate(annotation.selected_text, length: 50) %>"</div>
+                  <div class="annotation-note"><%= annotation.content %></div>
+                  <%= button_to note_path(annotation), method: :delete, data: { turbo_confirm: "Supprimer cette annotation ?" }, class: "btn-delete-annotation" do %>
+                    <i class="fas fa-times"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <!-- Annotation popup -->
+      <div class="annotation-popup hidden" data-text-annotation-target="popup">
+        <%= form_with url: lecture_notes_path(@lecture), method: :post, data: { turbo_stream: true, action: "turbo:submit-end->text-annotation#onSubmitSuccess" } do |f| %>
+          <div class="annotation-popup-header">
+            <i class="fas fa-highlighter"></i>
+            <span>Ajouter une annotation</span>
+          </div>
+          <input type="hidden" name="note[selected_text]" value="" data-text-annotation-target="selectedTextInput">
+          <input type="hidden" name="note[text_start]" value="" data-text-annotation-target="textStartInput">
+          <input type="hidden" name="note[text_end]" value="" data-text-annotation-target="textEndInput">
+          <input type="hidden" name="note[annotation_type]" value="inline">
+          <textarea name="note[content]" placeholder="Votre note..." rows="2" required data-text-annotation-target="noteInput"></textarea>
+          <div class="annotation-popup-actions">
+            <button type="button" class="btn-cancel-annotation" data-action="click->text-annotation#closePopup">Annuler</button>
+            <button type="submit" class="btn-save-annotation">
+              <i class="fas fa-check"></i> Enregistrer
+            </button>
+          </div>
+        <% end %>
       </div>
     </div>
   <% end %>
