@@ -1,0 +1,179 @@
+// ==========================================
+// Tarteaucitron — Custom Styling
+// Adapté au design Studigo (dark/light mode)
+// ==========================================
+
+// Variables de personnalisation
+#tarteaucitronRoot {
+  // Reset font
+  font-family: var(--font-body) !important;
+
+  // Bannière principale
+  #tarteaucitronAlertBig {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--shadow-lg) !important;
+    padding: 24px !important;
+    max-width: 480px !important;
+    margin: 0 auto 20px !important;
+
+    #tarteaucitronDisclaimerAlert {
+      color: var(--text-secondary) !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      margin-bottom: 16px !important;
+    }
+
+    // Boutons
+    #tarteaucitronPersonalize,
+    #tarteaucitronPersonalize2 {
+      background: var(--bg-elevated) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      padding: 10px 20px !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+
+      &:hover {
+        background: var(--bg-hover) !important;
+        border-color: var(--border-hover) !important;
+      }
+    }
+
+    #tarteaucitronCloseAlert {
+      background: var(--accent) !important;
+      color: white !important;
+      border: none !important;
+      border-radius: 10px !important;
+      padding: 10px 20px !important;
+      font-weight: 600 !important;
+      font-size: 14px !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+
+      &:hover {
+        background: var(--accent-hover) !important;
+      }
+    }
+
+    // Bouton "Tout refuser"
+    #tarteaucitronAllDenied2 {
+      background: transparent !important;
+      color: var(--text-tertiary) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      padding: 10px 20px !important;
+      font-weight: 500 !important;
+      font-size: 14px !important;
+
+      &:hover {
+        background: var(--bg-elevated) !important;
+        color: var(--text-secondary) !important;
+      }
+    }
+  }
+
+  // Panneau de gestion des services
+  #tarteaucitron {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--shadow-lg) !important;
+
+    #tarteaucitronServices {
+      background: transparent !important;
+
+      .tarteaucitronTitle {
+        background: var(--bg-elevated) !important;
+        color: var(--text-primary) !important;
+        border-bottom: 1px solid var(--border) !important;
+        font-weight: 600 !important;
+
+        button {
+          color: var(--text-primary) !important;
+        }
+      }
+
+      .tarteaucitronDetails {
+        color: var(--text-secondary) !important;
+        font-size: 13px !important;
+      }
+
+      .tarteaucitronLine {
+        background: var(--bg-surface) !important;
+        border-bottom: 1px solid var(--border) !important;
+
+        .tarteaucitronName {
+          color: var(--text-primary) !important;
+          font-weight: 500 !important;
+
+          span {
+            color: var(--text-tertiary) !important;
+          }
+        }
+
+        // Boutons Allow/Deny
+        .tarteaucitronAllow {
+          background: var(--success) !important;
+          color: white !important;
+          border-radius: 6px !important;
+        }
+
+        .tarteaucitronDeny {
+          background: var(--danger) !important;
+          color: white !important;
+          border-radius: 6px !important;
+        }
+      }
+    }
+
+    // Bouton fermer
+    #tarteaucitronClosePanel {
+      background: var(--bg-elevated) !important;
+      color: var(--text-primary) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 8px !important;
+
+      &:hover {
+        background: var(--bg-hover) !important;
+      }
+    }
+  }
+
+  // Petit icône en bas à droite
+  #tarteaucitronIcon {
+    background: var(--bg-surface) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 50% !important;
+    box-shadow: var(--shadow-md) !important;
+
+    #tarteaucitronManager {
+      color: var(--accent) !important;
+    }
+  }
+}
+
+// Overlay sombre
+#tarteaucitronBack {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  #tarteaucitronRoot {
+    #tarteaucitronAlertBig {
+      margin: 10px !important;
+      padding: 20px !important;
+      border-radius: 12px !important;
+
+      #tarteaucitronDisclaimerAlert {
+        font-size: 13px !important;
+      }
+    }
+  }
+}

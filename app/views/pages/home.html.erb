@@ -95,7 +95,7 @@
   <% if user_signed_in? %>
     <%# ========== DASHBOARD CONNECTE ========== %>
     <div class="hero-section">
-      <p class="hero-tagline">🎓 Ton espace d'apprentissage</p>
+      <p class="hero-tagline">Ton espace d'apprentissage</p>
       <h1 class="hero-title">Bienvenue sur <span class="hero-highlight" data-controller="text-animation">Studigo</span></h1>
       <p class="hero-subtitle">
         Importe tes cours, et laisse l'IA faire le reste.<br>
@@ -158,7 +158,7 @@
 
     <!-- HERO -->
     <div class="hero-section">
-      <p class="hero-tagline">🎓 La plateforme d'étude propulsée par l'IA</p>
+      <p class="hero-tagline">La plateforme d'étude propulsée par l'IA</p>
       <h1 class="hero-title">Transforme tes cours en <span class="hero-highlight" data-controller="text-animation">1 minute</span></h1>
       <p class="hero-subtitle">
         Importe un PDF ou un texte. Studigo génère automatiquement<br>
@@ -172,7 +172,7 @@
           Voir comment ça marche <i class="fas fa-arrow-down"></i>
         </a>
       </div>
-      <p class="hero-proof">🚧 Version bêta — amélioration continue. Rejoins les premiers utilisateurs.</p>
+      <p class="hero-proof">Version bêta — Rejoins les premiers utilisateurs.</p>
     </div>
 
     <!-- HOW IT WORKS -->
@@ -197,7 +197,56 @@
             <div class="step-number">3</div>
             <div class="step-emoji">🎯</div>
             <h3>Révise</h3>
-            <p>Teste-toi, suis ta progression et défie tes amis en mode multijoueur.</p>
+            <p>Teste-toi avec les flashcards et quiz. Défie tes amis en mode multijoueur.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUCT PREVIEW -->
+    <section id="preview" class="landing-section">
+      <div class="landing-section-inner">
+        <h2 class="landing-section-title">Aperçu du produit</h2>
+        <p class="landing-section-subtitle">De tes PDF à la révision, sans prise de tête.</p>
+        <div class="preview-grid">
+          <!-- Mock Flashcard -->
+          <div class="preview-card">
+            <div class="preview-card-header">
+              <span class="preview-badge">Flashcard</span>
+            </div>
+            <div class="preview-card-body">
+              <div class="mock-flashcard">
+                <div class="mock-flashcard-question">
+                  <span class="mock-label">Question</span>
+                  <p>Quelle est la capitale de la France ?</p>
+                </div>
+                <div class="mock-flashcard-divider"></div>
+                <div class="mock-flashcard-answer">
+                  <span class="mock-label">Réponse</span>
+                  <p>Paris</p>
+                </div>
+              </div>
+              <p class="preview-caption">Flashcards générées automatiquement à partir de ton cours.</p>
+            </div>
+          </div>
+
+          <!-- Mock Quiz -->
+          <div class="preview-card">
+            <div class="preview-card-header">
+              <span class="preview-badge">Quiz</span>
+            </div>
+            <div class="preview-card-body">
+              <div class="mock-quiz">
+                <p class="mock-quiz-question">Quel est le plus grand océan du monde ?</p>
+                <div class="mock-quiz-options">
+                  <div class="mock-option">Atlantique</div>
+                  <div class="mock-option mock-option-correct">Pacifique</div>
+                  <div class="mock-option">Indien</div>
+                  <div class="mock-option">Arctique</div>
+                </div>
+              </div>
+              <p class="preview-caption">Quiz interactifs pour tester tes connaissances.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -206,8 +255,8 @@
     <!-- FEATURES -->
     <section id="features" class="landing-section">
       <div class="landing-section-inner">
-        <h2 class="landing-section-title">Tout ce qu'il faut pour réussir</h2>
-        <p class="landing-section-subtitle">Un seul outil pour remplacer tes 10 apps d'étude.</p>
+        <h2 class="landing-section-title">Tout ce qu'il te faut pour réviser</h2>
+        <p class="landing-section-subtitle">De tes PDF à la révision, tout est automatisé.</p>
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">🃏</div>
@@ -217,7 +266,7 @@
           <div class="feature-card">
             <div class="feature-icon">📝</div>
             <h3>Quiz automatiques</h3>
-            <p>Des quiz créés en un clic pour tester tes connaissances. Seul ou entre amis.</p>
+            <p>Des quiz créés en un clic pour tester tes connaissances, seul ou entre amis.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🤖</div>
@@ -240,11 +289,11 @@
         <div class="faq-list">
           <details class="faq-item">
             <summary>C'est vraiment gratuit ?</summary>
-            <p>Oui. Le plan gratuit inclut : 3 cours maximum, 10 messages IA au total, 2 générations de flashcards, 1 création de quiz et 5 Mo par document. Pour un usage illimité, passe à Studigo Pro.</p>
+            <p>Oui. Le plan gratuit inclut : <strong>3 cours</strong>, <strong>10 messages IA</strong> au total, <strong>2 générations de flashcards</strong>, <strong>1 génération de quiz</strong> et <strong>5 Mo</strong> par document. Pour un usage illimité, passe à Studigo Pro.</p>
           </details>
           <details class="faq-item">
             <summary>Quels formats de fichiers sont supportés ?</summary>
-            <p>Studigo accepte les PDF et les images (JPG, PNG). Tu peux aussi coller directement du texte.</p>
+            <p>Studigo accepte les <strong>PDF</strong> et les <strong>images</strong> (JPG, PNG). Tu peux aussi coller directement du texte.</p>
           </details>
           <details class="faq-item">
             <summary>Mes données sont-elles sécurisées ?</summary>
@@ -252,7 +301,7 @@
           </details>
           <details class="faq-item">
             <summary>Combien coûte Studigo Pro ?</summary>
-            <p>Studigo Pro est à 9,99 €/mois ou 95 €/an (soit 7,92 €/mois). Cours illimités, IA complète, mode multijoueur.</p>
+            <p>Studigo Pro est à <strong>9,99 €/mois</strong> ou <strong>95 €/an</strong> (soit 7,92 €/mois). Cours illimités, messages IA illimités, générations illimitées et mode multijoueur inclus.</p>
           </details>
           <details class="faq-item">
             <summary>Je peux utiliser Studigo sur mobile ?</summary>

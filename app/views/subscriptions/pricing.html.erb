@@ -1,23 +1,23 @@
 <div class="pricing-page">
   <div class="container my-5">
     <div class="pricing-header">
-      <h1 class="pricing-main-title">💎 Choisis le plan qui te correspond</h1>
+      <h1 class="pricing-main-title">Choisis le plan qui te correspond</h1>
       <p class="pricing-subtitle">Débloque tout le potentiel de Studigo — commence gratuitement, évolue à ton rythme.</p>
     </div>
 
     <div class="pricing-grid">
       <!-- Plan Gratuit -->
       <div class="pricing-card">
-        <h3 class="pricing-plan-name">🆓 Gratuit</h3>
+        <h3 class="pricing-plan-name">Gratuit</h3>
         <div class="pricing-price">0&euro;<span>/mois</span></div>
         <p class="pricing-plan-desc">Idéal pour découvrir Studigo</p>
         <ul class="pricing-features">
-          <li>✅ 3 cours maximum</li>
-          <li>✅ 5 Mo par document</li>
-          <li>✅ 10 messages IA au total</li>
-          <li>✅ 2 générations de flashcards</li>
-          <li>✅ 1 création de quiz</li>
-          <li class="disabled">❌ Mode multijoueur</li>
+          <li><i class="fas fa-check"></i> 3 cours</li>
+          <li><i class="fas fa-check"></i> 10 messages IA au total</li>
+          <li><i class="fas fa-check"></i> 2 générations de flashcards</li>
+          <li><i class="fas fa-check"></i> 1 génération de quiz</li>
+          <li><i class="fas fa-check"></i> 5 Mo par document</li>
+          <li class="disabled"><i class="fas fa-times"></i> Mode multijoueur</li>
         </ul>
         <% if user_signed_in? && current_user.free? %>
           <span class="btn-plan-current">Plan actuel</span>
@@ -27,16 +27,16 @@
       <!-- Plan Pro Mensuel -->
       <div class="pricing-card pricing-card-pro">
         <span class="pricing-badge">Populaire</span>
-        <h3 class="pricing-plan-name">⚡ Pro Mensuel</h3>
+        <h3 class="pricing-plan-name">Pro Mensuel</h3>
         <div class="pricing-price">9,99&euro;<span>/mois</span></div>
         <p class="pricing-plan-desc">Pour les étudiants qui veulent performer</p>
         <ul class="pricing-features">
-          <li>✅ Cours illimités</li>
-          <li>✅ 10 Mo par document</li>
-          <li>✅ Accès complet aux fonctionnalités IA</li>
-          <li>✅ Flashcards illimitées</li>
-          <li>✅ Quiz illimités</li>
-          <li>✅ Mode multijoueur complet</li>
+          <li><i class="fas fa-check"></i> Cours illimités</li>
+          <li><i class="fas fa-check"></i> Messages IA illimités</li>
+          <li><i class="fas fa-check"></i> Générations de flashcards illimitées</li>
+          <li><i class="fas fa-check"></i> Générations de quiz illimitées</li>
+          <li><i class="fas fa-check"></i> 10 Mo par document</li>
+          <li><i class="fas fa-check"></i> Mode multijoueur</li>
         </ul>
         <% if user_signed_in? && current_user.pro? %>
           <%= link_to "Gérer mon abonnement", subscription_manage_path, class: "btn-plan-action" %>
@@ -50,14 +50,14 @@
       <!-- Plan Pro Annuel -->
       <div class="pricing-card pricing-card-pro">
         <span class="pricing-badge">-21%</span>
-        <h3 class="pricing-plan-name">🏆 Pro Annuel</h3>
+        <h3 class="pricing-plan-name">Pro Annuel</h3>
         <div class="pricing-price">95&euro;<span>/an</span></div>
-        <p class="pricing-plan-desc">Soit 7,92&euro;/mois — Économise 25&euro; 🎉</p>
+        <p class="pricing-plan-desc">Soit 7,92&euro;/mois — Économise 25&euro;</p>
         <ul class="pricing-features">
-          <li>✅ Tout le plan Pro Mensuel</li>
-          <li>✅ Économie de 21%</li>
-          <li>✅ Accès complet pendant 12 mois</li>
-          <li>✅ Support prioritaire</li>
+          <li><i class="fas fa-check"></i> Tout le plan Pro Mensuel</li>
+          <li><i class="fas fa-check"></i> Économie de 21%</li>
+          <li><i class="fas fa-check"></i> Accès complet pendant 12 mois</li>
+          <li><i class="fas fa-check"></i> Support prioritaire</li>
         </ul>
         <% if user_signed_in? && current_user.pro? %>
           <%= link_to "Gérer mon abonnement", subscription_manage_path, class: "btn-plan-action" %>
