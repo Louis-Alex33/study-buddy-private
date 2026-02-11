@@ -1,38 +1,61 @@
 import { Controller } from "@hotwired/stimulus"
 
+const STEPS = [
+  "Lecture du document...",
+  "Extraction du contenu...",
+  "Analyse par l'IA...",
+  "Structuration du résumé...",
+  "Finalisation..."
+]
+
 export default class extends Controller {
   submit() {
-
     const loading = document.createElement('div')
-    loading.className = 'upload-loading'
+    loading.className = 'generation-loading'
     loading.innerHTML = `
-      <div class="upload-loading-content">
-        <div class="spinner">
-          <div class="stickman">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="arm-left"></div>
-            <div class="arm-right"></div>
-            <div class="leg-left"></div>
-            <div class="leg-right"></div>
-          </div>
-          <div class="ground"></div>
+      <div class="generation-loading-card">
+        <div class="generation-loading-orb"></div>
+        <div class="generation-loading-orb"></div>
+        <div class="generation-loading-icon">
+          <i class="fas fa-file-alt"></i>
         </div>
-        <h2 style="margin-top: 3rem; color: #2c3e50; font-size: 1.8rem; font-weight: 700;">
-          <i class="fas fa-brain" style="color: #1351AA; margin-right: 0.5rem;"></i>
-          Analyse en cours
-        </h2>
-        <p>L'IA génère ton résumé personnalisé</p>
-        <div style="margin-top: 1.5rem; color: #666; font-size: 0.9rem; opacity: 0.8;">
-          <i class="fas fa-hourglass-half" style="margin-right: 0.3rem;"></i>
+        <h2 class="generation-loading-title">Analyse en cours</h2>
+        <p class="generation-loading-step">${STEPS[0]}</p>
+        <div class="generation-loading-progress">
+          <div class="generation-loading-progress-bar"></div>
+        </div>
+        <p class="generation-loading-hint">
+          <i class="fas fa-circle-notch"></i>
           Cela peut prendre quelques secondes...
-        </div>
+        </p>
       </div>
     `
     document.body.appendChild(loading)
 
+    this.animateProgress(loading, STEPS)
 
     const modal = bootstrap.Modal.getInstance(document.getElementById('uploadModal'))
     if (modal) modal.hide()
+  }
+
+  animateProgress(container, steps) {
+    const bar = container.querySelector('.generation-loading-progress-bar')
+    const stepText = container.querySelector('.generation-loading-step')
+    let currentStep = 0
+
+    const interval = setInterval(() => {
+      currentStep++
+      if (currentStep >= steps.length) {
+        clearInterval(interval)
+        bar.style.width = '95%'
+        return
+      }
+      stepText.style.opacity = '0'
+      setTimeout(() => {
+        stepText.textContent = steps[currentStep]
+        stepText.style.opacity = '1'
+      }, 300)
+      bar.style.width = `${Math.min((currentStep + 1) / steps.length * 90, 90)}%`
+    }, 3000)
   }
 }
