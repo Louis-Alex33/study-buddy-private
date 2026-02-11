@@ -21,7 +21,7 @@ class RealTimeQuizzesController < ApplicationController
     if @quiz_room.save
       # Créer automatiquement le participant pour le créateur
       @quiz_room.quiz_participants.create!(user: current_user, score: 0, correct_answers: 0, total_questions: 0)
-      redirect_to real_time_quiz_path(@quiz_room), notice: 'Room créée avec succès!'
+      redirect_to real_time_quiz_path(@quiz_room), notice: t("controllers.real_time_quizzes.room_created")
     else
       render :new, status: :unprocessable_entity
     end
@@ -39,12 +39,12 @@ class RealTimeQuizzesController < ApplicationController
 
   def join
     if @quiz_room.full?
-      redirect_to real_time_quizzes_path, alert: 'Cette room est pleine!'
+      redirect_to real_time_quizzes_path, alert: t("controllers.real_time_quizzes.room_full")
       return
     end
 
     if @quiz_room.quiz_participants.exists?(user: current_user)
-      redirect_to real_time_quiz_path(@quiz_room), notice: 'Tu es déjà dans cette room !'
+      redirect_to real_time_quiz_path(@quiz_room), notice: t("controllers.real_time_quizzes.already_joined")
       return
     end
 
@@ -58,7 +58,7 @@ class RealTimeQuizzesController < ApplicationController
       can_start: @quiz_room.can_start?
     })
 
-    redirect_to real_time_quiz_path(@quiz_room), notice: 'Tu as rejoint la room !'
+    redirect_to real_time_quiz_path(@quiz_room), notice: t("controllers.real_time_quizzes.joined")
   end
 
   def leave
@@ -72,21 +72,21 @@ class RealTimeQuizzesController < ApplicationController
         @quiz_room.destroy
       end
 
-      redirect_to real_time_quizzes_path, notice: 'Tu as quitté la room'
+      redirect_to real_time_quizzes_path, notice: t("controllers.real_time_quizzes.left")
     else
-      redirect_to real_time_quizzes_path, alert: 'Tu n\'es pas dans cette room'
+      redirect_to real_time_quizzes_path, alert: t("controllers.real_time_quizzes.not_in_room")
     end
   end
 
   def start
     # Vérifier que seul l'owner peut démarrer le quiz
     unless @quiz_room.owner == current_user
-      redirect_to real_time_quiz_path(@quiz_room), alert: 'Seul le créateur de la room peut lancer le quiz!'
+      redirect_to real_time_quiz_path(@quiz_room), alert: t("controllers.real_time_quizzes.only_owner_start")
       return
     end
 
     unless @quiz_room.can_start?
-      redirect_to real_time_quiz_path(@quiz_room), alert: 'Il faut au moins 2 joueurs pour commencer!'
+      redirect_to real_time_quiz_path(@quiz_room), alert: t("controllers.real_time_quizzes.need_two_players")
       return
     end
 
@@ -97,7 +97,7 @@ class RealTimeQuizzesController < ApplicationController
       type: 'quiz_started'
     })
 
-    redirect_to real_time_quiz_path(@quiz_room), notice: 'Le quiz a commencé!'
+    redirect_to real_time_quiz_path(@quiz_room), notice: t("controllers.real_time_quizzes.quiz_started")
   end
 
   def submit_answer
@@ -183,26 +183,26 @@ class RealTimeQuizzesController < ApplicationController
         })
       end
 
-      redirect_to real_time_quiz_path(@quiz_room), notice: 'Quiz terminé!'
+      redirect_to real_time_quiz_path(@quiz_room), notice: t("controllers.real_time_quizzes.quiz_finished")
     else
-      redirect_to real_time_quizzes_path, alert: 'Erreur'
+      redirect_to real_time_quizzes_path, alert: t("controllers.real_time_quizzes.error")
     end
   end
 
   def destroy
     # Seul l'owner peut supprimer la room, et seulement si elle est terminée
     if @quiz_room.owner != current_user
-      redirect_to real_time_quizzes_path, alert: 'Tu ne peux pas supprimer cette room !'
+      redirect_to real_time_quizzes_path, alert: t("controllers.real_time_quizzes.cannot_delete")
       return
     end
 
     if @quiz_room.status != 'finished'
-      redirect_to real_time_quizzes_path, alert: 'Tu ne peux supprimer que les rooms terminées !'
+      redirect_to real_time_quizzes_path, alert: t("controllers.real_time_quizzes.only_finished")
       return
     end
 
     @quiz_room.destroy
-    redirect_to real_time_quizzes_path, notice: 'Room supprimée avec succès!'
+    redirect_to real_time_quizzes_path, notice: t("controllers.real_time_quizzes.room_destroyed")
   end
 
   private

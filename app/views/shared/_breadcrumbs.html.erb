@@ -1,0 +1,12 @@
+<% if content_for?(:breadcrumbs) %>
+  <nav class="breadcrumbs" aria-label="Fil d'Ariane">
+    <ol class="breadcrumbs-list">
+      <li class="breadcrumbs-item">
+        <%= link_to root_path, class: "breadcrumbs-link" do %>
+          <i class="fas fa-home" aria-hidden="true"></i>
+        <% end %>
+      </li>
+      <%= yield(:breadcrumbs) %>
+    </ol>
+  </nav>
+<% end %>

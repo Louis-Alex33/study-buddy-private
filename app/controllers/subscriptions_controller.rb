@@ -26,18 +26,18 @@ class SubscriptionsController < ApplicationController
     redirect_to checkout_session.url, allow_other_host: true, status: :see_other
   rescue => e
     Rails.logger.error "Checkout error: #{e.message}"
-    redirect_to pricing_path, alert: "Impossible de lancer le paiement. Réessaie plus tard."
+    redirect_to pricing_path, alert: t("controllers.subscriptions.checkout_error")
   end
 
   def success
     sync_plan_if_needed
-    redirect_to lectures_path, notice: "Bienvenue dans Studigo Pro ! Profite de toutes les fonctionnalités."
+    redirect_to lectures_path, notice: t("controllers.subscriptions.welcome_pro")
   end
 
   def portal
     processor = current_user.payment_processor
     unless processor&.subscription&.active?
-      redirect_to subscription_manage_path, alert: "Aucun abonnement Stripe actif. Le portail de paiement n'est pas disponible."
+      redirect_to subscription_manage_path, alert: t("controllers.subscriptions.no_active_subscription")
       return
     end
 
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
     redirect_to portal_session.url, allow_other_host: true, status: :see_other
   rescue => e
     Rails.logger.error "Portal error: #{e.message}"
-    redirect_to subscription_manage_path, alert: "Impossible d'accéder au portail de gestion. Réessaie plus tard."
+    redirect_to subscription_manage_path, alert: t("controllers.subscriptions.portal_error")
   end
 
   private

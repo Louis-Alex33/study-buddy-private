@@ -13,9 +13,9 @@ class FlashcardsController < ApplicationController
 
     if generated_flashcards.present?
       current_user.increment!(:flashcard_generations_count)
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: "#{generated_flashcards.count} flashcards générées avec succès"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: t("controllers.flashcards.generated", count: generated_flashcards.count)
     else
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: "Erreur lors de la génération des flashcards"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: t("controllers.flashcards.generation_error")
     end
   end
 
@@ -42,7 +42,7 @@ class FlashcardsController < ApplicationController
   def destroy
     lecture = @flashcard.lecture
     @flashcard.destroy
-    redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: "Flashcard supprimée avec succès"
+    redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: t("controllers.flashcards.destroyed")
   end
 
   private
@@ -53,7 +53,7 @@ class FlashcardsController < ApplicationController
 
   def authorize_flashcard!
     unless @flashcard.lecture.user == current_user
-      redirect_to lectures_path, alert: "Accès non autorisé"
+      redirect_to lectures_path, alert: t("controllers.shared.unauthorized")
     end
   end
 

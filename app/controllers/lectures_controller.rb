@@ -35,7 +35,7 @@ class LecturesController < ApplicationController
 
     if @lecture.save
       current_user.check_and_award_badges!
-      redirect_to lecture_path(@lecture), notice: "Lecture créée avec succès"
+      redirect_to lecture_path(@lecture), notice: t("controllers.lectures.created")
     else
       @categories = current_user.categories.order(:title)
       render "pages/home", status: :unprocessable_content
@@ -47,7 +47,7 @@ class LecturesController < ApplicationController
 
   def update
     if @lecture.update(lecture_params)
-      redirect_to lecture_path(@lecture), notice: "Cours mis à jour avec succès"
+      redirect_to lecture_path(@lecture), notice: t("controllers.lectures.updated")
     else
       render :edit, status: :unprocessable_content
     end
@@ -55,17 +55,17 @@ class LecturesController < ApplicationController
 
   def destroy
     @lecture.destroy
-    redirect_to lectures_path, notice: "Lecture supprimée avec succès"
+    redirect_to lectures_path, notice: t("controllers.lectures.destroyed")
   end
 
   def re_analyze
     LectureAnalyzerService.new(@lecture).call
-    redirect_to lecture_path(@lecture), notice: "Fiche de cours ré-analysée avec succès"
+    redirect_to lecture_path(@lecture), notice: t("controllers.lectures.re_analyzed")
   end
 
   def download_resume
     unless @lecture.resume.present?
-      redirect_to lecture_path(@lecture), alert: "Aucune fiche de cours disponible pour ce cours."
+      redirect_to lecture_path(@lecture), alert: t("controllers.lectures.no_resume")
       return
     end
 
@@ -94,7 +94,7 @@ class LecturesController < ApplicationController
 
   def authorize_lecture!
     unless @lecture.user == current_user
-      redirect_to lectures_path, alert: "Accès non autorisé"
+      redirect_to lectures_path, alert: t("controllers.shared.unauthorized")
     end
   end
 

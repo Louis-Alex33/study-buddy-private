@@ -1,3 +1,23 @@
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  padding: 12px 24px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.2s;
+
+  &:focus {
+    top: 0;
+    color: #fff;
+  }
+}
+
 .navbar-studigo {
   background: var(--navbar-bg);
   backdrop-filter: blur(16px);
@@ -372,6 +392,13 @@
   cursor: pointer;
   flex-shrink: 0;
   padding: 2px;
+  background: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  color: inherit;
+  line-height: 0;
 }
 
 .theme-toggle-track {

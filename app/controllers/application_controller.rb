@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
 
     sign_out(current_user)
     redirect_to new_user_session_path,
-      alert: "Ta session a expiré car une connexion a été effectuée depuis un autre appareil."
+      alert: t("controllers.application.session_expired")
   end
 
   def enforce_ip_limit!
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     else
       sign_out(current_user)
       redirect_to new_user_session_path,
-        alert: "Activité suspecte détectée : trop d'appareils différents. Réessaie plus tard ou contacte le support."
+        alert: t("controllers.application.suspicious_activity")
     end
   end
 

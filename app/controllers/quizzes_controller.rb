@@ -27,7 +27,7 @@ class QuizzesController < ApplicationController
 
   def update
     if @quiz.update(quiz_params)
-      redirect_to quiz_path(@quiz), notice: "Quiz mis à jour avec succès."
+      redirect_to quiz_path(@quiz), notice: t("controllers.quizzes.updated")
     else
       @questions = @quiz.questions.includes(:options).ordered
       render :edit, status: :unprocessable_entity
@@ -36,21 +36,21 @@ class QuizzesController < ApplicationController
 
   def bookmark
     current_user.quiz_bookmarks.find_or_create_by(quiz: @quiz)
-    redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz ajouté aux favoris."
+    redirect_back fallback_location: quiz_path(@quiz), notice: t("controllers.quizzes.bookmarked")
   end
 
   def unbookmark
     current_user.quiz_bookmarks.find_by(quiz: @quiz)&.destroy
-    redirect_back fallback_location: quiz_path(@quiz), notice: "Quiz retiré des favoris."
+    redirect_back fallback_location: quiz_path(@quiz), notice: t("controllers.quizzes.unbookmarked")
   end
 
   def destroy
     lecture = @quiz.lecture
     @quiz.destroy
     if lecture
-      redirect_to lecture_path(lecture, anchor: "quiz-section"), notice: "Quiz supprimé avec succès."
+      redirect_to lecture_path(lecture, anchor: "quiz-section"), notice: t("controllers.quizzes.destroyed")
     else
-      redirect_back fallback_location: quizzes_path, notice: "Quiz supprimé avec succès."
+      redirect_back fallback_location: quizzes_path, notice: t("controllers.quizzes.destroyed")
     end
   end
 
@@ -78,9 +78,9 @@ class QuizzesController < ApplicationController
         end
       end
 
-      redirect_to (params[:redirect_to] || challenges_path), notice: "Quiz créé avec succès !"
+      redirect_to (params[:redirect_to] || challenges_path), notice: t("controllers.quizzes.created")
     else
-      redirect_to (params[:redirect_to] || challenges_path), alert: "Erreur lors de la création du quiz : #{@quiz.errors.full_messages.join(', ')}"
+      redirect_to (params[:redirect_to] || challenges_path), alert: t("controllers.quizzes.creation_error", errors: @quiz.errors.full_messages.join(', '))
     end
   end
 
@@ -103,7 +103,7 @@ class QuizzesController < ApplicationController
     end
 
     unless is_owner
-      redirect_to quizzes_path, alert: "Accès non autorisé"
+      redirect_to quizzes_path, alert: t("controllers.shared.unauthorized")
     end
   end
 

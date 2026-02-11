@@ -39,11 +39,11 @@ class MessagesController < ApplicationController
       # Finalement, rendre une réponse minimale (la page est déjà à jour via broadcasts)
       respond_to do |format|
         format.turbo_stream { head :ok }
-        format.html { redirect_to lecture_path(@lecture), notice: "Message envoyé" }
+        format.html { redirect_to lecture_path(@lecture), notice: t("controllers.messages.sent") }
       end
     else
       respond_to do |format|
-        format.html { redirect_to lecture_path(@lecture), alert: "Erreur lors de l'envoi du message" }
+        format.html { redirect_to lecture_path(@lecture), alert: t("controllers.messages.send_error") }
       end
     end
   end

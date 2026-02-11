@@ -36,7 +36,7 @@ class NotesController < ApplicationController
 
   def authorize_note!
     unless @note.user == current_user
-      redirect_to lectures_path, alert: "Accès non autorisé"
+      redirect_to lectures_path, alert: t("controllers.notes.unauthorized")
     end
   end
 

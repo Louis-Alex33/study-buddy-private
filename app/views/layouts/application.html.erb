@@ -21,6 +21,32 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Studigo",
+      "url": "https://studigo.fr",
+      "description": "Plateforme d'étude intelligente qui transforme tes PDF en flashcards et quiz grâce à l'IA."
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Studigo",
+      "url": "https://studigo.fr",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    }
+    </script>
+    <%= content_for?(:structured_data) ? yield(:structured_data) : "" %>
+
     <%# Google Fonts: Space Grotesk (titres) + Inter (UI/body) %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,8 +128,10 @@
   </head>
 
   <body class="<%= controller_name %>-<%= action_name %>" data-controller="dark-mode">
+    <a href="#main-content" class="skip-to-content">Aller au contenu principal</a>
+
     <!-- Animated Background -->
-    <div class="home-background">
+    <div class="home-background" aria-hidden="true">
       <div class="floating-icons">
         <!-- Book icon -->
         <div class="floating-icon size-lg icon-1 glow">
@@ -195,9 +223,14 @@
 
     <%= render "shared/navbar" %>
     <%= render "shared/usage_banner" %>
-    <%= render "shared/flashes" %>
+    <div aria-live="polite" aria-atomic="true">
+      <%= render "shared/flashes" %>
+    </div>
 
-    <%= yield %>
+    <main id="main-content">
+      <%= render "shared/breadcrumbs" %>
+      <%= yield %>
+    </main>
 
     <%= render "shared/footer" %>
   </body>

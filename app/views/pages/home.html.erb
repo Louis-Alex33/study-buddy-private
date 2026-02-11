@@ -1,3 +1,54 @@
+<% content_for(:structured_data) do %>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "C'est vraiment gratuit ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui. Le plan gratuit inclut : 3 cours, 10 messages IA au total, 2 générations de flashcards, 1 génération de quiz et 5 Mo par document. Pour un usage illimité, passe à Studigo Pro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quels formats de fichiers sont supportés ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Studigo accepte les PDF et les images (JPG, PNG). Tu peux aussi coller directement du texte. D'autres formats arrivent bientôt (PowerPoint, Word, etc.)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Mes données sont-elles sécurisées ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tes documents sont stockés sur AWS S3 et ne sont jamais partagés. Nous utilisons le chiffrement en transit et au repos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte Studigo Pro ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Studigo Pro est à 9,99 € TTC/mois ou 95 € TTC/an (soit 7,92 €/mois). Cours illimités, messages IA illimités, générations illimitées et mode multijoueur inclus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Je peux utiliser Studigo sur mobile ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, Studigo est entièrement responsive et fonctionne sur téléphone, tablette et ordinateur."
+      }
+    }
+  ]
+}
+</script>
+<% end %>
+
 <!-- Animated Study Background -->
 <div class="home-background">
   <div class="floating-icons">
@@ -207,17 +258,16 @@
     </div>
 
     <!-- SOCIAL PROOF -->
-    <!-- TODO: remplacer par des stats dynamiques -->
     <section class="landing-section landing-social-proof">
       <div class="landing-section-inner">
         <div class="social-proof-grid">
           <div class="social-proof-item">
-            <span class="social-proof-number">100+</span>
+            <span class="social-proof-number"><%= @stats_flashcards || 100 %>+</span>
             <span class="social-proof-label">Flashcards générées</span>
           </div>
           <div class="social-proof-item">
-            <span class="social-proof-number">50+</span>
-            <span class="social-proof-label">Utilisateurs en bêta</span>
+            <span class="social-proof-number"><%= @stats_users || 50 %>+</span>
+            <span class="social-proof-label">Utilisateurs</span>
           </div>
           <div class="social-proof-item">
             <span class="social-proof-number">30s</span>

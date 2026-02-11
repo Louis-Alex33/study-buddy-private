@@ -66,6 +66,7 @@ end
 
 gem 'aws-sdk-s3', require: false
 gem 'openssl', '~> 3.3.2'
+gem "rack-attack"
 gem "pay", "~> 7.0"
 gem "stripe", "~> 12.0"
 

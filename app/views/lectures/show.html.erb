@@ -1,3 +1,8 @@
+<% content_for(:breadcrumbs) do %>
+  <li class="breadcrumbs-item"><%= link_to "Mes cours", lectures_path, class: "breadcrumbs-link" %></li>
+  <li class="breadcrumbs-item"><%= @lecture.title.truncate(40) %></li>
+<% end %>
+
 <div class="container my-5">
   <!-- Header Section -->
   <div class="lecture-show-header">

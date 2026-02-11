@@ -15,7 +15,7 @@ class AttemptsController < ApplicationController
 
   def submit
     if @attempt.done?
-      redirect_to quiz_attempt_path(@quiz, @attempt), alert: "Ce quiz a déjà été soumis."
+      redirect_to quiz_attempt_path(@quiz, @attempt), alert: t("controllers.attempts.already_submitted")
       return
     end
 
@@ -50,7 +50,7 @@ class AttemptsController < ApplicationController
     current_user.check_and_award_badges!
 
     redirect_to quiz_attempt_path(@quiz, @attempt),
-      notice: "Quiz terminé ! Score: #{@attempt.score}/#{@attempt.total_questions} | +#{result[:points]} points ! | +#{result[:league_points]} LP"
+      notice: t("controllers.attempts.completed", score: @attempt.score, total: @attempt.total_questions, points: result[:points], league_points: result[:league_points])
   end
 
   private
@@ -64,7 +64,7 @@ class AttemptsController < ApplicationController
 
     # Ensure user can only access their own attempts
     unless @attempt.user == current_user
-      redirect_to quizzes_path, alert: "Accès non autorisé."
+      redirect_to quizzes_path, alert: t("controllers.shared.unauthorized")
     end
   end
 end

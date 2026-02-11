@@ -1,4 +1,4 @@
-<nav class="navbar-studigo" data-controller="navbar">
+<nav class="navbar-studigo" data-controller="navbar" role="navigation" aria-label="Navigation principale">
   <div class="navbar-container">
     <%= link_to root_path, class: "navbar-brand" do %>
       <div class="navbar-logo">S</div>
@@ -20,22 +20,22 @@
             <span class="navbar-pro-badge navbar-pro-badge--small">PRO</span>
           <% end %>
         <% end %>
-        <%= link_to leaderboard_path, class: "navbar-link #{'active' if current_page?(leaderboard_path)}", title: "Classement", data: { action: "click->navbar#closeMenu" } do %>
-          <i class="fas fa-trophy"></i>
+        <%= link_to leaderboard_path, class: "navbar-link #{'active' if current_page?(leaderboard_path)}", title: "Classement", aria: { label: "Classement" }, data: { action: "click->navbar#closeMenu" } do %>
+          <i class="fas fa-trophy" aria-hidden="true"></i>
         <% end %>
-        <%= link_to stats_path, class: "navbar-link #{'active' if current_page?(stats_path)}", title: "Statistiques", data: { action: "click->navbar#closeMenu" } do %>
-          <i class="fas fa-chart-bar"></i>
+        <%= link_to stats_path, class: "navbar-link #{'active' if current_page?(stats_path)}", title: "Statistiques", aria: { label: "Statistiques" }, data: { action: "click->navbar#closeMenu" } do %>
+          <i class="fas fa-chart-bar" aria-hidden="true"></i>
         <% end %>
-        <%= link_to search_path, class: "navbar-link #{'active' if current_page?(search_path)}", title: "Recherche", data: { action: "click->navbar#closeMenu" } do %>
-          <i class="fas fa-search"></i>
+        <%= link_to search_path, class: "navbar-link #{'active' if current_page?(search_path)}", title: "Recherche", aria: { label: "Recherche" }, data: { action: "click->navbar#closeMenu" } do %>
+          <i class="fas fa-search" aria-hidden="true"></i>
         <% end %>
-        <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
+        <button type="button" class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème" aria-label="Changer de thème">
           <div class="theme-toggle-track">
-            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun"></i>
-            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon"></i>
+            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true"></i>
+            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true"></i>
             <div class="theme-toggle-thumb"></div>
           </div>
-        </div>
+        </button>
         <div class="navbar-divider"></div>
         <div class="navbar-user-info">
           <span class="navbar-user-email"><%= current_user.display_name %></span>
@@ -47,28 +47,28 @@
             <%= link_to "Passer à Pro", pricing_path, class: "navbar-upgrade-link" %>
           <% end %>
         </div>
-        <%= link_to edit_user_registration_path, class: "navbar-link-account", title: "Mon compte", data: { action: "click->navbar#closeMenu" } do %>
-          <i class="fas fa-user-cog"></i>
+        <%= link_to edit_user_registration_path, class: "navbar-link-account", title: "Mon compte", aria: { label: "Mon compte" }, data: { action: "click->navbar#closeMenu" } do %>
+          <i class="fas fa-user-cog" aria-hidden="true"></i>
         <% end %>
-        <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement", data: { action: "click->navbar#closeMenu" } do %>
-          <i class="fas fa-cog"></i>
+        <%= link_to subscription_manage_path, class: "navbar-link-account", title: "Mon abonnement", aria: { label: "Mon abonnement" }, data: { action: "click->navbar#closeMenu" } do %>
+          <i class="fas fa-cog" aria-hidden="true"></i>
         <% end %>
         <% if current_user.admin? %>
-          <%= link_to admin_dashboard_path, class: "navbar-link-account", title: "Admin", data: { action: "click->navbar#closeMenu" } do %>
-            <i class="fas fa-shield-alt"></i>
+          <%= link_to admin_dashboard_path, class: "navbar-link-account", title: "Admin", aria: { label: "Administration" }, data: { action: "click->navbar#closeMenu" } do %>
+            <i class="fas fa-shield-alt" aria-hidden="true"></i>
           <% end %>
         <% end %>
         <%= link_to "Déconnexion", destroy_user_session_path, data: { turbo_method: :delete, action: "click->navbar#closeMenu" }, class: "navbar-btn" %>
       <% else %>
         <a href="/#features" class="navbar-link" data-action="click->navbar#closeMenu">Produit</a>
         <%= link_to "Tarifs", pricing_path, class: "navbar-link #{'active' if current_page?(pricing_path)}", data: { action: "click->navbar#closeMenu" } %>
-        <div class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème">
+        <button type="button" class="theme-toggle-pill" data-action="click->dark-mode#toggle" title="Changer de thème" aria-label="Changer de thème">
           <div class="theme-toggle-track">
-            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun"></i>
-            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon"></i>
+            <i class="fas fa-sun theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true"></i>
+            <i class="fas fa-moon theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true"></i>
             <div class="theme-toggle-thumb"></div>
           </div>
-        </div>
+        </button>
         <%= link_to "Connexion", new_user_session_path, class: "navbar-btn", data: { action: "click->navbar#closeMenu" } %>
         <%= link_to "Créer un compte", new_user_registration_path, class: "navbar-btn-primary", data: { action: "click->navbar#closeMenu" } %>
       <% end %>

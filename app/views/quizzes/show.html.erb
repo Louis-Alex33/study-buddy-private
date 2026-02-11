@@ -1,3 +1,8 @@
+<% content_for(:breadcrumbs) do %>
+  <li class="breadcrumbs-item"><%= link_to "Mes Quiz", quizzes_path, class: "breadcrumbs-link" %></li>
+  <li class="breadcrumbs-item"><%= @quiz.title.truncate(40) %></li>
+<% end %>
+
 <div class="container my-5">
   <div class="flashcard-show-header">
     <h2><i class="fas fa-brain"></i> <%= @quiz.title %></h2>

@@ -1,3 +1,9 @@
+<% content_for(:breadcrumbs) do %>
+  <li class="breadcrumbs-item"><%= link_to "Mes cours", lectures_path, class: "breadcrumbs-link" %></li>
+  <li class="breadcrumbs-item"><%= link_to @flashcard.lecture.title.truncate(30), lecture_path(@flashcard.lecture), class: "breadcrumbs-link" %></li>
+  <li class="breadcrumbs-item">Flashcard</li>
+<% end %>
+
 <% questions = JSON.parse(@flashcard.content) %>
 
 <div class="container my-5"

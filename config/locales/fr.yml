@@ -76,3 +76,75 @@ fr:
       wrong_length:
         one: "ne fait pas la bonne longueur (doit comporter exactement un caractère)"
         other: "ne fait pas la bonne longueur (doit comporter exactement %{count} caractères)"
+  controllers:
+    shared:
+      unauthorized: "Accès non autorisé"
+    application:
+      session_expired: "Ta session a expiré car une connexion a été effectuée depuis un autre appareil."
+      suspicious_activity: "Activité suspecte détectée : trop d'appareils différents. Réessaie plus tard ou contacte le support."
+    lectures:
+      created: "Lecture créée avec succès"
+      updated: "Cours mis à jour avec succès"
+      destroyed: "Lecture supprimée avec succès"
+      re_analyzed: "Fiche de cours ré-analysée avec succès"
+      no_resume: "Aucune fiche de cours disponible pour ce cours."
+    messages:
+      sent: "Message envoyé"
+      send_error: "Erreur lors de l'envoi du message"
+    flashcards:
+      generated: "%{count} flashcards générées avec succès"
+      generation_error: "Erreur lors de la génération des flashcards"
+      destroyed: "Flashcard supprimée avec succès"
+    quizzes:
+      updated: "Quiz mis à jour avec succès."
+      bookmarked: "Quiz ajouté aux favoris."
+      unbookmarked: "Quiz retiré des favoris."
+      destroyed: "Quiz supprimé avec succès."
+      created: "Quiz créé avec succès !"
+      creation_error: "Erreur lors de la création du quiz : %{errors}"
+    attempts:
+      already_submitted: "Ce quiz a déjà été soumis."
+      completed: "Quiz terminé ! Score: %{score}/%{total} | +%{points} points ! | +%{league_points} LP"
+    categories:
+      created: "Catégorie « %{title} » créée avec succès."
+      creation_error: "Erreur : %{errors}"
+      has_content: "Impossible de supprimer une catégorie qui contient des cours ou des quiz."
+      destroyed: "Catégorie supprimée."
+    friendships:
+      already_friends: "Tu es déjà ami(e) avec cette personne."
+      request_pending: "Une demande est déjà en attente."
+      request_sent: "Demande d'ami envoyée à %{name}."
+      accepted: "Demande d'ami acceptée."
+      rejected: "Demande d'ami refusée."
+      destroyed: "Ami supprimé."
+      unauthorized_action: "Action non autorisée."
+    real_time_quizzes:
+      room_created: "Room créée avec succès !"
+      room_full: "Cette room est pleine !"
+      already_joined: "Tu es déjà dans cette room !"
+      joined: "Tu as rejoint la room !"
+      left: "Tu as quitté la room"
+      not_in_room: "Tu n'es pas dans cette room"
+      only_owner_start: "Seul le créateur de la room peut lancer le quiz !"
+      need_two_players: "Il faut au moins 2 joueurs pour commencer !"
+      quiz_started: "Le quiz a commencé !"
+      quiz_finished: "Quiz terminé !"
+      error: "Erreur"
+      cannot_delete: "Tu ne peux pas supprimer cette room !"
+      only_finished: "Tu ne peux supprimer que les rooms terminées !"
+      room_destroyed: "Room supprimée avec succès !"
+    subscriptions:
+      checkout_error: "Impossible de lancer le paiement. Réessaie plus tard."
+      welcome_pro: "Bienvenue dans Studigo Pro ! Profite de toutes les fonctionnalités."
+      no_active_subscription: "Aucun abonnement Stripe actif. Le portail de paiement n'est pas disponible."
+      portal_error: "Impossible d'accéder au portail de gestion. Réessaie plus tard."
+    onboarding:
+      welcome: "Bienvenue sur Studigo ! Commence par télécharger ton premier document."
+    admin:
+      unauthorized: "Accès non autorisé."
+    quiz_bookmarks:
+      bookmarked: "Quiz ajouté aux favoris."
+      already_bookmarked: "Ce quiz est déjà dans tes favoris."
+      unbookmarked: "Quiz retiré des favoris."
+    notes:
+      unauthorized: "Accès non autorisé"

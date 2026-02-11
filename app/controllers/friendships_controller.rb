@@ -13,20 +13,20 @@ class FriendshipsController < ApplicationController
 
     # Vérifier si une amitié existe déjà
     if current_user.friend_with?(friend)
-      redirect_back fallback_location: users_path, alert: "Tu es déjà ami(e) avec cette personne."
+      redirect_back fallback_location: users_path, alert: t("controllers.friendships.already_friends")
       return
     end
 
     # Vérifier si une demande est déjà en attente
     if current_user.pending_request_with?(friend)
-      redirect_back fallback_location: users_path, alert: "Une demande est déjà en attente."
+      redirect_back fallback_location: users_path, alert: t("controllers.friendships.request_pending")
       return
     end
 
     @friendship = current_user.sent_friendships.build(friend: friend, status: 'pending')
 
     if @friendship.save
-      redirect_back fallback_location: users_path, notice: "Demande d'ami envoyée à #{friend.display_name}."
+      redirect_back fallback_location: users_path, notice: t("controllers.friendships.request_sent", name: friend.display_name)
     else
       redirect_back fallback_location: users_path, alert: @friendship.errors.full_messages.join(', ')
     end
@@ -37,27 +37,27 @@ class FriendshipsController < ApplicationController
       @friendship.accepted!
       current_user.check_and_award_badges!
       @friendship.user.check_and_award_badges!
-      redirect_to friendships_path, notice: "Demande d'ami acceptée."
+      redirect_to friendships_path, notice: t("controllers.friendships.accepted")
     else
-      redirect_to friendships_path, alert: "Action non autorisée."
+      redirect_to friendships_path, alert: t("controllers.friendships.unauthorized_action")
     end
   end
 
   def reject
     if @friendship.friend == current_user
       @friendship.rejected!
-      redirect_to friendships_path, notice: "Demande d'ami refusée."
+      redirect_to friendships_path, notice: t("controllers.friendships.rejected")
     else
-      redirect_to friendships_path, alert: "Action non autorisée."
+      redirect_to friendships_path, alert: t("controllers.friendships.unauthorized_action")
     end
   end
 
   def destroy
     if @friendship.user == current_user || @friendship.friend == current_user
       @friendship.destroy
-      redirect_to friendships_path, notice: "Ami supprimé."
+      redirect_to friendships_path, notice: t("controllers.friendships.destroyed")
     else
-      redirect_to friendships_path, alert: "Action non autorisée."
+      redirect_to friendships_path, alert: t("controllers.friendships.unauthorized_action")
     end
   end
 
