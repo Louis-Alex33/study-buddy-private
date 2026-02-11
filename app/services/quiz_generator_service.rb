@@ -20,7 +20,14 @@ class QuizGeneratorService
   def generate_questions
     chat = RubyLLM.chat(model: "gemini-2.0-flash")
     chat.with_instructions(instructions)
-    chat.ask("Génère un quiz de #{questions_count} questions sur le thème '#{@quiz.category.title}' avec un niveau de difficulté #{@quiz.level}/5.").content
+
+    prompt = if @quiz.lecture.present? && @quiz.lecture.resume.present?
+      "Génère un quiz de #{questions_count} questions basé sur ce contenu de cours :\n\nTitre : #{@quiz.lecture.title}\n\n#{@quiz.lecture.resume}\n\nNiveau de difficulté : #{@quiz.level}/5."
+    else
+      "Génère un quiz de #{questions_count} questions sur le thème '#{@quiz.category.title}' avec un niveau de difficulté #{@quiz.level}/5."
+    end
+
+    chat.ask(prompt).content
   end
 
   def questions_count
@@ -36,7 +43,8 @@ class QuizGeneratorService
       - Niveau de difficulté : #{@quiz.level}/5 (1=très facile, 5=très difficile)
       - Chaque question a exactement 4 options de réponse
       - Une seule option est correcte par question
-      - Les questions doivent être variées et pertinentes pour la catégorie
+      - Si un contenu de cours est fourni, base tes questions UNIQUEMENT sur ce contenu
+      - Sinon, les questions doivent être variées et pertinentes pour la catégorie
 
       FORMAT DE SORTIE STRICT (JSON avec guillemets doubles) :
       {
