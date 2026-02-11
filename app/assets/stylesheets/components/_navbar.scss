@@ -37,6 +37,20 @@
     }
   }
 
+  .badge-beta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: var(--accent-gradient);
+    border-radius: 20px;
+    line-height: 1.4;
+  }
+
   .navbar-logo {
     width: 45px;
     height: 45px;

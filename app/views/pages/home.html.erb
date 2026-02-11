@@ -158,7 +158,7 @@
 
     <!-- HERO -->
     <div class="hero-section">
-      <p class="hero-tagline">La plateforme d'étude propulsée par l'IA</p>
+      <p class="hero-tagline">Finis les heures perdues à faire des fiches. L'IA s'en charge.</p>
       <h1 class="hero-title">Transforme tes cours en <span class="hero-highlight" data-controller="text-animation">1 minute</span></h1>
       <p class="hero-subtitle">
         Importe un PDF ou un texte. Studigo génère automatiquement<br>
@@ -166,7 +166,7 @@
       </p>
       <div class="hero-cta-group">
         <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
-          Créer un compte gratuitement
+          Importe ton premier cours — c'est gratuit
         <% end %>
         <a href="#how-it-works" class="btn btn-secondary-cta">
           Voir comment ça marche <i class="fas fa-arrow-down"></i>
@@ -174,6 +174,27 @@
       </div>
       <p class="hero-proof">Version bêta — Rejoins les premiers utilisateurs.</p>
     </div>
+
+    <!-- SOCIAL PROOF -->
+    <!-- TODO: remplacer par des stats dynamiques -->
+    <section class="landing-section landing-social-proof">
+      <div class="landing-section-inner">
+        <div class="social-proof-grid">
+          <div class="social-proof-item">
+            <span class="social-proof-number">100+</span>
+            <span class="social-proof-label">Flashcards générées</span>
+          </div>
+          <div class="social-proof-item">
+            <span class="social-proof-number">50+</span>
+            <span class="social-proof-label">Utilisateurs en bêta</span>
+          </div>
+          <div class="social-proof-item">
+            <span class="social-proof-number">30s</span>
+            <span class="social-proof-label">Pour générer un quiz</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- HOW IT WORKS -->
     <section id="how-it-works" class="landing-section">
@@ -198,6 +219,41 @@
             <div class="step-emoji">🎯</div>
             <h3>Révise</h3>
             <p>Teste-toi avec les flashcards et quiz. Défie tes amis en mode multijoueur.</p>
+          </div>
+        </div>
+        <div class="landing-section-cta">
+          <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
+            Essayer gratuitement
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <!-- POUR QUI -->
+    <section class="landing-section">
+      <div class="landing-section-inner">
+        <h2 class="landing-section-title">Studigo s'adapte à toi</h2>
+        <p class="landing-section-subtitle">Que tu sois au lycée ou en master, Studigo t'aide à réviser plus efficacement.</p>
+        <div class="audience-grid">
+          <div class="audience-card">
+            <div class="audience-icon">🎓</div>
+            <h3>Lycéens</h3>
+            <p>Prépare ton bac avec des flashcards générées depuis tes cours.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">🏥</div>
+            <h3>Étudiants en médecine</h3>
+            <p>Mémorise des centaines de notions sans y passer la nuit.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">📐</div>
+            <h3>Prépa & BTS</h3>
+            <p>Transforme tes polys en quiz pour des révisions actives.</p>
+          </div>
+          <div class="audience-card">
+            <div class="audience-icon">🌍</div>
+            <h3>Formation pro & concours</h3>
+            <p>Révise n'importe quel contenu, à ton rythme.</p>
           </div>
         </div>
       </div>
@@ -279,6 +335,82 @@
             <p>Catégories, notes, documents — tout est rangé et accessible en un clic.</p>
           </div>
         </div>
+        <div class="landing-section-cta">
+          <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
+            Créer mon compte
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <!-- MULTIPLAYER -->
+    <section class="landing-section">
+      <div class="landing-section-inner">
+        <h2 class="landing-section-title">Révise avec tes amis</h2>
+        <p class="landing-section-subtitle">Le mode multijoueur de Studigo transforme les révisions en défi. Crée une session, invite tes amis et comparez vos scores en temps réel.</p>
+        <div class="multiplayer-steps">
+          <div class="multiplayer-step">
+            <div class="multiplayer-step-icon">🔗</div>
+            <h3>Crée une session</h3>
+            <p>Génère un lien de partie en un clic.</p>
+          </div>
+          <div class="multiplayer-step">
+            <div class="multiplayer-step-icon">👥</div>
+            <h3>Invite tes amis</h3>
+            <p>Partage le lien, ils rejoignent sans inscription.</p>
+          </div>
+          <div class="multiplayer-step">
+            <div class="multiplayer-step-icon">🏆</div>
+            <h3>Compare les scores</h3>
+            <p>Classement en temps réel à la fin du quiz.</p>
+          </div>
+        </div>
+        <div class="landing-section-cta">
+          <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
+            Essayer le mode multijoueur
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="landing-pricing" class="landing-section">
+      <div class="landing-section-inner">
+        <h2 class="landing-section-title">Un plan simple, sans surprise</h2>
+        <p class="landing-section-subtitle">Commence gratuitement, passe à Pro quand tu veux.</p>
+        <div class="landing-pricing-grid">
+          <div class="landing-pricing-card">
+            <h3 class="landing-pricing-name">Gratuit</h3>
+            <div class="landing-pricing-price">0&euro;<span>/mois</span></div>
+            <ul class="landing-pricing-features">
+              <li><i class="fas fa-check"></i> 3 cours</li>
+              <li><i class="fas fa-check"></i> 2 générations de flashcards</li>
+              <li><i class="fas fa-check"></i> 1 génération de quiz</li>
+              <li><i class="fas fa-check"></i> 10 messages IA au total</li>
+              <li><i class="fas fa-check"></i> 5 Mo par document</li>
+            </ul>
+            <%= link_to new_user_registration_path, class: "btn btn-landing-pricing-secondary" do %>
+              Commencer gratuitement
+            <% end %>
+          </div>
+          <div class="landing-pricing-card landing-pricing-card-pro">
+            <span class="landing-pricing-badge">Populaire</span>
+            <h3 class="landing-pricing-name">Pro</h3>
+            <div class="landing-pricing-price">9,99&euro; TTC<span>/mois</span></div>
+            <ul class="landing-pricing-features">
+              <li><i class="fas fa-check"></i> Cours illimités</li>
+              <li><i class="fas fa-check"></i> Flashcards illimitées</li>
+              <li><i class="fas fa-check"></i> Quiz illimités</li>
+              <li><i class="fas fa-check"></i> Messages IA illimités</li>
+              <li><i class="fas fa-check"></i> Mode multijoueur</li>
+              <li><i class="fas fa-check"></i> 10 Mo par document</li>
+            </ul>
+            <p class="landing-pricing-annual"><s>119&euro;</s> <strong>95&euro; TTC/an</strong> (soit 7,92&euro;/mois)</p>
+            <%= link_to pricing_path, class: "btn btn-upload-document btn-landing-pricing-primary" do %>
+              Passer à Pro
+            <% end %>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -301,7 +433,7 @@
           </details>
           <details class="faq-item">
             <summary>Combien coûte Studigo Pro ?</summary>
-            <p>Studigo Pro est à <strong>9,99 €/mois</strong> ou <strong>95 €/an</strong> (soit 7,92 €/mois). Cours illimités, messages IA illimités, générations illimitées et mode multijoueur inclus.</p>
+            <p>Studigo Pro est à <strong>9,99 € TTC/mois</strong> ou <strong>95 € TTC/an</strong> (soit 7,92 €/mois). Cours illimités, messages IA illimités, générations illimitées et mode multijoueur inclus.</p>
           </details>
           <details class="faq-item">
             <summary>Je peux utiliser Studigo sur mobile ?</summary>

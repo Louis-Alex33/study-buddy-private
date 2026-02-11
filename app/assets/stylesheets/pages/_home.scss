@@ -767,6 +767,260 @@
   }
 }
 
+// Section CTA (centered button after sections)
+.landing-section-cta {
+  margin-top: 2.5rem;
+  text-align: center;
+}
+
+// Social Proof
+.landing-social-proof {
+  padding: 40px 20px;
+}
+
+.social-proof-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.social-proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.social-proof-number {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -1px;
+}
+
+.social-proof-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+// Audience / "Pour qui" section
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  text-align: left;
+}
+
+.audience-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    border-color: var(--border-accent);
+  }
+
+  .audience-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+// Multiplayer section
+.multiplayer-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.multiplayer-step {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    border-color: var(--border-accent);
+  }
+
+  .multiplayer-step-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+// Landing Pricing
+.landing-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.landing-pricing-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 2px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+}
+
+.landing-pricing-card-pro {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+}
+
+.landing-pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-gradient);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.3rem 1.2rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.landing-pricing-name {
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.landing-pricing-price {
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+
+  span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+  }
+}
+
+.landing-pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+
+    i {
+      color: var(--success);
+      font-size: 0.85rem;
+      width: 18px;
+      text-align: center;
+    }
+  }
+}
+
+.landing-pricing-annual {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+
+  s {
+    color: var(--text-tertiary);
+  }
+
+  strong {
+    color: var(--accent);
+  }
+}
+
+.btn-landing-pricing-secondary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+  border: 2px solid var(--border);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: var(--bg-hover);
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+}
+
+.btn-landing-pricing-primary {
+  display: block;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+}
+
 // Final CTA
 .landing-final-cta {
   padding-bottom: 100px;
@@ -1026,6 +1280,14 @@
     padding: 50px 15px;
   }
 
+  .landing-social-proof {
+    padding: 30px 15px;
+  }
+
+  .social-proof-grid {
+    gap: 2rem;
+  }
+
   .steps-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -1035,6 +1297,15 @@
     padding: 2rem 1.5rem;
   }
 
+  .audience-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .audience-card {
+    padding: 1.5rem;
+  }
+
   .features-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
@@ -1042,6 +1313,24 @@
 
   .feature-card {
     padding: 1.5rem;
+  }
+
+  .multiplayer-steps {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .multiplayer-step {
+    padding: 2rem 1.5rem;
+  }
+
+  .landing-pricing-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .landing-pricing-card {
+    padding: 2rem 1.5rem;
   }
 
   .landing-final-cta {

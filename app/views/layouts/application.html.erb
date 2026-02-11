@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? "#{yield(:title)} | Studigo" : "Studigo — Ton compagnon d'étude intelligent" %></title>
+    <title><%= content_for?(:title) ? "#{yield(:title)} | Studigo" : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Studigo transforme tes cours en expériences d'apprentissage interactives. Organise tes documents, crée des flashcards et booste ta réussite grâce à l'IA." %>">
-    <meta name="keywords" content="étude, flashcards, quiz, IA, apprentissage, cours, étudiants, révision">
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe un PDF ou un texte. Studigo génère automatiquement des flashcards, quiz et fiches de révision grâce à l'IA. Gratuit pour commencer." %>">
+    <meta name="keywords" content="flashcards IA, quiz automatique, révision PDF, étude intelligente, générateur de flashcards, studigo">
     <meta name="author" content="Studigo">
     <meta name="robots" content="index, follow">
+    <!-- TODO: mettre à jour og:url et og:image quand le domaine custom sera configuré -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo" %>">
-    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Ton compagnon d'étude intelligent. Flashcards, quiz et IA pour réussir tes examens." %>">
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %>">
+    <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
     <meta property="og:site_name" content="Studigo">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo" %>">
-    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Ton compagnon d'étude intelligent." %>">
+    <meta property="og:url" content="<%= request.original_url %>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %>">
+    <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
     <link rel="canonical" href="<%= request.original_url %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
