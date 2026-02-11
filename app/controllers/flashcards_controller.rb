@@ -13,9 +13,9 @@ class FlashcardsController < ApplicationController
 
     if generated_flashcards.present?
       current_user.increment!(:flashcard_generations_count)
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: "#{generated_flashcards.count} flashcards generees avec succes"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: "#{generated_flashcards.count} flashcards générées avec succès"
     else
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: "Erreur lors de la generation des flashcards"
+      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: "Erreur lors de la génération des flashcards"
     end
   end
 
@@ -24,7 +24,14 @@ class FlashcardsController < ApplicationController
     @progress = @completion.status.to_i
   end
 
+  VALID_PROGRESS = %w[0 10 20 30 40 50 60 70 80 90 100].freeze
+
   def update_progress
+    unless VALID_PROGRESS.include?(params[:progress].to_s)
+      head :unprocessable_entity
+      return
+    end
+
     completion = current_user.flashcard_completions.find_or_initialize_by(flashcard: @flashcard)
     completion.status = params[:progress]
     completion.save
@@ -35,7 +42,7 @@ class FlashcardsController < ApplicationController
   def destroy
     lecture = @flashcard.lecture
     @flashcard.destroy
-    redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: "Flashcard supprimee avec succes"
+    redirect_to lecture_path(lecture, anchor: "flashcards-section"), notice: "Flashcard supprimée avec succès"
   end
 
   private
@@ -55,7 +62,7 @@ class FlashcardsController < ApplicationController
   end
 
   def set_lecture
-    @lecture = Lecture.find(params[:lecture_id])
+    @lecture = current_user.lectures.find(params[:lecture_id])
   end
 
   def generate_flashcards_with_ai

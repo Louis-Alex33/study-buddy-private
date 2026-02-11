@@ -4,7 +4,7 @@ class LecturesController < ApplicationController
   before_action :authorize_lecture!, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume]
 
   def index
-    @lectures = current_user.lectures
+    @lectures = current_user.lectures.includes(:category, :flashcards, :messages, :notes)
     @categories = current_user.categories.distinct
     @quizzes = Quiz.all
 
@@ -47,7 +47,7 @@ class LecturesController < ApplicationController
 
   def update
     if @lecture.update(lecture_params)
-      redirect_to lecture_path(@lecture), notice: "Lecture mise a jour"
+      redirect_to lecture_path(@lecture), notice: "Cours mis à jour avec succès"
     else
       render :edit, status: :unprocessable_content
     end

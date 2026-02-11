@@ -10,7 +10,10 @@ class StatsController < ApplicationController
     @total_attempts = @user.attempts.completed.count
     @average_score = @user.attempts.completed.average(:score)&.round(1) || 0
     @best_score_attempt = @user.attempts.completed.order(score: :desc).first
-    @perfect_scores = @user.attempts.completed.select { |a| a.percentage_score == 100 }.count
+    @perfect_scores = @user.attempts.completed.joins(quiz: :questions)
+                          .group("attempts.id", "attempts.score")
+                          .having("attempts.score = COUNT(questions.id)")
+                          .count.size
 
     # Flashcards
     @total_flashcard_completions = @user.flashcard_completions.count
@@ -21,14 +24,20 @@ class StatsController < ApplicationController
     @badges = @user.badges.order(:category, :points_required)
     @all_badges = Badge.all.order(:category, :points_required)
 
-    # Activité récente (dernières 4 semaines)
+    # Activité récente (dernières 4 semaines) — batch queries
+    four_weeks_ago = 3.weeks.ago.beginning_of_week
+    attempts_by_week = @user.attempts.where("created_at >= ?", four_weeks_ago)
+                           .group_by { |a| a.created_at.beginning_of_week.to_date }
+    lectures_by_week = @user.lectures.where("created_at >= ?", four_weeks_ago)
+                           .group_by { |l| l.created_at.beginning_of_week.to_date }
+
     @weekly_activity = (0..3).map do |weeks_ago|
       start_date = weeks_ago.weeks.ago.beginning_of_week
-      end_date = weeks_ago.weeks.ago.end_of_week
+      week_key = start_date.to_date
       {
         week: start_date.strftime("%d/%m"),
-        attempts: @user.attempts.where(created_at: start_date..end_date).count,
-        lectures: @user.lectures.where(created_at: start_date..end_date).count
+        attempts: (attempts_by_week[week_key] || []).count,
+        lectures: (lectures_by_week[week_key] || []).count
       }
     end.reverse
 

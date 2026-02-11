@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_11_172423) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_attempts_on_quiz_id"
+    t.index ["user_id", "created_at"], name: "index_attempts_on_user_id_and_created_at"
     t.index ["user_id", "quiz_id"], name: "index_attempts_on_user_id_and_quiz_id"
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
@@ -109,6 +110,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["flashcard_id"], name: "index_flashcard_completions_on_flashcard_id"
+    t.index ["user_id", "flashcard_id"], name: "index_flashcard_completions_on_user_and_flashcard", unique: true
     t.index ["user_id"], name: "index_flashcard_completions_on_user_id"
   end
 
@@ -151,6 +153,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["lecture_id", "created_at"], name: "index_messages_on_lecture_id_and_created_at"
     t.index ["lecture_id"], name: "index_messages_on_lecture_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -339,6 +342,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_02_03_110744) do
     t.index ["category_id"], name: "index_quizzes_on_category_id"
     t.index ["lecture_id"], name: "index_quizzes_on_lecture_id"
     t.index ["level"], name: "index_quizzes_on_level"
+    t.index ["status"], name: "index_quizzes_on_status"
   end
 
   create_table "solid_cable_messages", force: :cascade do |t|

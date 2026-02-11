@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'notes/create'
   devise_for :users
   root to: "pages#home"
 

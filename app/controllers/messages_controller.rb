@@ -39,7 +39,7 @@ class MessagesController < ApplicationController
       # Finalement, rendre une réponse minimale (la page est déjà à jour via broadcasts)
       respond_to do |format|
         format.turbo_stream { head :ok }
-        format.html { redirect_to lecture_path(@lecture), notice: "Message envoye" }
+        format.html { redirect_to lecture_path(@lecture), notice: "Message envoyé" }
       end
     else
       respond_to do |format|
@@ -55,7 +55,7 @@ class MessagesController < ApplicationController
   end
 
   def set_lecture
-    @lecture = Lecture.find(params[:lecture_id])
+    @lecture = current_user.lectures.find(params[:lecture_id])
   end
 
   def message_params

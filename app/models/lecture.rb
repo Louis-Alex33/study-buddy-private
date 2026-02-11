@@ -8,7 +8,7 @@ class Lecture < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :notes
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 255 }
   validates :category, presence: true
 
   ALLOWED_CONTENT_TYPES = %w[
