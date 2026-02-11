@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <title><%= content_for?(:title) ? "#{yield(:title)} | Studigo" : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,6 +8,7 @@
     <meta name="author" content="Studigo">
     <meta name="robots" content="index, follow">
     <!-- TODO: mettre à jour og:url et og:image quand le domaine custom sera configuré -->
+    <meta property="og:locale" content="fr_FR">
     <meta property="og:type" content="website">
     <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %>">
     <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">

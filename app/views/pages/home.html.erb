@@ -157,22 +157,52 @@
     <%# ========== LANDING PAGE VISITEUR ========== %>
 
     <!-- HERO -->
-    <div class="hero-section">
-      <p class="hero-tagline">Finis les heures perdues à faire des fiches. L'IA s'en charge.</p>
-      <h1 class="hero-title">Transforme tes cours en <span class="hero-highlight" data-controller="text-animation">1 minute</span></h1>
-      <p class="hero-subtitle">
-        Importe un PDF ou un texte. Studigo génère automatiquement<br>
-        des supports de révision + un <strong>assistant IA</strong> personnel.
-      </p>
-      <div class="hero-cta-group">
-        <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
-          Importe ton premier cours — c'est gratuit
-        <% end %>
-        <a href="#how-it-works" class="btn btn-secondary-cta">
-          Voir comment ça marche <i class="fas fa-arrow-down"></i>
-        </a>
+    <div class="hero-section hero-section-landing">
+      <div class="hero-content">
+        <p class="hero-tagline">Finis les heures perdues à faire des fiches. L'IA s'en charge.</p>
+        <h1 class="hero-title">Transforme tes cours en <span class="hero-highlight" data-controller="text-animation">1 minute</span></h1>
+        <p class="hero-subtitle">
+          Importe un PDF ou un texte. Studigo génère automatiquement<br>
+          des supports de révision + un <strong>assistant IA</strong> personnel.
+        </p>
+        <div class="hero-cta-group">
+          <%= link_to new_user_registration_path, class: "btn btn-upload-document" do %>
+            Importe ton premier cours — c'est gratuit
+          <% end %>
+          <a href="#how-it-works" class="btn btn-secondary-cta">
+            Voir comment ça marche <i class="fas fa-arrow-down"></i>
+          </a>
+        </div>
+        <p class="hero-proof">Version bêta — Rejoins les premiers utilisateurs.</p>
       </div>
-      <p class="hero-proof">Version bêta — Rejoins les premiers utilisateurs.</p>
+      <div class="hero-visual">
+        <!-- TODO: remplacer par une vraie capture d'écran du produit -->
+        <div class="hero-visual-placeholder">
+          <div class="hero-visual-mockup">
+            <div class="hero-mockup-header">
+              <span class="hero-mockup-dot"></span>
+              <span class="hero-mockup-dot"></span>
+              <span class="hero-mockup-dot"></span>
+            </div>
+            <div class="hero-mockup-body">
+              <div class="hero-mockup-sidebar">
+                <div class="hero-mockup-line short"></div>
+                <div class="hero-mockup-line"></div>
+                <div class="hero-mockup-line medium"></div>
+              </div>
+              <div class="hero-mockup-main">
+                <div class="hero-mockup-line"></div>
+                <div class="hero-mockup-line medium"></div>
+                <div class="hero-mockup-line short"></div>
+                <div class="hero-mockup-cards">
+                  <div class="hero-mockup-card"></div>
+                  <div class="hero-mockup-card"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- SOCIAL PROOF -->
@@ -425,7 +455,7 @@
           </details>
           <details class="faq-item">
             <summary>Quels formats de fichiers sont supportés ?</summary>
-            <p>Studigo accepte les <strong>PDF</strong> et les <strong>images</strong> (JPG, PNG). Tu peux aussi coller directement du texte.</p>
+            <p>Studigo accepte les <strong>PDF</strong> et les <strong>images</strong> (JPG, PNG). Tu peux aussi coller directement du texte. D'autres formats arrivent bientôt (PowerPoint, Word, etc.).</p>
           </details>
           <details class="faq-item">
             <summary>Mes données sont-elles sécurisées ?</summary>
