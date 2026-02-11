@@ -7,10 +7,10 @@ class PagesController < ApplicationController
     @categories = current_user&.categories&.includes(:quizzes, lectures: :flashcards)&.order(:title)
     @lecture = Lecture.new
 
-    # Dynamic social proof stats (visible to non-logged-in users on landing)
+    # Dynamic social proof stats (cached 10min, visible to non-logged-in users on landing)
     unless current_user
-      @stats_flashcards = (Flashcard.count / 10) * 10
-      @stats_users = (User.count / 10) * 10
+      @stats_flashcards = Rails.cache.fetch("stats/flashcards_count", expires_in: 10.minutes) { (Flashcard.count / 10) * 10 }
+      @stats_users = Rails.cache.fetch("stats/users_count", expires_in: 10.minutes) { (User.count / 10) * 10 }
     end
   end
 

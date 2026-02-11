@@ -1,7 +1,8 @@
 class LeaderboardController < ApplicationController
   def index
-    @top_by_points = User.order(points: :desc).limit(20)
+    @top_by_points = User.includes(:user_league).order(points: :desc).limit(20)
     @top_by_quizzes = User.joins(:attempts)
+                          .includes(:user_league)
                           .where(attempts: { done: true })
                           .group("users.id")
                           .order("COUNT(attempts.id) DESC")

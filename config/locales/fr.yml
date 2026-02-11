@@ -31,6 +31,11 @@ fr:
               blank: "doit être rempli(e)"
             password_confirmation:
               confirmation: "ne correspond pas au mot de passe"
+        lecture:
+          attributes:
+            document:
+              file_too_large: "La taille du fichier doit être inférieure à %{max_size} Mo"
+              invalid_content_type: "Type de fichier non autorisé. Formats acceptés : PDF, images (PNG, JPEG, GIF, WebP), texte, Word"
     models:
       user: "utilisateur"
     attributes:

@@ -1,7 +1,7 @@
 module Subscribable
   extend ActiveSupport::Concern
 
-  ADMIN_EMAILS = %w[la@mail.com famille@studigo.fr].freeze
+  ADMIN_EMAILS = ENV.fetch("ADMIN_EMAILS", "la@mail.com,famille@studigo.fr").split(",").map(&:strip).freeze
 
   PLAN_LIMITS = {
     "free" => {

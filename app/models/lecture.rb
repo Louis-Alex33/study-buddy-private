@@ -30,18 +30,18 @@ class Lecture < ApplicationRecord
   end
 
   def document_presence
-    errors.add(:document, "must be attached") unless document.attached?
+    errors.add(:document, :blank) unless document.attached?
   end
 
   def file_size_limit
     if document.attached? && document.byte_size > max_file_size_mb.megabytes
-      errors.add(:document, "La taille du fichier doit être inférieure à #{max_file_size_mb}Mo")
+      errors.add(:document, I18n.t("activerecord.errors.models.lecture.attributes.document.file_too_large", max_size: max_file_size_mb))
     end
   end
 
   def file_content_type
     if document.attached? && !ALLOWED_CONTENT_TYPES.include?(document.content_type)
-      errors.add(:document, "Type de fichier non autorisé. Formats acceptés : PDF, images (PNG, JPEG, GIF, WebP), texte, Word")
+      errors.add(:document, I18n.t("activerecord.errors.models.lecture.attributes.document.invalid_content_type"))
     end
   end
 
