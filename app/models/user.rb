@@ -3,11 +3,11 @@ class User < ApplicationRecord
 
   pay_customer stripe_attributes: :stripe_attributes
 
-  has_many :lectures
+  has_many :lectures, dependent: :destroy
   has_many :categories, dependent: :destroy
-  has_many :flashcard_completions
+  has_many :flashcard_completions, dependent: :destroy
   has_many :flashcards, through: :flashcard_completions
-  has_many :attempts
+  has_many :attempts, dependent: :destroy
   has_many :challenges
   has_many :challenger_users
   has_many :invited_challenges, through: :challenger_users, source: :challenge
@@ -47,9 +47,10 @@ class User < ApplicationRecord
     sent_friendships.pending
   end
 
-  # Vérifie si deux utilisateurs sont amis
+  # Vérifie si deux utilisateurs sont amis (requête SQL directe, sans charger tous les amis)
   def friend_with?(user)
-    friends.include?(user)
+    sent_friendships.accepted.exists?(friend_id: user.id) ||
+      received_friendships.accepted.exists?(user_id: user.id)
   end
 
   # Vérifie s'il y a une demande en attente avec un utilisateur
@@ -100,8 +101,18 @@ class User < ApplicationRecord
     when "Encyclopédie" then lectures.count >= 25
     when "Curieux" then attempts.completed.count >= 1
     when "Quiz master" then attempts.completed.count >= 10
-    when "Perfectionniste" then attempts.completed.any? { |a| a.percentage_score == 100 }
-    when "Sans faute" then attempts.completed.select { |a| a.percentage_score == 100 }.map(&:quiz_id).uniq.count >= 5
+    when "Perfectionniste"
+      attempts.completed
+              .joins(quiz: :questions)
+              .group("attempts.id", "attempts.score")
+              .having("attempts.score = COUNT(questions.id)")
+              .exists?
+    when "Sans faute"
+      attempts.completed
+              .joins(quiz: :questions)
+              .group("attempts.id", "attempts.score", "attempts.quiz_id")
+              .having("attempts.score = COUNT(questions.id)")
+              .select("attempts.quiz_id").distinct.count >= 5
     when "Mémorisation" then flashcard_completions.count >= 1
     when "Révision express" then flashcard_completions.where("CAST(status AS INTEGER) >= 100").count >= 10
     when "Social" then friends.count >= 1

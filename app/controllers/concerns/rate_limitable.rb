@@ -10,7 +10,7 @@ module RateLimitable
 
     if count >= max_per_minute
       redirect_back fallback_location: lectures_path,
-        alert: "Trop de requêtes. Patiente quelques instants avant de réessayer."
+        alert: t("controllers.rate_limit.too_many_requests")
       return false
     end
 

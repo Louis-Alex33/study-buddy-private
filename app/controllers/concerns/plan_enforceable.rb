@@ -7,7 +7,7 @@ module PlanEnforceable
     return true if current_user.can_create_lecture?
 
     redirect_to pricing_path,
-      alert: "Tu as atteint la limite de #{current_user.plan_limit(:max_lectures)} cours du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      alert: t("controllers.plan.lecture_limit", count: current_user.plan_limit(:max_lectures))
     false
   end
 
@@ -15,7 +15,7 @@ module PlanEnforceable
     return true if current_user.can_send_message?
 
     redirect_to pricing_path,
-      alert: "Tu as utilisé tes #{current_user.plan_limit(:max_messages_total)} messages IA du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      alert: t("controllers.plan.message_limit", count: current_user.plan_limit(:max_messages_total))
     false
   end
 
@@ -23,7 +23,7 @@ module PlanEnforceable
     return true if current_user.can_generate_flashcards?
 
     redirect_to pricing_path,
-      alert: "Tu as utilisé tes #{current_user.plan_limit(:max_flashcard_generations)} générations de flashcards du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      alert: t("controllers.plan.flashcard_limit", count: current_user.plan_limit(:max_flashcard_generations))
     false
   end
 
@@ -31,7 +31,7 @@ module PlanEnforceable
     return true if current_user.can_generate_quiz?
 
     redirect_to pricing_path,
-      alert: "Tu as utilisé ta #{current_user.plan_limit(:max_quiz_generations)} création de quiz du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      alert: t("controllers.plan.quiz_limit", count: current_user.plan_limit(:max_quiz_generations))
     false
   end
 
@@ -39,7 +39,7 @@ module PlanEnforceable
     return true if current_user.has_multiplayer_access?
 
     redirect_to pricing_path,
-      alert: "Le mode multijoueur est réservé aux abonnés Studigo Pro."
+      alert: t("controllers.plan.multiplayer_restricted")
     false
   end
 end

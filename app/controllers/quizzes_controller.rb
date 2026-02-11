@@ -3,12 +3,21 @@ class QuizzesController < ApplicationController
   before_action :check_quiz_limit, only: [:create]
   before_action -> { enforce_rate_limit!(:ai_quiz, max_per_minute: 3) }, only: [:create]
   before_action :set_quiz, only: [:show, :edit, :update, :destroy, :bookmark, :unbookmark]
+  before_action :authorize_quiz_access!, only: [:show, :bookmark, :unbookmark]
   before_action :authorize_quiz_modification!, only: [:edit, :update, :destroy]
 
   def index
     @categories = Category.includes(:quizzes).where.not(quizzes: { id: nil })
     @public_quizzes = Quiz.where(status: "public").includes(:category, :questions, :attempts).group_by(&:category)
-    @shared_quizzes = Quiz.where(status: "shared").includes(:category, :questions, :attempts, challenges: [:user, :invited_users]).group_by(&:category)
+
+    my_shared = Quiz.where(status: "shared").joins(:challenges)
+                    .where(challenges: { user_id: current_user.id })
+    invited_shared = Quiz.where(status: "shared").joins(challenges: :challenger_users)
+                         .where(challenger_users: { user_id: current_user.id })
+    @shared_quizzes = Quiz.where(id: my_shared.select(:id))
+                          .or(Quiz.where(id: invited_shared.select(:id)))
+                          .includes(:category, :questions, :attempts, challenges: [:user, :invited_users])
+                          .group_by(&:category)
   end
 
   def show
@@ -88,6 +97,17 @@ class QuizzesController < ApplicationController
 
   def set_quiz
     @quiz = Quiz.includes(questions: :options).find(params[:id])
+  end
+
+  def authorize_quiz_access!
+    return if @quiz.status == "public"
+    return if @quiz.challenges.exists?(user_id: current_user.id)
+    return if ChallengerUser.joins(:challenge)
+                .exists?(challenges: { quiz_id: @quiz.id }, user_id: current_user.id)
+    # Quiz lié à une lecture du user (généré depuis ses cours)
+    return if @quiz.lecture.present? && @quiz.lecture.user == current_user
+
+    redirect_to quizzes_path, alert: t("controllers.shared.unauthorized")
   end
 
   def authorize_quiz_modification!

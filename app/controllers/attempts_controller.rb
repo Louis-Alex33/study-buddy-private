@@ -1,6 +1,7 @@
 class AttemptsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_quiz
+  before_action :authorize_quiz_access!, only: [:create]
   before_action :set_attempt, only: [:show, :submit]
 
   def create
@@ -57,6 +58,16 @@ class AttemptsController < ApplicationController
 
   def set_quiz
     @quiz = Quiz.find(params[:quiz_id])
+  end
+
+  def authorize_quiz_access!
+    return if @quiz.status == "public"
+    return if @quiz.challenges.exists?(user_id: current_user.id)
+    return if ChallengerUser.joins(:challenge)
+                .exists?(challenges: { quiz_id: @quiz.id }, user_id: current_user.id)
+    return if @quiz.lecture.present? && @quiz.lecture.user == current_user
+
+    redirect_to quizzes_path, alert: t("controllers.shared.unauthorized")
   end
 
   def set_attempt

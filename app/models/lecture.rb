@@ -6,7 +6,7 @@ class Lecture < ApplicationRecord
   has_many :flashcards, dependent: :destroy
   has_many :quizzes, dependent: :destroy
   has_many :messages, dependent: :destroy
-  has_many :notes
+  has_many :notes, dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 255 }
   validates :category, presence: true

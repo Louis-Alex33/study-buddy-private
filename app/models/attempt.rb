@@ -9,18 +9,19 @@ class Attempt < ApplicationRecord
   def calculate_score
     return 0 if answers.empty?
 
+    answers_by_question = answers.to_a.group_by(&:question_id)
+    questions_with_options = quiz.questions.includes(:options).to_a
+
     correct_count = 0
-    quiz.questions.each do |question|
-      user_answers = answers.where(question: question)
-      correct_options = question.correct_options.pluck(:id)
+    questions_with_options.each do |question|
+      user_answers = answers_by_question[question.id] || []
+      correct_ids = question.options.select(&:correct).map(&:id)
 
       if question.multiple_answers
-        # All correct options must be selected and no incorrect ones
-        selected_ids = user_answers.pluck(:option_id)
-        correct_count += 1 if selected_ids.sort == correct_options.sort
+        selected_ids = user_answers.map(&:option_id)
+        correct_count += 1 if selected_ids.sort == correct_ids.sort
       else
-        # Single answer: the selected option must be correct
-        correct_count += 1 if user_answers.any? { |a| correct_options.include?(a.option_id) }
+        correct_count += 1 if user_answers.any? { |a| correct_ids.include?(a.option_id) }
       end
     end
 

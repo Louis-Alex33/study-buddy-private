@@ -148,3 +148,11 @@ fr:
       unbookmarked: "Quiz retiré des favoris."
     notes:
       unauthorized: "Accès non autorisé"
+    plan:
+      lecture_limit: "Tu as atteint la limite de %{count} cours du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      message_limit: "Tu as utilisé tes %{count} messages IA du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      flashcard_limit: "Tu as utilisé tes %{count} générations de flashcards du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      quiz_limit: "Tu as utilisé ta %{count} création de quiz du plan gratuit. Passe à Studigo Pro pour un accès illimité."
+      multiplayer_restricted: "Le mode multijoueur est réservé aux abonnés Studigo Pro."
+    rate_limit:
+      too_many_requests: "Trop de requêtes. Patiente quelques instants avant de réessayer."
