@@ -223,6 +223,10 @@
   .hero-cta-group {
     justify-content: flex-start;
   }
+
+  .hero-reassurance {
+    justify-content: flex-start;
+  }
 }
 
 .hero-content {
@@ -731,6 +735,16 @@
   i {
     font-size: 0.85rem;
   }
+}
+
+.hero-reassurance {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .hero-proof {
@@ -1361,6 +1375,44 @@
       box-shadow: inset 0 0 0 2px var(--bg-surface);
     }
   }
+}
+
+// ==========================================
+// Testimonials (commentée dans le HTML pour l'instant)
+// ==========================================
+
+.testimonials {
+  padding: 4rem 0;
+  background: var(--bg-elevated);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.testimonial-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+}
+
+.testimonial-quote {
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.testimonial-author {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
 }
 
 // ==========================================

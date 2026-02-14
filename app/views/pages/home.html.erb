@@ -224,9 +224,12 @@
             Voir comment ça marche <i class="fas fa-arrow-down"></i>
           </a>
         </div>
+        <p class="hero-reassurance">✓ Gratuit · ✓ Sans carte bancaire · ✓ Prêt en 30 secondes</p>
         <p class="hero-proof">Version bêta — Rejoins les premiers utilisateurs.</p>
       </div>
       <div class="hero-visual">
+        <!-- HERO PREVIEW START — Remplacer par des vrais screenshots ou une vidéo démo quand disponible -->
+        <!-- Pour remplacer : supprimer les cards statiques ci-dessous et insérer une <img> ou <video> -->
         <div class="hero-visual-stack">
           <!-- Mini flashcard -->
           <div class="hero-demo-card hero-demo-flashcard">
@@ -254,6 +257,7 @@
             </div>
           </div>
         </div>
+        <!-- HERO PREVIEW END -->
       </div>
     </div>
 
@@ -262,12 +266,12 @@
       <div class="landing-section-inner">
         <div class="social-proof-grid">
           <div class="social-proof-item">
-            <span class="social-proof-number"><%= @stats_flashcards || 100 %>+</span>
+            <span class="social-proof-number"><%= @stats_flashcards || 200 %>+</span>
             <span class="social-proof-label">Flashcards générées</span>
           </div>
           <div class="social-proof-item">
-            <span class="social-proof-number"><%= @stats_users || 50 %>+</span>
-            <span class="social-proof-label">Utilisateurs</span>
+            <span class="social-proof-number"><%= @stats_users || 30 %>+</span>
+            <span class="social-proof-label">Utilisateurs en bêta</span>
           </div>
           <div class="social-proof-item">
             <span class="social-proof-number">30s</span>
@@ -276,6 +280,28 @@
         </div>
       </div>
     </section>
+
+    <!-- SECTION TÉMOIGNAGES — Décommenter quand on a 3+ témoignages de vrais utilisateurs
+    <section class="testimonials">
+      <div class="container">
+        <h2>Ce que disent nos utilisateurs</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"[Témoignage à ajouter]"</p>
+            <p class="testimonial-author">— [Prénom], [Filière/École]</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"[Témoignage à ajouter]"</p>
+            <p class="testimonial-author">— [Prénom], [Filière/École]</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"[Témoignage à ajouter]"</p>
+            <p class="testimonial-author">— [Prénom], [Filière/École]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    -->
 
     <!-- HOW IT WORKS -->
     <section id="how-it-works" class="landing-section">
@@ -335,55 +361,6 @@
             <div class="audience-icon">🌍</div>
             <h3>Formation pro & concours</h3>
             <p>Révise n'importe quel contenu, à ton rythme.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCT PREVIEW -->
-    <section id="preview" class="landing-section">
-      <div class="landing-section-inner">
-        <h2 class="landing-section-title">Aperçu du produit</h2>
-        <p class="landing-section-subtitle">De tes PDF à la révision, sans prise de tête.</p>
-        <div class="preview-grid">
-          <!-- Mock Flashcard -->
-          <div class="preview-card">
-            <div class="preview-card-header">
-              <span class="preview-badge">Flashcard</span>
-            </div>
-            <div class="preview-card-body">
-              <div class="mock-flashcard">
-                <div class="mock-flashcard-question">
-                  <span class="mock-label">Question</span>
-                  <p>Quelle est la capitale de la France ?</p>
-                </div>
-                <div class="mock-flashcard-divider"></div>
-                <div class="mock-flashcard-answer">
-                  <span class="mock-label">Réponse</span>
-                  <p>Paris</p>
-                </div>
-              </div>
-              <p class="preview-caption">Flashcards générées automatiquement à partir de ton cours.</p>
-            </div>
-          </div>
-
-          <!-- Mock Quiz -->
-          <div class="preview-card">
-            <div class="preview-card-header">
-              <span class="preview-badge">Quiz</span>
-            </div>
-            <div class="preview-card-body">
-              <div class="mock-quiz">
-                <p class="mock-quiz-question">Quel est le plus grand océan du monde ?</p>
-                <div class="mock-quiz-options">
-                  <div class="mock-option">Atlantique</div>
-                  <div class="mock-option mock-option-correct">Pacifique</div>
-                  <div class="mock-option">Indien</div>
-                  <div class="mock-option">Arctique</div>
-                </div>
-              </div>
-              <p class="preview-caption">Quiz interactifs pour tester tes connaissances.</p>
-            </div>
           </div>
         </div>
       </div>
@@ -484,7 +461,7 @@
               <li><i class="fas fa-check"></i> Quiz illimités</li>
               <li><i class="fas fa-check"></i> Messages IA illimités</li>
               <li><i class="fas fa-check"></i> Mode multijoueur</li>
-              <li><i class="fas fa-check"></i> 10 Mo par document</li>
+              <li><i class="fas fa-check"></i> 25 Mo par document</li>
             </ul>
             <p class="landing-pricing-annual"><s>119&euro;</s> <strong>95&euro; TTC/an</strong> (soit 7,92&euro;/mois)</p>
             <%= link_to pricing_path, class: "btn btn-upload-document btn-landing-pricing-primary" do %>

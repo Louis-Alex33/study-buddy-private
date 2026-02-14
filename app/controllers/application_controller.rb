@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :verify_session_token!
   before_action :enforce_ip_limit!
   before_action :check_onboarding
+  # TODO: Décommenter quand studigo.fr sera configuré
+  # before_action :redirect_to_custom_domain
 
   private
 
@@ -38,6 +40,13 @@ class ApplicationController < ActionController::Base
         alert: t("controllers.application.suspicious_activity")
     end
   end
+
+  # TODO: Décommenter quand studigo.fr sera configuré
+  # def redirect_to_custom_domain
+  #   if request.host == 'studigo-5605123477b4.herokuapp.com'
+  #     redirect_to "https://studigo.fr#{request.fullpath}", status: :moved_permanently, allow_other_host: true
+  #   end
+  # end
 
   def check_onboarding
     return unless user_signed_in?

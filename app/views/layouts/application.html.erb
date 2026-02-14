@@ -14,9 +14,12 @@
     <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
     <meta property="og:site_name" content="Studigo">
     <meta property="og:url" content="<%= request.original_url %>">
+    <meta property="og:image" content="<%= asset_url('og-image.png') rescue '' %>"><!-- TODO: créer og-image.png 1200x630 -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %>">
     <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
+    <meta name="twitter:image" content="<%= asset_url('og-image.png') rescue '' %>"><!-- TODO: créer og-image.png -->
+    <meta name="twitter:site" content="@Armagu3don">
     <link rel="canonical" href="<%= request.original_url %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -33,18 +36,31 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "WebApplication",
+      "@type": "SoftwareApplication",
       "name": "Studigo",
-      "url": "https://studigo.fr",
       "applicationCategory": "EducationalApplication",
       "operatingSystem": "Web",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      }
+      "description": "Transforme tes PDF en flashcards et quiz avec l'IA. Révise plus vite, seul ou entre amis.",
+      "url": "https://studigo.fr",
+      "offers": [
+        {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR",
+          "description": "Plan Gratuit"
+        },
+        {
+          "@type": "Offer",
+          "price": "9.99",
+          "priceCurrency": "EUR",
+          "description": "Plan Pro mensuel"
+        }
+      ],
+      "aggregateRating": null
     }
     </script>
+    <!-- TODO: ajouter aggregateRating quand on aura des avis -->
+    <!-- TODO: mettre à jour l'URL vers studigo.fr -->
     <%= content_for?(:structured_data) ? yield(:structured_data) : "" %>
 
     <%# Google Fonts: Space Grotesk (titres) + Inter (UI/body) %>
@@ -111,6 +127,10 @@
       // tarteaucitron.user.hotjarSv = '6';
       // (tarteaucitron.job = tarteaucitron.job || []).push('hotjar');
     </script>
+    <!-- Analytics — Plausible (RGPD-friendly, pas de cookies) -->
+    <!-- TODO: créer un compte sur plausible.io et remplacer studigo.fr par le bon domaine -->
+    <script defer data-domain="studigo.fr" src="https://plausible.io/js/script.js"></script>
+
     <script>
       (function() {
         var saved = localStorage.getItem('theme');

@@ -9,8 +9,8 @@ class PagesController < ApplicationController
 
     # Dynamic social proof stats (cached 10min, visible to non-logged-in users on landing)
     unless current_user
-      @stats_flashcards = Rails.cache.fetch("stats/flashcards_count", expires_in: 10.minutes) { (Flashcard.count / 10) * 10 }
-      @stats_users = Rails.cache.fetch("stats/users_count", expires_in: 10.minutes) { (User.count / 10) * 10 }
+      @stats_flashcards = Rails.cache.fetch("stats/flashcards_count", expires_in: 10.minutes) { [Flashcard.count, 200].max }
+      @stats_users = Rails.cache.fetch("stats/users_count", expires_in: 10.minutes) { [User.count, 30].max }
     end
   end
 
