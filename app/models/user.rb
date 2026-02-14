@@ -108,11 +108,12 @@ class User < ApplicationRecord
               .having("attempts.score = COUNT(questions.id)")
               .exists?
     when "Sans faute"
-      attempts.completed
-              .joins(quiz: :questions)
-              .group("attempts.id", "attempts.score", "attempts.quiz_id")
-              .having("attempts.score = COUNT(questions.id)")
-              .select("attempts.quiz_id").distinct.count >= 5
+      perfect_quiz_ids = attempts.completed
+                                 .joins(quiz: :questions)
+                                 .group("attempts.id", "attempts.score", "attempts.quiz_id")
+                                 .having("attempts.score = COUNT(questions.id)")
+                                 .pluck("attempts.quiz_id")
+      perfect_quiz_ids.uniq.size >= 5
     when "Mémorisation" then flashcard_completions.count >= 1
     when "Révision express" then flashcard_completions.where("CAST(status AS INTEGER) >= 100").count >= 10
     when "Social" then friends.count >= 1
