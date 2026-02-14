@@ -12,8 +12,10 @@ export default class extends Controller {
   }
 
   poll() {
-    fetch(this.urlValue, {
-      headers: { "Accept": "application/json" }
+    const url = `${this.urlValue}?t=${Date.now()}`
+    fetch(url, {
+      headers: { "Accept": "application/json" },
+      cache: "no-store"
     })
       .then(response => response.json())
       .then(data => {
