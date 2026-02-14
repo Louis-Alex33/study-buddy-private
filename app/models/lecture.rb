@@ -48,6 +48,6 @@ class Lecture < ApplicationRecord
   private
 
   def analyze_document
-    LectureAnalyzerService.new(self).call
+    LectureAnalyzeJob.perform_later(self)
   end
 end

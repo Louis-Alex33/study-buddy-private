@@ -14,11 +14,13 @@
     <meta property="og:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
     <meta property="og:site_name" content="Studigo">
     <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= asset_url('og-image.png') rescue '' %>"><!-- TODO: créer og-image.png 1200x630 -->
+    <!-- TODO: créer og-image.png 1200x630 et décommenter la ligne ci-dessous -->
+    <!-- <meta property="og:image" content=""> -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : "Studigo — Transforme tes PDF en flashcards et quiz avec l'IA" %>">
     <meta name="twitter:description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : "Importe tes cours, l'IA génère tes flashcards et quiz. Révise plus vite, seul ou entre amis." %>">
-    <meta name="twitter:image" content="<%= asset_url('og-image.png') rescue '' %>"><!-- TODO: créer og-image.png -->
+    <!-- TODO: créer og-image.png et décommenter la ligne ci-dessous -->
+    <!-- <meta name="twitter:image" content=""> -->
     <meta name="twitter:site" content="@Armagu3don">
     <link rel="canonical" href="<%= request.original_url %>">
     <%= csrf_meta_tags %>

@@ -59,7 +59,7 @@ class LecturesController < ApplicationController
   end
 
   def re_analyze
-    LectureAnalyzerService.new(@lecture).call
+    LectureAnalyzeJob.perform_later(@lecture)
     redirect_to lecture_path(@lecture), notice: t("controllers.lectures.re_analyzed")
   end
 
