@@ -15,132 +15,27 @@
   </div>
 
   <!-- Resume Section -->
-  <% if @lecture.resume.present? %>
-    <%
-      # Get annotations for this lecture
-      inline_annotations = @lecture.notes.where(annotation_type: "inline").where.not(selected_text: nil)
-      sidebar_notes = @lecture.notes.where(annotation_type: ["sidebar", nil])
-    %>
-    <div class="lecture-resume-card" data-controller="text-annotation" data-text-annotation-lecture-id-value="<%= @lecture.id %>">
-      <div class="resume-header">
-        <div class="resume-icon"><i class="fas fa-file-alt"></i></div>
-        <div class="resume-title">
-          <h3>Fiche de cours</h3>
-          <p>Générée par l'IA <span class="annotation-hint"><i class="fas fa-highlighter"></i> Sélectionne du texte pour annoter</span></p>
-        </div>
-        <div class="resume-actions">
-          <%= link_to download_resume_lecture_path(@lecture), class: "btn-download-resume" do %>
-            <i class="fas fa-file-pdf"></i> Télécharger en PDF
-          <% end %>
-          <%= button_to re_analyze_lecture_path(@lecture), method: :post, class: "btn-reanalyze-resume", data: { turbo: false, turbo_confirm: "Ré-analyser ce document ? La fiche actuelle sera remplacée." } do %>
-            <i class="fas fa-rotate"></i> Ré-analyser
-          <% end %>
-        </div>
-      </div>
-      <div class="resume-content" data-text-annotation-target="content" data-action="mouseup->text-annotation#handleSelection">
-        <%= sanitize(@lecture.resume, tags: %w[h3 h4 p ul ol li strong em br]) %>
-      </div>
-
-      <!-- Notes Section (integrated at the end) -->
-      <div class="notes-section">
-        <div class="notes-section-header">
-          <div class="notes-section-title">
-            <i class="fas fa-sticky-note"></i>
-            <span>Mes notes</span>
-            <span class="notes-count"><%= @lecture.notes.count %></span>
-          </div>
-          <button type="button" class="btn-add-note" data-bs-toggle="collapse" data-bs-target="#newNoteForm">
-            <i class="fas fa-plus"></i> Nouvelle note
-          </button>
-        </div>
-
-        <!-- New note form (collapsed by default) -->
-        <div class="collapse" id="newNoteForm">
-          <div class="new-note-form-container">
-            <%= form_with url: lecture_notes_path(@lecture), method: :post, data: { turbo_stream: true }, class: "new-note-form", id: "sidebar-note-form" do %>
-              <input type="hidden" name="note[annotation_type]" value="sidebar">
-              <textarea name="note[content]" placeholder="Écris ta note ici..." rows="3" required class="note-textarea"></textarea>
-              <div class="new-note-actions">
-                <button type="button" class="btn-cancel-note" data-bs-toggle="collapse" data-bs-target="#newNoteForm">Annuler</button>
-                <button type="submit" class="btn-save-note">
-                  <i class="fas fa-check"></i> Enregistrer
-                </button>
-              </div>
-            <% end %>
+  <div id="lecture-resume-section">
+    <% if @lecture.resume.present? %>
+      <%= render "lectures/resume_section", lecture: @lecture %>
+    <% else %>
+      <div class="lecture-resume-card">
+        <div class="resume-header">
+          <div class="resume-icon"><i class="fas fa-file-alt"></i></div>
+          <div class="resume-title">
+            <h3>Fiche de cours</h3>
+            <p>Génération en cours...</p>
           </div>
         </div>
-
-        <!-- Notes list -->
-        <div class="notes-list-integrated" id="notes-list">
-          <% if inline_annotations.any? %>
-            <div class="notes-group">
-              <div class="notes-group-title">
-                <i class="fas fa-highlighter"></i> Annotations (<%= inline_annotations.count %>)
-              </div>
-              <% inline_annotations.each do |annotation| %>
-                <%= turbo_frame_tag dom_id(annotation) do %>
-                  <div class="note-item annotation-item">
-                    <div class="note-item-quote">"<%= truncate(annotation.selected_text, length: 60) %>"</div>
-                    <div class="note-item-content"><%= annotation.content %></div>
-                    <%= button_to note_path(annotation), method: :delete, data: { turbo_confirm: "Supprimer cette annotation ?" }, class: "btn-delete-note-item" do %>
-                      <i class="fas fa-times"></i>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-
-          <% if sidebar_notes.any? %>
-            <div class="notes-group">
-              <div class="notes-group-title">
-                <i class="fas fa-pen"></i> Notes (<%= sidebar_notes.count %>)
-              </div>
-              <% sidebar_notes.each do |note| %>
-                <%= turbo_frame_tag dom_id(note) do %>
-                  <div class="note-item">
-                    <div class="note-item-content"><%= note.content %></div>
-                    <%= button_to note_path(note), method: :delete, data: { turbo_confirm: "Supprimer cette note ?" }, class: "btn-delete-note-item" do %>
-                      <i class="fas fa-times"></i>
-                    <% end %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-
-          <% if @lecture.notes.empty? %>
-            <div class="notes-empty">
-              <i class="fas fa-sticky-note"></i>
-              <p>Aucune note pour ce cours</p>
-              <small>Sélectionne du texte pour annoter ou clique sur "Nouvelle note"</small>
-            </div>
-          <% end %>
+        <div class="resume-content" style="text-align: center; padding: 3rem;">
+          <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+            <span class="visually-hidden">Chargement...</span>
+          </div>
+          <p style="margin-top: 1rem; color: #6c757d;">L'IA analyse votre document, cela peut prendre quelques secondes...</p>
         </div>
       </div>
-
-      <!-- Annotation popup -->
-      <div class="annotation-popup hidden" data-text-annotation-target="popup">
-        <%= form_with url: lecture_notes_path(@lecture), method: :post, data: { turbo_stream: true, action: "turbo:submit-end->text-annotation#onSubmitSuccess" } do %>
-          <div class="annotation-popup-header">
-            <i class="fas fa-highlighter"></i>
-            <span>Ajouter une annotation</span>
-          </div>
-          <input type="hidden" name="note[selected_text]" value="" data-text-annotation-target="selectedTextInput">
-          <input type="hidden" name="note[text_start]" value="" data-text-annotation-target="textStartInput">
-          <input type="hidden" name="note[text_end]" value="" data-text-annotation-target="textEndInput">
-          <input type="hidden" name="note[annotation_type]" value="inline">
-          <textarea name="note[content]" placeholder="Votre note..." rows="2" required data-text-annotation-target="noteInput"></textarea>
-          <div class="annotation-popup-actions">
-            <button type="button" class="btn-cancel-annotation" data-action="click->text-annotation#closePopup">Annuler</button>
-            <button type="submit" class="btn-save-annotation">
-              <i class="fas fa-check"></i> Enregistrer
-            </button>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 
   <%= turbo_stream_from @lecture %>
 
