@@ -23,8 +23,6 @@ class Lecture < ApplicationRecord
   validate :file_size_limit
   validate :file_content_type
 
-  after_commit :analyze_document, on: :create
-
   def max_file_size_mb
     user&.max_file_size_mb || 5
   end
@@ -45,9 +43,4 @@ class Lecture < ApplicationRecord
     end
   end
 
-  private
-
-  def analyze_document
-    LectureAnalyzeJob.perform_later(self)
-  end
 end
