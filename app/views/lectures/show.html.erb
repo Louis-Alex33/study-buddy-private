@@ -19,7 +19,7 @@
     <% if @lecture.resume.present? %>
       <%= render "lectures/resume_section", lecture: @lecture %>
     <% else %>
-      <div class="lecture-resume-card">
+      <div class="lecture-resume-card" data-controller="resume-polling" data-resume-polling-url-value="<%= resume_status_lecture_path(@lecture) %>">
         <div class="resume-header">
           <div class="resume-icon"><i class="fas fa-file-alt"></i></div>
           <div class="resume-title">

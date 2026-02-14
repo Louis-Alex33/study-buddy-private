@@ -72,6 +72,7 @@ Rails.application.routes.draw do
     member do
       get :download_resume
       post :re_analyze
+      get :resume_status
     end
     resources :notes, only: %i[new create]
     resources :messages, only: %i[new create]

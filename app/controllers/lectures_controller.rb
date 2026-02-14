@@ -1,7 +1,7 @@
 class LecturesController < ApplicationController
   before_action :check_lecture_limit, only: [:create]
-  before_action :set_lecture, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume]
-  before_action :authorize_lecture!, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume]
+  before_action :set_lecture, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume, :resume_status]
+  before_action :authorize_lecture!, only: [:show, :edit, :update, :destroy, :re_analyze, :download_resume, :resume_status]
 
   def index
     @lectures = current_user.lectures.includes(:category, :flashcards, :messages, :notes)
@@ -56,6 +56,10 @@ class LecturesController < ApplicationController
   def destroy
     @lecture.destroy
     redirect_to lectures_path, notice: t("controllers.lectures.destroyed")
+  end
+
+  def resume_status
+    render json: { ready: @lecture.resume.present? }
   end
 
   def re_analyze
