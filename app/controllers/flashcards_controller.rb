@@ -9,14 +9,8 @@ class FlashcardsController < ApplicationController
   end
 
   def create
-    generated_flashcards = generate_flashcards_with_ai
-
-    if generated_flashcards.present?
-      current_user.increment!(:flashcard_generations_count)
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: t("controllers.flashcards.generated", count: generated_flashcards.count)
-    else
-      redirect_to lecture_path(@lecture, anchor: "flashcards-section"), alert: t("controllers.flashcards.generation_error")
-    end
+    FlashcardGenerateJob.perform_later(@lecture, current_user)
+    redirect_to lecture_path(@lecture, anchor: "flashcards-section"), notice: "Les flashcards sont en cours de génération. Rafraîchis la page dans quelques secondes."
   end
 
   def show

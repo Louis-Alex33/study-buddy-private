@@ -73,21 +73,10 @@ class QuizzesController < ApplicationController
     end
 
     if @quiz.save
-      # Générer les questions avec l'IA
-      QuizGeneratorService.new(@quiz).call
-      current_user.increment!(:quiz_generations_count)
+      invited_ids = @quiz.status == "shared" ? Array(params[:invited_user_ids]) : []
+      QuizGenerateJob.perform_later(@quiz, current_user, invited_user_ids: invited_ids)
 
-      # Créer le challenge avec l'utilisateur courant comme propriétaire
-      challenge = current_user.challenges.create!(quiz: @quiz)
-
-      # Ajouter les amis invités au challenge (seulement si quiz shared)
-      if @quiz.status == "shared" && params[:invited_user_ids].present?
-        params[:invited_user_ids].each do |user_id|
-          challenge.challenger_users.create!(user_id: user_id)
-        end
-      end
-
-      redirect_to (params[:redirect_to] || challenges_path), notice: t("controllers.quizzes.created")
+      redirect_to (params[:redirect_to] || challenges_path), notice: "Le quiz est en cours de génération. Rafraîchis la page dans quelques secondes."
     else
       redirect_to (params[:redirect_to] || challenges_path), alert: t("controllers.quizzes.creation_error", errors: @quiz.errors.full_messages.join(', '))
     end

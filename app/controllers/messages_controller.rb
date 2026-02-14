@@ -30,8 +30,8 @@ class MessagesController < ApplicationController
         locals: { message: @assistant_message }
       )
 
-      # Streaming IA via service
-      AiChatService.new(@lecture, current_user).stream_response(@message, @assistant_message)
+      # Streaming IA via job asynchrone (évite le timeout Heroku 30s)
+      AiChatJob.perform_later(@lecture, current_user, @message, @assistant_message)
 
       respond_to do |format|
         format.turbo_stream { head :ok }
