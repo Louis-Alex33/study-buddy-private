@@ -73,10 +73,20 @@ class QuizzesController < ApplicationController
     end
 
     if @quiz.save
-      invited_ids = @quiz.status == "shared" ? Array(params[:invited_user_ids]) : []
-      QuizGenerateJob.perform_later(@quiz, current_user, invited_user_ids: invited_ids)
+      QuizGeneratorService.new(@quiz).call
+      current_user.increment!(:quiz_generations_count)
 
-      redirect_to (params[:redirect_to] || challenges_path), notice: "Le quiz est en cours de génération. Rafraîchis la page dans quelques secondes."
+      challenge = current_user.challenges.create!(quiz: @quiz)
+
+      invited_ids = @quiz.status == "shared" ? Array(params[:invited_user_ids]) : []
+      if @quiz.status == "shared" && invited_ids.present?
+        invited_ids.each do |user_id|
+          challenge.challenger_users.create!(user_id: user_id)
+        end
+      end
+
+      current_user.check_and_award_badges!
+      redirect_to (params[:redirect_to] || challenges_path), notice: t("controllers.quizzes.created")
     else
       redirect_to (params[:redirect_to] || challenges_path), alert: t("controllers.quizzes.creation_error", errors: @quiz.errors.full_messages.join(', '))
     end
