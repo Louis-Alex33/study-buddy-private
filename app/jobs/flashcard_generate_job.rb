@@ -2,7 +2,7 @@ class FlashcardGenerateJob < ApplicationJob
   queue_as :default
 
   def perform(lecture, user)
-    ruby_llm_chat = RubyLLM.chat(model: "gemini-2.0-flash")
+    ruby_llm_chat = RubyLLM.chat(model: "gemini-3.8-flash")
 
     prompt = <<~PROMPT
       Génère 10 questions à partir de cette lecture:

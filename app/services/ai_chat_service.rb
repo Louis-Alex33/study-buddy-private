@@ -1,5 +1,5 @@
 class AiChatService
-  AI_MODEL = "gemini-2.0-flash"
+  AI_MODEL = "gemini-3.8-flash"
   FALLBACK_MODEL = "gpt-4o"
 
   def initialize(lecture, current_user)

@@ -18,7 +18,7 @@ class QuizGeneratorService
   private
 
   def generate_questions
-    chat = RubyLLM.chat(model: "gemini-2.0-flash")
+    chat = RubyLLM.chat(model: "gemini-3.8-flash")
     chat.with_instructions(instructions)
 
     prompt = if @quiz.lecture.present? && @quiz.lecture.resume.present?

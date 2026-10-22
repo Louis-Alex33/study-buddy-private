@@ -66,7 +66,7 @@ class FlashcardsController < ApplicationController
   end
 
   def generate_flashcards_with_ai
-    ruby_llm_chat = RubyLLM.chat(model: "gemini-2.0-flash")
+    ruby_llm_chat = RubyLLM.chat(model: "gemini-3.8-flash")
 
     prompt = <<~PROMPT
       Génère 10 questions à partir de cette lecture:

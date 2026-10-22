@@ -10,7 +10,9 @@ class LectureAnalyzerService
       response = generate_summary
       parsed_response = parse_json_response(response)
 
-      @lecture.update(resume: parsed_response['resume'])
+      attributes = { resume: parsed_response['resume'] }
+      attributes[:title] = parsed_response['title'] if parsed_response['title'].present?
+      @lecture.update!(attributes)
     rescue => e
       Rails.logger.error "Error analyzing lecture #{@lecture.id}: #{e.message}"
       @lecture.update(resume: "Erreur lors de l'analyse du document : #{e.message}")
@@ -42,17 +44,20 @@ class LectureAnalyzerService
         chat.ask("Analyse ce document et produis une fiche de cours structurée.", with: { pdf: @lecture.document.url }).content
       rescue => e
         Rails.logger.warn "PDF analysis failed, falling back to text extraction: #{e.message}"
-        ask_with_extracted_text(e)
+        ask_with_extracted_text(chat, e)
       end
     elsif @lecture.document.image?
       chat.ask("Analyse ce document et produis une fiche de cours structurée.", with: { image: @lecture.document.url }).content
     else
-      # Pour les fichiers texte ou autres
-      chat.ask("Analyse ce document et produis une fiche de cours structurée.").content
+      # Gemini ne peut pas analyser un fichier Active Storage sans contenu fourni.
+      text = extract_text_from_document
+      raise "Impossible de lire le contenu du document" if text.blank?
+
+      chat.ask("Analyse ce document et produis une fiche de cours structurée.\n\nContenu du document :\n#{text}").content
     end
   end
 
-  def ask_with_extracted_text(original_error)
+  def ask_with_extracted_text(chat, original_error)
     text = extract_text_from_pdf
 
     if text.blank?
@@ -60,9 +65,14 @@ class LectureAnalyzerService
     end
 
     Rails.logger.info "Extracted #{text.length} characters from PDF, retrying with extracted text"
-    chat = RubyLLM.chat(model: "gemini-2.0-flash")
-    chat.with_instructions(instructions)
     chat.ask("Analyse ce document et produis une fiche de cours structurée.\n\nContenu du document :\n#{text}").content
+  end
+
+  def extract_text_from_document
+    @lecture.document.download.truncate(100_000, omission: "\n\n[... texte tronqué ...]")
+  rescue => e
+    Rails.logger.error "Failed to read document text: #{e.message}"
+    nil
   end
 
   def extract_text_from_pdf
@@ -82,13 +92,13 @@ class LectureAnalyzerService
   def initialize_chat(preferred: true)
     chat = if @lecture.document.content_type == "application/pdf"
              # Pour les PDF: Gemini en priorité, GPT-4o en fallback
-             preferred ? RubyLLM.chat(model: "gemini-2.0-flash") : RubyLLM.chat(model: "gpt-4o")
+             preferred ? RubyLLM.chat(model: "gemini-3.8-flash") : RubyLLM.chat(model: "gpt-4o")
            elsif @lecture.document.image?
              # Pour les images: Gemini Flash (supporte la vision)
-             RubyLLM.chat(model: "gemini-2.0-flash")
+             RubyLLM.chat(model: "gemini-3.8-flash")
            else
              # Pour les autres: Gemini Flash
-             RubyLLM.chat(model: "gemini-2.0-flash")
+             RubyLLM.chat(model: "gemini-3.8-flash")
            end
 
     chat.with_instructions(instructions)
