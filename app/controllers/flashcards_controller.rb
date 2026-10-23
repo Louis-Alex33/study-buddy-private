@@ -66,8 +66,6 @@ class FlashcardsController < ApplicationController
   end
 
   def generate_flashcards_with_ai
-    ruby_llm_chat = RubyLLM.chat(model: "gemini-3.8-flash")
-
     prompt = <<~PROMPT
       Génère 10 questions à partir de cette lecture:
 
@@ -83,7 +81,7 @@ class FlashcardsController < ApplicationController
       Assure-toi de bien séparer chaque question par "---"
     PROMPT
 
-    response = ruby_llm_chat.ask(prompt)
+    response = ask_flashcards(prompt)
     flashcards_text = response.content
     question_blocks = flashcards_text.split("---").map(&:strip).reject(&:empty?)
     questions_data = []
@@ -109,5 +107,27 @@ class FlashcardsController < ApplicationController
     else
       []
     end
+  rescue RubyLLM::ServiceUnavailableError => e
+    Rails.logger.warn "Gemini indisponible pour les flashcards: #{e.message}"
+    []
+  rescue => e
+    Rails.logger.error "Erreur de génération des flashcards: #{e.message}"
+    []
+  end
+
+  def ask_flashcards(prompt)
+    models = ["gemini-3.8-flash", "gemini-3.8-flash-lite"]
+    last_error = nil
+
+    models.each do |model|
+      begin
+        return RubyLLM.chat(model: model).ask(prompt)
+      rescue RubyLLM::ServiceUnavailableError => e
+        last_error = e
+        Rails.logger.warn "Modèle Gemini #{model} indisponible, tentative suivante"
+      end
+    end
+
+    raise last_error if last_error
   end
 end
