@@ -17,6 +17,8 @@
   <!-- Resume Section -->
   <% if @lecture.resume.present? %>
     <%= render "lectures/resume_section", lecture: @lecture %>
+  <% else %>
+    <%= render "lectures/analyzing", lecture: @lecture %>
   <% end %>
 
   <%= turbo_stream_from @lecture %>

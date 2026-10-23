@@ -34,7 +34,7 @@ class LecturesController < ApplicationController
     end
 
     if @lecture.save
-      LectureAnalyzerService.new(@lecture).call
+      LectureAnalyzeJob.perform_later(@lecture)
       current_user.check_and_award_badges!
       redirect_to lecture_path(@lecture), notice: t("controllers.lectures.created")
     else
